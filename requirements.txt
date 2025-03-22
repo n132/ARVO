@@ -8,3 +8,4 @@ unidiff
 json5
 google-cloud-storage
 filelock
+disutils
