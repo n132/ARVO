@@ -111,7 +111,7 @@ class DfTool():
                 linenum = ct
         if len(res)<2:
             return res, linenum
-        pat = re.compile(f"{keyword}(\s.*$|$)")
+        pat = re.compile(rf"{keyword}(\s.*$|$)")
         res = []
         ct =  0 
         linenum = 0
