@@ -1,7 +1,7 @@
 # command line interface
 from reproducer import *
 from utils import *
-from report_gen import *
+from Locator import report
 import sys
 def usage():
     print("[+] Usage:")
