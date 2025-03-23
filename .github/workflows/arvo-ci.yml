@@ -24,6 +24,8 @@ jobs:
         sudo mkdir -p /src/ARVO
         sudo cp -r $GITHUB_WORKSPACE/* /src/ARVO
         sudo chown -R $USER:$USER /src
+        sudo mkdir /data
+        sudo chown -R $USER:$USER /data
 
     - name: Setup Python venv
       run: |
