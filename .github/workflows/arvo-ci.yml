@@ -1,0 +1,57 @@
+name: ARVO CI
+
+on:
+  workflow_dispatch:
+
+jobs:
+  arvo-setup:
+    runs-on: ubuntu-24.04
+
+    steps:
+    - name: Checkout ARVO
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update --fix-missing
+        sudo apt-get install -y sudo vim gdb wget git curl zsh python3 tmux ipython3 python3-pip python3.12-venv lsb-release gnupg git-lfs
+
+    # - name: Install oh-my-zsh
+    #   run: echo Y | sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+    - name: Setup /src/ARVO
+      run: |
+        sudo mkdir -p /src/ARVO
+        sudo cp -r $GITHUB_WORKSPACE/* /src/ARVO
+        sudo chown -R $USER:$USER /src/ARVO
+
+    - name: Setup Python venv
+      run: |
+        python3 -m venv /src/arvo_venv
+        source /src/arvo_venv/bin/activate
+        pip install -r /src/ARVO/requirements.txt
+
+    - name: Git LFS pull and extract metadata
+      run: |
+        cd /src/ARVO
+        git lfs pull
+        cp profile.template _profile.py
+        tar -xvf oss_fuzz_meta.tar
+
+    - name: Install docker-cli
+      run: |
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+          gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
+          https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" \
+          | sudo tee /etc/apt/sources.list.d/docker.list
+        sudo apt-get update
+        sudo apt-get install -y docker-ce-cli
+
+    - name: Run ARVO test
+      run: |
+        source /src/arvo_venv/bin/activate
+        cd /src/ARVO
+        rm -f ./Reports/25402.json
+        python3 ./cli.py report 25402
+        grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
