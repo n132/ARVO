@@ -1,9 +1,9 @@
 name: ARVO CI
 
 on:
-  push:
-    branches:
-      - main
+  # push:
+  #   branches:
+  #     - main
   pull_request:
   workflow_dispatch:  # keep this for manual runs
 
@@ -61,4 +61,4 @@ jobs:
         cd /src/ARVO
         rm -f ./Reports/25402.json
         python3 ./cli.py report 25402
-        grep "322716256d60e316c9a3b905a387be36d4e47368x" ./Reports/25402.json
+        grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
