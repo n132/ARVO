@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update --fix-missing
-        sudo apt-get install -y sudo vim gdb wget git curl zsh python3 tmux ipython3 python3-pip python3.12-venv lsb-release gnupg git-lfs
+        sudo apt-get install -y sudo vim gdb wget git curl python3 tmux ipython3 python3-pip python3.12-venv lsb-release gnupg git-lfs
 
     # - name: Install oh-my-zsh
     #   run: echo Y | sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -29,7 +29,9 @@ jobs:
         sudo cp -a $GITHUB_WORKSPACE /src/ARVO
         sudo chown -R $USER:$USER /src
         sudo chown -R $USER:$USER /data
-
+    - name: Clone OSS-Fuzz
+      run: |
+        git clone https://github.com/google/oss-fuzz.git /src/oss-fuzz
     - name: Setup Python venv
       run: |
         python3 -m venv /src/arvo_venv
