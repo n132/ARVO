@@ -26,7 +26,7 @@ See [GitHub Action Example][5] for an example of the database rebuild. Full func
 
 - Google Cloud SDK (gcloud)
 - Filling in _profile.py with credentials
-- OSS-Fuzz metadata (currently blocked by this issue)
+- OSS-Fuzz metadata (currently blocked by [a recent change][5])
 
 # 🔧 Example GitHub Action for ARVO
 
