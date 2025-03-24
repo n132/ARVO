@@ -22,7 +22,7 @@ docker run --rm -it n132/arvo:25402-fix arvo compile
 More metadata is store in: [ARVO-meta][3]
 # 🛠️ Rebuild the Database (Optional)
 
-See [GitHub Action Example][5] for an example of the database rebuild. Full functionality requires:
+See [GitHub Action Example][4] for an example of the database rebuild. Full functionality requires:
 
 - Google Cloud SDK (gcloud)
 - Filling in _profile.py with credentials
