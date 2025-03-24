@@ -3,36 +3,8 @@
 
 Creat `_profile.py` to init your setting. 
 
-Example:
+[Example](./profile.template)
 
-```python
-# You can keep these settings as default
-DATA_FOLD = "Type.Bug-Security_label.Reproducible_status.Verified"
-TIME_ZONE = "Etc/Greenwich"
-CLEAN_TMP = True
-User      = # <Your UserName>
-# Config
-gcloud_key          = f'/home/{User}/oss-pro-key.json' # Path of your gcloud key
-oss_fuzz_dir        = f"/home/{User}/oss-fuzz/" # Path of oss-fuzz
-ARVO_DIR            = f"/home/{User}/ARVO/" # Path of ARVO
-
-
-OPENAI_TOKEN = 'sk-...' # Your OpenAI API key
-
-# Create a tmp directory to Save ARVO data
-OSS_LOCK_DIR    = f'/data/{User}/oss-lock/'
-OSS_SAVED_IMG   = f'/data/{User}/oss-img/'
-OSS_OUT_DIR     = f'/data/{User}/oss-out/'
-OSS_WORK_DIR    = f'/data/{User}/oss-work/'
-OSS_DB_DIR      = f'/data/{User}/oss-db/'
-TMP             = f'/data/{User}/tmp/'
-
-
-CPU_LIMIT       = False
-DEBUG           = False
-
-
-```
 - DATA_FOLD: The name to store meta data of OSS-Fuzz cases.
 - TIME_ZONE: Your time zone, which is related to reproducing, since it's sensitive to time.
 - CLEAN_TMP: If you want to keep tmp files.
