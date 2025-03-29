@@ -98,7 +98,12 @@ def rebaseDockerfile(dockerfile_path,commit_date):
     def _listOssBaseImagebyTime_local(date):
         global SORTED_IMAGES
         if not SORTED_IMAGES:
-            with open('images.json', 'r') as file:
+            # Get the path to the current file
+            current_file = Path(__file__).resolve()
+            module_root = current_file.parent
+            # Reference a data file next to this script
+            data_file = module_root / "images.json"
+            with open(data_file, 'r') as file:
                 data = json.load(file)
             SORTED_IMAGES = data['versions']
         pre = SORTED_IMAGES[0]
@@ -179,7 +184,7 @@ def fixBuildScript(file,pname):
         line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
         dft.insertLineBefore(line,"sed -i 's/make fuzzers/make fuzzers -i/g' $SRC/libreoffice/bin/oss-fuzz-build.sh")
         dft.insertLineBefore(line,"sed -n -i '/#starting corpuses/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh")
-        dft.insertLineBefore(line,"sed -n -i '/pushd instdir\/program/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh")
+        dft.insertLineBefore(line,r"sed -n -i '/pushd instdir\/program/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh")
         dft.insertLineBefore(line,'echo "pushd instdir/program && mv *fuzzer $OUT" >> $SRC/libreoffice/bin/oss-fuzz-build.sh')
     elif pname == 'jbig2dec':
         dft.replace('unzip.*','exit 0')
@@ -302,12 +307,12 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     else:
         line = hits[0]
         if item_type == 'git':
-            pat = re.compile(f"{item_type}\s+clone")
+            pat = re.compile(rf"{item_type}\s+clone")
         # Could not be a clone command
         elif item_type == 'hg':
-            pat = re.compile(f"{item_type}\s+clone")
+            pat = re.compile(rf"{item_type}\s+clone")
         elif item_type == 'svn':
-            pat = re.compile(f"RUN\s+svn\s+(co|checkout)+")
+            pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
         else:
             return False
         if len(pat.findall(line)) != 1:
