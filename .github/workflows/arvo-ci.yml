@@ -42,7 +42,7 @@ jobs:
       run: |
         cd /src/ARVO
         git lfs pull
-        cp profile.template _profile.py
+        cp profile.template arvo/_profile.py
         tar -xvf oss_fuzz_meta.tar
 
     - name: Install docker-cli

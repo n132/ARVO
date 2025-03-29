@@ -23,4 +23,4 @@ FuzzLog
 PaperData*
 PatchFiles
 fxTest.py
-.arvo.egg-info
+*arvo.egg-info*
