@@ -1,0 +1,30 @@
+[project]
+name = "arvo"
+version = "0.1.0"
+description = "ARVO: an Atlas of Reproducible Vulnerabilities in Open source software"
+authors = [{ name = "n132", email = "n132@asu.com" }]
+dependencies = [
+    "pytz",
+    "python-dateutil",
+    "openai==0.27.5",
+    "jsonlines",
+    "base58",
+    "tiktoken",
+    "unidiff",
+    "json5",
+    "google-cloud-storage",
+    "filelock",
+    "setuptools"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+
+[tool.setuptools]
+packages = ["arvo"]  # replace with your actual code package
+
+
+[project.scripts]
+arvo = "arvo.cli:main"

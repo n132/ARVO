@@ -1,7 +1,7 @@
 
 ## Basic Setting
 
-Creat `_profile.py` to init your setting. 
+Creat `arvo/_profile.py` to init your setting. 
 
 [Example](./profile.template)
 
