@@ -36,13 +36,15 @@ jobs:
       run: |
         python3 -m venv /src/arvo_venv
         source /src/arvo_venv/bin/activate
-        pip install -r /src/ARVO/requirements.txt
+        cd /src/ARVO/
+        pip3 install -e .
 
     - name: Git LFS pull and extract metadata
       run: |
         cd /src/ARVO
         git lfs pull
         cp profile.template arvo/_profile.py
+        cd arvo
         tar -xvf oss_fuzz_meta.tar
 
     - name: Install docker-cli
@@ -60,5 +62,5 @@ jobs:
         source /src/arvo_venv/bin/activate
         cd /src/ARVO
         rm -f ./Reports/25402.json
-        python3 ./cli.py report 25402
+        arvo report 25402
         grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
