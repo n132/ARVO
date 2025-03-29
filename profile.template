@@ -8,7 +8,7 @@ UserName            = 'root'
 
 
 # Config
-ARVO_DIR            = f'/src/ARVO/' # Path of ARVO
+ARVO_DIR            = f'/src/ARVO/arvo' # Path of ARVO
 gcloud_key          = f'/src/cred/oss-pro-key.json' # Path of your gcloud key
 oss_fuzz_dir        = f'/src/oss-fuzz' # Path of oss-fuzz
 OSS_LOCK_DIR        = f'/data/oss-lock/'
