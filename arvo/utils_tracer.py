@@ -45,7 +45,7 @@ def customSrcmap_PM(srcmap):
 
     ## Update srcmap
     for key in data:
-        nk, data[key]['url'], data[key]['type'] = transform.trans_table(key,data[key]['url'],data[key]['type'])
+        nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
         if nk != key:
             data[nk] = data[key]
             del(data[key])
@@ -93,7 +93,7 @@ def customSrcmap(srcmap,pname,commit):
 
     ## Update srcmap
     for key in data:
-        nk, data[key]['url'], data[key]['type'] = transform.trans_table(key,data[key]['url'],data[key]['type'])
+        nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
         if nk != key:
             data[nk] = data[key]
             del(data[key])
