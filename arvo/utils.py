@@ -530,7 +530,7 @@ def loadReport(localId):
         d = json.loads(f.read())
     return d
 def dumpReport(localId,d):
-    fname = ARVO / "Reports" / f"{localId}.json"
+    fname = ARVO.parent / "Reports" / f"{localId}.json"
     with open(fname,'w') as f:
         f.write(json.dumps(d, indent=4))
     print("[+] Report Created: "+str(localId))
