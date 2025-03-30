@@ -28,6 +28,16 @@ See [GitHub Action Example][4] for an example of the database rebuild. Full func
 - Filling in arvo/_profile.py with credentials
 - OSS-Fuzz metadata (currently blocked by [a recent change][5])
 
+An example of rebuilding case-25402:
+```sh
+python3 -m venv arvo-run
+source ./arvo-run/bin/activate
+pip3 install -e .
+rm -f ./Reports/25402.json
+arvo report 25402
+```
+
+
 # 🔧 Example GitHub Action for ARVO
 
 ```yaml
@@ -88,7 +98,8 @@ jobs:
         python3 ./cli.py report 25402
         grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
 ```
-# Bug Report/Fix
+
+# 🐞 Bug Report/Fix
 - Open an issue/pr for this repo
 
 
