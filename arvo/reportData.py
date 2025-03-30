@@ -313,7 +313,7 @@ def _get_issue_from_date(d):
                 issues.append((exact_time,localId))
     issues.sort(key=lambda t:t[0])
     return issues
-RESULTS = ARVO / "Reports"
+RESULTS = REPORTS_DIR
 def vulnerabilityType():
     VulType = dict()
     VulType["Heap-overflow"] = 0

@@ -1,7 +1,7 @@
 from pathlib import Path
 from report_gen import getReports
 import json
-from .utils import getPname,get_projectInfo, DATADIR, getReport,getSrcmaps
+from .utils import getPname,get_projectInfo, DATADIR, getReport,getSrcmaps, REPORTS_DIR
 from .utils_exec import execute
 from .utils_git import GitTool
 from datetime import datetime
@@ -23,7 +23,7 @@ def prepare_repo(localId):
     gt = GitTool(url,protocol)
     return gt.repo
 def getFixTime(localId):
-    report = Path(".")/"Reports"/f"{localId}.json"
+    report = REPORTS_DIR / f"{localId}.json"
     with open(report) as f:
         meta = json.loads(f.read())
     fix     = meta['fix_commit']
