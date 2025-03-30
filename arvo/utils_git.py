@@ -1,8 +1,7 @@
 from .utils_exec import check_call, execute, execute_ret
 import shutil
 import os
-from .utils import tmpDir, tmpFile, eventLog
-import utils
+from .utils import tmpDir, tmpFile, eventLog, git_pull, hg_pull, svn_pull, clone, hg_clone, svn_clone
 from pathlib import Path
 from datetime import datetime
 import re
@@ -52,27 +51,27 @@ class GitTool():
 
     def pull(self):
         if self.type == 'git':
-            return utils.git_pull(self.repo)
+            return git_pull(self.repo)
         elif self.type == 'hg':
-            return utils.hg_pull(self.repo)
+            return hg_pull(self.repo)
         else:
-            return utils.svn_pull(self.repo)
+            return svn_pull(self.repo)
         
     def clone(self,url,revision=None):
         if self.type == 'git':
-            repo = utils.clone(url,revision)
+            repo = clone(url,revision)
             if repo!=False:
                 self.repo = list(repo.iterdir())[0]
             else:
                 return False
         elif self.type == 'hg':
-            repo = utils.hg_clone(url,revision)
+            repo = hg_clone(url,revision)
             if repo!=False:
                 self.repo = list(repo.iterdir())[0]
             else:
                 return False
         else:
-            repo = utils.svn_clone(url,revision)
+            repo = svn_clone(url,revision)
             if repo!=False:
                 self.repo = list(repo.iterdir())[0]
             else:
