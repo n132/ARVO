@@ -29,7 +29,6 @@ FUZZER_ARGS     =   'FUZZER_ARGS="-rss_limit_mb=2560 -timeout=25"'
 AFL_FUZZER_ARGS =   'AFL_FUZZER_ARGS="-m none"'
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = gcloud_key
-oss_fuzz_dir= Path(oss_fuzz_dir)
 OSS_TMP     = Path(TMP)                    
 ARVO        = Path(ARVO_DIR)
 OSS_OUT     = Path(OSS_OUT_DIR)
@@ -53,7 +52,6 @@ def eventLog(s,ext=False):
         f.write(s+"\n")
     if ext:
         exit(1)
-sys.path.insert(1,str(oss_fuzz_dir/"infra"))
 def dir_check(path):
     try:
         if not path.exists():
