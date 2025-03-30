@@ -31,6 +31,7 @@ AFL_FUZZER_ARGS =   'AFL_FUZZER_ARGS="-m none"'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = gcloud_key
 OSS_TMP     = Path(TMP)                    
 ARVO        = Path(ARVO_DIR)
+REPORTS_DIR = Path(REPORTS_DIR)
 OSS_OUT     = Path(OSS_OUT_DIR)
 OSS_WORK    = Path(OSS_WORK_DIR)           
 OSS_IMG     = Path(OSS_SAVED_IMG)          
@@ -514,21 +515,21 @@ def issue_record(name,localId,des,log_addr = "_CrashLOGs"):
         f.write(f"| {name} | {localId} | {des} |\n")
     return
 def getReports():
-    return [int(x.name[:-5]) for x in (ARVO/"Reports").iterdir()]
+    return [int(x.name[:-5]) for x in REPORTS_DIR.iterdir()]
 def getReport(localId):
-    fname = ARVO/"Reports"/f"{localId}.json"
+    fname = REPORTS_DIR/f"{localId}.json"
     if fname.exists():
         return json.loads(open(fname).read())
     return False
 def loadReport(localId):
-    fname = ARVO / "Reports" / f"{localId}.json"
+    fname = REPORTS_DIR / f"{localId}.json"
     if not fname.exists():
         return None
     with open(fname) as f:
         d = json.loads(f.read())
     return d
 def dumpReport(localId,d):
-    fname = ARVO.parent / "Reports" / f"{localId}.json"
+    fname = REPORTS_DIR / f"{localId}.json"
     with open(fname,'w') as f:
         f.write(json.dumps(d, indent=4))
     print("[+] Report Created: "+str(localId))
