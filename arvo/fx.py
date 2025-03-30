@@ -1,7 +1,7 @@
 # Use to deal with the data of fix
 from .Locator        import *
 from .utils_GPT      import *
-from utils          import *
+from .utils          import *
 from .utils_LLMFix   import *
 from .reproducer           import build_from_srcmap
 from .utils_diff           import getVulCommit, getDiff

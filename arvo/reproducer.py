@@ -1,8 +1,9 @@
 from .utils import *
 from .utils_core import *
 from .utils_git import *
-sys.path.insert(1,oss_fuzz_dir/"infra")
-import build_specified_commit as builder
+import collections
+BuildData = collections.namedtuple(
+    'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
 from .transform import trans_table
 # Global
 import copy
@@ -109,7 +110,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         if CLEAN_TMP:
             dir_name = str(dir_path).split("/")[-1]
             docker_run(["-v", f"{OSS_TMP}:/mnt" , "ubuntu", "/bin/bash", "-c",
-                        f"rm -rf /mnt/{dir_name}"])
+                        f"rm -rf /mnt/{dir_name}"]) 
 
     srcmap_items = json.loads(open(srcmap).read())
     if not oss_fuzz_commit:
@@ -128,7 +129,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     dockerfile = project_dir / 'Dockerfile'
     if DEBUG:
         print(f"[+] dockerfile: {dockerfile}")
-    build_data = builder.BuildData(
+    build_data = BuildData(
         sanitizer=sanitizer,
         architecture=arch,
         engine=engine,
