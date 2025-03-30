@@ -403,7 +403,7 @@ def fileReport(localId,fix_commit):
     vulComponentName    = "/src/"+pname
     vulComponentUrl     = info[vulComponentName]['url']
     vulComponentType    = info[vulComponentName]['type']
-    _,vulComponentUrl,_   = transform.trans_table(vulComponentName,vulComponentUrl,vulComponentType)
+    _,vulComponentUrl,_   = trans_table(vulComponentName,vulComponentUrl,vulComponentType)
     #######################################################
     #               Dump the report
     #######################################################
@@ -561,7 +561,7 @@ def lifeSpan_prepareProject(localId,pname):
         eventLog(f"[lifeSpan]: Failed to get the init_timestamp for {localId}")
         return False
     ti = json.loads(open(srcmap[0]).read())[f"/src/{pname}"]
-    _, ti["url"], ti["type"] = transform.trans_table(f"/src/{pname}", ti["url"], ti["type"])
+    _, ti["url"], ti["type"] = trans_table(f"/src/{pname}", ti["url"], ti["type"])
     gt = GitTool(ti["url"], ti["type"])
     beg_commit = gt.getCommitbyTimestamp(init_timestamp)
     if beg_commit == False:
