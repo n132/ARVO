@@ -18,7 +18,6 @@ OSS_OUT_DIR         = f'/data/oss-out/'
 OSS_WORK_DIR        = f'/data/oss-work/'
 OSS_DB_DIR          = f'/data/oss-db/'
 TMP                 = f'/data/tmp/'
-OSS_ERR_DIR         = ARVO_DIR + 'OSS_CrashLog/'
 
 XxX                 = f'/data/XxX'
 ZDC                 = f'/data/ZDC'
