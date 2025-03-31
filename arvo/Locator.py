@@ -187,7 +187,6 @@ def list_commits(localId,pname):
                 return leaveRet(False,gt.repo.parent)
     recentCommit = gt.getRecentCommit(res)
     return leaveRet((res,recentCommit,inclusive),gt.repo.parent)
-
 def vulCommit(localId,retryChance=None):
     global CHANCE, TURBO, CHANCE_VAL
     CHANCE = CHANCE_VAL if not retryChance else retryChance

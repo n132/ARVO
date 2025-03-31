@@ -104,8 +104,8 @@ def initARVODir(dirs):
     for i in dirs:
         if not dir_check(i):
             panic(f"Failed to init {i.name}")
-initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_AICC,ARVO_ZDC])
 
+initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_AICC,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
     with open(OSS_DB_MAP,'w') as f:
@@ -844,8 +844,6 @@ def issueFilter():
     remove_issue_meta(res)
     remove_issue_data(res)
     print("Done")
-
-
 def tokenLen(message: str,model='gpt-4'):
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(message))

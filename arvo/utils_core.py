@@ -159,7 +159,6 @@ def extraScritps(pname,oss_dir,source_dir):
             with open(target,'w') as f:
                 f.write("\n".join(lines))
     return True
-
 def fixBuildScript(file,pname):
     if not file.exists():
         return True

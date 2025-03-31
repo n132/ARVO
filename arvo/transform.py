@@ -35,7 +35,7 @@ TRANS_TABLE = {
 '/src/gdal/poppler': 'https://gitlab.freedesktop.org/poppler/poppler.git',
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
-}# 32
+}
 # Only include non git project
 TRANS_TYPE = {
     '/src/graphicsmagick': "hg"
