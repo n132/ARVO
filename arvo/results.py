@@ -1,5 +1,4 @@
 # Options related to data
-from glob import glob
 import json
 from .fx import *
 from .utils_diff import getDiff, getVulCommit
