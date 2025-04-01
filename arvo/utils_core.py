@@ -139,7 +139,7 @@ def rebaseDockerfile(dockerfile_path,commit_date):
                 f.write(data)
             return True
     image_name = repo
-    SUCCESS(image_hash)
+    # SUCCESS(image_hash)
     data = re.sub(r"FROM .*",f"FROM {image_name}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
     with open(dockerfile_path,'w') as f:
         f.write(data)

@@ -783,11 +783,11 @@ def parseCrash(path):
     return token, "No SUMMARY"
 def getCrashSummary(originalLog):
     if not originalLog.exists():
-        print("[-]: CrashSummary Doesn't Exist")
+        WARN("CrashSummary Doesn't Exist")
         return False
     targetCrash = parseCrash(originalLog)
     if not targetCrash:
-        print("[-]: Failed to parse CrashSummary")
+        WARN(f"Failed to parse CrashSummary {originalLog}")
         return False
     targetCrash = targetCrash[1] # Only compare the summary
     return targetCrash
