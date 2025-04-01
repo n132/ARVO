@@ -680,42 +680,34 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def crashVerify(issue,reproduce_case,tag=None,timeout=None,UUV=True):
-    # Return True if NOT crash
-    # Return False if crash 
-    crashVerifyPrompt()
-    if not check_call(['sudo','chown','-R',f'{UserName}:{UserName}',str(issue['localId'])],OSS_OUT):
-        return None
-    fuzz_target = getFuzzer(issue['localId'],OSS_OUT / str(issue['localId']))
-    if fuzz_target == None:
-        return None
-    if tag == None:
-        log_tag = None
-    elif type(tag) == str:
-        log_tag = f"{issue['localId']}_{tag}.log"
+def _pocResultChecker(returnCode,logfile, args, recursive_call):
+    if returnCode == 0: # not crash
+        return True
+    elif returnCode == 124 and ("timeout" in args): # timeout 
+        return True
+    # Handle of old fuzzing targets that only supports `fuzz < poc`
+    elif returnCode == 255 and not recursive_call:
+        # It could be some old version of fuzzing engine 
+        # `WARNING: using the deprecated call style `/out/pdf_fuzzer 1000`
+        # If it still dies with /out/fuzzer < /tmp/poc we keep the first log file
+        # check if Running: "WARNING: iterations invalid /tmp/poc" in the str
+        with open(logfile,'rb') as f:
+            log_ctx  = f.read()
+        if b"WARNING: iterations invalid" not in log_ctx:
+            return False # crashes
+        else:
+            INFO("Found a Fuzzing Target Doesn't Support `Fuzzer POC`")
+            fuzz_target = args[-2]
+            poc_path = args[-1]
+            new_args = args[:-2] + ["bash", "-c" , f'cat {poc_path} | {fuzz_target}'] # remove original command
+            return fuzzerExecution(new_args, logfile, True)
     else:
-        log_tag = tag# Path
-    res = ifCrash(fuzz_target.name,str(reproduce_case),issue,log_tag,timeout,UUV)
-    crashVerifyPrompt()
-    return res
-def crashVerifyPrompt():
-    print(" "*0x20)
-    print("$"*0x20)
-    print(" "*0x20)
-def ifCrash(fuzz_target,case,issue,log_tag,timeout=None,UUV = True):
-    out  = OSS_OUT / str(issue['localId']) 
-    if timeout:
-        timeout_parameters = ['timeout',str(timeout)]
-    else:
-        timeout_parameters = []
-    if UUV == True:
-        return fuzzerExecution(['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
-                    "-v",f"{case}:/tmp/poc",
-                    '-v',f"{out}:/out",f"gcr.io/oss-fuzz/{issue['localId']}"]+timeout_parameters+['/out/'+fuzz_target,'/tmp/poc'],log_tag)
-    else:
-        return fuzzerExecution(['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS+":detect_uninitialized=0", '-e', MSAN_OPTIONS,
-                    "-v",f"{case}:/tmp/poc",
-                    '-v',f"{out}:/out",f"gcr.io/oss-fuzz/{issue['localId']}"]+timeout_parameters+['/out/'+fuzz_target,'/tmp/poc'],log_tag)
+        with open(logfile,'rb') as f:
+            log_ctx  = f.read()
+        if b'out-of-memory' in log_ctx:
+            return True # Out of mem
+        return False # Crashes
+
 def fuzzerExecution(args, log_tag, recursive_call = False):
     cmd = ['docker','run','--rm','--privileged']
     cmd.extend(args)
@@ -726,35 +718,47 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
         # print commands for debugging
     else:
         print(" ".join(cmd))
-    if log_tag != None:
-        log_tag = ExeLog / log_tag if type(log_tag) == str else log_tag
-        with open(log_tag,'w') as f:
-            returnCode = execute_ret(cmd,stdout=f,stderr=f)
-            f.write(f"\nReturn Code: {returnCode}\n")
-    else:
-        returnCode = execute_ret(cmd)
+    with open(log_tag,'w') as f:
+        returnCode = execute_ret(cmd,stdout=f,stderr=f)
+        f.write(f"\nReturn Code: {returnCode}\n")
     print(f"[+] The return value is {returnCode}")
-    if returnCode == 0:
-        return True
-    elif returnCode == 124 and "timeout" in args:
+    return _pocResultChecker(returnCode,log_tag, args, recursive_call)
+
+def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
+    out  = OSS_OUT / str(issue['localId']) 
+    local_ubsan_op = UBSAN_OPTIONS+":detect_uninitialized=0" if not detect_uninitialized else UBSAN_OPTIONS
+    return fuzzerExecution(['-e', ASAN_OPTIONS, '-e',local_ubsan_op, '-e', MSAN_OPTIONS,
+            "-v",f"{case}:/tmp/poc",
+            '-v',f"{out}:/out",f"gcr.io/oss-fuzz/{issue['localId']}"]+timeout+['/out/'+fuzz_target,'/tmp/poc'],log_tag)
+
+def crashVerify(issue,reproduce_case,tag,timeout=None,detect_uninitialized=True):
+    # Return True if NOT crash
+    # Return False if crash 
+    print(" "*0x20)
+    print("$"*0x20)
+    print(" "*0x20)
+
+    if not check_call(['sudo','chown','-R',f'{UserName}:{UserName}',str(issue['localId'])],OSS_OUT):
         return None
-    elif returnCode == 255 and not recursive_call:
-        # It could be some old version of fuzzing engine 
-        # `WARNING: using the deprecated call style `/out/pdf_fuzzer 1000`
-        # If it still dies with /out/fuzzer < /tmp/poc we keep the first log file
-        # check if Running: "WARNING: iterations invalid /tmp/poc" in the str
-        re_run = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        _, err = re_run.communicate()
-        if b"WARNING: iterations invalid" not in err:
-            return False
-        else:
-            INFO("Found a Fuzzing Target Doesn't Support `Fuzzer POC`")
-            fuzz_target = cmd[-2]
-            poc_path = cmd[-1]
-            new_args = args[:-2] + ["bash", "-c" , f'cat {poc_path} | {fuzz_target}'] # remove original command
-            return fuzzerExecution(new_args, log_tag, True)
+    fuzz_target = getFuzzer(issue['localId'],OSS_OUT / str(issue['localId']))
+    if fuzz_target == None:
+        return None
+
+    if tag == None:
+        log_tag = tmpFile()
     else:
-        return False
+        # tag could be a path or a str
+        log_tag = f"{issue['localId']}_{tag}.log" if type(tag) == str else tag
+    timeout = ['timeout',str(timeout)] if timeout else []
+    res = ifCrash(fuzz_target.name,str(reproduce_case),issue,log_tag,timeout,detect_uninitialized)
+
+    if tag == None:
+        shutil.rmtree(log_tag.parent)
+    print(" "*0x20)
+    print("$"*0x20)
+    print(" "*0x20)
+    return res
+
 #==================================================================
 #
 #                  CrashInfo Parsing
