@@ -1,0 +1,93 @@
+{
+    "fix": "https://github.com/ArtifexSoftware/mupdf/commit/99817dba81da6d621cddab1807c2fe2a775a649a",
+    "verify": "0",
+    "localId": 70260,
+    "project": "mupdf",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "msan",
+    "crash_type": "Use-of-uninitialized-value",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 70260,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1720608852,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=4775841318371328\n\nProject: mupdf\nFuzzing Engine: libFuzzer\nFuzz Target: pdf_fuzzer\nJob Type: libfuzzer_msan_mupdf\nPlatform Id: linux\n\nCrash Type: Use-of-uninitialized-value\nCrash Address: \nCrash State:\n  Eval4Inputs\n  CachedXFORM4x2to1x2\n  cmsDoTransform\n  \nSanitizer: memory (MSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_msan_mupdf&range=201801220544:201801230546\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4775841318371328\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 70260,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1720617679,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-10-08"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 70260,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1722078431,
+                "content": "ClusterFuzz testcase 4775841318371328 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_msan_mupdf&range=202407250604:202407260614\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 70260,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1722085833,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 70260,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "2242780537",
+                    "displayName": "sebas...@artifex.com"
+                },
+                "timestamp": 1722212540,
+                "content": "Fixed upstream by http://cgit.ghostscript.com/cgi-bin/cgit.cgi/mupdf.git/commit/?id=99817dba81da6d621cddab1807c2fe2a775a649a"
+            }
+        ]
+    },
+    "fix_commit": "99817dba81da6d621cddab1807c2fe2a775a649a",
+    "repo_addr": "git://git.ghostscript.com/mupdf.git"
+}

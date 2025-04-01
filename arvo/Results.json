@@ -393,6 +393,7 @@
 {"localId": 5646, "project": "imagemagick", "pass": true}
 {"localId": 5651, "project": "skia", "pass": true}
 {"localId": 5652, "project": "open62541", "pass": true}
+{"localId": 5658, "project": "mupdf", "pass": true}
 {"localId": 5659, "project": "mupdf", "pass": true}
 {"localId": 5662, "project": "skia", "pass": true}
 {"localId": 5663, "project": "mupdf", "pass": true}
@@ -5613,3 +5614,4 @@
 {"localId": 67332, "project": "serenity", "pass": true}
 {"localId": 67354, "project": "gpac", "pass": true}
 {"localId": 67552, "project": "libxml2", "pass": true}
+{"localId": 70260, "project": "mupdf", "pass": true}
