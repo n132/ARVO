@@ -62,12 +62,12 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
         eventLog(f'dev:downloadFuzzer: {cmd}')
         return False
 
-def getFuzzerbyName(localId,srcmap_name,storage):
+def getOSSFuzzerbyName(localId,srcmap_name,storage):
     issue = getIssue(localId)
     fuzzer_info = issue['job_type'].split("_")
     engine = fuzzer_info[0]
     if engine not in ['libfuzzer','afl','honggfuzz','centipede','dataflow','none']:
-        eventLog(f'[-] dev:getFuzzer: weird engine found {engine}')
+        eventLog(f'[-] dev:getOSSFuzzer: weird engine found {engine}')
         return False
     if fuzzer_info[2] == 'i386':
         arch='i386'
@@ -77,12 +77,12 @@ def getFuzzerbyName(localId,srcmap_name,storage):
     donwloadFuzzer(pname, srcmap_name, engine, arch, storage)
     return list(storage.iterdir())[0]
 
-def getFuzzer(localId,storage=None):
+def getOSSFuzzer(localId,storage=None):
     issue = getIssue(localId)
     fuzzer_info = issue['job_type'].split("_")
     engine = fuzzer_info[0]
     if engine not in ['libfuzzer','afl','honggfuzz','centipede','dataflow','none']:
-        eventLog(f'[-] dev:getFuzzer: weird engine found {engine}')
+        eventLog(f'[-] dev:getOSSFuzzer: weird engine found {engine}')
         return False
     if fuzzer_info[2] == 'i386':
         arch='i386'
@@ -99,7 +99,7 @@ def getFuzzer(localId,storage=None):
     return 
     
 
-def getFuzzers():
+def getOSSFuzzers():
     issues = getAllLocalIds()
     storage = Path("/data/n132/oss-fuzz")
     ct =  0
@@ -109,7 +109,7 @@ def getFuzzers():
         try:
             tmp = storage / str(x)
             tmp.mkdir(exist_ok=True)
-            res = getFuzzer(x,tmp)
+            res = getOSSFuzzer(x,tmp)
         except:
             pass
 
