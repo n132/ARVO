@@ -62,7 +62,7 @@ def verify_FIX(localId,repo_dir,pname):
     if not build_res:
         return leave("Failed to Compile")
     tmp = tmpFile()
-    not_crash = crashVerify(issue,case_path, tmp )
+    not_crash = crashVerify(issue,case_path,tmp)
     if not_crash == True:
         return leave(True)
     else:

@@ -748,7 +748,7 @@ def crashVerify(issue,reproduce_case,tag,timeout=None,detect_uninitialized=True)
         log_tag = tmpFile()
     else:
         # tag could be a path or a str
-        log_tag = f"{issue['localId']}_{tag}.log" if type(tag) == str else tag
+        log_tag = ARVO / "Log" / "FuzzerExecution" / f"{issue['localId']}_{tag}.log" if type(tag) == str else tag
     timeout = ['timeout',str(timeout)] if timeout else []
     res = ifCrash(fuzz_target.name,str(reproduce_case),issue,log_tag,timeout,detect_uninitialized)
 
