@@ -680,7 +680,7 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def _pocResultChecker(returnCode,logfile, args, recursive_call):
+def pocResultChecker(returnCode,logfile, args, recursive_call):
     if returnCode == 0: # not crash
         return True
     elif returnCode == 124 and ("timeout" in args): # timeout 
@@ -722,7 +722,7 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
     print(f"[+] The return value is {returnCode}")
-    return _pocResultChecker(returnCode,log_tag, args, recursive_call)
+    return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
     out  = OSS_OUT / str(issue['localId']) 
