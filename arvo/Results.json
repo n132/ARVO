@@ -4260,6 +4260,7 @@
 {"localId": 49268, "project": "mruby", "pass": true}
 {"localId": 49269, "project": "mruby", "pass": true}
 {"localId": 49271, "project": "ffmpeg", "pass": true}
+{"localId": 49274, "project": "assimp", "pass": true}
 {"localId": 49277, "project": "libjxl", "pass": true}
 {"localId": 49282, "project": "mruby", "pass": true}
 {"localId": 49290, "project": "ghostscript", "pass": true}
@@ -5262,6 +5263,7 @@
 {"localId": 62425, "project": "icu", "pass": true}
 {"localId": 62432, "project": "icu", "pass": true}
 {"localId": 62435, "project": "lldpd", "pass": true}
+{"localId": 62441, "project": "assimp", "pass": true}
 {"localId": 62467, "project": "ffmpeg", "pass": true}
 {"localId": 62478, "project": "libvips", "pass": true}
 {"localId": 62500, "project": "mruby", "pass": true}
@@ -5526,6 +5528,7 @@
 {"localId": 65765, "project": "upx", "pass": true}
 {"localId": 65777, "project": "qpdf", "pass": true}
 {"localId": 65820, "project": "htslib", "pass": true}
+{"localId": 65838, "project": "assimp", "pass": true}
 {"localId": 65864, "project": "upx", "pass": true}
 {"localId": 65873, "project": "icu", "pass": true}
 {"localId": 65879, "project": "serenity", "pass": true}
