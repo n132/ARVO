@@ -716,10 +716,16 @@ def ifCrash(fuzz_target,case,issue,log_tag,timeout=None,UUV = True):
         return fuzzerExecution(['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS+":detect_uninitialized=0", '-e', MSAN_OPTIONS,
                     "-v",f"{case}:/tmp/poc",
                     '-v',f"{out}:/out",f"gcr.io/oss-fuzz/{issue['localId']}"]+timeout_parameters+['/out/'+fuzz_target,'/tmp/poc'],log_tag)
-def fuzzerExecution(args, log_tag):
+def fuzzerExecution(args, log_tag, recursive_call = False):
     cmd = ['docker','run','--rm','--privileged']
     cmd.extend(args)
-    print(" ".join(cmd))
+    
+    if recursive_call:
+        print("$"*0x20)
+        print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"'])) 
+        # print commands for debugging
+    else:
+        print(" ".join(cmd))
     if log_tag != None:
         log_tag = ExeLog / log_tag if type(log_tag) == str else log_tag
         with open(log_tag,'w') as f:
@@ -732,6 +738,21 @@ def fuzzerExecution(args, log_tag):
         return True
     elif returnCode == 124 and "timeout" in args:
         return None
+    elif returnCode == 255 and not recursive_call:
+        # It could be some old version of fuzzing engine 
+        # `WARNING: using the deprecated call style `/out/pdf_fuzzer 1000`
+        # If it still dies with /out/fuzzer < /tmp/poc we keep the first log file
+        # check if Running: "WARNING: iterations invalid /tmp/poc" in the str
+        re_run = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        _, err = re_run.communicate()
+        if b"WARNING: iterations invalid" not in err:
+            return False
+        else:
+            INFO("Found a Fuzzing Target Doesn't Support `Fuzzer POC`")
+            fuzz_target = cmd[-2]
+            poc_path = cmd[-1]
+            new_args = args[:-2] + ["bash", "-c" , f'cat {poc_path} | {fuzz_target}'] # remove original command
+            return fuzzerExecution(new_args, log_tag, True)
     else:
         return False
 #==================================================================
