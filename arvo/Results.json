@@ -5114,6 +5114,7 @@
 {"localId": 60090, "project": "libdwarf", "pass": true}
 {"localId": 60116, "project": "harfbuzz", "pass": true}
 {"localId": 60121, "project": "zeek", "pass": true}
+{"localId": 60218, "project": "assimp", "pass": true}
 {"localId": 60236, "project": "wolfssl", "pass": true}
 {"localId": 60238, "project": "harfbuzz", "pass": true}
 {"localId": 60245, "project": "capstone", "pass": true}
@@ -5617,6 +5618,9 @@
 {"localId": 67332, "project": "serenity", "pass": true}
 {"localId": 67354, "project": "gpac", "pass": true}
 {"localId": 67552, "project": "libxml2", "pass": true}
+{"localId": 67670, "project": "libxml2", "pass": true}
+{"localId": 68091, "project": "libxml2", "pass": true}
+{"localId": 68391, "project": "libxml2", "pass": true}
 {"localId": 68403, "project": "mupdf", "pass": true}
 {"localId": 69502, "project": "mupdf", "pass": true}
 {"localId": 70260, "project": "mupdf", "pass": true}
