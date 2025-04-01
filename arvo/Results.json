@@ -5614,4 +5614,8 @@
 {"localId": 67332, "project": "serenity", "pass": true}
 {"localId": 67354, "project": "gpac", "pass": true}
 {"localId": 67552, "project": "libxml2", "pass": true}
+{"localId": 68403, "project": "mupdf", "pass": true}
+{"localId": 69502, "project": "mupdf", "pass": true}
 {"localId": 70260, "project": "mupdf", "pass": true}
+{"localId": 70481, "project": "mupdf", "pass": true}
+{"localId": 70484, "project": "mupdf", "pass": true}
