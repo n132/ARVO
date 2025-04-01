@@ -731,7 +731,7 @@ def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True)
             "-v",f"{case}:/tmp/poc",
             '-v',f"{out}:/out",f"gcr.io/oss-fuzz/{issue['localId']}"]+timeout+['/out/'+fuzz_target,'/tmp/poc'],log_tag)
 
-def crashVerify(issue,reproduce_case,tag,timeout=None,detect_uninitialized=True):
+def crashVerify(issue,reproduce_case,tag,timeout=180,detect_uninitialized=True):
     # Return True if NOT crash
     # Return False if crash 
     print(" "*0x20)
