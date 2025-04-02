@@ -2388,6 +2388,7 @@
 {"localId": 25526, "project": "php", "pass": true}
 {"localId": 25530, "project": "libsndfile", "pass": true}
 {"localId": 25533, "project": "htslib", "pass": true}
+{"localId": 25536, "project": "libxml2", "pass": true}
 {"localId": 25545, "project": "ndpi", "pass": true}
 {"localId": 25554, "project": "skia", "pass": true}
 {"localId": 25561, "project": "libsndfile", "pass": true}
@@ -5618,11 +5619,16 @@
 {"localId": 67332, "project": "serenity", "pass": true}
 {"localId": 67354, "project": "gpac", "pass": true}
 {"localId": 67552, "project": "libxml2", "pass": true}
+{"localId": 67560, "project": "libxml2", "pass": true}
+{"localId": 67586, "project": "libxml2", "pass": true}
 {"localId": 67670, "project": "libxml2", "pass": true}
 {"localId": 68091, "project": "libxml2", "pass": true}
 {"localId": 68391, "project": "libxml2", "pass": true}
 {"localId": 68403, "project": "mupdf", "pass": true}
+{"localId": 69042, "project": "libxml2", "pass": true}
 {"localId": 69502, "project": "mupdf", "pass": true}
 {"localId": 70260, "project": "mupdf", "pass": true}
+{"localId": 70297, "project": "libxml2", "pass": true}
 {"localId": 70481, "project": "mupdf", "pass": true}
 {"localId": 70484, "project": "mupdf", "pass": true}
+{"localId": 70774, "project": "libxml2", "pass": true}
