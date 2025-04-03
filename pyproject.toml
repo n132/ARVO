@@ -14,7 +14,8 @@ dependencies = [
     "json5",
     "google-cloud-storage",
     "filelock",
-    "setuptools"
+    "setuptools",
+    "json5"
 ]
 
 [build-system]
