@@ -1,0 +1,66 @@
+{
+    "fix": "https://github.com/eclipse/mosquitto/commit/2754b6667d64069bcc3f5e24d43acc83a3a9f27a",
+    "verify": "0",
+    "localId": 68361,
+    "project": "mosquitto",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow WRITE {*}",
+    "severity": "High",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68361,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1714329003,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=4892680610971648\n\nProject: mosquitto\nFuzzing Engine: libFuzzer\nFuzz Target: broker_fuzz_test_config\nJob Type: libfuzzer_asan_mosquitto\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow WRITE {*}\nCrash Address: 0x611000000398\nCrash State:\n  config__add_listener\n  config__create_default_listener\n  config__read_file_core\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: High\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_mosquitto&range=202404270607:202404280628\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4892680610971648\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68361,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1714386060,
+                "content": "ClusterFuzz testcase 4892680610971648 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_mosquitto&range=202404280628:202404290617\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68361,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1714396332,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "2754b6667d64069bcc3f5e24d43acc83a3a9f27a",
+    "repo_addr": "https://github.com/eclipse/mosquitto"
+}
