@@ -30,11 +30,13 @@ See [GitHub Action Example][4] for an example of the database rebuild. Full func
 
 An example of rebuilding case-25402:
 ```sh
-python3 -m venv arvo-run
-source ./arvo-run/bin/activate
-pip3 install -e .
-rm -f ./Reports/25402.json
-arvo report 25402
+git cloned https://github.com/n132/ARVO-Pub.git ARVO
+cd ARVO
+python3 -m venv arvo-run # create the venv
+source ./arvo-run/bin/activate # enable venv
+pip3 install -e . # install arvo
+rm -f ./Reports/25402.json # delete existing report
+arvo report 25402 # regenerate the report
 ```
 
 
