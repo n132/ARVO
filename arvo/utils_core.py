@@ -203,8 +203,8 @@ def fixBuildScript(file,pname):
                 break
         if starts != -1 and ends != -1:
             dft.removeRange(starts,ends)        
-    elif pname == 'libredwg':
-        dft.replace('make\n','make -j`nproc`\n')
+    elif pname in ['libredwg','duckdb']:
+        dft.replace(r'^make$','make -j`nproc`\n')
     assert(dft.flush()==True)
     return True
 NoOperation = [
