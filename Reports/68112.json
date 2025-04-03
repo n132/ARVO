@@ -1,0 +1,81 @@
+{
+    "fix": "https://github.com/IUPAC-InChI/InChI/commit/c6098065a303a2db8ecd61537b5473065b861b4b",
+    "verify": "0",
+    "localId": 68112,
+    "project": "inchi",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Global-buffer-overflow READ 4",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68112,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1713431275,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5111311114502144\n\nProject: inchi\nFuzzing Engine: libFuzzer\nFuzz Target: inchi_input_fuzzer\nJob Type: libfuzzer_asan_inchi\nPlatform Id: linux\n\nCrash Type: Global-buffer-overflow READ 4\nCrash Address: 0x000000942c40\nCrash State:\n  OAD_Polymer_SetAtProps\n  OAD_Polymer_SmartReopenCyclizedUnits\n  GetStructFromINCHIEx\n  \nSanitizer: address (ASAN)\n\nCrash Revision: https://oss-fuzz.com/revisions?job=libfuzzer_asan_inchi&revision=202404170625\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5111311114502144\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68112,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1713446501,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-07-17"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68112,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1714048950,
+                "content": "ClusterFuzz testcase 5111311114502144 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_inchi&range=202404230602:202404240607\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68112,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1714050715,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "c6098065a303a2db8ecd61537b5473065b861b4b",
+    "repo_addr": "https://github.com/IUPAC-InChI/InChI"
+}

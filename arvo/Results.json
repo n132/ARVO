@@ -4707,6 +4707,7 @@
 {"localId": 55221, "project": "hdf5", "pass": true}
 {"localId": 55282, "project": "util-linux", "pass": true}
 {"localId": 55287, "project": "harfbuzz", "pass": true}
+{"localId": 55308, "project": "readstat", "pass": true}
 {"localId": 55310, "project": "wolfssl", "pass": true}
 {"localId": 55321, "project": "binutils", "pass": true}
 {"localId": 55332, "project": "imagemagick", "pass": true}
@@ -5635,7 +5636,10 @@
 {"localId": 67560, "project": "libxml2", "pass": true}
 {"localId": 67586, "project": "libxml2", "pass": true}
 {"localId": 67670, "project": "libxml2", "pass": true}
+{"localId": 68028, "project": "cyclonedds", "pass": true}
+{"localId": 68041, "project": "fwupd", "pass": true}
 {"localId": 68091, "project": "libxml2", "pass": true}
+{"localId": 68112, "project": "inchi", "pass": true}
 {"localId": 68314, "project": "inchi", "pass": true}
 {"localId": 68315, "project": "fwupd", "pass": true}
 {"localId": 68345, "project": "fwupd", "pass": true}
@@ -5647,13 +5651,17 @@
 {"localId": 68432, "project": "simdjson", "pass": true}
 {"localId": 68441, "project": "boringssl", "pass": true}
 {"localId": 68458, "project": "unit", "pass": true}
+{"localId": 68478, "project": "simdjson", "pass": true}
+{"localId": 68486, "project": "ninja", "pass": true}
 {"localId": 68524, "project": "boringssl", "pass": true}
 {"localId": 68629, "project": "edk2", "pass": true}
 {"localId": 68644, "project": "edk2", "pass": true}
+{"localId": 68663, "project": "pjsip", "pass": true}
 {"localId": 68668, "project": "qpdf", "pass": true}
 {"localId": 68680, "project": "ninja", "pass": true}
 {"localId": 68742, "project": "inchi", "pass": true}
 {"localId": 68763, "project": "openjpeg", "pass": true}
+{"localId": 68775, "project": "libspdm", "pass": true}
 {"localId": 68844, "project": "mpv", "pass": true}
 {"localId": 68933, "project": "libultrahdr", "pass": true}
 {"localId": 68946, "project": "libultrahdr", "pass": true}
@@ -5663,8 +5671,11 @@
 {"localId": 69492, "project": "libcups", "pass": true}
 {"localId": 69497, "project": "arduinojson", "pass": true}
 {"localId": 69502, "project": "mupdf", "pass": true}
+{"localId": 69527, "project": "libical", "pass": true}
+{"localId": 69531, "project": "miniz", "pass": true}
 {"localId": 69576, "project": "wamr", "pass": true}
 {"localId": 69656, "project": "inchi", "pass": true}
+{"localId": 69758, "project": "unit", "pass": true}
 {"localId": 69913, "project": "qpdf", "pass": true}
 {"localId": 70260, "project": "mupdf", "pass": true}
 {"localId": 70297, "project": "libxml2", "pass": true}
@@ -5672,6 +5683,7 @@
 {"localId": 70481, "project": "mupdf", "pass": true}
 {"localId": 70484, "project": "mupdf", "pass": true}
 {"localId": 70774, "project": "libxml2", "pass": true}
+{"localId": 70828, "project": "edk2", "pass": true}
 {"localId": 71120, "project": "gpsd", "pass": true}
 {"localId": 71136, "project": "rtpproxy", "pass": true}
 {"localId": 71290, "project": "libjpeg-turbo", "pass": true}
