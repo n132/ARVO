@@ -1,0 +1,93 @@
+{
+    "fix": "https://github.com/qpdf/qpdf/commit/8ae3ef28ac34fddb1cc8b03b2479f499e4af5f8a",
+    "verify": "0",
+    "localId": 69913,
+    "project": "qpdf",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Stack-buffer-overflow READ 1",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69913,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1719400232,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5835315281985536\n\nProject: qpdf\nFuzzing Engine: libFuzzer\nFuzz Target: future_qpdf_fuzzer\nJob Type: libfuzzer_asan_qpdf\nPlatform Id: linux\n\nCrash Type: Stack-buffer-overflow READ 1\nCrash Address: 0x7fa2eac011b5\nCrash State:\n  QPDF::read_xrefEntry\n  QPDF::read_xrefTable\n  QPDF::read_xref\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_qpdf&range=202406180615:202406230611\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5835315281985536\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69913,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1719408123,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-09-24"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69913,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1672121497",
+                    "displayName": "mholg...@gmail.com"
+                },
+                "timestamp": 1719494469,
+                "content": "This bug is not affecting any released version of qpdf"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69913,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1719593033,
+                "content": "ClusterFuzz testcase 5835315281985536 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_qpdf&range=202406270603:202406280619\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69913,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1719666635,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "8ae3ef28ac34fddb1cc8b03b2479f499e4af5f8a",
+    "repo_addr": "https://github.com/qpdf/qpdf.git"
+}

@@ -1,0 +1,82 @@
+{
+    "fix": "https://github.com/bblanchon/ArduinoJson/commit/208e7a33043784d4b9939fb236c84f56cd58e6f5",
+    "verify": "0",
+    "localId": 69497,
+    "project": "arduinojson",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow WRITE 1",
+    "severity": "High",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69497,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1717774488,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5354792971993088\n\nProject: arduinojson\nFuzzing Engine: libFuzzer\nFuzz Target: msgpack_fuzzer\nJob Type: libfuzzer_asan_i386_arduinojson\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow WRITE 1\nCrash Address: 0xf56009bd\nCrash State:\n  ArduinoJson::V704HB22::detail::MsgPackDeserializer<ArduinoJson::V704HB22::detail\n  ArduinoJson::V704HB22::DeserializationError::Code ArduinoJson::V704HB22::detail:\n  ArduinoJson::V704HB22::DeserializationError::Code ArduinoJson::V704HB22::detail:\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: High\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_arduinojson&range=202406060630:202406070623\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5354792971993088\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69497,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1717852831,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-09-05"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69497,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1718290625,
+                "content": "ClusterFuzz testcase 5354792971993088 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_arduinojson&range=202406110615:202406120611\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69497,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1718370655,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "208e7a33043784d4b9939fb236c84f56cd58e6f5",
+    "repo_addr": "https://github.com/bblanchon/ArduinoJson.git"
+}
