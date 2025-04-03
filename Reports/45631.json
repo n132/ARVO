@@ -1,0 +1,97 @@
+{
+    "fix": "https://sourceware.org/git/?p=elfutils.git;a=commitdiff;h=d85945f1056641180e03fb48ab770b893125786e",
+    "verify": "0",
+    "localId": 45631,
+    "project": "elfutils",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "msan",
+    "crash_type": "Use-of-uninitialized-value",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 45631,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1647496445,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5742116662280192\n\nProject: elfutils\nFuzzing Engine: libFuzzer\nFuzz Target: fuzz-libdwfl\nJob Type: libfuzzer_msan_elfutils\nPlatform Id: linux\n\nCrash Type: Use-of-uninitialized-value\nCrash Address: \nCrash State:\n  __libdw_gunzip\n  decompress\n  libdw_open_elf\n  \nSanitizer: memory (MSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_msan_elfutils&range=202203161800:202203170000\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5742116662280192\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 45631,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1355924921",
+                    "displayName": "da...@adalogics.com"
+                },
+                "timestamp": 1647770290,
+                "content": "MSAN report\n\tRunning: /mnt/scratch0/clusterfuzz/bot/inputs/fuzzer-testcases/crash-cdd503eda6f927979a20a3bd4c08c8182cdf2ff5\n==593068==WARNING: MemorySanitizer: use-of-uninitialized-value\n    #0 0x55eeb6 in zlib_fail /src/elfutils/libdwfl/gzip.c:132:3\n    #1 0x55eeb6 in __libdw_gunzip /src/elfutils/libdwfl/gzip.c:387:11\n    #2 0x540817 in decompress /src/elfutils/libdwfl/open.c:66:11\n    #3 0x5400d7 in what_kind /src/elfutils/libdwfl/open.c:114:12\n    #4 0x5400d7 in libdw_open_elf /src/elfutils/libdwfl/open.c:134:22\n    #5 0x53f505 in __libdw_open_file /src/elfutils/libdwfl/open.c:197:10\n    #6 0x52cea7 in __libdwfl_report_offline /src/elfutils/libdwfl/offline.c:281:22\n    #7 0x52cea7 in dwfl_report_offline /src/elfutils/libdwfl/offline.c:316:10\n    #8 0x52747b in LLVMFuzzerTestOneInput /src/fuzz-libdwfl.c:47:22\n    #9 0x4552f2 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerLoop.cpp:611:15\n    #10 0x440ea2 in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:324:6\n    #11 0x44670c in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerDriver.cpp:860:9\n    #12 0x46f0a2 in main /src/llvm-project/compiler-rt/lib/fuzzer/FuzzerMain.cpp:20:10\n    #13 0x7f5b32dd40b2 in __libc_start_main /build/glibc-eX1tMB/glibc-2.31/csu/libc-start.c:308:16\n    #14 0x41f5ed in _start\n  Uninitialized value was created by an allocation of 'code' in the stack frame of function '__libdw_gunzip'\n    #0 0x55cde0 in __libdw_gunzip /src/elfutils/libdwfl/gzip.c:184\nSUMMARY: MemorySanitizer: use-of-uninitialized-value (/mnt/scratch0/clusterfuzz/bot/builds/clusterfuzz-builds_elfutils_3ee01cb67db1a71e7adeb7f3f14722ea62f13cd5/revisions/fuzz-libdwfl+0x55eeb6)\nUnique heap origins: 44\nStack depot allocated bytes: 1638400\nUnique origin histories: 7\nHistory depot allocated bytes: 196608\nExiting"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 45631,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1355924921",
+                    "displayName": "da...@adalogics.com"
+                },
+                "timestamp": 1647770307,
+                "attachments": [
+                    {
+                        "attachmentId": "547332",
+                        "filename": "clusterfuzz-testcase-minimized-fuzz-libdwfl-5742116662280192",
+                        "size": "4",
+                        "contentType": "text/plain",
+                        "viewUrl": "/p/oss-fuzz/issues/attachmentText?aid=547332",
+                        "downloadUrl": "attachment?aid=547332&signed_aid=_8f5JNc8hxSA8c0msZTgJw=="
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 45631,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1647993939,
+                "content": "This crash occurs very frequently on linux platform and is likely preventing the fuzzer fuzz-libdwfl from making much progress. Fixing this will allow more bugs to be found.\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Fuzz-Blocker"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 45631,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1648156274,
+                "content": "ClusterFuzz testcase 5742116662280192 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_msan_elfutils&range=202203240610:202203241200\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "d85945f1056641180e03fb48ab770b893125786e",
+    "repo_addr": "git://sourceware.org/git/elfutils.git"
+}
