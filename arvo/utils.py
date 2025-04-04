@@ -872,5 +872,11 @@ def issueFilter():
 def tokenLen(message: str,model='gpt-4'):
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(message))
+def silentRun(func, *args, **kwargs):
+    original_stdout = sys.stdout
+    sys.stdout = open(os.devnull, 'w')
+    result = func(*args, **kwargs)
+    sys.stdout = original_stdout
+    return result
 if __name__ == "__main__":
     issueFilter()
