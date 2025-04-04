@@ -95,7 +95,6 @@ def customSrcmap(srcmap,pname,commit):
     for key in list(data.keys()):
         nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
         if nk != key:
-            # issue 31992
             data[nk] = data.pop(key)
     vk = "/src/"+pname
     if vk in data:
