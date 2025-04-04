@@ -88,11 +88,12 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "ubsan": "undefined",
     }
     fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','NOTFOUND')
-    if len(res['job_type'].split("_"))==3:
-        res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
-    else:
+    if len(res['job_type'].split("_"))==2:
         WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
         return False
+    else:
+        res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
+
     if fuzz_target != 'NOTFOUND':
         res['fuzz_target'] = fuzz_target
     if res['project'] == "NOTFOUND":
