@@ -2266,6 +2266,7 @@
 {"localId": 24243, "project": "ots", "pass": true}
 {"localId": 24246, "project": "skia", "pass": true}
 {"localId": 24267, "project": "rnp", "pass": true}
+{"localId": 24286, "project": "immer", "pass": true}
 {"localId": 24287, "project": "immer", "pass": true}
 {"localId": 24289, "project": "skia", "pass": true}
 {"localId": 24290, "project": "libvips", "pass": true}
@@ -2788,6 +2789,7 @@
 {"localId": 30012, "project": "htslib", "pass": true}
 {"localId": 30018, "project": "yara", "pass": true}
 {"localId": 30051, "project": "sudoers", "pass": true}
+{"localId": 30072, "project": "dropbear", "pass": true}
 {"localId": 30081, "project": "matio", "pass": true}
 {"localId": 30083, "project": "matio", "pass": true}
 {"localId": 30087, "project": "htslib", "pass": true}
@@ -2960,6 +2962,7 @@
 {"localId": 31612, "project": "c-blosc2", "pass": true}
 {"localId": 31619, "project": "ffmpeg", "pass": true}
 {"localId": 31637, "project": "c-blosc2", "pass": true}
+{"localId": 31692, "project": "fmt", "pass": true}
 {"localId": 31698, "project": "serenity", "pass": true}
 {"localId": 31705, "project": "c-blosc2", "pass": true}
 {"localId": 31710, "project": "c-blosc2", "pass": true}
@@ -3314,9 +3317,11 @@
 {"localId": 36093, "project": "c-blosc2", "pass": true}
 {"localId": 36098, "project": "sleuthkit", "pass": true}
 {"localId": 36103, "project": "c-blosc2", "pass": true}
+{"localId": 36105, "project": "fmt", "pass": true}
 {"localId": 36122, "project": "sleuthkit", "pass": true}
 {"localId": 36127, "project": "serenity", "pass": true}
 {"localId": 36158, "project": "libjxl", "pass": true}
+{"localId": 36177, "project": "openvpn", "pass": true}
 {"localId": 36196, "project": "php", "pass": true}
 {"localId": 36200, "project": "opensc", "pass": true}
 {"localId": 36205, "project": "php", "pass": true}
@@ -3700,6 +3705,7 @@
 {"localId": 41235, "project": "libjxl", "pass": true}
 {"localId": 41244, "project": "libpcap", "pass": true}
 {"localId": 41283, "project": "libvips", "pass": true}
+{"localId": 41293, "project": "qpid-proton", "pass": true}
 {"localId": 41302, "project": "imagemagick", "pass": true}
 {"localId": 41318, "project": "matio", "pass": true}
 {"localId": 41330, "project": "matio", "pass": true}
@@ -5218,6 +5224,7 @@
 {"localId": 61492, "project": "libvips", "pass": true}
 {"localId": 61528, "project": "kimageformats", "pass": true}
 {"localId": 61538, "project": "ntopng", "pass": true}
+{"localId": 61577, "project": "gstreamer", "pass": true}
 {"localId": 61582, "project": "icu", "pass": true}
 {"localId": 61584, "project": "ntopng", "pass": true}
 {"localId": 61593, "project": "libredwg", "pass": true}
@@ -5730,6 +5737,7 @@
 {"localId": 69656, "project": "inchi", "pass": true}
 {"localId": 69675, "project": "wamr", "pass": true}
 {"localId": 69758, "project": "unit", "pass": true}
+{"localId": 69849, "project": "mpv", "pass": true}
 {"localId": 69913, "project": "qpdf", "pass": true}
 {"localId": 69965, "project": "inchi", "pass": true}
 {"localId": 70006, "project": "inchi", "pass": true}
@@ -5739,8 +5747,10 @@
 {"localId": 70481, "project": "mupdf", "pass": true}
 {"localId": 70484, "project": "mupdf", "pass": true}
 {"localId": 70532, "project": "cpython3", "pass": true}
+{"localId": 70622, "project": "mpv", "pass": true}
 {"localId": 70774, "project": "libxml2", "pass": true}
 {"localId": 70828, "project": "edk2", "pass": true}
+{"localId": 70919, "project": "mpv", "pass": true}
 {"localId": 71007, "project": "rtpproxy", "pass": true}
 {"localId": 71096, "project": "haproxy", "pass": true}
 {"localId": 71120, "project": "gpsd", "pass": true}
