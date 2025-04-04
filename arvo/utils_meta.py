@@ -68,7 +68,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
                 return default
         return m.group(1).strip()
     res = {
-        "project": extract(r'Project:\s*(\S+)'),
+        "project": extract(r'(?:Target|Project):\s*(\S+)'),
         "job_type": extract(r'Job Type:\s*(\S+)'),
         "platform": extract(r'Platform Id:\s*(\S+)','linux'),
         "crash_type": extract(r'Crash Type:\s*(.+)'),
