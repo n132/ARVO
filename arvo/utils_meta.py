@@ -75,7 +75,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "crash_address": extract(r'Crash Address:\s*(\S+)'),
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
         "regressed": extract(r'(?:Regressed|Fixed):\s*(https?://\S+)'),
-        "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase).*:\s*(https?://\S+)'),
+        "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'),
         "localId": localId
     }
     sanitizer_map = {
@@ -86,12 +86,12 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "msan": "memory",
         "ubsan": "undefined",
     }
-    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','')
+    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','NOTFOUND')
     res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
-    if fuzz_target != '':
+    if fuzz_target != 'NOTFOUND':
         res['fuzz_target'] = fuzz_target
     return res
-def getIssue(issue_id):
+def getIssue(issue_id,debug = False):
     url = f'https://issues.oss-fuzz.com/action/issues/{issue_id}/events?currentTrackerId=391'
     session = requests.Session()
     # Step 1: Get the token from the cookie
@@ -113,7 +113,11 @@ def getIssue(issue_id):
     }
     response = session.get(url, headers=headers)
     raw_text = response.content
+    if debug:
+        print(raw_text)
     res = parse_oss_fuzz_report(raw_text,issue_id)
+    if debug:
+        print(res)
     return res
     
 def getIssues(issue_ids):

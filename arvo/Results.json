@@ -3627,6 +3627,7 @@
 {"localId": 40118, "project": "freeradius", "pass": true}
 {"localId": 40120, "project": "pcl", "pass": true}
 {"localId": 40150, "project": "imagemagick", "pass": true}
+{"localId": 40152, "project": "duckdb", "pass": true}
 {"localId": 40160, "project": "ndpi", "pass": true}
 {"localId": 40269, "project": "ndpi", "pass": true}
 {"localId": 40290, "project": "matio", "pass": true}
