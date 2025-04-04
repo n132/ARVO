@@ -76,7 +76,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
         "regressed": extract(r'(?:Regressed|Crash Revision):\s*(https?://\S+)',"NO_REGRESS"),
         "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'),
-        "verified_fixed": extract(r'(?:fixed in|Fixed):\s*(https?://\S+)','NO_FIX'),
+        "verified_fixed": extract(r'(?:fixed in|Fixed:)\s*(https?://\S+)','NO_FIX'),
         "localId": localId
     }
     sanitizer_map = {

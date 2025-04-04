@@ -79,6 +79,8 @@ def getOSSFuzzerbyName(localId,srcmap_name,storage):
 
 def getOSSFuzzer(localId,storage=None):
     issue = getIssue(localId)
+    if issue == False:
+        return False
     fuzzer_info = issue['job_type'].split("_")
     engine = fuzzer_info[0]
     if engine not in ['libfuzzer','afl','honggfuzz','centipede','dataflow','none']:
@@ -96,7 +98,7 @@ def getOSSFuzzer(localId,storage=None):
 
     srcmap_name = getSrcmaps(localId)[1].name.split(".")[0]
     donwloadFuzzer(pname, srcmap_name, engine, arch, storage)
-    return 
+    return True
     
 
 def getOSSFuzzers():
