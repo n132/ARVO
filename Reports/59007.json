@@ -1,0 +1,66 @@
+{
+    "fix": "https://github.com/NVIDIA/nccl/commit/ab2b89c4c339bd7f816fbc114a4b05d386b66290",
+    "verify": "0",
+    "localId": 59007,
+    "project": "nccl",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "ubsan",
+    "crash_type": "Index-out-of-bounds",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 59007,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1684164103,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=6133145670647808\n\nProject: nccl\nFuzzing Engine: libFuzzer\nFuzz Target: fuzz_xml\nJob Type: libfuzzer_ubsan_nccl\nPlatform Id: linux\n\nCrash Type: Index-out-of-bounds\nCrash Address: \nCrash State:\n  xmlLoadSub\n  ncclTopoGetXmlFromFile\n  fuzz_xml.cpp\n  \nSanitizer: undefined (UBSAN)\n\nRecommended Security Severity: Medium\n\nCrash Revision: https://oss-fuzz.com/revisions?job=libfuzzer_ubsan_nccl&revision=202305140621\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=6133145670647808\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 59007,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1712311834,
+                "content": "ClusterFuzz testcase 6133145670647808 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_ubsan_nccl&range=202404040605:202404050607\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 59007,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1712322631,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "ab2b89c4c339bd7f816fbc114a4b05d386b66290",
+    "repo_addr": "https://github.com/NVIDIA/nccl"
+}

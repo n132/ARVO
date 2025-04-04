@@ -92,11 +92,11 @@ def customSrcmap(srcmap,pname,commit):
         data = json.load(f)
 
     ## Update srcmap
-    for key in data:
+    for key in list(data.keys()):
         nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
         if nk != key:
-            data[nk] = data[key]
-            del(data[key])
+            # issue 31992
+            data[nk] = data.pop(key)
     vk = "/src/"+pname
     if vk in data:
         data[vk]['rev']=commit
