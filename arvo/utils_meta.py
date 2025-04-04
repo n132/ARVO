@@ -74,8 +74,9 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "crash_type": extract(r'Crash Type:\s*(.+)'),
         "crash_address": extract(r'Crash Address:\s*(\S+)'),
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
-        "regressed": extract(r'(?:Regressed|Fixed):\s*(https?://\S+)'),
+        "regressed": extract(r'(?:Regressed|Fixed|Crash Revision):\s*(https?://\S+)'),
         "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'),
+        "verified_fixed": extract(r'(?:fixed in)\s*(https?://\S+)','NO_FIX'),
         "localId": localId
     }
     sanitizer_map = {
@@ -87,13 +88,17 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "ubsan": "undefined",
     }
     fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','NOTFOUND')
-    res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
+    if len(res['job_type'].split("_"))==3:
+        res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
+    else:
+        WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
+        return False
     if fuzz_target != 'NOTFOUND':
         res['fuzz_target'] = fuzz_target
     if res['project'] == "NOTFOUND":
-        res['project'] = res['job_type'].split("_")[2]
+        res['project'] = res['job_type'].split("_")[-1]
     return res
-def getIssue(issue_id,debug = False):
+def getIssue(issue_id):
     url = f'https://issues.oss-fuzz.com/action/issues/{issue_id}/events?currentTrackerId=391'
     session = requests.Session()
     # Step 1: Get the token from the cookie
@@ -115,44 +120,151 @@ def getIssue(issue_id,debug = False):
     }
     response = session.get(url, headers=headers)
     raw_text = response.content
-    if debug:
-        print(raw_text)
     try:
         res = parse_oss_fuzz_report(raw_text,issue_id)
     except:
         WARN(f"FAIL on {issue_id}, skip")
         return False
-
-    if debug:
-        print(res)
     return res
     
 def getIssues(issue_ids):
     issues = []
-    for x in issue_ids:
-        if x == 42502198:
-            # Skip
-            continue
+    fp = META / "metadata.json"
+    if not fp.exists():
+        fp.touch()
+    done = []
+    with open(fp,'r') as f:
+        lines = f.readlines()
+    for line in lines:
+        done.append(json.loads(line)['localId'])
+    for x in tqdm(issue_ids):
         res = getIssue(x)
         if res:
             issues.append(res)
+            if x not in done:
+                with open(fp,'a') as f:
+                    f.write(json.dumps(res) + '\n') 
         else:
             WARN(f"Failed to fetch the issue for {x}")
     return issues
+# def download_build_artifacts(metadata, url, outdir):
+#     global storage_client
+#     if storage_client is None:
+#         storage_client = storage.Client()
+#     bucket_map = {
+#         "libfuzzer_address_i386": "clusterfuzz-builds-i386",
+#         "libfuzzer_memory_i386": "clusterfuzz-builds-i386",
+#         "libfuzzer_undefined_i386": "clusterfuzz-builds-i386",
+#         "libfuzzer_address": "clusterfuzz-builds",
+#         "libfuzzer_memory": "clusterfuzz-builds",
+#         "libfuzzer_undefined": "clusterfuzz-builds",
+#         "afl_address": "clusterfuzz-builds-afl",
+#         "honggfuzz_address": "clusterfuzz-builds-honggfuzz",
+#     }
+#     sanitizer_map = {
+#         "address (ASAN)": "address",
+#         "memory (MSAN)": "memory",
+#         "undefined (UBSAN)": "undefined",
+#         "asan": "address",
+#         "msan": "memory",
+#         "ubsan": "undefined",
+#         None: "",
+#     }
+#     job_name = metadata["job_type"]
+#     job = parse_job_type(job_name)
+    
+#     # These don't have any build artifacts
+#     if job['untrusted']: return False
+#     if job['engine'] == 'none': return False
+
+#     # Prefer the info from the job name, since the metadata
+#     # format has changed several times.
+#     if 'project' in metadata:
+#         project = metadata["project"]
+#         assert project == job['project']
+#     else:
+#         project = job['project']
+#     if 'sanitizer' in metadata:
+#         sanitizer = sanitizer_map[metadata["sanitizer"]]
+#         assert sanitizer == sanitizer_map[job['sanitizer']]
+#     else:
+#         sanitizer = sanitizer_map[job['sanitizer']]
+#     fuzzer = job['engine']
+#     bucket_string = f"{fuzzer}_{sanitizer}"
+#     if job['arch'] == 'i386':
+#         bucket_string += '_i386'
+#     assert bucket_string in bucket_map
+#     bucket_name = bucket_map[bucket_string]
+
+#     # Grab the revision from the URL
+#     urlparams = parse_qs(urlparse(url).query)
+    
+#     if 'revision' in urlparams:
+#         revision = urlparams['revision'][0]
+#     elif 'range' in urlparams:
+#         revision = urlparams['range'][0].split(':')[1]
+#     else:
+#         return False
+    
+#     zip_name = f'{project}-{sanitizer}-{revision}.zip'
+#     srcmap_name = f'{project}-{sanitizer}-{revision}.srcmap.json'
+#     zip_path = f'{project}/{zip_name}'
+#     srcmap_path = f'{project}/{srcmap_name}'
+#     downloaded_files = []
+#     bucket = storage_client.bucket(bucket_name)
+#     for path, name in [(srcmap_path, srcmap_name)]:
+# #    for path, name in [(zip_path, zip_name), (srcmap_path, srcmap_name)]:
+
+#         download_path = outdir / name
+
+#         if download_path.exists():
+#             print(f'Skipping {name} (already exists)')
+#             downloaded_files.append(download_path)
+#             continue
+#         blob = bucket.blob(path)
+#         if not blob.exists():
+#             print(f'Skipping {name} (not found)')
+#             continue
+#         print(download_path)
+#         ret = blob.download_to_filename(str(download_path))
+        
+#         print(f'Downloaded {name}')
+#         downloaded_files.append(download_path)
+#     return [str(f) for f in downloaded_files]
+
+# def data_download():
+#     global session
+#     session = requests.Session()
+#     session.get("https://issues.oss-fuzz.com/")
+#     xsrf_token = session.cookies.get("XSRF_TOKEN")
+
+#     metadata_file =  META / "metadata.json"
+#     metadata = {}
+#     for line in open(metadata_file):
+#         mdline = json.loads(line)
+#         metadata[mdline['localId']] = mdline
+#     #for localId in metadata:
+#     print(len(metadata))
+#     for localId in metadata:
+#         # Get reproducer(s) and save them.
+#         issue_dir = META / "Issues" / f"{localId}_files"
+#         issue_dir.mkdir(parents=True, exist_ok=True)
+
+#         if 'regressed' in metadata[localId]:
+#             download_build_artifacts(metadata[localId], metadata[localId]['regressed'], issue_dir)
+#         else:
+#             print('No regressed build:', localId)
+#         if 'verified_fixed' in metadata[localId] and  metadata[localId]['verified_fixed'] != 'NO_FIX':
+#             download_build_artifacts(metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
+#         else:
+#             print('No fixed:', localId)
+#     issueFilter()
+#     return str(outdir)
 def syncMeta(localIds):
     # load the meta to metadata.jsonl
-    fp = META / "metadata.jsonl"
-    res = getIssues(localIds)
-    done = []
-    if fp.exist():
-        with open(fp,'r') as f:
-            lines = f.readlines()
-        for line in lines:
-            done.append(json.loads(line)['localId'])
-    with open(fp,'w') as f:
-        for x in tqdm(res):
-            if x['localId'] not in done:
-                f.write(json.dumps(x))
+    getIssues(localIds)
+    
+        
 def getSrcmap():
     pass
 def getMeta():
