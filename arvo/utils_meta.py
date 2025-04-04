@@ -7,7 +7,7 @@ from .utils import ARVO
 from ._profile import DATA_FOLD2
 import json
 from tqdm import tqdm
-
+from pathlib import Path
 META = ARVO / DATA_FOLD2
 
 def getIssueIds():
@@ -68,7 +68,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
                 return default
         return m.group(1).strip()
     res = {
-        "project": extract(r'(?:Target|Project):\s*(\S+)'),
+        "project": extract(r'(?:Target|Project):\s*(\S+)','NOTFOUND'),
         "job_type": extract(r'Job Type:\s*(\S+)'),
         "platform": extract(r'Platform Id:\s*(\S+)','linux'),
         "crash_type": extract(r'Crash Type:\s*(.+)'),
@@ -90,6 +90,8 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
     res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
     if fuzz_target != 'NOTFOUND':
         res['fuzz_target'] = fuzz_target
+    if res['project'] == "NOTFOUND":
+        res['project'] = res['job_type'].split("_")[2]
     return res
 def getIssue(issue_id,debug = False):
     url = f'https://issues.oss-fuzz.com/action/issues/{issue_id}/events?currentTrackerId=391'
@@ -115,7 +117,12 @@ def getIssue(issue_id,debug = False):
     raw_text = response.content
     if debug:
         print(raw_text)
-    res = parse_oss_fuzz_report(raw_text,issue_id)
+    try:
+        res = parse_oss_fuzz_report(raw_text,issue_id)
+    except:
+        WARN(f"FAIL on {issue_id}, skip")
+        return False
+
     if debug:
         print(res)
     return res
@@ -123,6 +130,9 @@ def getIssue(issue_id,debug = False):
 def getIssues(issue_ids):
     issues = []
     for x in issue_ids:
+        if x == 42502198:
+            # Skip
+            continue
         res = getIssue(x)
         if res:
             issues.append(res)
