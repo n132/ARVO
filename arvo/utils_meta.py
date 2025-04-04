@@ -70,7 +70,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
     res = {
         "project": extract(r'Project:\s*(\S+)'),
         "job_type": extract(r'Job Type:\s*(\S+)'),
-        "platform": extract(r'Platform Id:\s*(\S+)'),
+        "platform": extract(r'Platform Id:\s*(\S+)','linux'),
         "crash_type": extract(r'Crash Type:\s*(.+)'),
         "crash_address": extract(r'Crash Address:\s*(\S+)'),
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
