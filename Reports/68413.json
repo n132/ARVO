@@ -1,0 +1,126 @@
+{
+    "fix": "https://gitlab.xiph.org/xiph/speex.git630163d19be79c37d28b5e2d25f8a0aed669d639",
+    "verify": "0",
+    "localId": 68413,
+    "project": "speex",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "msan",
+    "crash_type": "Use-of-uninitialized-value",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1714486230,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=6142339463577600\n\nProject: speex\nFuzzing Engine: libFuzzer\nFuzz Target: speex_decode_fuzzer_fixed\nJob Type: libfuzzer_msan_speex\nPlatform Id: linux\n\nCrash Type: Use-of-uninitialized-value\nCrash Address: \nCrash State:\n  compute_rms16\n  sb_decode\n  sb_decode\n  \nSanitizer: memory (MSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_msan_speex&range=202404290631:202404300618\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=6142339463577600\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1714569713,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-07-29"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1714700787,
+                "content": "This crash occurs very frequently on linux platform and is likely preventing the fuzzer speex_decode_fuzzer_fixed from making much progress. Fixing this will allow more bugs to be found.\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Fuzz-Blocker"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1716486848,
+                "amendments": [
+                    {
+                        "fieldName": "Cc",
+                        "newOrDeltaValue": "jmva...@jmvalin.ca"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "2591484497",
+                    "displayName": "le.bu...@gmail.com"
+                },
+                "timestamp": 1716567330,
+                "content": "Fixes in https://gitlab.xiph.org/xiph/speex/-/commit/630163d19be79c37d28b5e2d25f8a0aed669d639"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1716723336,
+                "content": "ClusterFuzz testcase 6142339463577600 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_msan_speex&range=202405240615:202405250602\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 68413,
+                "sequenceNum": 6,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1716729015,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "630163d19be79c37d28b5e2d25f8a0aed669d639",
+    "repo_addr": "https://gitlab.xiph.org/xiph/speex.git"
+}

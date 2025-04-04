@@ -1,0 +1,114 @@
+{
+    "fix": "https://github.com/tarantool/tarantool/commit/db351d3bc46cf80f4f673129c46a3a4b8be3cadd",
+    "verify": "0",
+    "localId": 66797,
+    "project": "tarantool",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "UNKNOWN READ",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1708235271,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5795224288821248\n\nProject: tarantool\nFuzzing Engine: libFuzzer\nFuzz Target: luaL_loadbuffer_fuzzer\nJob Type: libfuzzer_asan_tarantool\nPlatform Id: linux\n\nCrash Type: UNKNOWN READ\nCrash Address: 0x606000008cc0\nCrash State:\n  NULL\nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_tarantool&range=202402151200:202402151801\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5795224288821248\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1708285919,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-05-20"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "814098932",
+                    "displayName": "serge...@gmail.com"
+                },
+                "timestamp": 1708683688,
+                "content": "May be a dublicate of https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=66725.\n\nReduced to the following (reproduced on vanilla LuaJIT too):\n```\nlocal DEFAULT_NUMBER = 1\n\nlocal always_number = function(val)\n    return tonumber(val) or DEFAULT_NUMBER\nend\n\nlocal __call = function(self)\n    return self\nend\n\nlocal __index = function(self, key)\n    if type(self) == 'table' then\n        return rawget(self, key)\n    end\n    return always_number(key)\nend\n\nlocal __newindex = function(self, key, value)\n    if type(self) == 'table' then\n        if key ~= key or key == nil then\n            key = tostring(key)\n        end\n        rawset(self, key, value)\n    end\nend\n\ndebug.setmetatable(nil, {\n    __newindex = __newindex,\n    __call = __call,\n})\n\ndebug.setmetatable(0, {\n    __newindex = __newindex,\n    __call = __call,\n})\n\ndebug.setmetatable(function() end, {\n    __index = __index,\n})\nlocal table_mt = {\n    __call = __call,\n    __newindex = __newindex,\n}\n\ncounter_0 = 0\nlocal function Name0 (  )\n  if counter_0 > 5 then return end\n  counter_0 = counter_0 + 1\n  ((setmetatable({}, table_mt))())[(setmetatable({}, table_mt))()], Name0(setmetatable({}, table_mt))['Name'], Name0, ((setmetatable({}, table_mt))())['Name'], Name0:Name0(setmetatable({}, table_mt))['Name'], ((setmetatable({}, table_mt)))[(setmetatable({}, table_mt))] = 'Name', 'Name', (setmetatable({}, table_mt))(), 'Name' ;\n  return (setmetatable({}, table_mt))();\nend\n;\nName0()();\n```\n\n",
+                "attachments": [
+                    {
+                        "attachmentId": "628195",
+                        "filename": "core_on_trace.lua",
+                        "size": "1302",
+                        "contentType": "text/plain",
+                        "viewUrl": "/p/oss-fuzz/issues/attachmentText?aid=628195",
+                        "downloadUrl": "attachment?aid=628195&signed_aid=gzqlwmm0S5jClmJkLJGiMg=="
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "814098932",
+                    "displayName": "serge...@gmail.com"
+                },
+                "timestamp": 1709957610,
+                "content": "See report https://github.com/LuaJIT/LuaJIT/issues/1169."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1713018590,
+                "content": "ClusterFuzz testcase 5795224288821248 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_tarantool&range=202404111200:202404111800\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 66797,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1713100217,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "db351d3bc46cf80f4f673129c46a3a4b8be3cadd",
+    "repo_addr": "https://github.com/tarantool/tarantool"
+}

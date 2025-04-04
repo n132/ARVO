@@ -1,0 +1,110 @@
+{
+    "fix": "https://github.com/OpenPrinting/libcups/commit/a7a28e643cd0f84dcae785f93b72426d644c0619",
+    "verify": "0",
+    "localId": 69493,
+    "project": "libcups",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow READ {*}",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1717771824,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=4664958494244864\n\nProject: libcups\nFuzzing Engine: libFuzzer\nFuzz Target: fuzzipp\nJob Type: libfuzzer_asan_libcups\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow READ {*}\nCrash Address: 0x502000002af8\nCrash State:\n  ippWriteIO\n  fuzzipp.c\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nCrash Revision: https://oss-fuzz.com/revisions?job=libfuzzer_asan_libcups&revision=202406070608\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4664958494244864\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1717791187,
+                "content": "This crash occurs very frequently on linux platform and is likely preventing the fuzzer fuzzipp from making much progress. Fixing this will allow more bugs to be found.\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Fuzz-Blocker"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1717852827,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-09-05"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1793784204",
+                    "displayName": "jiong...@gmail.com"
+                },
+                "timestamp": 1718389936,
+                "content": "The bug has been fixed by the upstream project."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1718544989,
+                "content": "ClusterFuzz testcase 4664958494244864 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_libcups&range=202406140624:202406150623\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69493,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1718629858,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "a7a28e643cd0f84dcae785f93b72426d644c0619",
+    "repo_addr": "https://github.com/OpenPrinting/libcups.git"
+}

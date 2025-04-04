@@ -1,0 +1,82 @@
+{
+    "fix": "https://github.com/IUPAC-InChI/InChI/commit/9301aa1d62582206617c432d925a642a284e873d",
+    "verify": "0",
+    "localId": 69501,
+    "project": "inchi",
+    "fuzzer": "honggfuzz",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow READ 4",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69501,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1717778546,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=6574377792503808\n\nProject: inchi\nFuzzing Engine: honggfuzz\nFuzz Target: inchi_input_fuzzer\nJob Type: honggfuzz_asan_inchi\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow READ 4\nCrash Address: 0x50800000048c\nCrash State:\n  OAD_Polymer_CompareRanksOfTwoAtoms\n  OAD_Polymer_CompareBackboneBondsSeniority\n  OAD_PolymerUnit_SortBackboneBondsAndSetSeniors\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=honggfuzz_asan_inchi&range=202406040624:202406050610\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=6574377792503808\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69501,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1717852835,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-09-05"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69501,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1718361448,
+                "content": "ClusterFuzz testcase 6574377792503808 is verified as fixed in https://oss-fuzz.com/revisions?job=honggfuzz_asan_inchi&range=202406120607:202406130630\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69501,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1718370656,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "9301aa1d62582206617c432d925a642a284e873d",
+    "repo_addr": "https://github.com/IUPAC-InChI/InChI"
+}

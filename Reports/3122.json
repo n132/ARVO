@@ -1,0 +1,192 @@
+{
+    "fix": "https://github.com/openssl/openssl/commit/b23171744b01e473ebbfd6edad70c1c3825ffbcd",
+    "verify": "1",
+    "cve": "CVE-2017-3735",
+    "localId": 3122,
+    "project": "openssl",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow READ 1",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1503411504,
+                "content": "Detailed report: https://oss-fuzz.com/testcase?key=4519542728425472\n\nProject: openssl\nFuzzer: libFuzzer_openssl_x509\nFuzz target binary: x509\nJob Type: libfuzzer_asan_openssl\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow READ 1\nCrash Address: 0x602000000411\nCrash State:\n  X509v3_addr_get_afi\n  i2r_IPAddrBlocks\n  X509V3_EXT_print\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_openssl&range=201612232021:201612240725\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4519542728425472\n\nIssue filed automatically.\n\nSee https://github.com/google/oss-fuzz/blob/master/docs/reproducing.md for more information.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.\n\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you have questions for the OSS-Fuzz team, please file an issue at https://github.com/google/oss-fuzz/issues.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1503415545,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "OS-Linux"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1651769691",
+                    "displayName": "kurt@roeckx.be"
+                },
+                "timestamp": 1503419078,
+                "content": "A fix for this is available."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "2320805031",
+                    "displayName": "aarya@google.com"
+                },
+                "timestamp": 1503419417,
+                "content": "Kurt@, can you please comment on the security implications of this. This looks like a long standing bug."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "1651769691",
+                    "displayName": "kurt@roeckx.be"
+                },
+                "timestamp": 1503420138,
+                "content": "We're debating if we should assign a CVE to this or not, and at which severity we would look at this. We will probably look at this as a LOW."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "2320805031",
+                    "displayName": "aarya@google.com"
+                },
+                "timestamp": 1503420284,
+                "content": "Can it be used for an arbitrary 1 byte read."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 6,
+                "commenter": {
+                    "userId": "772695710",
+                    "displayName": "rich....@gmail.com"
+                },
+                "timestamp": 1503420739,
+                "content": "No, it can only be used for a one-byte read directly after the parsed IPAddress structure. While it is a public routine, it needn't be; it's only used in crypto/x509v3/v3_addr.c and is only used to determine how to output data about the extension.\r\n"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 7,
+                "commenter": {
+                    "userId": "772695710",
+                    "displayName": "rich....@gmail.com"
+                },
+                "timestamp": 1503936734,
+                "content": "We're issuing CVE 2017-3735, and the fix, today.  We're calling it LOW.\r\nIt looks like a day-one bug, dating back to commit 96ea4ae9 made in 2006.\r\n"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 8,
+                "commenter": {
+                    "userId": "71439148",
+                    "displayName": "kcc@google.com"
+                },
+                "timestamp": 1504024916,
+                "content": "rich.salz@, thanks for the fix!\r\nOnce ClusterFuzz confirms the fix, the bug will be auto-closed and will become public in 30 days (and so the reproducer input will also become public). \r\nMeanwhile, I've been asked to provide the input now, w/o waiting for 30 days. \r\nhttps://twitter.com/hanno/status/902426281354113024\r\n\r\nIs it ok to make the input public now, or we better wait?"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 9,
+                "commenter": {
+                    "userId": "1651769691",
+                    "displayName": "kurt@roeckx.be"
+                },
+                "timestamp": 1504026235,
+                "content": "I was under the impression that it was 7 days after it's closed?\r\n\r\nI was preparing a new update of the fuzz corpora in the openssl repo, but that at least going to take a few days. I've been able to reproduce it a few times when the input wasn't added yet, and one input has been added to my local corpus since yesterday.\r\n\r\nI currently don't see why we shouldn't make this public."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 10,
+                "commenter": {
+                    "userId": "71439148",
+                    "displayName": "kcc@google.com"
+                },
+                "timestamp": 1504048604,
+                "content": "30 days now. (7 days was the very early version of the policy)\r\n\r\nThanks, done. \r\nhttps://github.com/google/fuzzer-test-suite/tree/master/openssl-1.1.0c#x509"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 11,
+                "commenter": {
+                    "userId": "2660279188",
+                    "displayName": "ochang@google.com"
+                },
+                "timestamp": 1504048748,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-Restrict-View-Commit"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 12,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1504076851,
+                "content": "ClusterFuzz has detected this issue as fixed in range 201708280414:201708291730.\n\nDetailed report: https://oss-fuzz.com/testcase?key=4519542728425472\n\nProject: openssl\nFuzzer: libFuzzer_openssl_x509\nFuzz target binary: x509\nJob Type: libfuzzer_asan_openssl\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow READ 1\nCrash Address: 0x602000000411\nCrash State:\n  X509v3_addr_get_afi\n  i2r_IPAddrBlocks\n  X509V3_EXT_print\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_openssl&range=201612232021:201612240725\nFixed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_openssl&range=201708280414:201708291730\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4519542728425472\n\nSee https://github.com/google/oss-fuzz/blob/master/docs/reproducing.md for more information.\n\nIf you suspect that the result above is incorrect, try re-doing that job on the test case report page."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 3122,
+                "sequenceNum": 13,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1504077919,
+                "content": "ClusterFuzz testcase 4519542728425472 is verified as fixed, so closing issue as verified.\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "b23171744b01e473ebbfd6edad70c1c3825ffbcd",
+    "repo_addr": "https://github.com/openssl/openssl.git"
+}

@@ -1,0 +1,104 @@
+{
+    "fix": "https://git.libssh.org/projects/libssh.gitaef467ab4a01133c8d7fca1a48144f72d9bb0124",
+    "verify": "0",
+    "localId": 35485,
+    "project": "libssh",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "asan",
+    "crash_type": "Heap-buffer-overflow WRITE {*}",
+    "severity": "High",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1624380095,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=5806921457205248\n\nProject: libssh\nFuzzing Engine: libFuzzer\nFuzz Target: ssh_client_fuzzer\nJob Type: libfuzzer_asan_libssh\nPlatform Id: linux\n\nCrash Type: Heap-buffer-overflow WRITE {*}\nCrash Address: 0x60300000a6e0\nCrash State:\n  explicit_bzero\n  crypto_free\n  ssh_disconnect\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: High\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_asan_libssh&range=202005050240:202005080234\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=5806921457205248\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1624389044,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2021-09-20"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1917823890",
+                    "displayName": "jak...@gmail.com"
+                },
+                "timestamp": 1624531170,
+                "content": "Internal tracking bug on libssh side: https://gitlab.com/libssh/libssh-mirror/-/issues/87"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1630074750,
+                "content": "ClusterFuzz testcase 5806921457205248 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_asan_libssh&range=202108260607:202108261318\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "1917823890",
+                    "displayName": "jak...@gmail.com"
+                },
+                "timestamp": 1630075299,
+                "content": "For the record, this was fixed in latest libssh-0.9.6, it was assigned a CVE-2021-3634. More information is available on the following links\n\nhttps://www.libssh.org/2021/08/26/libssh-0-9-6-security-release/\nhttps://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3634\nhttps://gitlab.com/libssh/libssh-mirror/-/issues/87\nhttps://gitlab.com/libssh/libssh-mirror/-/commit/f5211239f918acf405d104b200891ca58130e23e"
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 35485,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1630089800,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "aef467ab4a01133c8d7fca1a48144f72d9bb0124",
+    "repo_addr": "https://git.libssh.org/projects/libssh.git"
+}

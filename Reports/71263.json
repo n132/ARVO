@@ -1,0 +1,98 @@
+{
+    "fix": "https://github.com/libjpeg-turbo/libjpeg-turbo/commit/562ad7612e4d9ac7735c7d27211f012e8f4ba31e",
+    "verify": "0",
+    "localId": 71263,
+    "project": "libjpeg-turbo.main",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "msan",
+    "crash_type": "Use-of-uninitialized-value",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 71263,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1723916400,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=4909354476699648\n\nProject: libjpeg-turbo\nFuzzing Engine: libFuzzer\nFuzz Target: compress_yuv_fuzzer\nJob Type: libfuzzer_msan_libjpeg-turbo\nPlatform Id: linux\n\nCrash Type: Use-of-uninitialized-value\nCrash Address: \nCrash State:\n  compress_yuv.cc\n  compress_yuv.cc\n  \nSanitizer: memory (MSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_msan_libjpeg-turbo&range=202408130609:202408140622\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4909354476699648\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 71263,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1723919831,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "OS-"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 71263,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1723987230,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-11-15"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 71263,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1724140112,
+                "content": "ClusterFuzz testcase 4909354476699648 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_msan_libjpeg-turbo&range=202408190617:202408200624\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 71263,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1724159470,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "562ad7612e4d9ac7735c7d27211f012e8f4ba31e",
+    "repo_addr": "https://github.com/libjpeg-turbo/libjpeg-turbo"
+}
