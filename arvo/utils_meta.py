@@ -74,9 +74,9 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "crash_type": extract(r'Crash Type:\s*(.+)'),
         "crash_address": extract(r'Crash Address:\s*(\S+)'),
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
-        "regressed": extract(r'(?:Regressed|Fixed|Crash Revision):\s*(https?://\S+)'),
+        "regressed": extract(r'(?:Regressed|Crash Revision):\s*(https?://\S+)',"NO_REGRESS"),
         "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'),
-        "verified_fixed": extract(r'(?:fixed in|Fixed)\s*(https?://\S+)','NO_FIX'),
+        "verified_fixed": extract(r'(?:fixed in|Fixed):\s*(https?://\S+)','NO_FIX'),
         "localId": localId
     }
     sanitizer_map = {
@@ -137,6 +137,7 @@ def getIssues(issue_ids):
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
+    # print(done)
     for x in tqdm(issue_ids):
         if x in done:
             continue
