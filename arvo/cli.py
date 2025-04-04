@@ -48,7 +48,12 @@ def cli_check(localId):
         SUCCESS("Patch Located: \tTrue")
     else:
         WARN("Patch Located: \tFalse")
-
+def cli_show(localId):
+    res = getReport(localId)
+    if not res:
+        WARN(f"No Report Found for {localId=}")
+    else:
+        print(json.dumps(res,indent=4))
 def main():
     parser = argparse.ArgumentParser(prog="arvo", description="ARVO CLI")
     subparsers = parser.add_subparsers(dest="command", required=True)
@@ -66,8 +71,12 @@ def main():
     p_list.add_argument("pname", type=str)
 
     # check status
-    p_check = subparsers.add_parser("check", help="Check the reproducing status of a localId")
+    p_check = subparsers.add_parser("check", help="Check the reproducing status")
     p_check.add_argument("localId", type=int)
+
+    # show report
+    p_show = subparsers.add_parser("show", help="Print the report")
+    p_show.add_argument("localId", type=int)
 
     args = parser.parse_args()
 
@@ -79,6 +88,8 @@ def main():
         cli_list(args.pname)
     elif args.command == "check":
         cli_check(args.localId)
+    elif args.command == "show":
+        cli_show(args.localId)
 
 if __name__ == "__main__":
     main()
