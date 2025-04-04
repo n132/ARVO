@@ -1,0 +1,110 @@
+{
+    "fix": "https://github.com/ARM-software/astc-encoder/commit/5c5dee52401189c27e481e8a7ec30f54fcdcdb5f",
+    "verify": "0",
+    "localId": 37413,
+    "project": "astc-encoder",
+    "fuzzer": "honggfuzz",
+    "sanitizer": "asan",
+    "crash_type": "UNKNOWN READ",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1629474872,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=6510398265229312\n\nProject: astc-encoder\nFuzzing Engine: honggfuzz\nFuzz Target: fuzz_astc_physical_to_symbolic\nJob Type: honggfuzz_asan_astc-encoder\nPlatform Id: linux\n\nCrash Type: UNKNOWN READ\nCrash Address: 0x0001000ad64b\nCrash State:\n  decode_ise\n  physical_to_symbolic\n  fuzz_astc_physical_to_symbolic.cpp\n  \nSanitizer: address (ASAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=honggfuzz_asan_astc-encoder&range=202108180601:202108200609\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=6510398265229312\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1629479376,
+                "content": "This crash occurs very frequently on linux platform and is likely preventing the fuzzer fuzz_astc_physical_to_symbolic from making much progress. Fixing this will allow more bugs to be found.\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Fuzz-Blocker"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1629485610,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2021-11-18"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1661555502",
+                    "displayName": "peter...@arm.com"
+                },
+                "timestamp": 1629559951,
+                "content": "Fixed in revision 5c5dee5.\nUnderlying bug has been in all releases, but only exposed by a recent change."
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "sequenceNum": 4,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1629659294,
+                "content": "ClusterFuzz testcase 6510398265229312 is verified as fixed in https://oss-fuzz.com/revisions?job=honggfuzz_asan_astc-encoder&range=202108210601:202108220616\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 37413,
+                "sequenceNum": 5,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1629917048,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "5c5dee52401189c27e481e8a7ec30f54fcdcdb5f",
+    "repo_addr": "https://github.com/ARM-software/astc-encoder"
+}

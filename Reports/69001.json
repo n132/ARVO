@@ -1,0 +1,82 @@
+{
+    "fix": "https://github.com/apache/trafficserver/commit/0a53513961cbe55a6bfde32be208c0e04a70b0f1",
+    "verify": "0",
+    "localId": 69001,
+    "project": "trafficserver",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "msan",
+    "crash_type": "Use-of-uninitialized-value",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69001,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1715633915,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=6159793621368832\n\nProject: trafficserver\nFuzzing Engine: libFuzzer\nFuzz Target: fuzz_http3frame\nJob Type: libfuzzer_msan_trafficserver\nPlatform Id: linux\n\nCrash Type: Use-of-uninitialized-value\nCrash Address: \nCrash State:\n  QUICVariableInt::size\n  Http3SettingsFrame::Http3SettingsFrame\n  Http3FrameFactory::create\n  \nSanitizer: memory (MSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_msan_trafficserver&range=202403110630:202403120635\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=6159793621368832\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69001,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1715692935,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2024-08-12"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69001,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1717668420,
+                "content": "ClusterFuzz testcase 6159793621368832 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_msan_trafficserver&range=202406040611:202406050627\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 69001,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1717679438,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": "0a53513961cbe55a6bfde32be208c0e04a70b0f1",
+    "repo_addr": "https://github.com/apache/trafficserver.git"
+}
