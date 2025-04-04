@@ -1,0 +1,85 @@
+{
+    "fix": "https://github.com/duckdb/duckdb/commit/c68e5ac2ab1bd673dece55f1d00f4ab5c652b356",
+    "verify": "0",
+    "localId": 50203,
+    "project": "duckdb",
+    "fuzzer": "libfuzzer",
+    "sanitizer": "ubsan",
+    "crash_type": "UNKNOWN READ",
+    "severity": "Medium",
+    "report": {
+        "comments": [
+            {
+                "projectName": "oss-fuzz",
+                "localId": 50203,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1660430059,
+                "content": "Detailed Report: https://oss-fuzz.com/testcase?key=4690585050546176\n\nProject: duckdb\nFuzzing Engine: libFuzzer\nFuzz Target: parse_fuzz_test\nJob Type: libfuzzer_ubsan_duckdb\nPlatform Id: linux\n\nCrash Type: UNKNOWN READ\nCrash Address: 0xffffffffffffffff\nCrash State:\n  std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<ch\n  duckdb::string_t::GetString\n  duckdb::Vector::GetValueInternal\n  \nSanitizer: undefined (UBSAN)\n\nRecommended Security Severity: Medium\n\nRegressed: https://oss-fuzz.com/revisions?job=libfuzzer_ubsan_duckdb&range=202208080604:202208090607\n\nReproducer Testcase: https://oss-fuzz.com/download?testcase_id=4690585050546176\n\nIssue filed automatically.\n\nSee https://google.github.io/oss-fuzz/advanced-topics/reproducing for instructions to reproduce this bug locally.\nWhen you fix this bug, please\n  * mention the fix revision(s).\n  * state whether the bug was a short-lived regression or an old bug in any stable releases.\n  * add any other useful information.\nThis information can help downstream consumers.\n\nIf you need to contact the OSS-Fuzz team with a question, concern, or any other feedback, please file an issue at https://github.com/google/oss-fuzz/issues. Comments on individual Monorail issues are not monitored.\n\nThis bug is subject to a 90 day disclosure deadline. If 90 days elapse\nwithout an upstream patch, then the bug report will automatically\nbecome visible to the public.",
+                "descriptionNum": 1
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 50203,
+                "sequenceNum": 1,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1660502906,
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "Disclosure-2022-11-11"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 50203,
+                "sequenceNum": 2,
+                "commenter": {
+                    "userId": "382749006",
+                    "displayName": "ClusterFuzz-External"
+                },
+                "timestamp": 1660833965,
+                "content": "ClusterFuzz testcase 4690585050546176 is verified as fixed in https://oss-fuzz.com/revisions?job=libfuzzer_ubsan_duckdb&range=202208170600:202208180607\n\nIf this is incorrect, please file a bug on https://github.com/google/oss-fuzz/issues/new",
+                "amendments": [
+                    {
+                        "fieldName": "Status",
+                        "newOrDeltaValue": "Verified",
+                        "oldValue": "New"
+                    },
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "ClusterFuzz-Verified"
+                    }
+                ]
+            },
+            {
+                "projectName": "oss-fuzz",
+                "localId": 50203,
+                "sequenceNum": 3,
+                "commenter": {
+                    "userId": "1950284618",
+                    "displayName": "sheriffbot"
+                },
+                "timestamp": 1660847992,
+                "content": "This bug has been fixed. It has been opened to the public.\n\n- Your friendly Sheriffbot",
+                "amendments": [
+                    {
+                        "fieldName": "Labels",
+                        "newOrDeltaValue": "-restrict-view-commit"
+                    }
+                ]
+            }
+        ]
+    },
+    "fix_commit": [
+        "3897112bf67651d7d24a4d9e46c19ff78367a735",
+        "c68e5ac2ab1bd673dece55f1d00f4ab5c652b356"
+    ],
+    "repo_addr": "https://github.com/duckdb/duckdb"
+}
