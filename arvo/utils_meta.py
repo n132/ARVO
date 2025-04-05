@@ -275,6 +275,15 @@ def data_download():
     for localId in tqdm(metadata):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
+        if issue_dir.exists():
+            done = []
+            for x in issue_dir.iterdir():
+                done.append(x)
+            if len(done) == 2:
+                INFO(f"Already downloaded {localId}")
+                continue
+            elif len(done) != 0:
+                shutil.rmtree(issue_dir)
         issue_dir.mkdir(parents=True, exist_ok=True)
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
