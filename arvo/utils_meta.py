@@ -6,8 +6,11 @@ from .utils_log import *
 from .utils import *
 import json
 from tqdm import tqdm
-META = ARVO / DATA_FOLD2
+from google.cloud import storage
 
+META = ARVO / DATA_FOLD2
+from urllib.parse import urlparse
+from urllib.parse import parse_qs
 def getIssueIds():
     localIds = []
     session = requests.Session()
@@ -148,6 +151,33 @@ def getIssues(issue_ids):
         else:
             WARN(f"Failed to fetch the issue for {x}")
     return issues
+# Parse the job type into parts
+def parse_job_type(job_type):
+    parts = job_type.split('_')
+    remainder = []
+    parsed = {}
+    while len(parts) > 0:
+        part = parts.pop(0)
+        if part in ['afl', 'honggfuzz', 'libfuzzer']:
+            parsed['engine'] = part
+        elif part in ['asan', 'ubsan', 'msan']:
+            parsed['sanitizer'] = part
+        elif part == 'i386':
+            parsed['arch'] = part
+        elif part == 'untrusted':
+            parsed['untrusted'] = True
+        else:
+            remainder.append(part)
+    if len(remainder) > 0:
+        parsed['project'] = '_'.join(remainder)
+    if 'arch' not in parsed:
+        parsed['arch'] = 'x86_64'
+    if 'engine' not in parsed:
+        parsed['engine'] = 'none'
+    if 'untrusted' not in parsed:
+        parsed['untrusted'] = False
+    return parsed
+storage_client = None
 def download_build_artifacts(metadata, url, outdir):
     global storage_client
     if storage_client is None:
@@ -169,6 +199,9 @@ def download_build_artifacts(metadata, url, outdir):
         "asan": "address",
         "msan": "memory",
         "ubsan": "undefined",
+        "address": "address",
+        "memory": "memory",
+        "undefined": "undefined",
         None: "",
     }
     job_name = metadata["job_type"]
@@ -182,7 +215,6 @@ def download_build_artifacts(metadata, url, outdir):
     # format has changed several times.
     if 'project' in metadata:
         project = metadata["project"]
-        assert project == job['project']
     else:
         project = job['project']
     if 'sanitizer' in metadata:
@@ -234,11 +266,6 @@ def download_build_artifacts(metadata, url, outdir):
     return [str(f) for f in downloaded_files]
 
 def data_download():
-    global session
-    session = requests.Session()
-    session.get("https://issues.oss-fuzz.com/")
-    xsrf_token = session.cookies.get("XSRF_TOKEN")
-
     metadata_file =  META / "metadata.json"
     metadata = {}
     for line in open(metadata_file):
@@ -252,8 +279,9 @@ def data_download():
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
-        download_build_artifacts(metadata[localId], metadata[localId]['regressed'], issue_dir)
-        download_build_artifacts(metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
+
+        silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir)
+        silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
     # issueFilter()
     return True
 def syncMeta(localIds):
@@ -268,6 +296,7 @@ def getMeta():
         META.mkdir()
     localIds = getIssueIds()
     syncMeta(localIds)
+    
 
 if __name__ == "__main__":
     pass
