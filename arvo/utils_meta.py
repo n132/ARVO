@@ -3,11 +3,9 @@ import requests
 import re
 from datetime import datetime
 from .utils_log import *
-from .utils import ARVO
-from ._profile import DATA_FOLD2
+from .utils import *
 import json
 from tqdm import tqdm
-from pathlib import Path
 META = ARVO / DATA_FOLD2
 
 def getIssueIds():
@@ -150,119 +148,114 @@ def getIssues(issue_ids):
         else:
             WARN(f"Failed to fetch the issue for {x}")
     return issues
-# def download_build_artifacts(metadata, url, outdir):
-#     global storage_client
-#     if storage_client is None:
-#         storage_client = storage.Client()
-#     bucket_map = {
-#         "libfuzzer_address_i386": "clusterfuzz-builds-i386",
-#         "libfuzzer_memory_i386": "clusterfuzz-builds-i386",
-#         "libfuzzer_undefined_i386": "clusterfuzz-builds-i386",
-#         "libfuzzer_address": "clusterfuzz-builds",
-#         "libfuzzer_memory": "clusterfuzz-builds",
-#         "libfuzzer_undefined": "clusterfuzz-builds",
-#         "afl_address": "clusterfuzz-builds-afl",
-#         "honggfuzz_address": "clusterfuzz-builds-honggfuzz",
-#     }
-#     sanitizer_map = {
-#         "address (ASAN)": "address",
-#         "memory (MSAN)": "memory",
-#         "undefined (UBSAN)": "undefined",
-#         "asan": "address",
-#         "msan": "memory",
-#         "ubsan": "undefined",
-#         None: "",
-#     }
-#     job_name = metadata["job_type"]
-#     job = parse_job_type(job_name)
+def download_build_artifacts(metadata, url, outdir):
+    global storage_client
+    if storage_client is None:
+        storage_client = storage.Client()
+    bucket_map = {
+        "libfuzzer_address_i386": "clusterfuzz-builds-i386",
+        "libfuzzer_memory_i386": "clusterfuzz-builds-i386",
+        "libfuzzer_undefined_i386": "clusterfuzz-builds-i386",
+        "libfuzzer_address": "clusterfuzz-builds",
+        "libfuzzer_memory": "clusterfuzz-builds",
+        "libfuzzer_undefined": "clusterfuzz-builds",
+        "afl_address": "clusterfuzz-builds-afl",
+        "honggfuzz_address": "clusterfuzz-builds-honggfuzz",
+    }
+    sanitizer_map = {
+        "address (ASAN)": "address",
+        "memory (MSAN)": "memory",
+        "undefined (UBSAN)": "undefined",
+        "asan": "address",
+        "msan": "memory",
+        "ubsan": "undefined",
+        None: "",
+    }
+    job_name = metadata["job_type"]
+    job = parse_job_type(job_name)
     
-#     # These don't have any build artifacts
-#     if job['untrusted']: return False
-#     if job['engine'] == 'none': return False
+    # These don't have any build artifacts
+    if job['untrusted']: return False
+    if job['engine'] == 'none': return False
 
-#     # Prefer the info from the job name, since the metadata
-#     # format has changed several times.
-#     if 'project' in metadata:
-#         project = metadata["project"]
-#         assert project == job['project']
-#     else:
-#         project = job['project']
-#     if 'sanitizer' in metadata:
-#         sanitizer = sanitizer_map[metadata["sanitizer"]]
-#         assert sanitizer == sanitizer_map[job['sanitizer']]
-#     else:
-#         sanitizer = sanitizer_map[job['sanitizer']]
-#     fuzzer = job['engine']
-#     bucket_string = f"{fuzzer}_{sanitizer}"
-#     if job['arch'] == 'i386':
-#         bucket_string += '_i386'
-#     assert bucket_string in bucket_map
-#     bucket_name = bucket_map[bucket_string]
+    # Prefer the info from the job name, since the metadata
+    # format has changed several times.
+    if 'project' in metadata:
+        project = metadata["project"]
+        assert project == job['project']
+    else:
+        project = job['project']
+    if 'sanitizer' in metadata:
+        sanitizer = sanitizer_map[metadata["sanitizer"]]
+        assert sanitizer == sanitizer_map[job['sanitizer']]
+    else:
+        sanitizer = sanitizer_map[job['sanitizer']]
+    fuzzer = job['engine']
+    bucket_string = f"{fuzzer}_{sanitizer}"
+    if job['arch'] == 'i386':
+        bucket_string += '_i386'
+    assert bucket_string in bucket_map
+    bucket_name = bucket_map[bucket_string]
 
-#     # Grab the revision from the URL
-#     urlparams = parse_qs(urlparse(url).query)
+    # Grab the revision from the URL
+    urlparams = parse_qs(urlparse(url).query)
     
-#     if 'revision' in urlparams:
-#         revision = urlparams['revision'][0]
-#     elif 'range' in urlparams:
-#         revision = urlparams['range'][0].split(':')[1]
-#     else:
-#         return False
+    if 'revision' in urlparams:
+        revision = urlparams['revision'][0]
+    elif 'range' in urlparams:
+        revision = urlparams['range'][0].split(':')[1]
+    else:
+        return False
     
-#     zip_name = f'{project}-{sanitizer}-{revision}.zip'
-#     srcmap_name = f'{project}-{sanitizer}-{revision}.srcmap.json'
-#     zip_path = f'{project}/{zip_name}'
-#     srcmap_path = f'{project}/{srcmap_name}'
-#     downloaded_files = []
-#     bucket = storage_client.bucket(bucket_name)
-#     for path, name in [(srcmap_path, srcmap_name)]:
-# #    for path, name in [(zip_path, zip_name), (srcmap_path, srcmap_name)]:
+    zip_name = f'{project}-{sanitizer}-{revision}.zip'
+    srcmap_name = f'{project}-{sanitizer}-{revision}.srcmap.json'
+    zip_path = f'{project}/{zip_name}'
+    srcmap_path = f'{project}/{srcmap_name}'
+    downloaded_files = []
+    bucket = storage_client.bucket(bucket_name)
+    for path, name in [(srcmap_path, srcmap_name)]:
+#    for path, name in [(zip_path, zip_name), (srcmap_path, srcmap_name)]:
 
-#         download_path = outdir / name
+        download_path = outdir / name
 
-#         if download_path.exists():
-#             print(f'Skipping {name} (already exists)')
-#             downloaded_files.append(download_path)
-#             continue
-#         blob = bucket.blob(path)
-#         if not blob.exists():
-#             print(f'Skipping {name} (not found)')
-#             continue
-#         print(download_path)
-#         ret = blob.download_to_filename(str(download_path))
+        if download_path.exists():
+            print(f'Skipping {name} (already exists)')
+            downloaded_files.append(download_path)
+            continue
+        blob = bucket.blob(path)
+        if not blob.exists():
+            print(f'Skipping {name} (not found)')
+            continue
+        print(download_path)
+        ret = blob.download_to_filename(str(download_path))
         
-#         print(f'Downloaded {name}')
-#         downloaded_files.append(download_path)
-#     return [str(f) for f in downloaded_files]
+        print(f'Downloaded {name}')
+        downloaded_files.append(download_path)
+    return [str(f) for f in downloaded_files]
 
-# def data_download():
-#     global session
-#     session = requests.Session()
-#     session.get("https://issues.oss-fuzz.com/")
-#     xsrf_token = session.cookies.get("XSRF_TOKEN")
+def data_download():
+    global session
+    session = requests.Session()
+    session.get("https://issues.oss-fuzz.com/")
+    xsrf_token = session.cookies.get("XSRF_TOKEN")
 
-#     metadata_file =  META / "metadata.json"
-#     metadata = {}
-#     for line in open(metadata_file):
-#         mdline = json.loads(line)
-#         metadata[mdline['localId']] = mdline
-#     #for localId in metadata:
-#     print(len(metadata))
-#     for localId in metadata:
-#         # Get reproducer(s) and save them.
-#         issue_dir = META / "Issues" / f"{localId}_files"
-#         issue_dir.mkdir(parents=True, exist_ok=True)
-
-#         if 'regressed' in metadata[localId]:
-#             download_build_artifacts(metadata[localId], metadata[localId]['regressed'], issue_dir)
-#         else:
-#             print('No regressed build:', localId)
-#         if 'verified_fixed' in metadata[localId] and  metadata[localId]['verified_fixed'] != 'NO_FIX':
-#             download_build_artifacts(metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
-#         else:
-#             print('No fixed:', localId)
-#     issueFilter()
-#     return str(outdir)
+    metadata_file =  META / "metadata.json"
+    metadata = {}
+    for line in open(metadata_file):
+        mdline = json.loads(line)
+        metadata[mdline['localId']] = mdline
+    #for localId in metadata:
+    for localId in tqdm(metadata):
+        # Get reproducer(s) and save them.
+        issue_dir = META / "Issues" / f"{localId}_files"
+        issue_dir.mkdir(parents=True, exist_ok=True)
+        if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
+            metadata[localId]['verified_fixed'] == 'NO_FIX':
+            continue
+        download_build_artifacts(metadata[localId], metadata[localId]['regressed'], issue_dir)
+        download_build_artifacts(metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
+    # issueFilter()
+    return True
 def syncMeta(localIds):
     # load the meta to metadata.jsonl
     getIssues(localIds)
