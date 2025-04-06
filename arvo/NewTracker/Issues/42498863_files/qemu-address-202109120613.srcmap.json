@@ -1,0 +1,12 @@
+{
+  "/src/qemu": {
+    "type": "git",
+    "url": "https://git.qemu.org/git/qemu.git",
+    "rev": "99c44988d5ba1866a411450c877ed818b1b70081"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

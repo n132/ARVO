@@ -1,0 +1,42 @@
+{
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "6d9e2f0c8490a3af0384bff397779e3440a05ba6"
+  },
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable",
+    "rev": "a2befe3383bd1c6dfe3950b5f6d835f3f750a68f"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "c2b7b6c1e0d14070c6651132a07096fb5992eeeb"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "f014d609c07cf83d5a9be730469f67bd199c017e"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "3a50a8a91ad10e406544d16247957a17a5d5beac"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "d1356e7684fcf3e9759950b91497f02e37b13498"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "ccd0ae20223f93b9c549eb5a845b92a3faa92f8b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "360497"
+  }
+}

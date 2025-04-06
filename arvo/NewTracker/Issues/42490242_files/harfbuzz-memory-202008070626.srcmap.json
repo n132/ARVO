@@ -1,0 +1,12 @@
+{
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://github.com/harfbuzz/harfbuzz.git",
+    "rev": "3d164d5883ceb5698a98ca025b5f75ce465e1f51"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

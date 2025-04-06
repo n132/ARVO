@@ -1,0 +1,67 @@
+{
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "cc875e5dacf526bee76cf5dbb6e4fa6ba2a60db3"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "b3b4f947a8123429feede113a4d74f2b04434315"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "f2d7c57c71a0810b25fc2bead63c5ab35e5d0284"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "5711b50eebe392119defd2a2a262bffef05e8507"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff.git",
+    "rev": "17adf4308cc90d1263774d0a120af65a5fc147fa"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "761f49c3ab1c91b8e911840a4f6f246308b7c242"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "ea6ca5bc18246a338a40b8ae0a55f77928442e28"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "e519af8b49f52c4ac400f50f23b48ebe36a5f4df"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "3a53627306233013dcec61a90f0e9ed302ea5156"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "c61a2c798e0f3ca73d2f78e8721ae37e6a70c045"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif.git",
+    "rev": "1ce27bb9736bf2595662a2e84934cef6e1e3536e"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "04f42ceca40f73e2978b50e93806c2a18c1281fc"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips.git",
+    "rev": "e34cbae4b7162db783d3677ac09112394690ccb1"
+  }
+}

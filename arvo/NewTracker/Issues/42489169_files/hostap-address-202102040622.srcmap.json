@@ -1,0 +1,12 @@
+{
+  "/src/hostap": {
+    "type": "git",
+    "url": "git://w1.fi/srv/git/hostap.git",
+    "rev": "947272febe24a8f0ea828b5b2f35f13c3821901e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/envoy": {
+    "type": "git",
+    "url": "https://github.com/envoyproxy/envoy.git",
+    "rev": "2e3adc3d3bb5b4c7be0b9001197f7c86000b6dd3"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "333338"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/libreoffice": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/libreoffice/core",
+    "rev": "68f7d89cecc74e1df649e0691676178db544f913"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "320456"
+  }
+}

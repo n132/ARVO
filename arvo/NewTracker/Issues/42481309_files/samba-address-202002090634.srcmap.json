@@ -1,0 +1,12 @@
+{
+  "/src/samba": {
+    "type": "git",
+    "url": "https://gitlab.com/samba-team/samba",
+    "rev": "2d9841c9788835484c364b61507efdf8fe34aa9e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

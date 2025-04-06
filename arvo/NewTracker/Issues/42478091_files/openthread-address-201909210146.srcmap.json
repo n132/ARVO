@@ -1,0 +1,17 @@
+{
+  "/src/openthread": {
+    "type": "git",
+    "url": "https://github.com/openthread/openthread",
+    "rev": "a1cffd2545efbdc38ee8c59b490567f5c3f82608"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372447"
+  }
+}

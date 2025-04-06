@@ -1,0 +1,27 @@
+{
+  "/src/monero/monero": {
+    "type": "git",
+    "url": "https://github.com/monero-project/monero.git",
+    "rev": "3cbb44a2fd79ce9c667006e2e42e61513993e59a"
+  },
+  "/src/monero/hidapi": {
+    "type": "git",
+    "url": "https://github.com/signal11/hidapi",
+    "rev": "40cf516139b5b61e30d9403a48db23d8f915f52c"
+  },
+  "/src/monero/libusb": {
+    "type": "git",
+    "url": "https://github.com/libusb/libusb.git",
+    "rev": "0034b2afdcdb1614e78edaa2a9e22d5936aeae5d"
+  },
+  "/src/monero/libzmq": {
+    "type": "git",
+    "url": "https://github.com/zeromq/libzmq.git",
+    "rev": "a84ffa12b2eb3569ced199660bac5ad128bff1f0"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

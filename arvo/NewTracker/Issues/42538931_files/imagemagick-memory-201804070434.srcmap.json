@@ -1,0 +1,57 @@
+{
+  "/src/libraw": {
+    "type": "git",
+    "url": "https://github.com/libraw/libraw",
+    "rev": "91ebd68ba4886ccfab2840f8941e1a086ae81c56"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "47b59d47cfd904a420fbd45629d168ca1973721d"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2",
+    "rev": "cdddeff02fff209e602d4dff97aa94fbbdab2904"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "450306a84b18a742944d4d2fa8478016b1004d14"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "a0215fb7dc131f22d5bab7dd71430008a0a2ae69"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "2c7eb4fed9cbed43ae402840f6706998ce2dd1c4"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265",
+    "rev": "1df1dfe3180074724e8c7dedc789910a605934ad"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "33f1b16788b86d4501f82678090d209364b3ca49"
+  },
+  "/src/imagemagick": {
+    "type": "git",
+    "url": "https://github.com/imagemagick/imagemagick",
+    "rev": "8a6acf4f01bec0fb087c5f3de35d34a6ae56717c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "329484"
+  }
+}

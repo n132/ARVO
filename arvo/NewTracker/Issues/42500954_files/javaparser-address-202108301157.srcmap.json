@@ -1,0 +1,12 @@
+{
+  "/src/javaparser": {
+    "type": "git",
+    "url": "https://github.com/javaparser/javaparser",
+    "rev": "341a25a22858c535e49aa068fb128d2cdf141151"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "b7a672291188a6469f71dd13ad14f2f9a7344fc8"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "https://git.ghostscript.com/ghostpdl.git",
+    "rev": "adc3adfdf30f625444203a7c624c3fa123cfddd2"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "7e1a1643df34dae1b756f6ae6ed71f9c8d8af667"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "301f7a14295a3bdfaf406dbb5004d0784dc137ea"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2",
+    "rev": "5327092bb28b6df742386d75555ba3ccc6d05ce6"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "5db6a6819d0f904e0b58f34ae928fea234adb1a0"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "c047fcf7bf9ad1553d581a49e3965c5b37f126fc"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "de1f47b2b40e960b7bc3acba754f66dd19705921"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "af650c0bd2a17dddf20c099fb9f419427d4524fc"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "e86d43caeec81132df187fff3763e8a6ea591742"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372447"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "http://hg.code.sf.net/p/graphicsmagick/code",
+    "rev": "a1fa3514c0b2e24287c6a9f4435b99aa3c985de2"
+  }
+}

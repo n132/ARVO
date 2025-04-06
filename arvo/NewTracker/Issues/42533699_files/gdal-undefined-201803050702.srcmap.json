@@ -1,0 +1,17 @@
+{
+  "/src/gdal/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "613ccbf26c50758670874c5e61315c0ab18b088e"
+  },
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "6339b2d8eedf59d625dee9534c561e6d9c4d0a1c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "326682"
+  }
+}

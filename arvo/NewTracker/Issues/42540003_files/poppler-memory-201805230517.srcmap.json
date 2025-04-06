@@ -1,0 +1,17 @@
+{
+  "/src/poppler": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/poppler/poppler.git",
+    "rev": "3ca2d43b7ddcca08bc026c6564f89ffbe0dde506"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "git://git.sv.nongnu.org/freetype/freetype2.git",
+    "rev": "3fcb4cfa26e697c8c643bfc7e46b03f013394fa1"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "333061"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/unrar": {
+    "type": "git",
+    "url": "https://github.com/aawc/unrar.git",
+    "rev": "637fc8446edb8444c7a66918f109f2fa552ff987"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "318818"
+  }
+}

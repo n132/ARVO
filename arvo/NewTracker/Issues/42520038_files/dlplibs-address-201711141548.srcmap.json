@@ -1,0 +1,87 @@
+{
+  "/src/libqxp": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libqxp",
+    "rev": "fd3f5e9aa55bcbd63f88c00cabf5c3be2df201ac"
+  },
+  "/src/libetonyek": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libetonyek",
+    "rev": "6d1da35a6f78eb2d1c607021f022123228ac1989"
+  },
+  "/src/libabw": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libabw",
+    "rev": "5116e01cbfd183c5e3b75303461b57b5a3acdc78"
+  },
+  "/src/libe-book": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libebook/code",
+    "rev": "232835e21d1f40d221b278cb8f96ca98fbf7e484"
+  },
+  "/src/libmwaw": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libmwaw/libmwaw",
+    "rev": "9040f834c1aa7f395e29b9a100d21bd5f84c4e96"
+  },
+  "/src/libwps": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwps/code",
+    "rev": "1b056d30bc51dc21352d2dab32dde0fbdc7d2691"
+  },
+  "/src/libstaroffice": {
+    "type": "git",
+    "url": "https://github.com/fosnola/libstaroffice",
+    "rev": "32c696dde85578a0ab07943104becbdd467e48aa"
+  },
+  "/src/libwpg": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpg/code",
+    "rev": "732691b13daf8328617b96586c3f9e7b4c9a8e00"
+  },
+  "/src/libwpd": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpd/code",
+    "rev": "156aab6d6f3b49415d30780c20c32f026560b56f"
+  },
+  "/src/libfreehand": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libfreehand",
+    "rev": "13b245e648d70f9d80375887d70928ee5d590cb3"
+  },
+  "/src/libpagemaker": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libpagemaker",
+    "rev": "9f9eb81807f36d6869224fb8f5e3849fedffd421"
+  },
+  "/src/libzmf": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libzmf",
+    "rev": "1ea96e7d9779f8a6350679c830304a7f913ea8f0"
+  },
+  "/src/libvisio": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libvisio",
+    "rev": "07863ce4ede0ad8752627e8e96db63bf58ca9ba7"
+  },
+  "/src/libcdr": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libcdr",
+    "rev": "597d8bcb89cbedad5ba6009ad04ea43bf01188d3"
+  },
+  "/src/libmspub": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libmspub",
+    "rev": "e0def2a0eed45d6b201c2c45bcfff69a06077253"
+  },
+  "/src/librevenge": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpd/librevenge",
+    "rev": "febb15ee20c933128700c4faf5370b5d6b1f159f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "318155"
+  }
+}

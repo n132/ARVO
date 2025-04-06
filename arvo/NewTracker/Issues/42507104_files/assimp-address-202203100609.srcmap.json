@@ -1,0 +1,12 @@
+{
+  "/src/assimp": {
+    "type": "git",
+    "url": "https://github.com/assimp/assimp.git",
+    "rev": "1b3ae6352745737dddc60dddf680fb7406d05ded"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

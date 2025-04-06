@@ -1,0 +1,32 @@
+{
+  "/src/flac-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/flac-fuzzers.git",
+    "rev": "a5473ee59ae802f9565d73ce460c86f7c1e16543"
+  },
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "0a596947f9003e765643235c25625473726b9bcd"
+  },
+  "/src/ExoPlayer": {
+    "type": "git",
+    "url": "https://github.com/google/ExoPlayer.git",
+    "rev": "a308c691d120e0b8496b2e843635edd9cc7dcef0"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://github.com/xiph/ogg.git",
+    "rev": "3069cc2bb44160982cdb21b2b8f0660c76b17572"
+  },
+  "/src/flac": {
+    "type": "git",
+    "url": "https://github.com/xiph/flac.git",
+    "rev": "7b73bbcca4b4c912fa609e8975946158ab06d099"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

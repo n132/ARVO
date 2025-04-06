@@ -1,0 +1,7 @@
+{
+  "/src/h3": {
+    "type": "git",
+    "url": "https://github.com/uber/h3",
+    "rev": "e8b16611b582275bdb9815bc5a80e0559a811758"
+  }
+}

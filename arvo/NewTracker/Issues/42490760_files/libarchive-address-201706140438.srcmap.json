@@ -1,0 +1,12 @@
+{
+  "/src/libarchive": {
+    "type": "git",
+    "url": "https://github.com/libarchive/libarchive.git",
+    "rev": "328453a041e2ead52bf2c64b778a29f99bd17f14"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "f592e4a8d8226e535d207946ee02b2681414d8c9"
+  }
+}

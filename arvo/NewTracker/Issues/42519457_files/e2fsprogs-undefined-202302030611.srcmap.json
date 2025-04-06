@@ -1,0 +1,7 @@
+{
+  "/src/e2fsprogs": {
+    "type": "git",
+    "url": "https://github.com/tytso/e2fsprogs",
+    "rev": "711f699cebdd573daf699d0b091d3ff203dd9cf8"
+  }
+}

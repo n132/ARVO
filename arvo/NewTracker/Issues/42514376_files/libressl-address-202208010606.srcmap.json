@@ -1,0 +1,32 @@
+{
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable.git",
+    "rev": "e7c48bb560efd49ace610f9f8c516728366435f3"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "55f977dcaef2ca875e62631113886470bfc4b7dd"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "8b25a1fb3f639000b8f86fb99bfa5ff38800ac18"
+  },
+  "/src/libressl.fuzzers": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/fuzz.git",
+    "rev": "42eba397a218c03d3b02eb07021bfc6203ebc21c"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

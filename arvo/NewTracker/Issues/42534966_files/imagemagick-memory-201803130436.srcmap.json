@@ -1,0 +1,12 @@
+{
+  "/src/imagemagick": {
+    "type": "git",
+    "url": "https://github.com/imagemagick/imagemagick",
+    "rev": "a73c4ccf4d54d33dbc9897d7b22a2c46d6bb966e"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "327358"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "3eff339237a03235c1860dd949a223e2e9337295"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "https://git.ghostscript.com/ghostpdl.git",
+    "rev": "5b85ddd19a8420a1bd2d5529325be35d78e94234"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "7e1a1643df34dae1b756f6ae6ed71f9c8d8af667"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "301f7a14295a3bdfaf406dbb5004d0784dc137ea"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2",
+    "rev": "12af46b649fdb946bacf150428e5cdfc3470a7ca"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "5ced1f590bcfe50de333e77eb5d40953a8faaa1c"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "c25df8ba3fd2a701bef8e26e1d7e05e94b86df18"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "de1f47b2b40e960b7bc3acba754f66dd19705921"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "24d2ccb4e0ae2b1a9cccbf1198a28020931e7e96"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "c9cb49177b1193668d63f788b2b5e30b13b28a2e"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "367797"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "http://hg.code.sf.net/p/graphicsmagick/code",
+    "rev": "e7b35d7d0d586c54e00bffb0c714ea67cc57eb13"
+  }
+}

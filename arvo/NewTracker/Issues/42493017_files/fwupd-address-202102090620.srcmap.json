@@ -1,0 +1,12 @@
+{
+  "/src/fwupd": {
+    "type": "git",
+    "url": "https://github.com/fwupd/fwupd.git",
+    "rev": "0cde61dd4df7d1ed1928e37f15f383354decd7e9"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "aeb7d7048371cd91ab9280c3958f1c35e5d5e758"
+  }
+}

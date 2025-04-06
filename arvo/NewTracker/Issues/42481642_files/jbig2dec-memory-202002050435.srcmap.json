@@ -1,0 +1,12 @@
+{
+  "/src/jbig2dec": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/jbig2dec.git",
+    "rev": "e20979d9e27342a2e5d54f12702e038df015de01"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

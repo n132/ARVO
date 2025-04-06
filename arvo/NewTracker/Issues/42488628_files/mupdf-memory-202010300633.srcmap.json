@@ -1,0 +1,12 @@
+{
+  "/src/mupdf": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/mupdf.git",
+    "rev": "c3aa7c5e87a69188e20106d8a0d7190b12ae4865"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "ecc3914172f12ba4703e185601cd2683d4ac8c8f"
+  },
+  "/src/libidn": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libidn.git",
+    "rev": "8fbbfc83c6da708ab9b6a4941eb551b59f85c100"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "90e4c2a32a49480652ecbe73d70e4e182156b93d"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "dd8fabbf8ee5884dce477c775d76348692226bed"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "3d46d6ec03de0acca63c3fbdd56ed065d719c7d9"
+  }
+}

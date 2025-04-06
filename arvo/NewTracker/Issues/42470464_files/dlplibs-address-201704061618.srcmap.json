@@ -1,0 +1,77 @@
+{
+  "/src/libabw": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libabw",
+    "rev": "a1f65e1c00c5f466c5de536ecc6c681a462cbb35"
+  },
+  "/src/libe-book": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libebook/code",
+    "rev": "817f4dcb31670c824d5437c7ee1970a0d684a743"
+  },
+  "/src/libmwaw": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libmwaw/libmwaw",
+    "rev": "95c3bc4b7862f0029332e51b0fbf1ce60202d29d"
+  },
+  "/src/libwps": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwps/code",
+    "rev": "d896b8f18a31a184a0a333bf6532ec143727e845"
+  },
+  "/src/libstaroffice": {
+    "type": "git",
+    "url": "https://github.com/fosnola/libstaroffice",
+    "rev": "7b04b9880ee8ffabcb515362ed5027070c4e4ca2"
+  },
+  "/src/libwpg": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpg/code",
+    "rev": "88304f0c7ec7c04465b78d1e94ca229a20bd6f4b"
+  },
+  "/src/libwpd": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpd/code",
+    "rev": "b2b5f834819d62683e593bc822296a3eb13d5258"
+  },
+  "/src/libfreehand": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libfreehand",
+    "rev": "3963cc0c0d2933f97a1b950e14ffad435c40de48"
+  },
+  "/src/libpagemaker": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libpagemaker",
+    "rev": "8e440c31f449de2330409541dc136c5f8fe1f126"
+  },
+  "/src/libzmf": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libzmf",
+    "rev": "a518a331a4335aa818efdd6fc5258fc8ff0703c3"
+  },
+  "/src/libvisio": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libvisio",
+    "rev": "cf0303b0ca57d3f54aa50686d38aaa149c02d034"
+  },
+  "/src/libcdr": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libcdr",
+    "rev": "263b1707ba5506fe9b162404b84b8e6c7b8d6ef5"
+  },
+  "/src/libmspub": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libmspub",
+    "rev": "c6de50a17e7636c20bef03e7336f9782c8fc3850"
+  },
+  "/src/librevenge": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpd/librevenge",
+    "rev": "2da08d40098aec8e847e83a0a46af9b38161685c"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "2773e2d4e3b975ff1b6eebb5637d83c893edc57f"
+  }
+}

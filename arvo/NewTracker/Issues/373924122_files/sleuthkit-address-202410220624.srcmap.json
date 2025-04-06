@@ -1,0 +1,7 @@
+{
+  "/src/sleuthkit": {
+    "type": "git",
+    "url": "https://github.com/sleuthkit/sleuthkit",
+    "rev": "ff3c3c7fb68394a4406e275b578b5345ee54a708"
+  }
+}

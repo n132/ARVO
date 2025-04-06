@@ -1,0 +1,12 @@
+{
+  "/src/serenity": {
+    "type": "git",
+    "url": "https://github.com/SerenityOS/serenity",
+    "rev": "3e592f5959f2a106c28d99a8d7539a6346d47970"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

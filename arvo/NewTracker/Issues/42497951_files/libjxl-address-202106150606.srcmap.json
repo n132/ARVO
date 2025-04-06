@@ -1,0 +1,12 @@
+{
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "85aa1491b967709701d2d2293627c5cd1c7cb96d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  }
+}

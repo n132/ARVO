@@ -1,0 +1,7 @@
+{
+  "/src/jettison": {
+    "type": "git",
+    "url": "https://github.com/jettison-json/jettison.git",
+    "rev": "66e2fe8ed2c9ccb431a98ccca05a2f4a822d6f64"
+  }
+}

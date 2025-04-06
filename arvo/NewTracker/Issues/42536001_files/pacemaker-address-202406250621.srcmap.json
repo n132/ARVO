@@ -1,0 +1,22 @@
+{
+  "/src/pacemaker": {
+    "type": "git",
+    "url": "https://github.com/ClusterLabs/pacemaker",
+    "rev": "24554aa2118696fef14b72e509f13c7eefe1fb4f"
+  },
+  "/src/libqb": {
+    "type": "git",
+    "url": "https://github.com/ClusterLabs/libqb",
+    "rev": "40542f314ebe7312fa995677ed5c967150dd5d6a"
+  },
+  "/src/libxslt": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxslt.git",
+    "rev": "3f5ab3a728d2b53579bc26dd2443f4d4ad9032e5"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "fd099dd8dc171c2a11f762b4fbd5e9bbba1eb686"
+  }
+}

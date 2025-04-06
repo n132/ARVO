@@ -1,0 +1,47 @@
+{
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "4f6db6a12971cea851094dca560669c61044a999"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "0df474ac9eaaaaa8de2956ee284274d5896e6c9f"
+  },
+  "/src/libgif": {
+    "type": "git",
+    "url": "https://git.code.sf.net/p/giflib/code",
+    "rev": "adf5a1a506a1ab8979d25768c8eb2a6cfdec7698"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "301f7a14295a3bdfaf406dbb5004d0784dc137ea"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "52291467e1d24ed5c99186b93722e740902bd19c"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif",
+    "rev": "da025b3b85f076f8739ce3046c1de87f8670795c"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips",
+    "rev": "45015b002ace9ce0642da72c3d7c63503f7bf3d1"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

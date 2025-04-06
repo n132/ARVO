@@ -1,0 +1,142 @@
+{
+  "/src/secp256k1": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/secp256k1.git",
+    "rev": "427bc3cdcfbc74778070494daab1ae5108c71368"
+  },
+  "/src/blst": {
+    "type": "git",
+    "url": "https://github.com/supranational/blst.git",
+    "rev": "a7fd1f584d26b0ae6cdc427976ea1d8980f7e15d"
+  },
+  "/src/noble-secp256k1": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-secp256k1.git",
+    "rev": "5a44c9804b7d137ab15e4cf4508d2f9e77ddd89f"
+  },
+  "/src/noble-bls12-381": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-bls12-381.git",
+    "rev": "e576811f02f6c0b4fc4729408e3bf4df2012050b"
+  },
+  "/src/noble-ed25519": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-ed25519.git",
+    "rev": "9077c97891f9c3ec3188e250c22e8afb067e129b"
+  },
+  "/src/xxHash": {
+    "type": "git",
+    "url": "https://github.com/Cyan4973/xxHash.git",
+    "rev": "554e98d5e775148f2cbf46aa1a4cb4654c4e6fcd"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "67f3af619ab7e91bf980e5fdec5949c5824ad049"
+  },
+  "/src/crypto-js": {
+    "type": "git",
+    "url": "https://github.com/brix/crypto-js.git",
+    "rev": "4dcaa7afd08f48cd285463b8f9499cdb242605fa"
+  },
+  "/src/libfuzzer-js": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/libfuzzer-js.git",
+    "rev": "f137ae4012b04c29d89816844cc8040a38b69734"
+  },
+  "/src/bignumber.js": {
+    "type": "git",
+    "url": "https://github.com/MikeMcl/bignumber.js.git",
+    "rev": "2603bfd93e0e51a090b138561a79249f8480156e"
+  },
+  "/src/bn.js": {
+    "type": "git",
+    "url": "https://github.com/indutny/bn.js.git",
+    "rev": "5df40f81ea8afb835b909bb7c21e0833cdeb6a30"
+  },
+  "/src/SymCrypt": {
+    "type": "git",
+    "url": "https://github.com/microsoft/SymCrypt.git",
+    "rev": "4d3fd5136855648d2a5e987f3b95473b056876b1"
+  },
+  "/src/libtomcrypt": {
+    "type": "git",
+    "url": "https://github.com/libtom/libtomcrypt.git",
+    "rev": "2a1b284677a51f587ab7cd9d97395e0c0c93a447"
+  },
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "66a68f0947ae81ee05958bf710bb5df589b39c8b"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/Mbed-TLS/mbedtls.git",
+    "rev": "2a44ac245fa193e2b1d3c614193336546496de67"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "7f6811a731c29bd6d046425df55e71d0b943f2f3"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "c810e6ce7bdf1e7282f4c6e7b1d6ea9261c32e4c"
+  },
+  "/src/cityhash": {
+    "type": "git",
+    "url": "https://github.com/google/cityhash.git",
+    "rev": "f5dc54147fcce12cefd16548c8e760d68ac04226"
+  },
+  "/src/evercrypt": {
+    "type": "git",
+    "url": "https://github.com/project-everest/hacl-star",
+    "rev": "d3f6c884931771be619371b326f94686dcad80e0"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "fae63f517906ba8f46d255f1b5770665f2197ad9"
+  },
+  "/src/cryptopp": {
+    "type": "git",
+    "url": "https://github.com/weidai11/cryptopp/",
+    "rev": "a21bab3255dd3c7708d8af4cc065e3e2464db48a"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "74646566e93de7551bfdfc5f49de7462f13d1d05"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "f3fed0d5fc11a3406951884b9739a93639697a56"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "48fe23a453ea2715f890eb0e9edf9569304d8e79"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "614a1cd8bb1d7962697a794a0370583de9a2c752"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "b60838a775ba63bf741048c31f17c51637047cff"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "3e25d69ba6b268f2817e920a69eb2c091efe17e6"
+  }
+}

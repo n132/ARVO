@@ -1,0 +1,7 @@
+{
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://github.com/harfbuzz/harfbuzz.git",
+    "rev": "3d08a2f10cada7c72513d9491ddf66820ef008fb"
+  }
+}

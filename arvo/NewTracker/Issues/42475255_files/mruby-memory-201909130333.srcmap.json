@@ -1,0 +1,27 @@
+{
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "62c5c91a2bfd675fa99cf61f6747fd227da8983a"
+  },
+  "/src/mruby_seeds": {
+    "type": "git",
+    "url": "https://github.com/bshastry/mruby_seeds.git",
+    "rev": "5a618aba8e4493eceff7a430cba7c848e6cbabfd"
+  },
+  "/src/mruby": {
+    "type": "git",
+    "url": "https://github.com/mruby/mruby",
+    "rev": "ad4bdda074bb7aa452b17515ea7ad936674c9df1"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "e9be6bce2282e8db95221c9a17fd10aba9e901bc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "371806"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "d1710d9f9c643ef8df1b79ab4d874f133647154b"
+  },
+  "/src/wolfsm": {
+    "type": "git",
+    "url": "https://github.com/wolfssl/wolfsm",
+    "rev": "898545f3d300703d31ff6e322ff629b251e056f3"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfssl/wolfssl",
+    "rev": "8569e76a87c9c015224a0f0fdd0f195927693fb9"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "d0ce04aec2087c1be4b6330f978c35338a818e09"
+  },
+  "/src/libecc": {
+    "type": "git",
+    "url": "https://github.com/libecc/libecc.git",
+    "rev": "b9329e2826f4d622dbb9ffdd9316e98fda7a023f"
+  }
+}

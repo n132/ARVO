@@ -1,0 +1,17 @@
+{
+  "/src/ndpi": {
+    "type": "git",
+    "url": "https://github.com/ntop/nDPI.git",
+    "rev": "d506a0e12f7e491626de27d93f34fbfa9b36530e"
+  },
+  "/src/json-c": {
+    "type": "git",
+    "url": "https://github.com/json-c/json-c.git",
+    "rev": "66cce0a1d7ec68301421591dec6b88c4a43c7cde"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

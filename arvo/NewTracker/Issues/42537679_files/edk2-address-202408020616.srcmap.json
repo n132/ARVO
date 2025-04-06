@@ -1,0 +1,12 @@
+{
+  "/src/hbfa-fl": {
+    "type": "git",
+    "url": "https://github.com/intel/hbfa-fl",
+    "rev": "28cf356f2045958509e66beacc95ceed61613957"
+  },
+  "/src/edk2": {
+    "type": "git",
+    "url": "https://github.com/tianocore/edk2.git",
+    "rev": "87d3a6272ca8637787813256c1a2435e89e326e2"
+  }
+}

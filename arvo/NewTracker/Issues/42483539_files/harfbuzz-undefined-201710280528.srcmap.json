@@ -1,0 +1,12 @@
+{
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/harfbuzz.git",
+    "rev": "5daf3bd4494cce6b4fb074533be9e99c4d9e0edd"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "316824"
+  }
+}

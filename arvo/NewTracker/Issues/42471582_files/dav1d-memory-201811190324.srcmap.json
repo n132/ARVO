@@ -1,0 +1,12 @@
+{
+  "/src/dav1d": {
+    "type": "git",
+    "url": "https://code.videolan.org/videolan/dav1d.git",
+    "rev": "5698bc91b692dbcc2e92c2990c5a2d841cfbea1d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "347180"
+  }
+}

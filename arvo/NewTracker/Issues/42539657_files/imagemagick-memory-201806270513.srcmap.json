@@ -1,0 +1,77 @@
+{
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "ce6dea8aa9606c4824e8ed6223e6a8f3e8034f75"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng",
+    "rev": "916117d97058b37e7eef2558a71919a8a073a3d3"
+  },
+  "/src/libraw": {
+    "type": "git",
+    "url": "https://github.com/libraw/libraw",
+    "rev": "8a6d29d8ce7b7b95f88846a47991b8c79b7fe186"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "2267f5b0d20a5d24e93fcd9f72ea7eeb0d89708c"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2",
+    "rev": "207ca38fb5e99a638e9ea86d86b28fc895661122"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "398c1e9acc9b4531edceb3d77da0de5744675052"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "be738c6d396fa5a272c1b209be4379a7532debfe"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "d2205ba2ee78faeea659263383446c4472b1f9df"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif",
+    "rev": "2706077d0fe4019e4555bebb46e98ff57b850e63"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265",
+    "rev": "b500546cc40649b9786f4f258ffe3829f1bd59cd"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "58a898cb4459055bb488ca815c23b880c242a27d"
+  },
+  "/src/imagemagick": {
+    "type": "git",
+    "url": "https://github.com/imagemagick/imagemagick",
+    "rev": "6aa082fa1f62aaa183d5be90fe05383ab6c4efc7"
+  },
+  "/src/perffuzz": {
+    "type": "git",
+    "url": "https://github.com/carolemieux/perffuzz",
+    "rev": "902f6e51ff3c5202d7fd2fea6c8f3f84ffc5084b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "335705"
+  }
+}

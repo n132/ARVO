@@ -1,0 +1,12 @@
+{
+  "/src/gpsd": {
+    "type": "git",
+    "url": "https://gitlab.com/gpsd/gpsd",
+    "rev": "b43eacb14fdc828e7b4dc22c64bfbb671fc5be12"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/pkillarjun/oss-fuzz-bloat",
+    "rev": "4e52c62eecf2c7d9405d4992b4b297cf193c28ae"
+  }
+}

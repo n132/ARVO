@@ -1,0 +1,17 @@
+{
+  "/src/ExoPlayer": {
+    "type": "git",
+    "url": "https://github.com/google/ExoPlayer.git",
+    "rev": "bc3537260b1df38b30100e67ac5e1ac592fb5f26"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://github.com/xiph/ogg.git",
+    "rev": "db5c7a49ce7ebda47b15b78471e78fb7f2483e22"
+  },
+  "/src/flac": {
+    "type": "git",
+    "url": "https://github.com/xiph/flac.git",
+    "rev": "383512d551de2ebf640a95d010b38ad58b0d12ae"
+  }
+}

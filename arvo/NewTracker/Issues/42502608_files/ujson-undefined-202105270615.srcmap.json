@@ -1,0 +1,12 @@
+{
+  "/src/ultrajson": {
+    "type": "git",
+    "url": "https://github.com/ultrajson/ultrajson.git",
+    "rev": "651cca5acd8483e29647d1a05820a2064d19e595"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/openh264": {
+    "type": "git",
+    "url": "https://github.com/cisco/openh264.git",
+    "rev": "f86f0e47ef28fdf33b15a64eac8359cc1a88dfe6"
+  }
+}

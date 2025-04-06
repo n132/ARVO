@@ -1,0 +1,12 @@
+{
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://github.com/FFmpeg/FFmpeg",
+    "rev": "74035aaed7ab43a911842059cefd1101f5d65d09"
+  },
+  "/src/mpv": {
+    "type": "git",
+    "url": "https://github.com/mpv-player/mpv",
+    "rev": "95ac32220e5d0adc7b4ba28fd9d7eadbe37b67c6"
+  }
+}

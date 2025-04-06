@@ -1,0 +1,12 @@
+{
+  "/src/usrsctp": {
+    "type": "git",
+    "url": "https://github.com/sctplab/usrsctp",
+    "rev": "3e1c5ae9560154d86f5636d6abfb8101dc2e0c47"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

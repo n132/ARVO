@@ -1,0 +1,17 @@
+{
+  "/src/corpi": {
+    "type": "git",
+    "url": "https://github.com/qlyoung/corpi",
+    "rev": "de26a013ff7c9a88648aeea50e830167572a95a3"
+  },
+  "/src/frr": {
+    "type": "git",
+    "url": "https://github.com/FRRouting/frr",
+    "rev": "05f8f7e771cc500d48106cbc034e520572c34119"
+  },
+  "/src/libyang": {
+    "type": "git",
+    "url": "https://github.com/CESNET/libyang.git",
+    "rev": "8b0b910a2dcb7360cb5b0aaefbd1338271d50946"
+  }
+}

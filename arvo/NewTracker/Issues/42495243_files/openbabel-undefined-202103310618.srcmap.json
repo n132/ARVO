@@ -1,0 +1,12 @@
+{
+  "/src/openbabel": {
+    "type": "git",
+    "url": "https://github.com/openbabel/openbabel.git",
+    "rev": "2ff5b1089ee0d69b5694cf305e4a121b153340c5"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

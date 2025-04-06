@@ -1,0 +1,12 @@
+{
+  "/src/wabt": {
+    "type": "git",
+    "url": "https://github.com/WebAssembly/wabt",
+    "rev": "e808dfe3fc7ec890be4ef59d4772afaa19af4847"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

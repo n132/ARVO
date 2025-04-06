@@ -1,0 +1,32 @@
+{
+  "/src/suricata-verify": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata-verify",
+    "rev": "80ce94a695adcdc1abe2f4d5b9734d55c331a39a"
+  },
+  "/src/libhtp": {
+    "type": "git",
+    "url": "https://github.com/OISF/libhtp.git",
+    "rev": "6b70803c45894da7a591b2305498335e6df4f9a3"
+  },
+  "/src/suricata": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata.git",
+    "rev": "ddf14e51dcf5dabdb4bc07414a118530e2a1b819"
+  },
+  "/src/fuzzpcap": {
+    "type": "git",
+    "url": "https://github.com/catenacyber/fuzzpcap",
+    "rev": "100db6cefd77238f623b5127a3efed01c7333cad"
+  },
+  "/src/libyaml": {
+    "type": "git",
+    "url": "https://github.com/yaml/libyaml",
+    "rev": "f8f760f7387d2cc56a2fc7b1be313a3bf3f7f58c"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

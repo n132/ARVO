@@ -1,0 +1,7 @@
+{
+  "/src/jq": {
+    "type": "git",
+    "url": "https://github.com/jqlang/jq",
+    "rev": "6ce6e7c71355a0b6006e9e3371364f6945da5a29"
+  }
+}

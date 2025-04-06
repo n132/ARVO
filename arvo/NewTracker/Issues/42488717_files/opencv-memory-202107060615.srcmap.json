@@ -1,0 +1,12 @@
+{
+  "/src/opencv": {
+    "type": "git",
+    "url": "https://github.com/opencv/opencv.git",
+    "rev": "aaad1791d9522cb08448cb525855401157c53e73"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  }
+}

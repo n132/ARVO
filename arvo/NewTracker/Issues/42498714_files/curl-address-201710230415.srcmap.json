@@ -1,0 +1,17 @@
+{
+  "/src/curl_fuzzer": {
+    "type": "git",
+    "url": "https://github.com/curl/curl-fuzzer.git",
+    "rev": "123d14edd778d0a1fa427d28494a2952d4e90df8"
+  },
+  "/src/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "fdd879d549e77fdcf913e5d4a5c5823e70759807"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "316310"
+  }
+}

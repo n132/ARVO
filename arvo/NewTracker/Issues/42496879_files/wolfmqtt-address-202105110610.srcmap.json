@@ -1,0 +1,27 @@
+{
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "0a596947f9003e765643235c25625473726b9bcd"
+  },
+  "/src/wolfmqtt-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/wolfmqtt-fuzzers.git",
+    "rev": "e77562b87079e1852ba56cdc232d20e672a89844"
+  },
+  "/src/wolfmqtt": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfMQTT.git",
+    "rev": "1fc82d59b8d77a495c24d7ebd489961b16cd58d3"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "bab0d9bd4a524b97921f516c3532d299fa59fa9a"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

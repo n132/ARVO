@@ -1,0 +1,42 @@
+{
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "ef3224c53b3a3ac51c7c1846cc3873fa1d4910f4"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "d85e39b5da8fc60bb6055720a1ddeaa31951da02"
+  },
+  "/src/libtasn1": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/libtasn1.git",
+    "rev": "a12e96f81ce90843455f212d7b93da716726ea0b"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "ce0d453222ca51c056f4f442988710eb0b696365"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "2c0ed45908fb2cdedfe92b8a1bef2f69034a4fb7"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "e3970fb9891668bd9dbc94daca18dc0d42b7e466"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "354742"
+  },
+  "/src/gmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "036ddbf61ac6183c38f98c2f98cdd63ceaf17cc6"
+  }
+}

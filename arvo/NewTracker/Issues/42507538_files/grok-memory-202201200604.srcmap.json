@@ -1,0 +1,22 @@
+{
+  "/src/grok-data": {
+    "type": "git",
+    "url": "https://github.com/GrokImageCompression/grok-test-data.git",
+    "rev": "67a188cca0389cf989cecb58a068dcacc718e072"
+  },
+  "/src/grok": {
+    "type": "git",
+    "url": "https://github.com/GrokImageCompression/grok.git",
+    "rev": "16943a4930db5e2a83786c83fa2923369cc351bb"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c5117b42cab9f47448a7f3cfe3edae6708d32528"
+  }
+}

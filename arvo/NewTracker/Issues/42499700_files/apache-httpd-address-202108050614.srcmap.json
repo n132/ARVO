@@ -1,0 +1,17 @@
+{
+  "/src/fuzz-headers": {
+    "type": "git",
+    "url": "https://github.com/AdaLogics/fuzz-headers",
+    "rev": "d1f246dd940a82219aaad0879b4a5745292fa7fc"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  },
+  "/src/httpd": {
+    "type": "svn",
+    "url": "https://svn.apache.org/repos/asf/httpd/httpd/trunk",
+    "rev": "1892026"
+  }
+}

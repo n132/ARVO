@@ -1,0 +1,7 @@
+{
+  "/src/janino": {
+    "type": "git",
+    "url": "https://github.com/janino-compiler/janino.git",
+    "rev": "9932dac078b51819f267bc33dedad8da393b3748"
+  }
+}

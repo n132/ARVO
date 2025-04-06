@@ -1,0 +1,12 @@
+{
+  "/src/yara": {
+    "type": "git",
+    "url": "https://github.com/VirusTotal/yara.git",
+    "rev": "48cc15b447ad48fa79c4f935605bfc9be52c9945"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

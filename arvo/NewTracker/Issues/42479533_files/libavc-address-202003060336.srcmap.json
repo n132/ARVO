@@ -1,0 +1,12 @@
+{
+  "/src/libavc": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libavc",
+    "rev": "29fc5cb2f209311f6ec4ce2abf1775079cd49344"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/libtpms": {
+    "type": "git",
+    "url": "https://github.com/stefanberger/libtpms",
+    "rev": "98b34147ad3ea412ba938de24491d96fa265447f"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

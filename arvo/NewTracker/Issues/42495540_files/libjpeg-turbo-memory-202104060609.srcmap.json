@@ -1,0 +1,12 @@
+{
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "cd9a318502293f889a47cdc134434d44b93eca0d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

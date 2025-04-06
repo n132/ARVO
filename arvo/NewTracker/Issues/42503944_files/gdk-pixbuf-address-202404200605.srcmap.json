@@ -1,0 +1,7 @@
+{
+  "/src/gdk-pixbuf": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/gdk-pixbuf.git",
+    "rev": "db6a9a11b03ceab2be794f4f7326199bc157bae9"
+  }
+}

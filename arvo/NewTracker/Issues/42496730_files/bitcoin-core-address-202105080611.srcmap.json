@@ -1,0 +1,17 @@
+{
+  "/src/bitcoin-core": {
+    "type": "git",
+    "url": "https://github.com/bitcoin/bitcoin.git",
+    "rev": "9313c4e6aa4b707c06a86b33d5d2753cd8383340"
+  },
+  "/src/bitcoin-core/assets": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/qa-assets",
+    "rev": "8fc6beab04b308e5717cda7c1cb77b69718ae7a1"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

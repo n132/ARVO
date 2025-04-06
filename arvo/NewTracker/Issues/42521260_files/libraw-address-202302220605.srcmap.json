@@ -1,0 +1,7 @@
+{
+  "/src/libraw": {
+    "type": "git",
+    "url": "https://github.com/libraw/libraw",
+    "rev": "443b7fb51e1ca89a1178180258a0f10ed353617d"
+  }
+}

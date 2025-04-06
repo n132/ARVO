@@ -1,0 +1,12 @@
+{
+  "/src/libssh": {
+    "type": "git",
+    "url": "https://git.libssh.org/projects/libssh.git",
+    "rev": "c15ad753a7083e3886891f0a1db7cd809ad23582"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "342524"
+  }
+}

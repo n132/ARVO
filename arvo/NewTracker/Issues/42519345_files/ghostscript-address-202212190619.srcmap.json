@@ -1,0 +1,17 @@
+{
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/ghostpdl.git",
+    "rev": "cf069250ecc21843d748860c69026e28331c4519"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/freetype/freetype2.git",
+    "rev": "e8ebfe988b5f57bfb9a3ecb13c70d9791bce9ecf"
+  },
+  "/src/cups": {
+    "type": "git",
+    "url": "https://github.com/apple/cups.git",
+    "rev": "0ad6ac55da2686c6fa24b05bde5e9036fd4db5d1"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "/src/libevent": {
+    "type": "git",
+    "url": "https://github.com/libevent/libevent.git",
+    "rev": "c57f5c34903b02c6e7378865f71a2b83a5befb96"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl.git",
+    "rev": "a0abb6a10f4c5fc6dd20c487aa0db085fbfb3562"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/tor-fuzz-corpora": {
+    "type": "git",
+    "url": "https://git.torproject.org/fuzzing-corpora.git",
+    "rev": "a2700167905a3ab189c4b8bf30c2f67c1193fbe3"
+  },
+  "/src/tor": {
+    "type": "git",
+    "url": "https://git.torproject.org/tor.git",
+    "rev": "f42739e746bcaa0159f7bb41d893ac8920a657ca"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "333253"
+  }
+}

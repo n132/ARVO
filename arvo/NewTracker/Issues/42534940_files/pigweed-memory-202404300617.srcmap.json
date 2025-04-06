@@ -1,0 +1,7 @@
+{
+  "/src/pigweed": {
+    "type": "git",
+    "url": "https://pigweed.googlesource.com/pigweed/pigweed",
+    "rev": "5f043974e7207fb8eed7d13c89654665437c6811"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/radare2-regressions": {
+    "type": "git",
+    "url": "https://github.com/radare/radare2-regressions",
+    "rev": "646308296e94bab3e4f0a87f90b487af63ccd833"
+  },
+  "/src/radare2": {
+    "type": "git",
+    "url": "https://github.com/radare/radare2",
+    "rev": "c0779bd604b251fc97befebfdc870527b3947379"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "365988"
+  }
+}

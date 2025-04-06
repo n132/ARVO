@@ -1,0 +1,12 @@
+{
+  "/src/dav1d": {
+    "type": "git",
+    "url": "https://code.videolan.org/videolan/dav1d.git",
+    "rev": "a978375bf8ef28b76929adb1c6e9f2013b4a84ac"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

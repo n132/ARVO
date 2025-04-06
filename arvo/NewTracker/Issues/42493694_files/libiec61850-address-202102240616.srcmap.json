@@ -1,0 +1,12 @@
+{
+  "/src/libiec61850": {
+    "type": "git",
+    "url": "https://github.com/mz-automation/libiec61850",
+    "rev": "5b0db88aa18d3c936856544b4feb42786380870b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  }
+}

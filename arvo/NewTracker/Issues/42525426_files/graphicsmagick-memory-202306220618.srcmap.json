@@ -1,0 +1,72 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "2473b4855ea139e91f790a35539fe7da54022360"
+  },
+  "/src/jasper": {
+    "type": "git",
+    "url": "https://github.com/jasper-software/jasper",
+    "rev": "354722a9a42e502092c31941913f4552bb72eb63"
+  },
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "bf905ea2251191ff9911ae7ec0cfc35d41f9f7f6"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "http://git.ghostscript.com/ghostpdl.git",
+    "rev": "4209debfae54c45165d26d22393fe550c538f3ca"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "83a150fb5df031cc534bd915ff03cbcce1aad127"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "f135775ad4e5d4408d2e12ffcc71bb36e6b48551"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2.git/",
+    "rev": "5c00a46805d6423fc45b4ba2c0f2e22dd0450d73"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "6b9e3b04008165260a13f77cf235170438d5adf8"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "e4aeaebc201ba49fec50b087aeb15343c63712e5"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "dbb3a536ed9873ffa0870321f6873e564c6a9da8"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "04f42ceca40f73e2978b50e93806c2a18c1281fc"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "14a9dbfba00e84f722c82668580b1866311b7d11"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "7f7258f25bf7ef852c8698f283976706ec19a75e"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "https://hg.osdn.net/view/graphicsmagick/GM",
+    "rev": "8a180b8c316e0acbbd58a8a559e35207d02e455b"
+  }
+}

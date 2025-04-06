@@ -1,0 +1,22 @@
+{
+  "/src/glib": {
+    "type": "git",
+    "url": "https://github.com/GNOME/glib",
+    "rev": "872927c307441aa0820c82680c2754a4e4e5477e"
+  },
+  "/src/glib/subprojects/libffi": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/gstreamer/meson-ports/libffi.git",
+    "rev": "339f603ab6b90df65de5d517ae2f692c35a9cd99"
+  },
+  "/src/bluez": {
+    "type": "git",
+    "url": "https://github.com/bluez/bluez",
+    "rev": "d2a2aabee646c4e95655bc5dc93c323efa5fc588"
+  },
+  "/src/ell": {
+    "type": "git",
+    "url": "git://git.kernel.org/pub/scm/libs/ell/ell.git",
+    "rev": "a7c28b45eafbbddef9b17075e2db404606de5781"
+  }
+}

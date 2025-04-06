@@ -1,0 +1,17 @@
+{
+  "/src/php-src": {
+    "type": "git",
+    "url": "https://github.com/php/php-src.git",
+    "rev": "392f0abf687c7519ba02d7d41b9622f0b3d1a8e2"
+  },
+  "/src/php-src/oniguruma": {
+    "type": "git",
+    "url": "https://github.com/kkos/oniguruma.git",
+    "rev": "2b7b94122c696ffb5ed7fbe9a42c73d4563e3498"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

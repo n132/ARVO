@@ -1,0 +1,37 @@
+{
+  "/src/suricata-verify": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata-verify",
+    "rev": "494b9d594fc8a0f305f48a6e51badf8ff7b55f31"
+  },
+  "/src/libhtp": {
+    "type": "git",
+    "url": "https://github.com/OISF/libhtp.git",
+    "rev": "be0063a6138f795fc1af76cc5340bcb11d3b0b87"
+  },
+  "/src/suricata6": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata.git",
+    "rev": "75e57dde7c147423a299a4d8e63a8d48b7bd22cd"
+  },
+  "/src/suricata": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata.git",
+    "rev": "6190913a461e9943e83f24d78a368043c22f0039"
+  },
+  "/src/fuzzpcap": {
+    "type": "git",
+    "url": "https://github.com/catenacyber/fuzzpcap",
+    "rev": "185c08feae72c8b4e5b2b2beab7bd69717ff0e84"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "48c3741002aca9dae84e9f2288ca149af14c9128"
+  },
+  "/src/libyaml": {
+    "type": "git",
+    "url": "https://github.com/yaml/libyaml",
+    "rev": "f8f760f7387d2cc56a2fc7b1be313a3bf3f7f58c"
+  }
+}

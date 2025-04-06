@@ -1,0 +1,17 @@
+{
+  "/src/strongswan/fuzzing-corpora": {
+    "type": "git",
+    "url": "https://github.com/strongswan/fuzzing-corpora.git",
+    "rev": "5dd950e3d6ff93109a2ae6079d44e9159b4e82de"
+  },
+  "/src/strongswan": {
+    "type": "git",
+    "url": "https://github.com/strongswan/strongswan.git",
+    "rev": "9cf292051265f511a9a2154f48891099b4814728"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "939ff20e42a4b2c5e41645e48a6c617cb57945fa"
+  }
+}

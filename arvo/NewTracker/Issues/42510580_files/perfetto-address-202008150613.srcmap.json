@@ -1,0 +1,12 @@
+{
+  "/src/perfetto": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/perfetto/",
+    "rev": "22e7f7a0d7d761f391e41ad2b9767e2251cb0749"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

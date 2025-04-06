@@ -1,0 +1,17 @@
+{
+  "/src/libhtp": {
+    "type": "git",
+    "url": "https://github.com/OISF/libhtp.git",
+    "rev": "9efa5ad27d6c321bcfcc8c2ae984d30bbc29125b"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "e9be6bce2282e8db95221c9a17fd10aba9e901bc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372197"
+  }
+}

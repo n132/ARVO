@@ -1,0 +1,17 @@
+{
+  "/src/php-src": {
+    "type": "git",
+    "url": "https://github.com/php/php-src.git",
+    "rev": "be5fd30d544d97d8438894c6fc0463adc368d181"
+  },
+  "/src/php-src/oniguruma": {
+    "type": "git",
+    "url": "https://github.com/kkos/oniguruma.git",
+    "rev": "227ec0bd690207812793c09ad70024707c405376"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

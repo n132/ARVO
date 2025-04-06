@@ -1,0 +1,7 @@
+{
+  "/src/samba": {
+    "type": "git",
+    "url": "https://gitlab.com/samba-team/samba",
+    "rev": "f5c76c3c814dac2b0c09026520f75c0b0e22b6b4"
+  }
+}

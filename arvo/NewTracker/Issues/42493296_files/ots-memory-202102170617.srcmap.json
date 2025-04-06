@@ -1,0 +1,12 @@
+{
+  "/src/ots": {
+    "type": "git",
+    "url": "https://github.com/khaledhosny/ots.git",
+    "rev": "6e9a697bd9a76475d2d947fb1a371e8f7a6edb32"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "aeb7d7048371cd91ab9280c3958f1c35e5d5e758"
+  }
+}

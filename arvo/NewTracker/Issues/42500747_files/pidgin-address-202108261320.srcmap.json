@@ -1,0 +1,27 @@
+{
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "bb05211c12328cb16327bb0d58c0c67a9a44576f"
+  },
+  "/src/go-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "dea91c97debeac7c1aaf9c19f79029809e23a353"
+  },
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "eafcdd2eb64c4f62c0e135f337f2c567735886fe"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

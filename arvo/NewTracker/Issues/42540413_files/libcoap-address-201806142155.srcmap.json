@@ -1,0 +1,12 @@
+{
+  "/src/libcoap": {
+    "type": "git",
+    "url": "https://github.com/obgm/libcoap.git",
+    "rev": "df4bad7e08c298e9f4067d75149dd72c306f1c17"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "334772"
+  }
+}

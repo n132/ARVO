@@ -1,0 +1,12 @@
+{
+  "/src/libreoffice": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/libreoffice/core",
+    "rev": "cf1c835e8016f8f1eefea6d625a913c0ac343a63"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "333509bb0a56be9bd2e236f0e2f37d4af2dd7d59"
+  }
+}

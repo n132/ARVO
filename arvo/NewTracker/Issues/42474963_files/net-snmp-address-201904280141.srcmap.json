@@ -1,0 +1,12 @@
+{
+  "/src/net-snmp": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/net-snmp/code",
+    "rev": "1db5d4df050768a7d93fab12f2e0ffec19a830e1"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "359391"
+  }
+}

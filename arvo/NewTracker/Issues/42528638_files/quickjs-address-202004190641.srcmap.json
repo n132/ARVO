@@ -1,0 +1,12 @@
+{
+  "/src/quickjs": {
+    "type": "git",
+    "url": "https://github.com/horhof/quickjs",
+    "rev": "85b3138902338802ccfacbd793db80ad84e602d8"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

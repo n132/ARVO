@@ -1,0 +1,17 @@
+{
+  "/src/php-src": {
+    "type": "git",
+    "url": "https://github.com/php/php-src.git",
+    "rev": "b6dc1d2466e14171ebcd0a5f02b9d5e25a2e0b4b"
+  },
+  "/src/php-src/sapi/fuzzer": {
+    "type": "git",
+    "url": "https://github.com/php/php-fuzzing-sapi.git",
+    "rev": "5d1913acdc52b4d553b57a4cd6a0c7555bd1a233"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "357447"
+  }
+}

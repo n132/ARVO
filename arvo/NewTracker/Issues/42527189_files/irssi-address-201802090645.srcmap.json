@@ -1,0 +1,12 @@
+{
+  "/src/irssi": {
+    "type": "git",
+    "url": "https://github.com/irssi/irssi",
+    "rev": "7c31f7adc5685074d25a32737c9743089850675c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "324713"
+  }
+}

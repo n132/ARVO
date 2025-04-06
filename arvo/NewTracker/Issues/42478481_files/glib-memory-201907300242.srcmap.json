@@ -1,0 +1,12 @@
+{
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "84738f7e80093d7292a51a47d8446d129e839587"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "367281"
+  }
+}

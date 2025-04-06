@@ -1,0 +1,7 @@
+{
+  "/src/pistache": {
+    "type": "git",
+    "url": "https://github.com/pistacheio/pistache",
+    "rev": "bbc70155ee1981081a3687eb28e54daefa32f6c0"
+  }
+}

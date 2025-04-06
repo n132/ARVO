@@ -1,0 +1,17 @@
+{
+  "/src/tcpdump": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/tcpdump.git",
+    "rev": "f4ebd6cda863de6de39e3fdf4b065df06c99650d"
+  },
+  "/src/libpcap": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/libpcap.git",
+    "rev": "ebaafda0b638fd8293f6cbfe41f86abb0da22edc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "363525"
+  }
+}

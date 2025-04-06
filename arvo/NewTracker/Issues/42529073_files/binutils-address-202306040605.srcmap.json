@@ -1,0 +1,12 @@
+{
+  "/src/binutils-gdb": {
+    "type": "git",
+    "url": "git://sourceware.org/git/binutils-gdb.git",
+    "rev": "a366c78c1bc020c41518840e1aa9cfe4dd8c5230"
+  },
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples",
+    "rev": "50f4f6ad752e982f26fab167665e763b6877c942"
+  }
+}

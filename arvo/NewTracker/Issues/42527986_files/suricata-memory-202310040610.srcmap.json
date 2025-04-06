@@ -1,0 +1,42 @@
+{
+  "/src/suricata-verify": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata-verify",
+    "rev": "1077babc5e5fcdb2bbb091060da67bb2a51ba63d"
+  },
+  "/src/libhtp": {
+    "type": "git",
+    "url": "https://github.com/OISF/libhtp.git",
+    "rev": "8bdfe7b9d04e5e948c8fbaa7472e14d884cc00af"
+  },
+  "/src/suricata6": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata.git",
+    "rev": "d1bd80fce61a9f0a4207713ee3cc9d3f489a8a61"
+  },
+  "/src/suricata": {
+    "type": "git",
+    "url": "https://github.com/OISF/suricata.git",
+    "rev": "915707090762a0be84fc38ec458baebb05f92252"
+  },
+  "/src/fuzzpcap": {
+    "type": "git",
+    "url": "https://github.com/catenacyber/fuzzpcap",
+    "rev": "185c08feae72c8b4e5b2b2beab7bd69717ff0e84"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "ac8f12c97d1afd9bafa9c710f827d40a407d3266"
+  },
+  "/src/quadfuzz": {
+    "type": "git",
+    "url": "https://github.com/catenacyber/quadfuzz.git",
+    "rev": "5f12caf4b149c7c25747801ab5d8c28618bcf9a9"
+  },
+  "/src/libyaml": {
+    "type": "git",
+    "url": "https://github.com/yaml/libyaml",
+    "rev": "f8f760f7387d2cc56a2fc7b1be313a3bf3f7f58c"
+  }
+}

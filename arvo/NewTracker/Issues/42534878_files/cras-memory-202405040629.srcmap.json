@@ -1,0 +1,7 @@
+{
+  "/src/adhd": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromiumos/third_party/adhd",
+    "rev": "b3ca8230b624ad1beefd03138d383b72a7b2751e"
+  }
+}

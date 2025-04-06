@@ -1,0 +1,7 @@
+{
+  "/src/libhevc": {
+    "type": "git",
+    "url": "https://github.com/ittiam-systems/libhevc.git",
+    "rev": "a7874ebcf88499106deec0f87ebc18672fd55ea8"
+  }
+}

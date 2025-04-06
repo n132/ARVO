@@ -1,0 +1,7 @@
+{
+  "/src/perfetto": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/perfetto/",
+    "rev": "0394aac114025be620cf8f3dd9e725a388b6f5f4"
+  }
+}

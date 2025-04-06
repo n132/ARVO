@@ -1,0 +1,157 @@
+{
+  "/src/skia": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/skia.git",
+    "rev": "bcfbf6e94c2272b0a030a8763e2abcfe4b55395c"
+  },
+  "/src/skia/third_party/externals/freetype": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/freetype2.git",
+    "rev": "7edc937fe679d14d66f55cf6f7fa607925d38f3c"
+  },
+  "/src/skia/third_party/externals/piex": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/piex.git",
+    "rev": "bb217acdca1cc0c16b704669dd6f91a1b509c406"
+  },
+  "/src/skia/third_party/externals/opencl-registry": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/OpenCL-Registry",
+    "rev": "932ed55c85f887041291cef8019e54280c033c35"
+  },
+  "/src/skia/third_party/externals/wuffs": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/google/wuffs.git",
+    "rev": "2276be64e93bd7664e0fec191b8fb3139d516ba8"
+  },
+  "/src/skia/third_party/externals/libpng": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/libpng.git",
+    "rev": "2ee8cb0559bf826d9bc5c0b0f3c9015f51190814"
+  },
+  "/src/skia/third_party/externals/angle2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/angle/angle.git",
+    "rev": "0546b5380780a5ae12db34a9ef4fb310935ef35b"
+  },
+  "/src/skia/third_party/externals/sfntly": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/googlei18n/sfntly.git",
+    "rev": "b55ff303ea2f9e26702b514cf6a3196a2e3e2974"
+  },
+  "/src/skia/third_party/externals/spirv-tools": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/SPIRV-Tools.git",
+    "rev": "e9e4393b1c5aad7553c05782acefbe32b42644bd"
+  },
+  "/src/skia/third_party/externals/imgui": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/ocornut/imgui.git",
+    "rev": "d38d7c6628bebd02692cfdd6fa76b4d992a35b75"
+  },
+  "/src/skia/third_party/externals/dng_sdk": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/dng_sdk.git",
+    "rev": "96443b262250c390b0caefbf3eed8463ba35ecae"
+  },
+  "/src/skia/third_party/externals/Nima-Cpp": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/2d-inc/Nima-Cpp.git",
+    "rev": "4bd02269d7d1d2e650950411325eafa15defb084"
+  },
+  "/src/skia/third_party/externals/lua": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/lua/lua.git",
+    "rev": "e354c6355e7f48e087678ec49e340ca0696725b1"
+  },
+  "/src/skia/third_party/externals/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp.git",
+    "rev": "2b98df90cb75cfc1cf4505a59a7b25499fa10887"
+  },
+  "/src/skia/third_party/externals/harfbuzz": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
+    "rev": "1e06282105a2d579aab32094cc7abc10ed231978"
+  },
+  "/src/skia/third_party/externals/egl-registry": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/EGL-Registry",
+    "rev": "a0bca08de07c7d7651047bedc0b653cfaaa4f2ae"
+  },
+  "/src/skia/third_party/externals/expat": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/expat.git",
+    "rev": "e5aa0a2cb0a5f759ef31c0819dc67d9b14246a4a"
+  },
+  "/src/skia/third_party/externals/swiftshader": {
+    "type": "git",
+    "url": "https://swiftshader.googlesource.com/SwiftShader",
+    "rev": "bf8fd5b5fb6892dabcc21b4b86d41cd40cb9b4b5"
+  },
+  "/src/skia/third_party/externals/opencl-lib": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-Tools/common-lib-amd-APPSDK-3.0",
+    "rev": "4e6d30e406d2e5a65e1d65e404fe6df5f772a32b"
+  },
+  "/src/skia/third_party/externals/opengl-registry": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/OpenGL-Registry",
+    "rev": "14b80ebeab022b2c78f84a573f01028c96075553"
+  },
+  "/src/skia/third_party/externals/Nima-Math-Cpp": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/2d-inc/Nima-Math-Cpp.git",
+    "rev": "e0c12772093fa8860f55358274515b86885f0108"
+  },
+  "/src/skia/third_party/externals/icu": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
+    "rev": "407b39301e71006b68bd38e770f35d32398a7b14"
+  },
+  "/src/skia/third_party/externals/zlib": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib",
+    "rev": "47af7c547f8551bd25424e56354a2ae1e9062859"
+  },
+  "/src/skia/third_party/externals/spirv-headers": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/SPIRV-Headers.git",
+    "rev": "661ad91124e6af2272afd00f804d8aa276e17107"
+  },
+  "/src/skia/third_party/externals/sdl": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/sdl",
+    "rev": "5d7cfcca344034aff9327f77fc181ae3754e7a90"
+  },
+  "/src/skia/third_party/externals/microhttpd": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libmicrohttpd",
+    "rev": "748945ec6f1c67b7efc934ab0808e1d32f2fb98d"
+  },
+  "/src/skia/third_party/externals/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "574f3a772c96dc9db2c98ef24706feb3f6dbda9a"
+  },
+  "/src/skia/buildtools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/buildtools.git",
+    "rev": "505de88083136eefd056e5ee4ca0f01fe9b33de8"
+  },
+  "/src/skia/common": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/common.git",
+    "rev": "9737551d7a52c3db3262db5856e6bcd62c462b92"
+  },
+  "/src/depot_tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
+    "rev": "2afcf22ad1841a0fd653a4fca72ab37eee4b4b02"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "354840"
+  }
+}

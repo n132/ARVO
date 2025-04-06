@@ -1,0 +1,12 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "git://git.gnome.org/libxml2",
+    "rev": "92b9e8c8b3787068565a1820ba575d042f9eec66"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "2ac50c9432f4856b505e3f9cb7f4e7161f5e182c"
+  }
+}

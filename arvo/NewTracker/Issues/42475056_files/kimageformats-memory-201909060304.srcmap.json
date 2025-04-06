@@ -1,0 +1,42 @@
+{
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "git://anongit.kde.org/kimageformats",
+    "rev": "4bf2894bdee81ae7da6953f05915351685373b75"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "git://anongit.kde.org/karchive",
+    "rev": "9cdcc8afdcc8c1839bb514cb9fe5d6b2c369a8cc"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "a42a4513398a159e4f6749fbcb1309c4a42b4841"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "git://anongit.kde.org/extra-cmake-modules",
+    "rev": "c806bd48a29fef3575891b78b06ed085d1bdfed1"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "7328bc9c9feefb9c12770cac2a23c50a25ff463c"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "e9be6bce2282e8db95221c9a17fd10aba9e901bc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "371163"
+  }
+}

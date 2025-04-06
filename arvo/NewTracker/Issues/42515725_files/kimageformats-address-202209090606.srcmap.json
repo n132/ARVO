@@ -1,0 +1,67 @@
+{
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "4c31ef03e3fd5239d6b794771d4ae7daa7815b28"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "1d36c10ade9b2acfc2dcc4ca8b6176a9789c902c"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "e587ef6e8000662b91c35ccb866c2374d3a40e27"
+  },
+  "/src/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "f938f6b7dd412ffcbdab1808a265b6375dc7b037"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "fc430c57c7b0307b4c5ffb686cd90b3c010d08d2"
+  },
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kimageformats.git",
+    "rev": "feb6d9b20f843cf015c612519cd4d9146b0499df"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "0a17848c93d4934b4dbc23d821d04c658cf96776"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "a5984e059385e93ab06eb95cbe12bea5215f7b9d"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "7bb60fd04228c9e95ddc127687291ff23cefe58b"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "9d38713bb140429b320ad4d8d83c5d6347c48563"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "21767c654d31d2dccdde4330529775c6c5fd5389"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "f29cab3bbe2dc1cf2661e74b6a85214bd23194cb"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

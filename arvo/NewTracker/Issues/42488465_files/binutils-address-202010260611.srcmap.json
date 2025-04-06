@@ -1,0 +1,12 @@
+{
+  "/src/binutils-gdb": {
+    "type": "git",
+    "url": "git://sourceware.org/git/binutils-gdb.git",
+    "rev": "069ef164801ff68e2ce5d24a2601b1fb6d3acedb"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

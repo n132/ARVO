@@ -1,0 +1,12 @@
+{
+  "/src/pcl": {
+    "type": "git",
+    "url": "https://github.com/PointCloudLibrary/pcl",
+    "rev": "a39143c64d03b2906589deed3e1047e23b436124"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

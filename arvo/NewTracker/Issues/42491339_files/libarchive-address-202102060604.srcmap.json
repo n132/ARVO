@@ -1,0 +1,12 @@
+{
+  "/src/libarchive": {
+    "type": "git",
+    "url": "https://github.com/libarchive/libarchive.git",
+    "rev": "858fa8eaa9435340d2bda988715e0d9023089bec"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

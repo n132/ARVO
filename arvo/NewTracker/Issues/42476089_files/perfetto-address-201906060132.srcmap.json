@@ -1,0 +1,12 @@
+{
+  "/src/perfetto": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/perfetto/",
+    "rev": "b05aa6f24261e9f5af0acc9ae0ff0091bf04f0f5"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "362666"
+  }
+}

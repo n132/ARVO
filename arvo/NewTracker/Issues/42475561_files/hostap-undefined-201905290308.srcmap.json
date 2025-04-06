@@ -1,0 +1,12 @@
+{
+  "/src/hostap": {
+    "type": "git",
+    "url": "git://w1.fi/srv/git/hostap.git",
+    "rev": "7d89a997146beec38a6a3785dd6c08fd6bbc87c4"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "361919"
+  }
+}

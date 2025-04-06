@@ -1,0 +1,12 @@
+{
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "324867"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "http://hg.code.sf.net/p/graphicsmagick/code",
+    "rev": "31ea5f25d8b724ca6df662e1312500ad90de0dfc"
+  }
+}

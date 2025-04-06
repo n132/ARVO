@@ -1,0 +1,17 @@
+{
+  "/src/gpac": {
+    "type": "git",
+    "url": "https://github.com/gpac/gpac",
+    "rev": "61a70e54a7dbe9314d0a30af3e808f9e72bcb3f9"
+  },
+  "/src/testsuite": {
+    "type": "git",
+    "url": "https://github.com/gpac/testsuite",
+    "rev": "5131972381dc20e1cd2e3677af58f0ef06b70c96"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

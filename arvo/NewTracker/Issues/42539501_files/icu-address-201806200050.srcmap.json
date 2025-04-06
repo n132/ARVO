@@ -1,0 +1,17 @@
+{
+  "/src/perffuzz": {
+    "type": "git",
+    "url": "https://github.com/carolemieux/perffuzz",
+    "rev": "902f6e51ff3c5202d7fd2fea6c8f3f84ffc5084b"
+  },
+  "/src/icu": {
+    "type": "svn",
+    "url": "http://source.icu-project.org/repos/icu/trunk/icu4c",
+    "rev": "41541"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "335087"
+  }
+}

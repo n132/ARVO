@@ -1,0 +1,12 @@
+{
+  "/src/MapServer": {
+    "type": "git",
+    "url": "https://github.com/MapServer/MapServer",
+    "rev": "8b83e6272ca3009a8c02846313c2aa45479146ae"
+  },
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "d04cd6a53b95e2c17cdd5c58c6a8d435349084dd"
+  }
+}

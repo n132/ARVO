@@ -1,0 +1,37 @@
+{
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable",
+    "rev": "2f7827344a0234320c7ad8d2fc2418e9d8a586c9"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "d04601a6ff321d19d653a4dcc38114abbaf2c0fb"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "e55c64fdd3f47413e17eaa8e4f4d2a62622a01eb"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "4f29f3a29b8b416a501c7166dbbca5284b198f81"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "d1356e7684fcf3e9759950b91497f02e37b13498"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "c039117fcd5fd56824d2ae329368bd8744ad8743"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "358729"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/unbound": {
+    "type": "git",
+    "url": "https://github.com/NLnetLabs/unbound",
+    "rev": "1e0c957dcd7b0b1e03ff2d8bf58fdbb147ce4978"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

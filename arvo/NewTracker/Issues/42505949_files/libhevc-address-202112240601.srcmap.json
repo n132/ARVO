@@ -1,0 +1,12 @@
+{
+  "/src/libhevc": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libhevc",
+    "rev": "64062d5b6560bc673c84cb875008d976592bc748"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

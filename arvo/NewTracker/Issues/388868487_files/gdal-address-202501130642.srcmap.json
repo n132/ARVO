@@ -1,0 +1,7 @@
+{
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "11ff175a376506fd759bedbfbe2bfa8c129c681e"
+  }
+}

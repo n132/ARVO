@@ -1,0 +1,12 @@
+{
+  "/src/freeradius-server": {
+    "type": "git",
+    "url": "https://github.com/FreeRADIUS/freeradius-server.git",
+    "rev": "54d9b8fe612200b1d775f78881126e3e0dea5c0b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

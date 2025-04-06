@@ -1,0 +1,12 @@
+{
+  "/src/oniguruma": {
+    "type": "git",
+    "url": "https://github.com/kkos/oniguruma.git",
+    "rev": "14f5efb82321e26502caa2df3c58aa1c2d36c801"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "518e42281f77768215851d31fc61e8970ce21481"
+  }
+}

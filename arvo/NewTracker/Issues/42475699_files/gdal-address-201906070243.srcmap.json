@@ -1,0 +1,22 @@
+{
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "767e3a56144f676ca738ef8f700e0e56035bd05a"
+  },
+  "/src/gdal/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "e1f3aaea0cf7d404d44e0dbdf608b1260fae6e1a"
+  },
+  "/src/gdal/proj": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/proj.4",
+    "rev": "f8438ec596cce6f4b3e0c19092df9eaf22e93cd3"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "362765"
+  }
+}

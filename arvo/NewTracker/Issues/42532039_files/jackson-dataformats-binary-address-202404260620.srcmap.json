@@ -1,0 +1,7 @@
+{
+  "/src/jackson-dataformats-binary": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-dataformats-binary",
+    "rev": "db8294256462d3ad53accea1b9ad7526d77984e0"
+  }
+}

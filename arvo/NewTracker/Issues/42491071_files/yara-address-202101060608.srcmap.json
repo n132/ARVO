@@ -1,0 +1,12 @@
+{
+  "/src/yara": {
+    "type": "git",
+    "url": "https://github.com/VirusTotal/yara.git",
+    "rev": "4782d10257693a30bf84b4b33159d02594ece005"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/c-blosc2": {
+    "type": "git",
+    "url": "https://github.com/Blosc/c-blosc2.git",
+    "rev": "8aa97af0cbf5ce37a17937f8001f270cf2f6d805"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "aeb7d7048371cd91ab9280c3958f1c35e5d5e758"
+  }
+}

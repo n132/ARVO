@@ -1,0 +1,22 @@
+{
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://github.com/harfbuzz/harfbuzz.git",
+    "rev": "8b2f9adf2938513a183af58246e4b02b6173c359"
+  },
+  "/src/fribidi": {
+    "type": "git",
+    "url": "https://github.com/behdad/fribidi.git",
+    "rev": "3585a81e625e5b35962bed11fdc99d54485048e0"
+  },
+  "/src/libass": {
+    "type": "git",
+    "url": "https://github.com/libass/libass.git",
+    "rev": "a93e17f5ffe526e68c88d69141dbf495523376e2"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  }
+}

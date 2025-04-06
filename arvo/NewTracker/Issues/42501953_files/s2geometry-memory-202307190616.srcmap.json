@@ -1,0 +1,7 @@
+{
+  "/src/s2geometry": {
+    "type": "git",
+    "url": "https://github.com/google/s2geometry",
+    "rev": "7773d518b1f29caa1c2045eb66ec519e025be108"
+  }
+}

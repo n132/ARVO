@@ -1,0 +1,22 @@
+{
+  "/src/libxslt": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxslt.git",
+    "rev": "3e8bbcdec8d2318ca8ab27a2a4a509a5d9bb2d51"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "f93ca3e140a371b26366f747a408588c631e0fd1"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "654f389e73c9fd5b7e141b33ea28ab0fdda3178f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

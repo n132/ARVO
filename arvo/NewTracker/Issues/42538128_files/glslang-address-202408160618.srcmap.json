@@ -1,0 +1,7 @@
+{
+  "/src/glslang": {
+    "type": "git",
+    "url": "https://github.com/khronosgroup/glslang",
+    "rev": "d59c84d388c805022e2bddea08aa41cbe7e43e55"
+  }
+}

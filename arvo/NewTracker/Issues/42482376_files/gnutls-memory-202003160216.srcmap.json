@@ -1,0 +1,42 @@
+{
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "82bd85449f867a838dfe47475f9f5c0364ec1dd9"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "dbb4cc6b5432b6ec1bec78c78009b8e667a47c97"
+  },
+  "/src/libtasn1": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/libtasn1.git",
+    "rev": "78204593822b4c1a8e0ca87f57c48e5936b0fe2c"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "c7b33a418d9426ee311db45473cb20bad94df26a"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "10b6e6a6e705935e39f71d9a5cf06b39f4f3570f"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "66a08a8636e7f89ccc8ea904b6c5100853e63a4f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  },
+  "/src/gmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "766a0d7bd89ee1627f4cacb751205707ea07e104"
+  }
+}

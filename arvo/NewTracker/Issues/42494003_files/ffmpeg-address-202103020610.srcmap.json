@@ -1,0 +1,62 @@
+{
+  "/src/vorbis": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/vorbis.git",
+    "rev": "4e1155cc77a2c672f3dd18f9a32dbf1404693289"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/theora.git",
+    "rev": "7180717276af1ebc7da15c83162d6c5d6203aabf"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/opus.git",
+    "rev": "16286a25fdd865c66a837a73b65fbaa7b25bf484"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "31bd3f2707fb7dbae539a7093ba1fc4b2b37d84e"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "ebefb90b75f07ea5ab06d6b2a5ea5355c843d266"
+  },
+  "/src/libvdpau": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~aplattner/libvdpau",
+    "rev": "eac1393480bc7c2209d4984819951cb9dc1e03d0"
+  },
+  "/src/libva": {
+    "type": "git",
+    "url": "https://github.com/intel/libva",
+    "rev": "7a92a2b7cc2ec89b19d50e990ca1a3580bbf297a"
+  },
+  "/src/libXfixes": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/git/xorg/lib/libXfixes",
+    "rev": "174a94975af710247719310cfc53bd13e1f3b44d"
+  },
+  "/src/libXext": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/xorg/lib/libXext",
+    "rev": "47904063048fa6ef6e8e16219ddef4d14d5d9a4b"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "606547f4adb3869bccc3f28bff32eefd439c45da"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "988deae6da70e3c24d8e75d75e300e49981599b7"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c3a8052a16f7d2d1947ea538719905a9d7a24d22"
+  }
+}

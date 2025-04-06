@@ -1,0 +1,7 @@
+{
+  "/src/commons-validator": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-validator.git",
+    "rev": "b1a3368b0fc4c03fe6776cf8f002015bb98655e6"
+  }
+}

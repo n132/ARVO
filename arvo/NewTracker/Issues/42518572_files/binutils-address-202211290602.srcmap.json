@@ -1,0 +1,17 @@
+{
+  "/src/binutils-preconditions": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binutils-preconditions",
+    "rev": "fbe7d4f3acfe7236aeb049f41c8ac7419ba0fa59"
+  },
+  "/src/binutils-gdb": {
+    "type": "git",
+    "url": "git://sourceware.org/git/binutils-gdb.git",
+    "rev": "5a4020d4d4082f0a853631ca69c6944c94575457"
+  },
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples",
+    "rev": "50f4f6ad752e982f26fab167665e763b6877c942"
+  }
+}

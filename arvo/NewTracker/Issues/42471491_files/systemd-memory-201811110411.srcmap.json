@@ -1,0 +1,12 @@
+{
+  "/src/systemd": {
+    "type": "git",
+    "url": "https://github.com/systemd/systemd",
+    "rev": "a9353a5c5b512f107955e56a9812724f40b841d3"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "346604"
+  }
+}

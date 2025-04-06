@@ -1,0 +1,12 @@
+{
+  "/src/selinux": {
+    "type": "git",
+    "url": "https://github.com/SELinuxProject/selinux",
+    "rev": "d155b410d4bbc90d28f361b966f0429598da8188"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

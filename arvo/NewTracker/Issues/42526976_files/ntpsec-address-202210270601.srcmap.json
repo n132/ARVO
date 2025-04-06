@@ -1,0 +1,17 @@
+{
+  "/src/ntpsec": {
+    "type": "git",
+    "url": "https://gitlab.com/NTPsec/ntpsec",
+    "rev": "128b66ae122d7b41ce4b99f427383fd6a5923d71"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "733683c4823e897d5815ac817e0001d834e94f1e"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  }
+}

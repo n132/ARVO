@@ -1,0 +1,12 @@
+{
+  "/src/libbpf": {
+    "type": "git",
+    "url": "https://github.com/libbpf/libbpf",
+    "rev": "22411acc4b2c846868fd570b2d9f3b016d2af2cb"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ef77d552e9b89852b293c300a5a9a9c617945f43"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/pcre": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre/code/trunk",
+    "rev": "1764"
+  },
+  "/src/njs": {
+    "type": "hg",
+    "url": "http://hg.nginx.org/njs",
+    "rev": "27bb9caf186ca2400e5631180d5f2911e2e14c05"
+  }
+}

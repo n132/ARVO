@@ -1,0 +1,47 @@
+{
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "c5fbd55dac29c1fb968a0a1709650def75514167"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "6d2e8837b440ce4d8befd805a5abc0d351028d70"
+  },
+  "/src/jbigkit": {
+    "type": "git",
+    "url": "https://www.cl.cam.ac.uk/~mgk25/git/jbigkit",
+    "rev": "0e5b77e81aff2b377eb55bd5df09e1ab9e1ae63c"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "d7bf01c95476e16bc1852e5e6954f3a616721a54"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "dbe3e0c43e549a1602286144d94b0666549b18e6"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "9dce07a777c01ec1d77ccc90cf81479c267febaa"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/leptonica": {
+    "type": "git",
+    "url": "https://github.com/DanBloomberg/leptonica.git",
+    "rev": "989e05e68f3006d7c4356b0050f0faf64445f4bf"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

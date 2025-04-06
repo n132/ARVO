@@ -1,0 +1,12 @@
+{
+  "/src/htslib": {
+    "type": "git",
+    "url": "https://github.com/samtools/htslib.git",
+    "rev": "2d1e9549f45881a014a387dd2c3287508a863ff9"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

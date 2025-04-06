@@ -1,0 +1,7 @@
+{
+  "/src/opencv": {
+    "type": "git",
+    "url": "https://github.com/opencv/opencv.git",
+    "rev": "9eb78eeb18b9347b690d13151d5855f518d8be72"
+  }
+}

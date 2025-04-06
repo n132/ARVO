@@ -1,0 +1,22 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "54489e95e01882407f356f83c9074415e561db00"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "af3bb18749db3559dc4968dd85319d05168d4b5e"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing.git",
+    "rev": "25c648f09052f752cd3a2fc1f0131855896bb7d1"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "a7fbc543c9b2305befee733d689fdf8b821ab880"
+  }
+}

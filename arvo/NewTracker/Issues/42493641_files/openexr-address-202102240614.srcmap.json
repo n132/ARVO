@@ -1,0 +1,12 @@
+{
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr",
+    "rev": "d51c77e490f4db09089ed14fc6484a5771a782ec"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  }
+}

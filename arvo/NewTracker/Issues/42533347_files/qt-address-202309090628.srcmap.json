@@ -1,0 +1,22 @@
+{
+  "/src/qt/qtqa": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtqa.git",
+    "rev": "2c916ef7618bdee6c8d0bf5a854da71d8c9ce495"
+  },
+  "/src/qt/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "e53d0220da4906f88494933ff3b0076335ad065f"
+  },
+  "/src/qt/qtsvg": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtsvg.git",
+    "rev": "b07336555d32a68ab23e9b7aa6b1b1fce8bc2209"
+  },
+  "/src/qt/qtimageformats": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtimageformats.git",
+    "rev": "27d4110587e58605254901efe9b1240b02ccc4b8"
+  }
+}

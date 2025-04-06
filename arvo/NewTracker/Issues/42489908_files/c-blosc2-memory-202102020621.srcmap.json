@@ -1,0 +1,17 @@
+{
+  "/src/c-blosc2": {
+    "type": "git",
+    "url": "https://github.com/Blosc/c-blosc2.git",
+    "rev": "751d56b8f51e3530a81cefc3978262c7d448353d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "654f389e73c9fd5b7e141b33ea28ab0fdda3178f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

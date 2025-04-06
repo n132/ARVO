@@ -1,0 +1,7 @@
+{
+  "/src/opensc": {
+    "type": "git",
+    "url": "https://github.com/OpenSC/OpenSC",
+    "rev": "1ab2af78f0a7214404e9545c965b877327dc117d"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/gdk-pixbuf": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/gdk-pixbuf.git",
+    "rev": "d3f1f4f17896cbf5c307c1a79cb9f92d7979d823"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

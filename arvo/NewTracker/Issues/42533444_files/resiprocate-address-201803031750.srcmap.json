@@ -1,0 +1,12 @@
+{
+  "/src/resiprocate": {
+    "type": "git",
+    "url": "https://github.com/resiprocate/resiprocate.git",
+    "rev": "40edcde0a63c56310c4fac73893fd0fa83dfbd4c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "326659"
+  }
+}

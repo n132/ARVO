@@ -1,0 +1,17 @@
+{
+  "/src/fuzzer_corpus": {
+    "type": "git",
+    "url": "https://github.com/randombit/crypto-corpus.git",
+    "rev": "e6cf7f745fd359fad1c282a008a38c96100cb649"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "45edefdf92ced2fdbf16bd9ecfea8de24732dc52"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "326303"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/hiredis": {
+    "type": "git",
+    "url": "https://github.com/redis/hiredis",
+    "rev": "cc7c35ce6091571b292c1daeb93ce91d1b809ee6"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

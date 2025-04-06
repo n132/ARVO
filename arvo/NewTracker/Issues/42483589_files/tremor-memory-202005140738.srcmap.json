@@ -1,0 +1,17 @@
+{
+  "/src/tremor": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/tremor.git",
+    "rev": "b56ffce0c0773ec5ca04c466bc00b1bbcaf65aef"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "1e8d7cce266df61afc9d35db0283bbacc0237aba"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

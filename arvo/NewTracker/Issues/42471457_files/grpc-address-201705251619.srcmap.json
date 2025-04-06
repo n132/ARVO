@@ -1,0 +1,7 @@
+{
+  "/src/grpc": {
+    "type": "git",
+    "url": "https://github.com/grpc/grpc",
+    "rev": "19fd924bed05cf8e6fb9006d5b3ef9e1e9fb8f8e"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/mdbtools": {
+    "type": "git",
+    "url": "https://github.com/mdbtools/mdbtools",
+    "rev": "9e883cb100bc68f9c469f1d88fe06a2f7fc85597"
+  },
+  "/src/mdbtools/test": {
+    "type": "git",
+    "url": "https://github.com/mdbtools/mdbtestdata",
+    "rev": "22d36cc727c67573e004ecd54db9ffb2776aef32"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

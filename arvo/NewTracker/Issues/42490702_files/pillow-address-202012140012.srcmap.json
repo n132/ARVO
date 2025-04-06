@@ -1,0 +1,12 @@
+{
+  "/src/Pillow": {
+    "type": "git",
+    "url": "https://github.com/python-pillow/Pillow",
+    "rev": "ff40eaa9615b0c37fd4bd4192e3a3219a5867c2b"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

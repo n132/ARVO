@@ -1,0 +1,12 @@
+{
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "aeaaa78e66b6c0c0bf0a1d2614efbaf4a522e66b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "312775"
+  }
+}

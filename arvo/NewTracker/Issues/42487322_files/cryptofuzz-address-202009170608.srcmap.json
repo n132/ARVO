@@ -1,0 +1,127 @@
+{
+  "/src/libfuzzer-js": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/libfuzzer-js.git",
+    "rev": "988f6b7db967ef2d64f63ef541e62322de4d73b1"
+  },
+  "/src/bignumber.js": {
+    "type": "git",
+    "url": "https://github.com/MikeMcl/bignumber.js.git",
+    "rev": "73b336f5520cd9e3cd79c058d26470df5ffd2d19"
+  },
+  "/src/bn.js": {
+    "type": "git",
+    "url": "https://github.com/indutny/bn.js.git",
+    "rev": "c39161e9a056cac6ae9819ab11065550980df432"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle",
+    "rev": "517bf6e1ff55e9fd54c0b1e59e8a8e4c8b0ce91c"
+  },
+  "/src/SymCrypt": {
+    "type": "git",
+    "url": "https://github.com/microsoft/SymCrypt.git",
+    "rev": "263e3e6550a7ca5386fa5edcdb7dbd52702c0d50"
+  },
+  "/src/libtomcrypt": {
+    "type": "git",
+    "url": "https://github.com/libtom/libtomcrypt.git",
+    "rev": "cfbd7f8d364e1438555ff2a247f7e17add11840e"
+  },
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "33b935921c91eb7832296a6387d3f8dfbfa7e385"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/ARMmbed/mbedtls.git",
+    "rev": "1d9c11081a99712c12f8b7c65b0f65064f5d0899"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "0694eafb5ed78403e4aabf7b3bd9db522313609c"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "f7561d261a3e1939006dbc305f9a0e74f0c6809f"
+  },
+  "/src/go": {
+    "type": "git",
+    "url": "https://github.com/golang/go",
+    "rev": "7f24142b7b289df7e98ed3e1ccd673824dd1d0ee"
+  },
+  "/src/cityhash": {
+    "type": "git",
+    "url": "https://github.com/google/cityhash.git",
+    "rev": "8af9b8c2b889d80c22d6bc26ba0df1afb79a30db"
+  },
+  "/src/evercrypt": {
+    "type": "git",
+    "url": "https://github.com/project-everest/hacl-star",
+    "rev": "d3f6c884931771be619371b326f94686dcad80e0"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "9cd92ebae21900e54cc3d8b607c8ed1afbf2eb9b"
+  },
+  "/src/cryptopp": {
+    "type": "git",
+    "url": "https://github.com/weidai11/cryptopp/",
+    "rev": "2ec97f4676068109350301e0db4c941e2b7e87a8"
+  },
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable",
+    "rev": "5bedaf92260fe08ac4df4e513471bfa970167253"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "65441e9309ef33b20ee5b3f4e812f2b2427b83a2"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "49e9f67d8b7cbeb3953b5548ad1009d15947a523"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "8230710f04ed70fee41ec3ed8f3e4b1af55be05a"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "ced717a59cd19ba53fe7592cc53b17cb3f2211da"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "3ecbd792eea98c4b224784ab9c98f476fcc2efb5"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "57547dbdd7d453e27ca9b099f30d3309c4b44604"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "f46f20c58c4f7731cb928b4d1678919fd47cdf07"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "353611bde2596b0bd71f63cdaed271908fb636c6"
+  }
+}

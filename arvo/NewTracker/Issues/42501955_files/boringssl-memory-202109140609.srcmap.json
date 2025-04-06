@@ -1,0 +1,27 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "909a0f36a10075c4b4bc70fdee2c7e32dd612a72"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "ffd86a32874e5c08a143019aad1aaf0907294c9f"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing.git",
+    "rev": "bb05211c12328cb16327bb0d58c0c67a9a44576f"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "27a3328a37c320750398bebeaa02f84318811bf3"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

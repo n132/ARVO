@@ -1,0 +1,77 @@
+{
+  "/src/x264": {
+    "type": "git",
+    "url": "git://git.videolan.org/git/x264.git",
+    "rev": "7d0ff22e8c96de126be9d3de4952edd6d1b75a8c"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "git://git.xiph.org/vorbis.git",
+    "rev": "46e70fa6573e206c2555cd99a53204ffd6bf58fd"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "git://git.xiph.org/theora.git",
+    "rev": "e5d205bfe849f1b41f45b91a0b71a3bdc6cd458f"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "git://git.xiph.org/opus.git",
+    "rev": "c1c247d7e715100a50ca185948c7336bdd4dfdba"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "git://git.xiph.org/ogg.git",
+    "rev": "bc82844df068429d209e909da47b1f730b53b689"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "9364fc04f1e4e46e3e4c51560b532aab6e1649bc"
+  },
+  "/src/libvdpau": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~aplattner/libvdpau",
+    "rev": "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
+  },
+  "/src/libva": {
+    "type": "git",
+    "url": "https://github.com/01org/libva",
+    "rev": "c309013e99e30aef4b38b03234b57dbb78ade971"
+  },
+  "/src/libXfixes": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/git/xorg/lib/libXfixes",
+    "rev": "b9b75d74c3e78c5df70c512786d1ee6db45975aa"
+  },
+  "/src/libXext": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/xorg/lib/libXext",
+    "rev": "a07b4bb8290d0c1bba7bcecd5bb6896fbe1b169c"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "e45ae429b9ca8f234eb861338a75b2d89cde206a"
+  },
+  "/src/drm": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/mesa/drm",
+    "rev": "7164abebecfbf450cdc55133eb3162f8c1501ff3"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "0bd48ab2d9e463b75ef52c0eaa0cc00c4c385cce"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "336742"
+  },
+  "/src/x265": {
+    "type": "hg",
+    "url": "https://bitbucket.org/multicoreware/x265",
+    "rev": "0106f9f2f867ee20893a317e98c60e9ca626e7d2"
+  }
+}

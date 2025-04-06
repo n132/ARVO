@@ -1,0 +1,157 @@
+{
+  "/src/secp256k1": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/secp256k1.git",
+    "rev": "4fd00f4bfe5ce54adcdeb61e68bce52ffddf0f4d"
+  },
+  "/src/blst": {
+    "type": "git",
+    "url": "https://github.com/supranational/blst.git",
+    "rev": "9c87d4a09d6648e933c818118a4418349804ce7f"
+  },
+  "/src/noble-secp256k1": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-secp256k1.git",
+    "rev": "097b60b10805058355f49924d6a5c5746ee116c9"
+  },
+  "/src/noble-bls12-381": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-bls12-381.git",
+    "rev": "b06f567511c06e016032d8c8548c4759a63fb1d8"
+  },
+  "/src/noble-ed25519": {
+    "type": "git",
+    "url": "https://github.com/paulmillr/noble-ed25519.git",
+    "rev": "064c817a671ca00d5b9026b2a0559e96f56413d7"
+  },
+  "/src/xxHash": {
+    "type": "git",
+    "url": "https://github.com/Cyan4973/xxHash.git",
+    "rev": "675eda553733666329e1052f8fd97ef599fdca63"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "b221f128ece7e2e28794c3f639ba4b6192b435cc"
+  },
+  "/src/crypto-js": {
+    "type": "git",
+    "url": "https://github.com/brix/crypto-js.git",
+    "rev": "4dcaa7afd08f48cd285463b8f9499cdb242605fa"
+  },
+  "/src/libfuzzer-js": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/libfuzzer-js.git",
+    "rev": "f137ae4012b04c29d89816844cc8040a38b69734"
+  },
+  "/src/bignumber.js": {
+    "type": "git",
+    "url": "https://github.com/MikeMcl/bignumber.js.git",
+    "rev": "6f2932fe5b41e0a2a037ae3004d6562a68c70cff"
+  },
+  "/src/bn.js": {
+    "type": "git",
+    "url": "https://github.com/indutny/bn.js.git",
+    "rev": "5df40f81ea8afb835b909bb7c21e0833cdeb6a30"
+  },
+  "/src/SymCrypt": {
+    "type": "git",
+    "url": "https://github.com/microsoft/SymCrypt.git",
+    "rev": "4d3fd5136855648d2a5e987f3b95473b056876b1"
+  },
+  "/src/libtomcrypt": {
+    "type": "git",
+    "url": "https://github.com/libtom/libtomcrypt.git",
+    "rev": "b96e96cf8b22a931e8e91098ac37bc72f9e2f033"
+  },
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "45aa3adb96ed68f833019decb01692d3a244874f"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/Mbed-TLS/mbedtls.git",
+    "rev": "31beb2d449f2b6e01e28f2d063e99c9a27965312"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "eda3cd6a37e35ecf4bedebd3da4dff06ce6ea4e5"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "c321da5c3d69b86962468d8eb55c9ea07be077d5"
+  },
+  "/src/cityhash": {
+    "type": "git",
+    "url": "https://github.com/google/cityhash.git",
+    "rev": "f5dc54147fcce12cefd16548c8e760d68ac04226"
+  },
+  "/src/evercrypt": {
+    "type": "git",
+    "url": "https://github.com/project-everest/hacl-star",
+    "rev": "d3f6c884931771be619371b326f94686dcad80e0"
+  },
+  "/src/cryptopp": {
+    "type": "git",
+    "url": "https://github.com/weidai11/cryptopp/",
+    "rev": "a75a7d87ff03df37f6319c45a484b292465cc173"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "36d014f919d1c5f00dde4509da9b5e02895467c9"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "ecb7e9ae5cf7e940751f0f68d212fb2b099322ef"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "23def9d37156cc3b2c00fb45ec3b8e271a5d4563"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "a596237349f81e27b05d8aab6537f4335a199ce5"
+  },
+  "/src/go-sys": {
+    "type": "git",
+    "url": "https://github.com/golang/sys.git",
+    "rev": "38ebf4150f9b8b3b3345ee2a1f7cfb0d774567f8"
+  },
+  "/src/go-crypto": {
+    "type": "git",
+    "url": "https://github.com/golang/crypto",
+    "rev": "3f0842a46434ea6f56bf6e684c2b83d90e9cff07"
+  },
+  "/src/go-dev": {
+    "type": "git",
+    "url": "https://github.com/golang/go",
+    "rev": "0460c61e5fd2242d27451f527dafc4d9a098fef4"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "8225bdfc499f73465e4e7931eeb575f444c0e115"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "dbed9fc0522a94ce9ec81b9369f08afbb5e812e0"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "3e25d69ba6b268f2817e920a69eb2c091efe17e6"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "a78ec32c9fda3b46d63c08b37f0cf5ffab9a98f9"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "7db4e813947c479fe54453904d992071a7f58b2a"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "357963"
+  },
+  "/src/x265": {
+    "type": "hg",
+    "url": "http://hg.videolan.org/x265",
+    "rev": "ed72af837053d708dee586aa27dac1d63ee0abd6"
+  }
+}

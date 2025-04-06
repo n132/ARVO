@@ -1,0 +1,17 @@
+{
+  "/src/openvpn": {
+    "type": "git",
+    "url": "https://github.com/OpenVPN/openvpn",
+    "rev": "51d85a9d287f44c373eaa514c6a52e1078c27c43"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://github.com/google/boringssl.git",
+    "rev": "ecc301ca0f77dd5d78de4b22d25713e63d18168a"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

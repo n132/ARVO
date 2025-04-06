@@ -1,0 +1,27 @@
+{
+  "/src/qtqa": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtqa.git",
+    "rev": "18a3fb4d13f708c89d8b2e3478c8ca61350c6c02"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "60f21e96aeeda1e1b96b1abd91630a85ea5c1820"
+  },
+  "/src/qtsvg": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtsvg.git",
+    "rev": "bbd799611ad5e748b379c068d7bbec1096ccb184"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

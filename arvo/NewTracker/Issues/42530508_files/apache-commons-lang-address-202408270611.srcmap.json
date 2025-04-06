@@ -1,0 +1,17 @@
+{
+  "/src/commons-lang": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-lang",
+    "rev": "b64f71df6dabe0bc144715fabc82c311cf9eb8f0"
+  },
+  "/src/go-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "7741ea063935a10cf0df710f9bc5deb9a6386502"
+  }
+}

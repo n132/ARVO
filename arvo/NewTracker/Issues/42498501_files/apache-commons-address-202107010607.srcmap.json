@@ -1,0 +1,17 @@
+{
+  "/src/commons-imaging": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-imaging.git",
+    "rev": "471475c860a6106684ce33cbda96d20d03504c86"
+  },
+  "/src/commons-compress": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-compress.git",
+    "rev": "ef5d70b625000e38404194aaab311b771c44efda"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  }
+}

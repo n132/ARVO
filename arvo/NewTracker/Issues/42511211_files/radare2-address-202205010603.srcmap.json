@@ -1,0 +1,17 @@
+{
+  "/src/radare2-fuzz": {
+    "type": "git",
+    "url": "https://github.com/radareorg/radare2-fuzz",
+    "rev": "b60bd6db686ea3b3d5390cb54df4f3b203bba9dc"
+  },
+  "/src/radare2": {
+    "type": "git",
+    "url": "https://github.com/radareorg/radare2",
+    "rev": "3a9ba748f2bee9d3950346dac0753145809e4abc"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

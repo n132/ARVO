@@ -1,0 +1,7 @@
+{
+  "/src/igraph": {
+    "type": "git",
+    "url": "https://github.com/igraph/igraph",
+    "rev": "bfcfac20d6c465b860312f2c237b6f75a814c53e"
+  }
+}

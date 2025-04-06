@@ -1,0 +1,12 @@
+{
+  "/src/unicorn": {
+    "type": "git",
+    "url": "https://github.com/unicorn-engine/unicorn.git",
+    "rev": "bf1713d9e011b55ca1f502a6779fc4722b4bb077"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

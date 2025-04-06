@@ -1,0 +1,17 @@
+{
+  "/src/sudo": {
+    "type": "git",
+    "url": "https://github.com/sudo-project/sudo",
+    "rev": "67be673856ab8eae1801c0e85306f9d5eb359056"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "742e94b26247aaac4cddf0c5ca8787b3ea9fe571"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

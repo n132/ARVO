@@ -1,0 +1,12 @@
+{
+  "/src/wabt": {
+    "type": "git",
+    "url": "https://github.com/WebAssembly/wabt",
+    "rev": "4b9852ad23541c851031398b835d6387b1b51393"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

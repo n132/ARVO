@@ -1,0 +1,67 @@
+{
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "6211b6500c8bec13a17707440d3a84ca8b34eed5"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "https://git.ghostscript.com/ghostpdl.git",
+    "rev": "fb78a833aeb27ddd59a88c799fde1e939fb43e5a"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "6e2bc122087d618ab5d7ce5b23f1f7da12bb2a08"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "301f7a14295a3bdfaf406dbb5004d0784dc137ea"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2.git/",
+    "rev": "505943a6a4cbf549e744fe4fe9d36bba68ef3db1"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "110d8d6dcafaed517e8f77a6253169535ee3a20e"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "f34d2f4192296f40037ee9e503bb82857064c8d9"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "869b9d1b4edd6df07f819d360d306251f8147353"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "ae545534617c8c377ef45a485594fdbc4dcf999d"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "4ca3e42517b1030f523b28164f6a9d9ba9f12daa"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "http://hg.code.sf.net/p/graphicsmagick/code",
+    "rev": "4fc18176a211fa741f9016a87e3be0be7c5bc74b"
+  }
+}

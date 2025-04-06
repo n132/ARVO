@@ -1,0 +1,12 @@
+{
+  "/src/open62541": {
+    "type": "git",
+    "url": "https://github.com/open62541/open62541.git",
+    "rev": "f1579b5fed8b36c6577ad3dfe11734e6d9e4d5ae"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "343560"
+  }
+}

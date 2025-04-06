@@ -1,0 +1,7 @@
+{
+  "/src/llvm_libcxxabi": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/libcxxabi/trunk",
+    "rev": "303768"
+  }
+}

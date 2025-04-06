@@ -1,0 +1,22 @@
+{
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl.git",
+    "rev": "72c1e37421ffe9a4db4bba46f3d736dbc227c255"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://github.com/google/boringssl.git",
+    "rev": "4ef5de02c7d0d9cf8c1ec72450ab825b633c7b76"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/ARMmbed/mbedtls.git",
+    "rev": "523f0554b6cdc7ace5d360885c3f5bbcc73ec0e8"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

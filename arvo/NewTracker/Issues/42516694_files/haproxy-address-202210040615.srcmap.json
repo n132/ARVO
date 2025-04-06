@@ -1,0 +1,17 @@
+{
+  "/src/haproxy": {
+    "type": "git",
+    "url": "https://github.com/haproxy/haproxy",
+    "rev": "14f62688839dc7245ca87e040f14fbd2147698e6"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

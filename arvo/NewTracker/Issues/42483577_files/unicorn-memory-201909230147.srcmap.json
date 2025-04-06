@@ -1,0 +1,17 @@
+{
+  "/src/unicorn": {
+    "type": "git",
+    "url": "https://github.com/unicorn-engine/unicorn.git",
+    "rev": "355eaecc12b8022ccefac432dfa003fdb642c0f5"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372537"
+  }
+}

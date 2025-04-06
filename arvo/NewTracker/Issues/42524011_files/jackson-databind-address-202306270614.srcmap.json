@@ -1,0 +1,27 @@
+{
+  "/src/jackson-databind": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-databind",
+    "rev": "d02474ebd96c915fadabaa34c76cc202594b16ff"
+  },
+  "/src/jackson-databind/jackson-core": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-core",
+    "rev": "3ca03722d36068fb46fb566a110a9e7f72094dd4"
+  },
+  "/src/jackson-databind/jackson-annotations": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-annotations",
+    "rev": "63dce3d495caf4116e927092639ca7eb9431abcd"
+  },
+  "/src/github-samples": {
+    "type": "git",
+    "url": "https://github.com/AdamKorcz/github-samples",
+    "rev": "5ecb3dfa6d0700621d00debef0a830fd6443c580"
+  },
+  "/src/javaparser": {
+    "type": "git",
+    "url": "https://github.com/javaparser/javaparser",
+    "rev": "76866eac710f206bf97cd4a58cc529f2c9198029"
+  }
+}

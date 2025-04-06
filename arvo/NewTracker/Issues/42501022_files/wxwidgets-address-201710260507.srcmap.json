@@ -1,0 +1,12 @@
+{
+  "/src/wxwidgets": {
+    "type": "git",
+    "url": "https://github.com/wxWidgets/wxWidgets.git",
+    "rev": "8a4573223e34fd0301e9cbd37aa768922c8eeb58"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "316636"
+  }
+}

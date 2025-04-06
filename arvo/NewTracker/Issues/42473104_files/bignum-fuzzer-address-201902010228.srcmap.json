@@ -1,0 +1,32 @@
+{
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/ARMmbed/mbedtls",
+    "rev": "f352f75f6bd5734c8f671323dd6ab32472d5da34"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "d7266ecc9bf92ffad277bc39653919da79c8f42b"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "5dc40a83c74be579575a512b30d9c1e0364e6a7b"
+  },
+  "/src/bignum-fuzzer": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/bignum-fuzzer",
+    "rev": "d99d380f2b7303aeaf5b95f759c48827c60bce0d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "352828"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "036ddbf61ac6183c38f98c2f98cdd63ceaf17cc6"
+  }
+}

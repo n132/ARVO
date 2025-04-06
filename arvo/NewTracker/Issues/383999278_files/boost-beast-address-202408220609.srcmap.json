@@ -1,0 +1,7 @@
+{
+  "/src/boost": {
+    "type": "git",
+    "url": "https://github.com/boostorg/boost.git",
+    "rev": "33bd8f7c2a0b8a5b0d9046f1a78fdf327697a506"
+  }
+}

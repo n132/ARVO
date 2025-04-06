@@ -1,0 +1,7 @@
+{
+  "/src/lucene": {
+    "type": "git",
+    "url": "https://github.com/apache/lucene.git",
+    "rev": "d1c353116157d0375de9d673ae5e9c90524ffe2f"
+  }
+}

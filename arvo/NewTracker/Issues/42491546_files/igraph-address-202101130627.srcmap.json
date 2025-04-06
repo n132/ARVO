@@ -1,0 +1,12 @@
+{
+  "/src/igraph": {
+    "type": "git",
+    "url": "https://github.com/igraph/igraph",
+    "rev": "a06a52fe82e8d5e8c4d29cf0f10da18f7b673971"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

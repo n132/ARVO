@@ -1,0 +1,32 @@
+{
+  "/src/wycheproof": {
+    "type": "git",
+    "url": "https://github.com/google/wycheproof.git",
+    "rev": "cd27d6419bedd83cbd24611ec54b6d4bfdb0cdca"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "2d594446eb1bfb2d53231db2ddde198988e9e555"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "0639e821247e61b186c52fbe315dbb0fa5dd4fa6"
+  },
+  "/src/secp256k1": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/secp256k1.git",
+    "rev": "472faaa8ee617d6eecfcf542119a9d3ba85bff5a"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "334b2d3deb1004d8bcdfc335ca17fe182ede3c37"
+  },
+  "/src/bitcoin-core": {
+    "type": "git",
+    "url": "https://github.com/bitcoin/bitcoin.git",
+    "rev": "9f1aa88d4d9596aeb5220fa30ee3972294b62793"
+  }
+}

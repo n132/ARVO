@@ -1,0 +1,77 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "dea91c97debeac7c1aaf9c19f79029809e23a353"
+  },
+  "/src/jasper": {
+    "type": "git",
+    "url": "https://github.com/jasper-software/jasper",
+    "rev": "eb53548a96252ef3a295c43fef5f276bc835960e"
+  },
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "bf905ea2251191ff9911ae7ec0cfc35d41f9f7f6"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "http://git.ghostscript.com/ghostpdl.git",
+    "rev": "2e66582c527646015731cd0f4a0fb2e2d1559887"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "076cf327b5f0368eb353e6a3d3996561511ab226"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "301f7a14295a3bdfaf406dbb5004d0784dc137ea"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "https://git.savannah.nongnu.org/r/freetype/freetype2.git/",
+    "rev": "78f2bd0bd3cf4b1faa8c2ce5e1f159172d57c72d"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "0a9b9721782d3a60a5c16c8c9a7abf3d4b1ecd42"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "18a20b3ad7f623db8583fc6661e2bea953d0a4ec"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/xz-mirror/xz",
+    "rev": "e7da44d5151e21f153925781ad29334ae0786101"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "29148919e06c3d84b4a73c857ff0a97bb3d37bd9"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "c67e182128f258fdd580affc3511caf7ddf8f99c"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  },
+  "/src/graphicsmagick": {
+    "type": "hg",
+    "url": "https://hg.osdn.net/view/graphicsmagick/GM",
+    "rev": "631b7f2d66e891e5d9564937444f7ed3bbd1e6eb"
+  }
+}

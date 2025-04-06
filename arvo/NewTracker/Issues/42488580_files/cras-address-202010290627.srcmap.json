@@ -1,0 +1,12 @@
+{
+  "/src/adhd": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromiumos/third_party/adhd",
+    "rev": "7bbf54da6dae6f947b96495cfc3228948cd91d1d"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

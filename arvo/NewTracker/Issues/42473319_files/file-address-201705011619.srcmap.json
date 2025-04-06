@@ -1,0 +1,7 @@
+{
+  "/src/file": {
+    "type": "git",
+    "url": "https://github.com/file/file.git",
+    "rev": "6623a8e0bfbc94e0a2c5e0b3bbf5962303237057"
+  }
+}

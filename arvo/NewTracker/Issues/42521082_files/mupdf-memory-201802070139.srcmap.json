@@ -1,0 +1,12 @@
+{
+  "/src/mupdf": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/mupdf.git",
+    "rev": "a6cbde55a4bc8095556d5b0e134e51d7ac946805"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "324437"
+  }
+}

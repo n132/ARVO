@@ -1,0 +1,22 @@
+{
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "5e42913d569f2578f4f2967611d454b6b3b40a7b"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "197979994b17a3adc2ec944db2119a4a9abbca11"
+  },
+  "/src/BearSSL": {
+    "type": "git",
+    "url": "https://www.bearssl.org/git/BearSSL",
+    "rev": "3c040368f6791553610e362401db1efff4b4c5b8"
+  }
+}

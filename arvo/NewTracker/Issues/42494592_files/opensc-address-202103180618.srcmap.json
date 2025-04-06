@@ -1,0 +1,12 @@
+{
+  "/src/opensc": {
+    "type": "git",
+    "url": "https://github.com/OpenSC/OpenSC",
+    "rev": "d5dea2dd1b3a412adace25ee8a9ff2e73a97508a"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "7c2436c7114e21f029b06346421a73910deac578"
+  }
+}

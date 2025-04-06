@@ -1,0 +1,7 @@
+{
+  "/src/jline3": {
+    "type": "git",
+    "url": "https://github.com/jline/jline3",
+    "rev": "6fcf987d13107213811aaf2298a4933b2d74725e"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/osquery": {
+    "type": "git",
+    "url": "https://github.com/osquery/osquery",
+    "rev": "77aced2b1f65aa3e3bd43e15004dcbced4f5c06e"
+  }
+}

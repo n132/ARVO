@@ -1,0 +1,12 @@
+{
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "0965b23044e5b55a3beb01d6a6c62eb2b9a7b0c9"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "350500"
+  }
+}

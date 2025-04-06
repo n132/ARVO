@@ -1,0 +1,7 @@
+{
+  "/src/libssh2": {
+    "type": "git",
+    "url": "https://github.com/libssh2/libssh2.git",
+    "rev": "88a960a86b9ffbabd17a4bbcf767e26514c4678e"
+  }
+}

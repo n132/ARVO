@@ -1,0 +1,12 @@
+{
+  "/src/libsass": {
+    "type": "git",
+    "url": "https://github.com/sass/libsass.git",
+    "rev": "c71314073b2ad3d70a429f133604aa2cae3b3f6b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "363642"
+  }
+}

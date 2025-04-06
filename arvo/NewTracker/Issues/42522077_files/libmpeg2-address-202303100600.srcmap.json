@@ -1,0 +1,7 @@
+{
+  "/src/libmpeg2": {
+    "type": "git",
+    "url": "https://github.com/ittiam-systems/libmpeg2.git",
+    "rev": "9fcdebef07c9f30dc8a64f9236078a4b1caaa8e1"
+  }
+}

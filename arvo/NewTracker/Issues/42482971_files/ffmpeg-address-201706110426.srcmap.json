@@ -1,0 +1,77 @@
+{
+  "/src/x264": {
+    "type": "git",
+    "url": "git://git.videolan.org/git/x264.git",
+    "rev": "df79067c0cf33da712d344b5f8869be7eaf326f3"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "git://git.xiph.org/vorbis.git",
+    "rev": "143caf4023a90c09a5eb685fdd46fb9b9c36b1ee"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "git://git.xiph.org/theora.git",
+    "rev": "b97ef834c491bddb0f09804b4be2ff5c49cb1a61"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "git://git.xiph.org/opus.git",
+    "rev": "41443428cbb9b551d96c687f70bae37ac3b32afb"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "a46bc0268b8d7d73adda1fef937f4310d2e76be8"
+  },
+  "/src/libvdpau": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~aplattner/libvdpau",
+    "rev": "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
+  },
+  "/src/libva": {
+    "type": "git",
+    "url": "https://github.com/01org/libva",
+    "rev": "e4072fb1f2cccb468fc84c67c5c51e649affec48"
+  },
+  "/src/libXfixes": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/git/xorg/lib/libXfixes",
+    "rev": "b9b75d74c3e78c5df70c512786d1ee6db45975aa"
+  },
+  "/src/libXext": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/xorg/lib/libXext",
+    "rev": "a07b4bb8290d0c1bba7bcecd5bb6896fbe1b169c"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "5eb6f0db8cc1ecc00af2ef534078e4c65fdf978f"
+  },
+  "/src/drm": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/mesa/drm",
+    "rev": "b6f450e065a538d566c71872ce890ff07956e3eb"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "22a25ab3896cbb8dceebdba4d439e8b2b398ff0e"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "2ac50c9432f4856b505e3f9cb7f4e7161f5e182c"
+  },
+  "/src/ogg": {
+    "type": "svn",
+    "url": "https://svn.xiph.org/trunk/ogg",
+    "rev": "19603"
+  },
+  "/src/x265": {
+    "type": "hg",
+    "url": "https://bitbucket.org/multicoreware/x265",
+    "rev": "e75d5f5eeae3413057437af9f7d3ba9bc10fa3fa"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "/src/x264": {
+    "type": "git",
+    "url": "git://git.videolan.org/git/x264.git",
+    "rev": "90a61ec76424778c050524f682a33f115024be96"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "git://git.xiph.org/vorbis.git",
+    "rev": "143caf4023a90c09a5eb685fdd46fb9b9c36b1ee"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "git://git.xiph.org/theora.git",
+    "rev": "91203fdfdc0eb06cd87409d47e35d9ee5471a90f"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "git://git.xiph.org/opus.git",
+    "rev": "1f8cea2d13b21e55518e55c15ec6bd9510164696"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "a24e1e8027074efca8a6da19fea6025afabf3687"
+  },
+  "/src/libvdpau": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~aplattner/libvdpau",
+    "rev": "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
+  },
+  "/src/libva": {
+    "type": "git",
+    "url": "https://github.com/01org/libva",
+    "rev": "bd949b77e8f0226a746b5fc2002b01a0e9ea1f2e"
+  },
+  "/src/libXfixes": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/git/xorg/lib/libXfixes",
+    "rev": "b9b75d74c3e78c5df70c512786d1ee6db45975aa"
+  },
+  "/src/libXext": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/xorg/lib/libXext",
+    "rev": "a07b4bb8290d0c1bba7bcecd5bb6896fbe1b169c"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "5eb6f0db8cc1ecc00af2ef534078e4c65fdf978f"
+  },
+  "/src/drm": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/mesa/drm",
+    "rev": "00aa2c18810efb896afd9ff0acbadd4aa9540fe6"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "a0296fc056f0d86943c697c505a181744b07dd45"
+  },
+  "/src/ogg": {
+    "type": "svn",
+    "url": "https://svn.xiph.org/trunk/ogg",
+    "rev": "19600"
+  },
+  "/src/x265": {
+    "type": "hg",
+    "url": "https://bitbucket.org/multicoreware/x265",
+    "rev": "fd01abfc7898283922b34f7fcd9192ddf9c7818a"
+  }
+}

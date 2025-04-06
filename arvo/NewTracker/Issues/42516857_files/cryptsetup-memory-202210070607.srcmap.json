@@ -1,0 +1,17 @@
+{
+  "/src/cryptsetup": {
+    "type": "git",
+    "url": "https://gitlab.com/cryptsetup/cryptsetup.git",
+    "rev": "cc276527c786a324fe716a15f4d06a4e85474536"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

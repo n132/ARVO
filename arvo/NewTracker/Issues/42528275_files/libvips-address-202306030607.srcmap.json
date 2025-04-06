@@ -1,0 +1,67 @@
+{
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "2c3c27f401c6d244760f95389c1c191859c44562"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "b3b4f947a8123429feede113a4d74f2b04434315"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "fa63922230fedaceea1fc677779d3fe13b954904"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "bae11e527caa19ae0c7fafc408c9018eeb869967"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff.git",
+    "rev": "be9785ac6def7b0d909ec25297a48ccdfc388f05"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "46bc4fc9d981b1760def26dd64b9c80ccbad9f6f"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "e5c1fc470fceaca08b8c30dc40768c28b82b9e12"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "e519af8b49f52c4ac400f50f23b48ebe36a5f4df"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "6b506ed3970b98893d8da4b6db72189f39e3ec69"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "c174b77886aef7237ba8e695de140751e8eba606"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif.git",
+    "rev": "612ffa25497740fd29509340a9e458f25a560b40"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "04f42ceca40f73e2978b50e93806c2a18c1281fc"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips.git",
+    "rev": "0df1fc51a9cc2a61777d8fba97189f5ceee68511"
+  }
+}

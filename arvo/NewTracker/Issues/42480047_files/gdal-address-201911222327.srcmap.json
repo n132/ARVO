@@ -1,0 +1,27 @@
+{
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "b9bf325d1fb4f6d3a9d84769dd36d08f260f4cfb"
+  },
+  "/src/gdal/poppler": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/poppler/poppler.git",
+    "rev": "1fa3cbd729bf16e06678b39d05be12d0ec6fa786"
+  },
+  "/src/gdal/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "74f441c6d31ff8f8bfd242c3d4027d4a56230ce1"
+  },
+  "/src/gdal/proj": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/proj.4",
+    "rev": "566a33ffbf66386a1f6ee16fe3d6dd313bde7eb1"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

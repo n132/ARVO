@@ -1,0 +1,17 @@
+{
+  "/src/wireshark-fuzzdb": {
+    "type": "git",
+    "url": "https://bitbucket.org/jwzawadzki/wireshark-fuzzdb.git",
+    "rev": "98fa5ba9a4c27a2fbcbe68bc43f696cfa295046e"
+  },
+  "/src/wireshark": {
+    "type": "git",
+    "url": "https://gitlab.com/wireshark/wireshark.git",
+    "rev": "c80c16759ba23e29c70ec8fbe62e0a9870685a66"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5dd35f5281afec0955c08fe9f99e3c83222b7764"
+  }
+}

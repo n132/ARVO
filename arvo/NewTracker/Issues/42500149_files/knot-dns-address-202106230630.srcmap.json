@@ -1,0 +1,37 @@
+{
+  "/src/knot-dns": {
+    "type": "git",
+    "url": "https://gitlab.labs.nic.cz/knot/knot-dns",
+    "rev": "b5713e263f7f4b1a92835943102cf2976ae4f7d1"
+  },
+  "/src/lmdb": {
+    "type": "git",
+    "url": "https://github.com/LMDB/lmdb.git",
+    "rev": "01b1b7dc204abdf3849536979205dc9e3a0e3ece"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "41ab46a6e0a2406cd0646325b38b0bf627fd0557"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "20fedc0155a8cd08ed81179ac72d5bdc187bf3d0"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "87f797a50b854a4a2231203c25adbcec4f0dcd05"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "7e3a9c5bde817dab5b9a6987a373e6a3c2e6576b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  }
+}

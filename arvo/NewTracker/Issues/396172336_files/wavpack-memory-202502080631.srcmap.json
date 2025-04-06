@@ -1,0 +1,7 @@
+{
+  "/src/wavpack": {
+    "type": "git",
+    "url": "https://github.com/dbry/WavPack.git",
+    "rev": "0b99613e30cdb85475c5b77ef50a4bf10d79f041"
+  }
+}

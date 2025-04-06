@@ -1,0 +1,17 @@
+{
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "git://anongit.kde.org/kimageformats",
+    "rev": "af7a89fea7e66206fbe5fe6c1d80ac8690d021cc"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "50f3f8f6bb8f5482c713480fad80421760184216"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "356312"
+  }
+}

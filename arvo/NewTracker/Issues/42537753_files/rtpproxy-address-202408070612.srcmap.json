@@ -1,0 +1,7 @@
+{
+  "/src/rtpproxy": {
+    "type": "git",
+    "url": "https://github.com/sippy/rtpproxy",
+    "rev": "a585fd048363990e9f9163c769e5998e3263a337"
+  }
+}

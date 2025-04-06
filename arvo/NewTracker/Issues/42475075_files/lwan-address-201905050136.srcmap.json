@@ -1,0 +1,12 @@
+{
+  "/src/lwan": {
+    "type": "git",
+    "url": "git://github.com/lpereira/lwan",
+    "rev": "9ad6eb501b55f27a17d6383fa5bdcb2328147685"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "359972"
+  }
+}

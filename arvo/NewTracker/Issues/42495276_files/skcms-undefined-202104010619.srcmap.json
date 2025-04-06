@@ -1,0 +1,12 @@
+{
+  "/src/skcms": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/skcms.git",
+    "rev": "c8a56c57ab7c5547ad29e2112ccf02e8dd91ce91"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

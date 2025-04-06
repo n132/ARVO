@@ -1,0 +1,12 @@
+{
+  "/src/jsoup": {
+    "type": "git",
+    "url": "https://github.com/jhy/jsoup/",
+    "rev": "ae9a18c9e1382b5d8bad14d09279eda725490c25"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

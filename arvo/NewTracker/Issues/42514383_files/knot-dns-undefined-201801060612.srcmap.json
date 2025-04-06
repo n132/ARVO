@@ -1,0 +1,27 @@
+{
+  "/src/knot-dns": {
+    "type": "git",
+    "url": "https://gitlab.labs.nic.cz/knot/knot-dns",
+    "rev": "694e1b2787abacb0539657b701fc99007a5f5d02"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "3d8f3da8c74d93ac8e867426024c4a8590332023"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "db9b8594e4caa5459483359567fd077025a0cb65"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "66423d10dedd2e1391cac7031bb00271694fafcb"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "321929"
+  }
+}

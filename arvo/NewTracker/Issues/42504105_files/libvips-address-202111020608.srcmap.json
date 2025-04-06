@@ -1,0 +1,77 @@
+{
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "e698ff1d03c3ddea4f67d5ec8b2cb23faf785680"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "b3b4f947a8123429feede113a4d74f2b04434315"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "0b1e0b4a847f93e5c7c781201247e709a4f13149"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif",
+    "rev": "561abfc6b8c014499d42df5246cf2f6510fc196f"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "875df4954d1abfe440c1e9e6eb175203844a448f"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "29219a5bd14040d60e376324a52ef91b68808143"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "96e3dfef26351f705d0ddf082dd6bb26325c22d5"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "1b21d36ba99c6bc4380a50676240cf632433e747"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "a37d4836519517bdce6cb9d956092321eca3e73b"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "d401d6251412a2985810ffaffb90b448a6ee12a9"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "0b845e907e63129110e2ce5ee2e4476e7b6efd08"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif",
+    "rev": "a918830b8830e1e3657b4f36f48571a8d95a4ec8"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips",
+    "rev": "f92069b0353f3aebbe01793bf49a66895506b444"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/mupdf": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/mupdf.git",
+    "rev": "14fe6e23252fa475016df7120a6c70d28bf85c3f"
+  }
+}

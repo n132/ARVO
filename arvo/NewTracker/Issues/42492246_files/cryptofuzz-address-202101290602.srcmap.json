@@ -1,0 +1,152 @@
+{
+  "/src/xxHash": {
+    "type": "git",
+    "url": "https://github.com/Cyan4973/xxHash.git",
+    "rev": "f2c52f1236a50d754b07f584ce4592de1df8c0f7"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "6be367bf8b591d48e1e74d709c34319cff9df1d1"
+  },
+  "/src/Monocypher": {
+    "type": "git",
+    "url": "https://github.com/LoupVaillant/Monocypher.git",
+    "rev": "baca5d31259c598540e4d1284bc8d8f793abf83a"
+  },
+  "/src/crypto-js": {
+    "type": "git",
+    "url": "https://github.com/brix/crypto-js.git",
+    "rev": "971c31f0c931f913d22a76ed488d9216ac04e306"
+  },
+  "/src/libfuzzer-js": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/libfuzzer-js.git",
+    "rev": "988f6b7db967ef2d64f63ef541e62322de4d73b1"
+  },
+  "/src/bignumber.js": {
+    "type": "git",
+    "url": "https://github.com/MikeMcl/bignumber.js.git",
+    "rev": "3e171919fd75b0518477f8eda819a37c9ee91586"
+  },
+  "/src/bn.js": {
+    "type": "git",
+    "url": "https://github.com/indutny/bn.js.git",
+    "rev": "6ef485dc30b002ec8100602998763fec8a1a3897"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle",
+    "rev": "ddf99ac4c5de3710c7bfac81eac60d55e59a35c2"
+  },
+  "/src/SymCrypt": {
+    "type": "git",
+    "url": "https://github.com/microsoft/SymCrypt.git",
+    "rev": "263e3e6550a7ca5386fa5edcdb7dbd52702c0d50"
+  },
+  "/src/libtomcrypt": {
+    "type": "git",
+    "url": "https://github.com/libtom/libtomcrypt.git",
+    "rev": "910d6252770f1e517d9ed02dc0549a1d61dfe159"
+  },
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "12f03c310f25af55dc99f79e432f725cfdf2c1f0"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/ARMmbed/mbedtls.git",
+    "rev": "ddb3bd57d34f905e02383050a4d10d53fb466ba9"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "91299c5abd9cd88a0520b15524f467059231d9f5"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "054ccc027882251d53fa99f0d3ff145217d178c7"
+  },
+  "/src/go": {
+    "type": "git",
+    "url": "https://github.com/golang/go",
+    "rev": "c8bd8010ff7c0115bf186443119216ba51f09d2b"
+  },
+  "/src/cityhash": {
+    "type": "git",
+    "url": "https://github.com/google/cityhash.git",
+    "rev": "8af9b8c2b889d80c22d6bc26ba0df1afb79a30db"
+  },
+  "/src/evercrypt": {
+    "type": "git",
+    "url": "https://github.com/project-everest/hacl-star",
+    "rev": "d3f6c884931771be619371b326f94686dcad80e0"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "aa3f595341eb263980210776c7fe377b2ed24c5e"
+  },
+  "/src/cryptopp": {
+    "type": "git",
+    "url": "https://github.com/weidai11/cryptopp/",
+    "rev": "6d460d9265db113370c963db41bb0312d1fb5e3c"
+  },
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable",
+    "rev": "a6f5d81fbebcf4ec31a4963511d5b695793fc639"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "39e08310b11b0fedab76bf2806bb964fb31e70d3"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "ae2bb641735447496bed334c495e4868b981fe32"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "e947a0642db111bb34547b5f7d48e13163492ca5"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "354a934228d9892291a08c72115d9758e3079ee8"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "068bef5eab942df0a133c92522f2ab81b28ac636"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "989830e2b958287acd8b1779bdb900c0f9be0e1c"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "2004338a20808ab182a7b0066212429c5fb2a4d6"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "339390f0f87dd9fa3e95d9106559e9e3ad4cb5cc"
+  }
+}

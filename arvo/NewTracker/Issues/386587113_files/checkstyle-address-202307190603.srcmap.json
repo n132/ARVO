@@ -1,0 +1,7 @@
+{
+  "/src/checkstyle": {
+    "type": "git",
+    "url": "https://github.com/checkstyle/checkstyle",
+    "rev": "8b7dac5792b450386651647e2c8a5fa84e1d7f97"
+  }
+}

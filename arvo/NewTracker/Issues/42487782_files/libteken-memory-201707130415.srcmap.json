@@ -1,0 +1,12 @@
+{
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "638c2576b086ea64ab6b336aafb0fefd97f5bdfc"
+  },
+  "/src/libteken": {
+    "type": "svn",
+    "url": "https://svn.freebsd.org/base/head/sys/teken",
+    "rev": "320930"
+  }
+}

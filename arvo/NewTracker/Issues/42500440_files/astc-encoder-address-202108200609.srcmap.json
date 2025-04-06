@@ -1,0 +1,12 @@
+{
+  "/src/astc-encoder": {
+    "type": "git",
+    "url": "https://github.com/ARM-software/astc-encoder",
+    "rev": "a463566e906016c195a5a1d8e1b9c14be3491f79"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

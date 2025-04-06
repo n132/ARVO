@@ -1,0 +1,12 @@
+{
+  "/src/fluent-bit": {
+    "type": "git",
+    "url": "https://github.com/fluent/fluent-bit/",
+    "rev": "1af34c6d57e9cbdcebf11d7f4f5f083d664344e0"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "79d75d8e42e5adf64e149ab6e1fe197cb1d4f303"
+  }
+}

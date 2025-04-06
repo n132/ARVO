@@ -1,0 +1,12 @@
+{
+  "/src/envoy": {
+    "type": "git",
+    "url": "https://github.com/envoyproxy/envoy.git",
+    "rev": "cfe0391ce24f7d11b3b125078ab77f6f4142e4ac"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

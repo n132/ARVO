@@ -1,0 +1,12 @@
+{
+  "/src/exiv2": {
+    "type": "git",
+    "url": "https://github.com/Exiv2/exiv2",
+    "rev": "bd0eefdab73b91f7b849f67559609aa1ee9163f2"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/strongswan/fuzzing-corpora": {
+    "type": "git",
+    "url": "https://github.com/strongswan/fuzzing-corpora.git",
+    "rev": "2cbfbfcab22a3351277570d5dfa3c1e5c1f66e52"
+  },
+  "/src/strongswan": {
+    "type": "git",
+    "url": "https://github.com/strongswan/strongswan.git",
+    "rev": "d9d9b3f5696b8a3b8c4ec57fcd299d0fdac08b46"
+  }
+}

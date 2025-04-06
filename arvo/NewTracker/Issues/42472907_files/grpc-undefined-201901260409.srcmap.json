@@ -1,0 +1,12 @@
+{
+  "/src/grpc": {
+    "type": "git",
+    "url": "https://github.com/grpc/grpc",
+    "rev": "412f230707147483f9bf1be2502b82d606b5784a"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "352269"
+  }
+}

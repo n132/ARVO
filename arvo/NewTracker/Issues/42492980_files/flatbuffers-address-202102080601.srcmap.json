@@ -1,0 +1,12 @@
+{
+  "/src/flatbuffers": {
+    "type": "git",
+    "url": "https://github.com/google/flatbuffers",
+    "rev": "6f3e45eca1fde7a68cb72fd4499a3647f719c9db"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "aeb7d7048371cd91ab9280c3958f1c35e5d5e758"
+  }
+}

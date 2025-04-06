@@ -1,0 +1,12 @@
+{
+  "/src/pcre2": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre2/code/trunk",
+    "rev": "1088"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "358939"
+  }
+}

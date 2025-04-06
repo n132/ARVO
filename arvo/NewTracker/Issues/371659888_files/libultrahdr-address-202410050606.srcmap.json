@@ -1,0 +1,7 @@
+{
+  "/src/libultrahdr": {
+    "type": "git",
+    "url": "https://github.com/google/libultrahdr.git",
+    "rev": "5e3aa2261afa731583ba1b6bee346b64122dc3bb"
+  }
+}

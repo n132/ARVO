@@ -1,0 +1,27 @@
+{
+  "/src/binutils-preconditions": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binutils-preconditions",
+    "rev": "5f4a18df321c8c2f2db61cda1ed201b70ceb424f"
+  },
+  "/src/binutils-gdb": {
+    "type": "git",
+    "url": "git://sourceware.org/git/binutils-gdb.git",
+    "rev": "491cf3178f718e48d71a54e50475e37dd831a51d"
+  },
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples",
+    "rev": "c9ecddf630fa7c629a7004294c6b422e73d51bd7"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "a976295b2acaff8461a906c461f5bb25dafdf557"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

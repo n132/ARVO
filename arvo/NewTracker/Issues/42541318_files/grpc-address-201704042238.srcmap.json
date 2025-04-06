@@ -1,0 +1,12 @@
+{
+  "/src/grpc": {
+    "type": "git",
+    "url": "https://github.com/grpc/grpc",
+    "rev": "c02f36bc9ec4baab246c1bd869d679ed19ab8580"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "f79aecb525cf76ff17c5873070c4663bbd178e1a"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/assimp": {
+    "type": "git",
+    "url": "https://github.com/assimp/assimp.git",
+    "rev": "5698d41bf952b156b2855c143021ace8fa06dfea"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

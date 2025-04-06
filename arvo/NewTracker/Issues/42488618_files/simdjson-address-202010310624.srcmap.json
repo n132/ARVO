@@ -1,0 +1,12 @@
+{
+  "/src/simdjson": {
+    "type": "git",
+    "url": "https://github.com/simdjson/simdjson.git",
+    "rev": "500e4c3572715700915d151545eeea1fa55d91db"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

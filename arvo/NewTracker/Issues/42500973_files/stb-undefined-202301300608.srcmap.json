@@ -1,0 +1,7 @@
+{
+  "/src/stb": {
+    "type": "git",
+    "url": "https://github.com/nothings/stb.git",
+    "rev": "5736b15f7ea0ffb08dd38af21067c314d6a3aae9"
+  }
+}

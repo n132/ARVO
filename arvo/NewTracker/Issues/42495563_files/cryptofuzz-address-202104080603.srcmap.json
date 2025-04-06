@@ -1,0 +1,142 @@
+{
+  "/src/xxHash": {
+    "type": "git",
+    "url": "https://github.com/Cyan4973/xxHash.git",
+    "rev": "7bf3d9f331d0b7d0f5856ae1894e0314e2b304c2"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "6b371749bc9db2823901b788bc56fae29cfe4aba"
+  },
+  "/src/Monocypher": {
+    "type": "git",
+    "url": "https://github.com/LoupVaillant/Monocypher.git",
+    "rev": "cfe2af980091726f1a92c722bed2b6d2a7a11334"
+  },
+  "/src/crypto-js": {
+    "type": "git",
+    "url": "https://github.com/brix/crypto-js.git",
+    "rev": "971c31f0c931f913d22a76ed488d9216ac04e306"
+  },
+  "/src/libfuzzer-js": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/libfuzzer-js.git",
+    "rev": "988f6b7db967ef2d64f63ef541e62322de4d73b1"
+  },
+  "/src/bignumber.js": {
+    "type": "git",
+    "url": "https://github.com/MikeMcl/bignumber.js.git",
+    "rev": "3e171919fd75b0518477f8eda819a37c9ee91586"
+  },
+  "/src/bn.js": {
+    "type": "git",
+    "url": "https://github.com/indutny/bn.js.git",
+    "rev": "5d5532d9fb7192b5d2545bdb2aa024ca1822a313"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle",
+    "rev": "53b71192704878f3f19b6c8baabf41ae35ab5b2e"
+  },
+  "/src/SymCrypt": {
+    "type": "git",
+    "url": "https://github.com/microsoft/SymCrypt.git",
+    "rev": "6d019cefafb3fefe3c53b0de3bba6f8c86e2d48a"
+  },
+  "/src/libtomcrypt": {
+    "type": "git",
+    "url": "https://github.com/libtom/libtomcrypt.git",
+    "rev": "910d6252770f1e517d9ed02dc0549a1d61dfe159"
+  },
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "6d566070b48efd2fa099bbe9822914455150aba9"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/ARMmbed/mbedtls.git",
+    "rev": "6741fc914851de968c9dfa5a690d1183b650b144"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "3b9e7942ea0f30ccf6e95242a83f864a8d1b925c"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "b8e392971a16189eb46d58a51d259a725b7c814e"
+  },
+  "/src/cityhash": {
+    "type": "git",
+    "url": "https://github.com/google/cityhash.git",
+    "rev": "8af9b8c2b889d80c22d6bc26ba0df1afb79a30db"
+  },
+  "/src/evercrypt": {
+    "type": "git",
+    "url": "https://github.com/project-everest/hacl-star",
+    "rev": "d3f6c884931771be619371b326f94686dcad80e0"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "840713de1a685920b6b1e1379902d545eccc74cf"
+  },
+  "/src/cryptopp": {
+    "type": "git",
+    "url": "https://github.com/weidai11/cryptopp/",
+    "rev": "b72007386d0fdb817d95a299f7368646ffd50afd"
+  },
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable",
+    "rev": "141f7528cb5610becd963d8c403c5b14afe73634"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "247907e65b7cbedf7b865ec1c5f2070500b2619b"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "fa2d3d56b9f542f8519b1c2298213d92eb954f3c"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "9695f6de1579f5d46e75cfebbaf44bc99cb421ec"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "a198cc04c3ffaf83007db19935d22d3e5de94e2d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "16dcc5929aa3e8ab08e4239c856c8e3dce001742"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "a66c71152314e591106680e6de618c3c8d044373"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "a73b6e472e5534cd9c4b210061720211832f078c"
+  }
+}

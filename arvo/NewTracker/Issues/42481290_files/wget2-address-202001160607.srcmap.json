@@ -1,0 +1,42 @@
+{
+  "/src/wget2": {
+    "type": "git",
+    "url": "https://gitlab.com/gnuwget/wget2.git",
+    "rev": "59d9ecd9c0a9411c9b02185e49637396a77bd205"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "4023d63f0b2795c0c0447282c808671ae8503ac3"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "0d1b423df26319088f2512b6314f6774132ccb82"
+  },
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "39c2990840c0150bb72185ead5cd0cb8f1968602"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "bf761c4327becf10b749cc4edf1115507ca45590"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "10b6e6a6e705935e39f71d9a5cf06b39f4f3570f"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "df2bd909b3ec63c2aa8d60f47c8fda3a7c9044d8"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

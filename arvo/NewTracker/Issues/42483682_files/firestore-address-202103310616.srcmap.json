@@ -1,0 +1,12 @@
+{
+  "/src/firebase-ios-sdk": {
+    "type": "git",
+    "url": "https://github.com/firebase/firebase-ios-sdk.git",
+    "rev": "e81547f313af6f6733ccc25eb3c0cea8e6008578"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

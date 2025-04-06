@@ -1,0 +1,62 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "145170125af959c814d33899bebb57f2da2f541b"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/vorbis.git",
+    "rev": "84c023699cdf023a32fa4ded32019f194afcdad0"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/theora.git",
+    "rev": "7180717276af1ebc7da15c83162d6c5d6203aabf"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/opus.git",
+    "rev": "ccaaffa9a3ee427e9401c4dcf6462e378d9a4694"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "3069cc2bb44160982cdb21b2b8f0660c76b17572"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "618739f59f5d3505ff76a1a82eb198bed4ec989d"
+  },
+  "/src/libvdpau": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~aplattner/libvdpau",
+    "rev": "eac1393480bc7c2209d4984819951cb9dc1e03d0"
+  },
+  "/src/libva": {
+    "type": "git",
+    "url": "https://github.com/intel/libva",
+    "rev": "aeba58590726ab08b924e6a2ad0078d74c5dd01b"
+  },
+  "/src/libXext": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/xorg/lib/libXext",
+    "rev": "47904063048fa6ef6e8e16219ddef4d14d5d9a4b"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "072f2cdafdd2bb7ed2d630d09c2a5697a4aec53d"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "fe85afbf8cb2b9cf8cb28cb13bff654949b43823"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

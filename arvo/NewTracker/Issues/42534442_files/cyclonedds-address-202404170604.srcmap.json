@@ -1,0 +1,7 @@
+{
+  "/src/cyclonedds": {
+    "type": "git",
+    "url": "https://github.com/eclipse-cyclonedds/cyclonedds",
+    "rev": "2ad37f4cc3d545149f680d6a8b0ff31e0ea84edc"
+  }
+}

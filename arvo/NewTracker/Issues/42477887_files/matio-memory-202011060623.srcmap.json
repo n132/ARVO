@@ -1,0 +1,12 @@
+{
+  "/src/matio": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/matio/matio",
+    "rev": "d49cac47b9cb373920bf7f85a0f1bdcb1caf84bd"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

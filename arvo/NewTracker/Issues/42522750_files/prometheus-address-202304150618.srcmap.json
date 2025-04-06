@@ -1,0 +1,7 @@
+{
+  "/root/go/src/github.com/prometheus/prometheus": {
+    "type": "git",
+    "url": "https://github.com/prometheus/prometheus",
+    "rev": "7309ac272195cb856b879306d6a27af7641d3346"
+  }
+}

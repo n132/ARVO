@@ -1,0 +1,22 @@
+{
+  "/src/freetype2-testing": {
+    "type": "git",
+    "url": "https://github.com/freetype/freetype2-testing.git",
+    "rev": "0eb700d45bb00af96bff247efc79cee58dbfa4ed"
+  },
+  "/src/text-rendering-tests": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/text-rendering-tests.git",
+    "rev": "f9535a12551d2fb25d8288547692271ebef38c35"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c5117b42cab9f47448a7f3cfe3edae6708d32528"
+  }
+}

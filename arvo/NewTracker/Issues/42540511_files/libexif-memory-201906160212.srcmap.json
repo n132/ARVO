@@ -1,0 +1,17 @@
+{
+  "/src/exif-samples": {
+    "type": "git",
+    "url": "https://github.com/ianare/exif-samples",
+    "rev": "4b5f141a24bce239daca0cada8c824a2088210c1"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif",
+    "rev": "a0c04d9cb6ab0c41a6458def9f892754e84160a0"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "363504"
+  }
+}

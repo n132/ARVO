@@ -1,0 +1,12 @@
+{
+  "/src/libteken": {
+    "type": "svn",
+    "url": "https://svn.freebsd.org/base/head/sys/teken",
+    "rev": "323342"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "312854"
+  }
+}

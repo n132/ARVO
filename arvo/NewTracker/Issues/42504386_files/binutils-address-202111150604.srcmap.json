@@ -1,0 +1,17 @@
+{
+  "/src/binutils-preconditions": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binutils-preconditions",
+    "rev": "5f4a18df321c8c2f2db61cda1ed201b70ceb424f"
+  },
+  "/src/binutils-gdb": {
+    "type": "git",
+    "url": "git://sourceware.org/git/binutils-gdb.git",
+    "rev": "7b2ec4e46fb726a7616a07e67c4270f48c8c546e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "533e979010ca338df6fc415d87668f8187752915"
+  }
+}

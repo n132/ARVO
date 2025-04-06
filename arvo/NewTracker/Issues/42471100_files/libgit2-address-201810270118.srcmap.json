@@ -1,0 +1,12 @@
+{
+  "/src/libgit2": {
+    "type": "git",
+    "url": "https://github.com/libgit2/libgit2",
+    "rev": "795580095a5b04ae81be4affb24bd9ea4b69d068"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "345443"
+  }
+}

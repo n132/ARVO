@@ -1,0 +1,12 @@
+{
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/OpenPrinting/fuzzing.git",
+    "rev": "e9c2156028c1de1a64c524b50d603a17e12c2b81"
+  },
+  "/src/libcups": {
+    "type": "git",
+    "url": "https://github.com/OpenPrinting/libcups.git",
+    "rev": "dfc1ec1ea41aa5623e79fc48c33b33ff1d547044"
+  }
+}

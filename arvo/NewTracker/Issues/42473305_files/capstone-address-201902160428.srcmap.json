@@ -1,0 +1,17 @@
+{
+  "/src/capstonenext": {
+    "type": "git",
+    "url": "https://github.com/aquynh/capstone.git",
+    "rev": "b8640cb95347ba87d0c9cbf683f0809c53a5865b"
+  },
+  "/src/capstonemaster": {
+    "type": "git",
+    "url": "https://github.com/aquynh/capstone.git",
+    "rev": "16f4c801dfa3ce7f75820681c7acb4f59d5d79fa"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "354195"
+  }
+}

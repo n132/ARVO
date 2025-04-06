@@ -1,0 +1,7 @@
+{
+  "/src/jbig2dec": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/jbig2dec.git",
+    "rev": "a5b9b7cd7b9ed349964eb89883c4b22c410b3398"
+  }
+}

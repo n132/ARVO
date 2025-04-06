@@ -1,0 +1,27 @@
+{
+  "/src/jackson-annotations": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-annotations",
+    "rev": "34f442d3e9a33cb3cafed2b6bce78a25c01a44f1"
+  },
+  "/src/jackson-core": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-core",
+    "rev": "7d5043fb8a2e1862f0052e20b4903253d4b6ab02"
+  },
+  "/src/jackson-databind": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-databind",
+    "rev": "6d839c7f1d951149e433a84e75f7df392a714248"
+  },
+  "/src/jackson-dataformats-binary": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-dataformats-binary",
+    "rev": "c1e4867083acb3c49214639cc33f697152f33ec6"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "7c2436c7114e21f029b06346421a73910deac578"
+  }
+}

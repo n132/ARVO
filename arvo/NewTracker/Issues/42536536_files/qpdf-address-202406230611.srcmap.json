@@ -1,0 +1,17 @@
+{
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "2c5312fd12f9c36675a330f8ad74f17c00bc409f"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "0f51fb4933fc9ce18199cb2554dacea8033e7fd3"
+  },
+  "/src/qpdf": {
+    "type": "git",
+    "url": "https://github.com/qpdf/qpdf.git",
+    "rev": "9ed34aec10d9716c56dd6c6320f06f01cf27fea8"
+  }
+}

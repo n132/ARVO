@@ -1,0 +1,7 @@
+{
+  "/src/libigl": {
+    "type": "git",
+    "url": "https://github.com/libigl/libigl",
+    "rev": "6e32964a824b04355431b236251d94e6d7fb4916"
+  }
+}

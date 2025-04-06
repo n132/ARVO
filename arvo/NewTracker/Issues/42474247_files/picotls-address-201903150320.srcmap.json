@@ -1,0 +1,12 @@
+{
+  "/src/picotls": {
+    "type": "git",
+    "url": "https://github.com/h2o/picotls",
+    "rev": "254a1801ede6ed8f4b0c86303c0a9cb8dab9b40f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "356229"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/libyang": {
+    "type": "git",
+    "url": "https://github.com/CESNET/libyang",
+    "rev": "6f74fd18e5ace7d8f1ae6c1c1c2b7442dc263b22"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ade8cdca55951958024c86766453430f904381c5"
+  },
+  "/src/pcre2": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre2/code/trunk",
+    "rev": "1316"
+  }
+}

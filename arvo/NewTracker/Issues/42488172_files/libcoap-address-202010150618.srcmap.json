@@ -1,0 +1,12 @@
+{
+  "/src/libcoap": {
+    "type": "git",
+    "url": "https://github.com/obgm/libcoap.git",
+    "rev": "4ca959ca536c850c1806746601a0b560bc57b6c5"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

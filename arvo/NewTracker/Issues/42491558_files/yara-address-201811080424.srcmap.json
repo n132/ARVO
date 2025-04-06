@@ -1,0 +1,12 @@
+{
+  "/src/yara": {
+    "type": "git",
+    "url": "https://github.com/VirusTotal/yara.git",
+    "rev": "aa182b4f928e54189fe51606d4dc419e7b27022f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "346388"
+  }
+}

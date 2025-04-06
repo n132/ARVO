@@ -1,0 +1,12 @@
+{
+  "/src/libxls": {
+    "type": "git",
+    "url": "https://github.com/libxls/libxls",
+    "rev": "82b62b777fed09f9face510393e038e63ff2cb1a"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "352021"
+  }
+}

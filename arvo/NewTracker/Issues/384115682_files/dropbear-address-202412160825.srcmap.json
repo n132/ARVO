@@ -1,0 +1,12 @@
+{
+  "/src/dropbear": {
+    "type": "git",
+    "url": "https://github.com/mkj/dropbear",
+    "rev": "ae62f2056878657e7ec08ad16eac141fc2e5ea9c"
+  },
+  "/src/dropbear-corpus": {
+    "type": "hg",
+    "url": "https://hg.ucc.asn.au/dropbear-fuzzcorpus",
+    "rev": "6d889f88a97dbf38e2c554cd01f138bbbb599dab"
+  }
+}

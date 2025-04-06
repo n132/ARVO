@@ -1,0 +1,7 @@
+{
+  "/src/json": {
+    "type": "git",
+    "url": "https://github.com/nlohmann/json.git",
+    "rev": "fba1bcdd0b109c217564088219eb44e2a2a8e077"
+  }
+}

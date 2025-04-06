@@ -1,0 +1,12 @@
+{
+  "/src/jsoncons": {
+    "type": "git",
+    "url": "https://github.com/danielaparker/jsoncons",
+    "rev": "4b39a34563b4c66470ecc7d1ee1d2d4b14146cd6"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

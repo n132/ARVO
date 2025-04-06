@@ -1,0 +1,17 @@
+{
+  "/src/dropbear": {
+    "type": "git",
+    "url": "https://github.com/mkj/dropbear",
+    "rev": "91ca561d7a3148f858b7daebf860bea937ec9b08"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "41ad23041b98917e9c38873f5b296ab98e59e460"
+  },
+  "/src/dropbear/corpus": {
+    "type": "hg",
+    "url": "https://hg.ucc.asn.au/dropbear-fuzzcorpus",
+    "rev": "3432c49c080c522a2a29b2325e928b21578c85d3"
+  }
+}

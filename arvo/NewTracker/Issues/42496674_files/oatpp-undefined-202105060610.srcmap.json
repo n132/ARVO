@@ -1,0 +1,12 @@
+{
+  "/src/oatpp": {
+    "type": "git",
+    "url": "https://github.com/oatpp/oatpp.git",
+    "rev": "13eaca0dc787ac34cf9f670ee50b3327500d0bad"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

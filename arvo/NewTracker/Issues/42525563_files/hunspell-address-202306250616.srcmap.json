@@ -1,0 +1,7 @@
+{
+  "/src/hunspell": {
+    "type": "git",
+    "url": "https://github.com/hunspell/hunspell.git",
+    "rev": "ab3825969d2a78f9871242c9ce89fcd34a3ddafe"
+  }
+}

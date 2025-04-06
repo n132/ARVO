@@ -1,0 +1,7 @@
+{
+  "/src/poi": {
+    "type": "git",
+    "url": "https://github.com/apache/poi.git",
+    "rev": "9c249442990221ba65500ed8e5a1a0e6bb005f1e"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/faad2": {
+    "type": "git",
+    "url": "https://github.com/knik0/faad2",
+    "rev": "d7aa650f3c04aa344ab236d784394c8f6d8d59ee"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/arrow-testing": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow-testing.git",
+    "rev": "d315f7985207d2d67fc2c8e41053e9d97d573f4b"
+  },
+  "/src/arrow": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow.git",
+    "rev": "0ed5fa166107387246024c6dd7cf42f5eed54c38"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

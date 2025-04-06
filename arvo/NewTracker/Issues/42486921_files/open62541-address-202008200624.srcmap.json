@@ -1,0 +1,12 @@
+{
+  "/src/open62541": {
+    "type": "git",
+    "url": "https://github.com/open62541/open62541.git",
+    "rev": "ee275e79310280a71fad3b21f6d430c0c046091b"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

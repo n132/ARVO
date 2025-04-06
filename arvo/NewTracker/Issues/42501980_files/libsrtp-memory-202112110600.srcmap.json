@@ -1,0 +1,12 @@
+{
+  "/src/libsrtp": {
+    "type": "git",
+    "url": "https://github.com/cisco/libsrtp",
+    "rev": "359c160bd605ab6f98382d619c4d059bc7183963"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

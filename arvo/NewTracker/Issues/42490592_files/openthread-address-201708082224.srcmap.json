@@ -1,0 +1,12 @@
+{
+  "/src/openthread": {
+    "type": "git",
+    "url": "https://github.com/openthread/openthread",
+    "rev": "1be11ba2296e3c99fbf9fca6607fb6e86796fa84"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "6d39c6ba7f52b61664c982d6ac89d7491b6f8730"
+  }
+}

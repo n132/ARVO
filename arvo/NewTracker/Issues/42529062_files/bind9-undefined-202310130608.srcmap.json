@@ -1,0 +1,7 @@
+{
+  "/src/bind9": {
+    "type": "git",
+    "url": "https://gitlab.isc.org/isc-projects/bind9.git",
+    "rev": "77ea29e4165b3d6e4934ceee9e4b665ff9ee8450"
+  }
+}

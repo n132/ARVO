@@ -1,0 +1,12 @@
+{
+  "/src/tinygltf": {
+    "type": "git",
+    "url": "https://github.com/syoyo/tinygltf.git",
+    "rev": "ce3a30e612f6c1ed9bc618927de62189097574a9"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

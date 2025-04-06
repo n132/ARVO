@@ -1,0 +1,12 @@
+{
+  "/src/gnupg": {
+    "type": "git",
+    "url": "git://git.gnupg.org/gnupg.git",
+    "rev": "bdda31a26bc69b6ee72e964510db113645de76ef"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "356228"
+  }
+}

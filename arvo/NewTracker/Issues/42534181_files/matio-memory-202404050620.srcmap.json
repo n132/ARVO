@@ -1,0 +1,17 @@
+{
+  "/src/hdf5": {
+    "type": "git",
+    "url": "https://github.com/HDFGroup/hdf5.git",
+    "rev": "c5c4713a9a0c940a6d20daad1152a3fc80b4fec5"
+  },
+  "/src/matio": {
+    "type": "git",
+    "url": "https://github.com/tbeu/matio.git",
+    "rev": "29e986fb1cfe09dacdbe386f441882025f652377"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "0f51fb4933fc9ce18199cb2554dacea8033e7fd3"
+  }
+}

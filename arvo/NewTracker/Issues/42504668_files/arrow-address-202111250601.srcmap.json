@@ -1,0 +1,12 @@
+{
+  "/src/arrow": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow.git",
+    "rev": "61c15ed2f2ba1f77650de1eebace10f32cf5a695"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "6f9a98c4a97e8e261fc52891d61f0b0c145b6364"
+  }
+}

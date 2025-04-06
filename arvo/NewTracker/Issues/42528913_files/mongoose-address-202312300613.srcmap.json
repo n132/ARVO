@@ -1,0 +1,7 @@
+{
+  "/src/mongoose": {
+    "type": "git",
+    "url": "https://github.com/cesanta/mongoose",
+    "rev": "bd5e4dba262f1d43259f592be1831b4920d260fb"
+  }
+}

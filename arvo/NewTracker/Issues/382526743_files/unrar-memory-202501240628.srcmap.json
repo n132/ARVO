@@ -1,0 +1,7 @@
+{
+  "/src/unrar": {
+    "type": "git",
+    "url": "https://github.com/aawc/unrar.git",
+    "rev": "a4ae80fa158d9f9fd5f745125288e301c2abf9fc"
+  }
+}

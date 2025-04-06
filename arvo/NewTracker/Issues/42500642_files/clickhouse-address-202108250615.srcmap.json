@@ -1,0 +1,12 @@
+{
+  "/src/ClickHouse": {
+    "type": "git",
+    "url": "https://github.com/ClickHouse/ClickHouse",
+    "rev": "74bd5f9632fce833082e707a3c8d95cca56dc641"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

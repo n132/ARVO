@@ -1,0 +1,7 @@
+{
+  "/src/json-java": {
+    "type": "git",
+    "url": "https://github.com/stleary/JSON-java",
+    "rev": "0578285036b019874e5bc598916040cfb8511200"
+  }
+}

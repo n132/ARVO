@@ -1,0 +1,12 @@
+{
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "f9d75ccef0b54c9f4167d95088d4727985133c52"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "ec86fc2fa358b373131987e3b85fa08bef06963e"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "/src/wget2": {
+    "type": "git",
+    "url": "https://gitlab.com/gnuwget/wget2.git",
+    "rev": "f4055e50d942c6c40d9e0b84de06bd65abd6fff5"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "dffd5a166e7aa59e5966b3ad27949170bf1d8061"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "dcda81d796de2f4a16fd7e9e7a5d07baa288f147"
+  },
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "d6c1051b37f16d8304938de7c796cfadc426bba8"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "185cd0381f402dfd97b4898f733e41c5f4977020"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "dd8fabbf8ee5884dce477c775d76348692226bed"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "5844f4ef3dfa5a943c0ddd45ca82064df0dd792b"
+  }
+}

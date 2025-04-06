@@ -1,0 +1,12 @@
+{
+  "/src/geos": {
+    "type": "git",
+    "url": "https://git.osgeo.org/gitea/geos/geos.git",
+    "rev": "84558712033b2554c2411076ec350e183747c95a"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "7777045c09c404b1274c930788317525fedb43ad"
+  }
+}

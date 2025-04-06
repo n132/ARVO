@@ -1,0 +1,17 @@
+{
+  "/src/libplacebo": {
+    "type": "git",
+    "url": "https://github.com/haasn/libplacebo",
+    "rev": "47ea18ef47875aafe611d47e07a6314ccc92a916"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://github.com/FFmpeg/FFmpeg",
+    "rev": "4e069ba80abe81ed64b20125232ca5be3fdf6ceb"
+  },
+  "/src/mpv": {
+    "type": "git",
+    "url": "https://github.com/mpv-player/mpv",
+    "rev": "0cfd52074b50df623f9fa9fd9ad0ba4657311398"
+  }
+}

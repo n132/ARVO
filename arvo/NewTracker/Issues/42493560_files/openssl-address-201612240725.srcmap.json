@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"453c5709c808ff40701a61215566f5f2164d7700","url":"https://github.com/google/oss-fuzz.git","path":"/projects/openssl/"},"/src/openssl":{"rev":"8bfa99f04f9763a6a8d72a6d5c1f0a962f8a084b","type":"git","url":"https://github.com/openssl/openssl.git"}}

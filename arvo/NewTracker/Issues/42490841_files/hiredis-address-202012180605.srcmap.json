@@ -1,0 +1,12 @@
+{
+  "/src/hiredis": {
+    "type": "git",
+    "url": "https://github.com/redis/hiredis",
+    "rev": "297ecbecb71616977ab0bb9b7387d8fa19a5a54f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

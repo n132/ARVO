@@ -1,0 +1,7 @@
+{
+  "/src/pyodbc": {
+    "type": "git",
+    "url": "https://github.com/mkleehammer/pyodbc",
+    "rev": "44d7cc7209d82c6c4215f2fd9f83b2301704dd22"
+  }
+}

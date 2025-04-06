@@ -1,0 +1,17 @@
+{
+  "/src/qtqa": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtqa.git",
+    "rev": "85be2c2f08e1e759e1f0862c812df7253af83014"
+  },
+  "/src/qt": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qt5.git",
+    "rev": "e468db267ac232fe92358aab8912e954e8bd4c81"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

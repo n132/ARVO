@@ -1,0 +1,7 @@
+{
+  "/src/commons-io": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-io.git",
+    "rev": "06fde31494c279ad940149e1a3d4944040c73c0d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/trafficserver": {
+    "type": "git",
+    "url": "https://github.com/apache/trafficserver.git",
+    "rev": "1c37f7ab7efc9ab521360654cacf3aacc5fdddc0"
+  }
+}

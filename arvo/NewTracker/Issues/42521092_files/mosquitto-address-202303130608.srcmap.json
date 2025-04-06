@@ -1,0 +1,12 @@
+{
+  "/src/cJSON": {
+    "type": "git",
+    "url": "https://github.com/DaveGamble/cJSON",
+    "rev": "b45f48e600671feade0b6bd65d1c69de7899f2be"
+  },
+  "/src/mosquitto": {
+    "type": "git",
+    "url": "https://github.com/eclipse/mosquitto",
+    "rev": "5f19971270a7773a12a636e1aef6ea30cbc4c776"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/fuzzer-test-suite": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzer-test-suite",
+    "rev": "51356066dc70c43c9da0ad98e887684a0394860f"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "114db750f4638de466d4a182d3da63d5566b9fca"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

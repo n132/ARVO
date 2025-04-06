@@ -1,0 +1,17 @@
+{
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  },
+  "/src/pcre": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre/code/trunk",
+    "rev": "1764"
+  },
+  "/src/njs": {
+    "type": "hg",
+    "url": "http://hg.nginx.org/njs",
+    "rev": "804afbc896773070151e5cbc0b9cfb190d859777"
+  }
+}

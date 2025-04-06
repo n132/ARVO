@@ -1,0 +1,12 @@
+{
+  "/src/qpid-proton": {
+    "type": "git",
+    "url": "https://github.com/apache/qpid-proton.git",
+    "rev": "8b816f48c18c5643325a63f9a6c5fbe6049d65db"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "7777045c09c404b1274c930788317525fedb43ad"
+  }
+}

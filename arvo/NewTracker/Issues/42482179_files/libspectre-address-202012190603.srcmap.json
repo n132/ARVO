@@ -1,0 +1,12 @@
+{
+  "/src/libspectre": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/libspectre/libspectre.git",
+    "rev": "155777e316aa1bbc0f3be9ed7a6e7a9b76b58968"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

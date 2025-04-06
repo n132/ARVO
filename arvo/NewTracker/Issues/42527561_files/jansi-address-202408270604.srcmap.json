@@ -1,0 +1,7 @@
+{
+  "/src/jansi": {
+    "type": "git",
+    "url": "https://github.com/fusesource/jansi",
+    "rev": "045fd560a7580713d910aecaf776e0b3328c27be"
+  }
+}

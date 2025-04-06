@@ -1,0 +1,12 @@
+{
+  "/src/fio": {
+    "type": "git",
+    "url": "https://github.com/axboe/fio.git",
+    "rev": "e4d9a7bf68d0ffb9fd7ab328a4f0edddc89297be"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

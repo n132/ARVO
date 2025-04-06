@@ -1,0 +1,22 @@
+{
+  "/src/fastjson": {
+    "type": "git",
+    "url": "https://github.com/alibaba/fastjson",
+    "rev": "14a95cc5b07e76ab8c0c72192c1e739cb157c7fc"
+  },
+  "/src/go-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "2176cdf2b4aed741c7b5bd0f1fa05c7fed711950"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

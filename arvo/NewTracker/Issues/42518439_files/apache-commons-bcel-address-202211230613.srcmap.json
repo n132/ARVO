@@ -1,0 +1,7 @@
+{
+  "/src/commons-bcel": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-bcel.git",
+    "rev": "16bb11a081e7ca201d55b7c0f3417a947379b218"
+  }
+}

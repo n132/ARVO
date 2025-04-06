@@ -1,0 +1,42 @@
+{
+  "/src/wycheproof": {
+    "type": "git",
+    "url": "https://github.com/google/wycheproof.git",
+    "rev": "2196000605e45d91097147c9c71f26b72af58003"
+  },
+  "/src/trezor-firmware": {
+    "type": "git",
+    "url": "https://github.com/trezor/trezor-firmware.git",
+    "rev": "f9d4be268ead711c8324b471a8911cdd9a3a8c19"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "edd94567b92aadfca79a9117cfb649cb024fc567"
+  },
+  "/src/secp256k1": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/secp256k1.git",
+    "rev": "7973576f6e3ab27d036a09397152b124d747f4ae"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "327dce75fdb6124d0d5167188644dc74a83fbe2d"
+  },
+  "/src/bitcoin-core": {
+    "type": "git",
+    "url": "https://github.com/bitcoin/bitcoin.git",
+    "rev": "912cb594901b1a5dd99aa4c00be34ae36512bc57"
+  },
+  "/src/bitcoin-core/assets": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/qa-assets",
+    "rev": "73d3bc1751bf37fa3ec0b3c5ffb48ef9a639e9e4"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

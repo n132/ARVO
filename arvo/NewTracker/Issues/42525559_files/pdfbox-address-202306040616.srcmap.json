@@ -1,0 +1,7 @@
+{
+  "/src/project-parent/pdfbox": {
+    "type": "git",
+    "url": "https://github.com/apache/pdfbox/",
+    "rev": "0ed519e4b851cc08afca3307bc469f1b2e779594"
+  }
+}

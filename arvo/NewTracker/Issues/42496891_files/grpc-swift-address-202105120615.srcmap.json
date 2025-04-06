@@ -1,0 +1,17 @@
+{
+  "/src/grpc-swift": {
+    "type": "git",
+    "url": "https://github.com/grpc/grpc-swift",
+    "rev": "8c43144fd62f88c1361e7b812af62d42bfd36925"
+  },
+  "/src/llvm-project": {
+    "type": "git",
+    "url": "https://github.com/llvm/llvm-project.git",
+    "rev": "d8e65585f7c7cddd63920d122a9e6368d91c9389"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

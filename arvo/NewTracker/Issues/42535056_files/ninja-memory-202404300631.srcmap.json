@@ -1,0 +1,7 @@
+{
+  "/src/ninja": {
+    "type": "git",
+    "url": "https://github.com/ninja-build/ninja",
+    "rev": "4ef30b110a528d47b2d7008b79c6e9d4ef48b25d"
+  }
+}

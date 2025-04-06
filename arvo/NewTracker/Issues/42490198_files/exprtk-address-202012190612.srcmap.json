@@ -1,0 +1,12 @@
+{
+  "/src/exprtk": {
+    "type": "git",
+    "url": "https://github.com/ArashPartow/exprtk.git",
+    "rev": "ed2a8d893406a8324989b83c00e3948987253a90"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

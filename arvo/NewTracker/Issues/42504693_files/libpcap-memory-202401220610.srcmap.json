@@ -1,0 +1,12 @@
+{
+  "/src/tcpdump": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/tcpdump.git",
+    "rev": "07c3f2997107c541eb00bdad450b9bd83d071de9"
+  },
+  "/src/libpcap": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/libpcap.git",
+    "rev": "fb92b4dd10ed1f73a536e512fd0b0e33b76329a6"
+  }
+}

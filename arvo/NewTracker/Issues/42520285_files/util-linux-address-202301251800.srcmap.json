@@ -1,0 +1,7 @@
+{
+  "/src/util-linux": {
+    "type": "git",
+    "url": "https://github.com/util-linux/util-linux",
+    "rev": "46ce48b6a5bf13f95318d579e2af4fde189d049a"
+  }
+}

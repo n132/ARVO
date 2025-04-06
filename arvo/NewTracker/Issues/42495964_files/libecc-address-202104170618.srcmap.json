@@ -1,0 +1,22 @@
+{
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "5e05469ecb43a867f53befbb838cda23fcac5358"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "04fc4b81f0ef44bcfe3a64ffd45bb61f0a92b60d"
+  },
+  "/src/libecc": {
+    "type": "git",
+    "url": "https://github.com/ANSSI-FR/libecc.git",
+    "rev": "f97b2b6afc47cc2b8374db9f26baedc89d5c2b2d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

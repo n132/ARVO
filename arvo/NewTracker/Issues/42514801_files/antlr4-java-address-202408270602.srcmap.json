@@ -1,0 +1,7 @@
+{
+  "/src/antlr4": {
+    "type": "git",
+    "url": "https://github.com/antlr/antlr4.git",
+    "rev": "811b7fda58bd14d7f0abc496b6fd651dfa01ed97"
+  }
+}

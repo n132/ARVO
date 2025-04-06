@@ -1,0 +1,7 @@
+{
+  "/src/jackson-dataformats-text": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-dataformats-text.git",
+    "rev": "64ed6d88b6d639d7d97ce71296885d8fcc3930ea"
+  }
+}

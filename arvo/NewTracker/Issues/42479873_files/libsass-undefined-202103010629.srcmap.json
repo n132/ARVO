@@ -1,0 +1,12 @@
+{
+  "/src/libsass": {
+    "type": "git",
+    "url": "https://github.com/sass/libsass.git",
+    "rev": "d4d74ef559b46198f79acfbdaab4556ca56a0405"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "78d96c4dc86ac20e2a6e244017407ccc037ff13b"
+  }
+}

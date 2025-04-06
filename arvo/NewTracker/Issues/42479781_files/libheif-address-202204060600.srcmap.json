@@ -1,0 +1,27 @@
+{
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "0f8496f22d284e1a69df12fe0b72f375aed31315"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "402e264b94fd74bdf66837da216b6251805b4ae4"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "45904e5667c5bf59c67fcdc586dfba110832894c"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  },
+  "/src/x265": {
+    "type": "hg",
+    "url": "http://hg.videolan.org/x265",
+    "rev": "42467a41224f0b6d5d73d2ff7f5f213a3a392ea3"
+  }
+}

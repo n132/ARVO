@@ -1,0 +1,7 @@
+{
+  "/src/opensips": {
+    "type": "git",
+    "url": "https://github.com/OpenSIPS/opensips",
+    "rev": "f602982156b6ff6b83cd7e57e5e42e02f0b37dc4"
+  }
+}

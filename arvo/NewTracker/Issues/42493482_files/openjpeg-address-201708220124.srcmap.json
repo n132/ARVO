@@ -1,0 +1,17 @@
+{
+  "/src/openjpeg/data": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg-data",
+    "rev": "c07f38fae1e67adc288c2d6679df5d3652017fbe"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "8180eeace13ffceef5dd7c3f80be156e36181846"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "311419"
+  }
+}

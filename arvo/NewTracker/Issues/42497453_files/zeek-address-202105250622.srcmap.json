@@ -1,0 +1,12 @@
+{
+  "/src/zeek": {
+    "type": "git",
+    "url": "https://github.com/zeek/zeek",
+    "rev": "f38eae06f1e32ed00e18c7a1f4af2180f5db2f39"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

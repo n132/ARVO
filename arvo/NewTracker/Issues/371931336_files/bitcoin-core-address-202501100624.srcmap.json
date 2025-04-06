@@ -1,0 +1,12 @@
+{
+  "/src/secp256k1": {
+    "type": "git",
+    "url": "https://github.com/bitcoin-core/secp256k1.git",
+    "rev": "f79f46c70386c693ff4e7aef0b9e7923ba284e56"
+  },
+  "/src/bitcoin-core": {
+    "type": "git",
+    "url": "https://github.com/bitcoin/bitcoin.git",
+    "rev": "37af8bfb34d685bfd5d9a9ba6b35b4705e021535"
+  }
+}

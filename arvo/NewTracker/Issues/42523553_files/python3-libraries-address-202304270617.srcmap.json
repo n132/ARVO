@@ -1,0 +1,12 @@
+{
+  "/src/python-library-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/python-library-fuzzers.git",
+    "rev": "e977ff7fa5f8aec8529e2e0ea2e49fb5c4b93d94"
+  },
+  "/src/cpython": {
+    "type": "git",
+    "url": "https://github.com/python/cpython.git",
+    "rev": "ce2383ec6665850a1bdffad388876481b6f3205f"
+  }
+}

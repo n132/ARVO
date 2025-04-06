@@ -1,0 +1,17 @@
+{
+  "/src/libavc": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libavc",
+    "rev": "ea14d495b1995ff09642edfb1b0b45a3d289b0af"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "e9be6bce2282e8db95221c9a17fd10aba9e901bc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "371161"
+  }
+}

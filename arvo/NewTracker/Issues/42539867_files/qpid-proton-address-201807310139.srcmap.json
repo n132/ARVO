@@ -1,0 +1,12 @@
+{
+  "/src/qpid-proton": {
+    "type": "git",
+    "url": "git://git.apache.org/qpid-proton.git",
+    "rev": "d722f7df5c714074b07cd803cbd6406edca4b40c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "338345"
+  }
+}

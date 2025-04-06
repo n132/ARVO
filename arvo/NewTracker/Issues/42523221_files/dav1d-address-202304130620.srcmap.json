@@ -1,0 +1,7 @@
+{
+  "/src/dav1d": {
+    "type": "git",
+    "url": "https://code.videolan.org/videolan/dav1d.git",
+    "rev": "6ae576672452f9c9f788a8fca30c6884b49fe2db"
+  }
+}

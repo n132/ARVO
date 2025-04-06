@@ -1,0 +1,12 @@
+{
+  "/src/tidy-html5": {
+    "type": "git",
+    "url": "https://github.com/htacg/tidy-html5.git",
+    "rev": "408ac93195f3547c5a81535aabd26287de14b2a2"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

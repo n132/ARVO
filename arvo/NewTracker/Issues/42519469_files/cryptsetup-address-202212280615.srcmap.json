@@ -1,0 +1,7 @@
+{
+  "/src/cryptsetup": {
+    "type": "git",
+    "url": "https://gitlab.com/cryptsetup/cryptsetup.git",
+    "rev": "1682e72bf5199c0c8cef32a21929f026b2e1e6d4"
+  }
+}

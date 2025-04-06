@@ -1,0 +1,12 @@
+{
+  "/src/librawspeed": {
+    "type": "git",
+    "url": "https://github.com/darktable-org/rawspeed.git",
+    "rev": "f1806ea3d0abd164e38da2fafe3d3479feb1d3e8"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "1c95d56d2379b6a13cb8be7f4f5aa89fc9ad8317"
+  }
+}

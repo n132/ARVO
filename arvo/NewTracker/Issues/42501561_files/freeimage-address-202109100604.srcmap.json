@@ -1,0 +1,12 @@
+{
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  },
+  "/src/freeimage-svn": {
+    "type": "svn",
+    "url": "https://svn.code.sf.net/p/freeimage/svn",
+    "rev": "1889"
+  }
+}

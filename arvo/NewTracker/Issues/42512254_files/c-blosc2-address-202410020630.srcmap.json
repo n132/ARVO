@@ -1,0 +1,7 @@
+{
+  "/src/c-blosc2": {
+    "type": "git",
+    "url": "https://github.com/Blosc/c-blosc2.git",
+    "rev": "f8723dc5e4c47a123fddcae993f91b039c5540be"
+  }
+}

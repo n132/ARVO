@@ -1,0 +1,12 @@
+{
+  "/src/irssi": {
+    "type": "git",
+    "url": "https://github.com/irssi/irssi",
+    "rev": "b2c93656232563237f2a8412205d6cf533a0b2e0"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "78d96c4dc86ac20e2a6e244017407ccc037ff13b"
+  }
+}

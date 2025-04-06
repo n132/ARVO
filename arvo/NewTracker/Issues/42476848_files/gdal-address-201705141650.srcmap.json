@@ -1,0 +1,12 @@
+{
+  "/src/gdal/libexpat": {
+    "type": "git",
+    "url": "https://github.com/libexpat/libexpat",
+    "rev": "b357bf21e757d00540242f4aa915289c15f0b524"
+  },
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "a19e69bf8ab347449d461947300475b96557500a"
+  }
+}

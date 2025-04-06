@@ -1,0 +1,12 @@
+{
+  "/src/tensorflow": {
+    "type": "git",
+    "url": "https://github.com/tensorflow/tensorflow",
+    "rev": "60c930f6056756c886ad5984a59cb6f0871dcac8"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  }
+}

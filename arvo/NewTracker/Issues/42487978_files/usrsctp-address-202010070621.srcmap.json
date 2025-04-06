@@ -1,0 +1,12 @@
+{
+  "/src/usrsctp": {
+    "type": "git",
+    "url": "https://github.com/sctplab/usrsctp",
+    "rev": "eb437608224b43b93f9ba6c974c438e8d991859a"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

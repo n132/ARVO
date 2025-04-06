@@ -1,0 +1,37 @@
+{
+  "/src/spicy/spicy-tftp": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-tftp",
+    "rev": "eb8d3a04ab8f195f4af2a27630cddb052b2fd9a1"
+  },
+  "/src/spicy/spicy-png": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-png",
+    "rev": "96e7f8e54757b88ff82102e2a9e07ad742984acb"
+  },
+  "/src/spicy": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy",
+    "rev": "e2b5c11910e0870b956d60c4c780dda5392e8190"
+  },
+  "/src/spicy/spicy-dns": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-dns",
+    "rev": "784f556bebb968b73dedec36ea8d3f7b7f9ad558"
+  },
+  "/src/spicy/spicy-http": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-http",
+    "rev": "59aa2992e7787741dcd3aff755246efc119dbe6c"
+  },
+  "/src/spicy/spicy-dhcp": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-dhcp",
+    "rev": "ffb0af2375c913ec30c01c383b170182eb89466d"
+  },
+  "/src/spicy/spicy-pe": {
+    "type": "git",
+    "url": "https://github.com/zeek/spicy-pe",
+    "rev": "f7dee824533f4eb84e80db2779230b91043ad9cf"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "/src/jpeg-xl": {
+    "type": "git",
+    "url": "https://gitlab.com/wg1/jpeg-xl.git",
+    "rev": "9a8f5195e4d1c45112fd65f184ebe115f4163ba2"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif",
+    "rev": "0e3e9247bfc1da9d5b22c622129782761682a130"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "562fcd4ab0aa2c49c12df4bd2b76dca7a837ad4c"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "52bbf49bd1b78783265f4939558fa0c63c546d95"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "05b72d4205491a9f54ff5449d54f407a91689e8e"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "de6f83bc641477352de6ff6be08012df024dcfe0"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "a37d4836519517bdce6cb9d956092321eca3e73b"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "c23672ce52ae53bd846b555439aa0a070b6d2c07"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "807809d7dd9b09c0380b71d5d5ebee3c1439ca99"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif",
+    "rev": "c16ba6320c5d6dc8ed5bf779df8a30d0a33812ca"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips",
+    "rev": "50c96a1e3b9149f24fb611d7f92aa405ef87ccd1"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

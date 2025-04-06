@@ -1,0 +1,7 @@
+{
+  "/src/commons-net": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-net.git",
+    "rev": "5b7e8d09c9a0e4b61ad3e9271c16a5f077060b41"
+  }
+}

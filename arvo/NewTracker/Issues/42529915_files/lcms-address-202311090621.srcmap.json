@@ -1,0 +1,7 @@
+{
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "4842f9b0745fa11a7988ae2d404225d59daae0c0"
+  }
+}

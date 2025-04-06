@@ -1,0 +1,42 @@
+{
+  "/src/gnupg": {
+    "type": "git",
+    "url": "git://git.gnupg.org/gnupg.git",
+    "rev": "224e26cf7b67f22bb0140133eac6b4ad24f3b1b7"
+  },
+  "/src/npth": {
+    "type": "git",
+    "url": "git://git.gnupg.org/npth.git",
+    "rev": "7e45b50a4034735bad8ba99a003bbf986c664d8c"
+  },
+  "/src/libksba": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libksba.git",
+    "rev": "fe03ab4c14e71cb08210159a943a6edded6cdc4d"
+  },
+  "/src/libassuan": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libassuan.git",
+    "rev": "05535d9863cfc4656554fa5fd8df2f4fbe695178"
+  },
+  "/src/libgcrypt": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgcrypt.git",
+    "rev": "6cb0faf6ceec5b2e799e6fb5f04b85d135a7da9b"
+  },
+  "/src/libgpg-error": {
+    "type": "git",
+    "url": "git://git.gnupg.org/libgpg-error.git",
+    "rev": "165dbac7d556aa4738b51437eb977964adacb7bf"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "068bef5eab942df0a133c92522f2ab81b28ac636"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

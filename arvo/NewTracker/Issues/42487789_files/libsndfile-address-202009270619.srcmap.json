@@ -1,0 +1,12 @@
+{
+  "/src/libsndfile": {
+    "type": "git",
+    "url": "https://github.com/erikd/libsndfile.git",
+    "rev": "fe493272d2261e1f0b547cd39bd91e44ebc580bb"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

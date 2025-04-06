@@ -1,0 +1,22 @@
+{
+  "/src/MapServer": {
+    "type": "git",
+    "url": "https://github.com/MapServer/MapServer",
+    "rev": "f686abf8e4c48879e4055c5e1a86617f70889b20"
+  },
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "106402acafbcddcfe6d25bc3408bbdafbe63ef5a"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "0cb913aa9d77ebd2870aa1036fd8651c2557a9a9"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

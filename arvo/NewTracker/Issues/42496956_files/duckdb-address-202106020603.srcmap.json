@@ -1,0 +1,12 @@
+{
+  "/src/duckdb": {
+    "type": "git",
+    "url": "https://github.com/duckdb/duckdb",
+    "rev": "f52c77e3599a8af9d5a38f69794910475f8d06fb"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

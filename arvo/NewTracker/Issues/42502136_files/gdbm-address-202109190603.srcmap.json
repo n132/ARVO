@@ -1,0 +1,12 @@
+{
+  "/src/gdbm": {
+    "type": "git",
+    "url": "https://git.gnu.org.ua/gdbm.git",
+    "rev": "ca7194987388a825f57fdebd73eb9c491a8749b0"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

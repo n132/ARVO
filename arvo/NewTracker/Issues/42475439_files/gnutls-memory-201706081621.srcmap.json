@@ -1,0 +1,22 @@
+{
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "edef840f23b31066df4333995f544ae0f32d3e09"
+  },
+  "/src/gnutls/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "7815864d0557ef0b456bc4517df76e7ae2b54f83"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "0081a51a3df7ec30da22402fe878be61790ab721"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "2ac50c9432f4856b505e3f9cb7f4e7161f5e182c"
+  }
+}

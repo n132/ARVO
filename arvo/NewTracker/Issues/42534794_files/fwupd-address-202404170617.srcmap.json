@@ -1,0 +1,7 @@
+{
+  "/src/fwupd": {
+    "type": "git",
+    "url": "https://github.com/fwupd/fwupd.git",
+    "rev": "328e02ad783ea2ae10f902c5313b150450d7b624"
+  }
+}

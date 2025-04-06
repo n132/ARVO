@@ -1,0 +1,12 @@
+{
+  "/src/uWebSockets": {
+    "type": "git",
+    "url": "https://github.com/uNetworking/uWebSockets.git",
+    "rev": "03fca626a95130ab80f86adada54b29d27242759"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

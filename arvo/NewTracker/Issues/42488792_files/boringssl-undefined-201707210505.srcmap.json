@@ -1,0 +1,12 @@
+{
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "c642aca28feb7e18f244658559f4042286aed0c8"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "60e43be6dce8d725900869a210c1211b9f6541ad"
+  }
+}

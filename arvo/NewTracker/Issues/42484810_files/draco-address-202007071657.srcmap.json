@@ -1,0 +1,12 @@
+{
+  "/src/draco": {
+    "type": "git",
+    "url": "https://github.com/google/draco",
+    "rev": "79601d2d060be52e673a82ed1c46f4666eb28255"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

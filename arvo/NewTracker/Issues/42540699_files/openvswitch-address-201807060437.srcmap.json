@@ -1,0 +1,12 @@
+{
+  "/src/openvswitch": {
+    "type": "git",
+    "url": "https://github.com/openvswitch/ovs.git",
+    "rev": "23626bcf3bd987f7a5e03b93bec8450b10421c31"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "336410"
+  }
+}

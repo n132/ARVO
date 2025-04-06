@@ -1,0 +1,7 @@
+{
+  "/src/spring-data-mongodb": {
+    "type": "git",
+    "url": "https://github.com/spring-projects/spring-data-mongodb",
+    "rev": "9c09edd59452bd29fd6e61a3f2c5cf414b874c19"
+  }
+}

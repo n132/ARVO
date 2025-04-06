@@ -1,0 +1,12 @@
+{
+  "/src/util-linux": {
+    "type": "git",
+    "url": "https://github.com/karelzak/util-linux",
+    "rev": "3b87a9af494b4ecc2ed3aa544f1a2f8df6789354"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

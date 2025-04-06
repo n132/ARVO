@@ -1,0 +1,12 @@
+{
+  "/src/stb": {
+    "type": "git",
+    "url": "https://github.com/nothings/stb.git",
+    "rev": "b42009b3b9d4ca35bc703f5310eedc74f584be58"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

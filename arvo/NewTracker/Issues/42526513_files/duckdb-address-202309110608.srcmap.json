@@ -1,0 +1,7 @@
+{
+  "/src/duckdb": {
+    "type": "git",
+    "url": "https://github.com/duckdb/duckdb",
+    "rev": "7208022cac983300712db555f39265eed04a655d"
+  }
+}

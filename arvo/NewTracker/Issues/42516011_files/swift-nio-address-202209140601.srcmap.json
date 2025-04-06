@@ -1,0 +1,22 @@
+{
+  "/src/swift-nio": {
+    "type": "git",
+    "url": "https://github.com/apple/swift-nio.git",
+    "rev": "6918034260d1b0ff46a24a6e3ced445bc2d0ed4b"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "748de3eed506a515840fcea85fb1c0c22c170c2a"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "a976295b2acaff8461a906c461f5bb25dafdf557"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

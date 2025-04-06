@@ -1,0 +1,12 @@
+{
+  "/src/util-linux": {
+    "type": "git",
+    "url": "https://github.com/util-linux/util-linux",
+    "rev": "d9edc382f56791e301c2d2b193c1067c717ae8e8"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  }
+}

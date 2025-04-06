@@ -1,0 +1,12 @@
+{
+  "/src/arrow-testing": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow-testing.git",
+    "rev": "ad82a736c170e97b7c8c035ebd8a801c17eec170"
+  },
+  "/src/arrow": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow.git",
+    "rev": "4bbd48db8f3937c3e2f54f4c1131fd6af5a6b85c"
+  }
+}

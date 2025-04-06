@@ -1,0 +1,22 @@
+{
+  "/src/corpi": {
+    "type": "git",
+    "url": "https://github.com/qlyoung/corpi",
+    "rev": "de26a013ff7c9a88648aeea50e830167572a95a3"
+  },
+  "/src/frr": {
+    "type": "git",
+    "url": "https://github.com/FRRouting/frr",
+    "rev": "f5a2b2f8979d372f7da82558fa04ecf597535c22"
+  },
+  "/src/libyang": {
+    "type": "git",
+    "url": "https://github.com/CESNET/libyang.git",
+    "rev": "a531aef42741b25b0343b64db5cf9ffd7a823e90"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

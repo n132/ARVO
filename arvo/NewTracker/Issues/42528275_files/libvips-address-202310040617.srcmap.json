@@ -1,0 +1,72 @@
+{
+  "/src/highway": {
+    "type": "git",
+    "url": "https://github.com/google/highway.git",
+    "rev": "ed2813bfcc10682d29f0a90219810e5bd33f092e"
+  },
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "246f8f0a497e842d14138afe2b63d609fccb3798"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "b3b4f947a8123429feede113a4d74f2b04434315"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "cd6274a9e5e106ea990fb150e781d79848b74337"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "6072059e819eb3b3f9897fa34968befcb10a8a3b"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff.git",
+    "rev": "5e7c59d6a950760c875c865846e57b91a64ea428"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "cdbf88aed27c6e3ff8453754e1f1631806fffe4f"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "e5c1fc470fceaca08b8c30dc40768c28b82b9e12"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "f8e5fa92b0e37ab597616f554bee254157998227"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "2c97a1ff07ccffe7c4b6bc96c7a94afbc32c3575"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "adc149b0337bdcbf076dd0a355a29a2abc1de8f6"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif.git",
+    "rev": "f2d5adc02535e22346a2a10134a6d8cba5f692c4"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "ac8f12c97d1afd9bafa9c710f827d40a407d3266"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips.git",
+    "rev": "ba2712b59c0423ccd7bb7ce9bd1b6701f86a0a6d"
+  }
+}

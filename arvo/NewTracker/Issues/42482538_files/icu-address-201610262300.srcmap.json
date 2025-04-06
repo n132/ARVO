@@ -1,0 +1,7 @@
+{
+  "/src/icu": {
+    "type": "svn",
+    "url": "http://source.icu-project.org/repos/icu/icu/trunk",
+    "rev": "39485"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples",
+    "rev": "8c61df835c1b4ced083db6dac3e90f3758340922"
+  },
+  "/src/libdwarf": {
+    "type": "git",
+    "url": "https://github.com/davea42/libdwarf-code",
+    "rev": "9770b2cc4812857022a8e147bdfe1f102adba382"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

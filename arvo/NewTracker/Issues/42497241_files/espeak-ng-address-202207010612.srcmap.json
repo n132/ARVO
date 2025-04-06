@@ -1,0 +1,12 @@
+{
+  "/src/espeak-ng": {
+    "type": "git",
+    "url": "https://github.com/espeak-ng/espeak-ng",
+    "rev": "1f76c4b8bd320714aa61ad8abb527c5d92cc5164"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

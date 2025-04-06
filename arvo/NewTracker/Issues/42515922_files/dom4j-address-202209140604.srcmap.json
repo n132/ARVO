@@ -1,0 +1,17 @@
+{
+  "/src/dom4j": {
+    "type": "git",
+    "url": "https://github.com/dom4j/dom4j.git",
+    "rev": "7fbdc6d58623ec0b54b9b44a4738781b65191df1"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "a976295b2acaff8461a906c461f5bb25dafdf557"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

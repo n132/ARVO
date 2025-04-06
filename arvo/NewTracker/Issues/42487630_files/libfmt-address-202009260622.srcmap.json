@@ -1,0 +1,12 @@
+{
+  "/src/fmt": {
+    "type": "git",
+    "url": "https://github.com/fmtlib/fmt.git",
+    "rev": "c156093ffd99b0689af3826f3aa04e7db97cc543"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

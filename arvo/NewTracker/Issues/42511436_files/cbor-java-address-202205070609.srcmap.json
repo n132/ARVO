@@ -1,0 +1,12 @@
+{
+  "/src/cbor-java": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/cbor-java",
+    "rev": "00c4a382dd3810f9c1b363eaad339cff34a3f6fe"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

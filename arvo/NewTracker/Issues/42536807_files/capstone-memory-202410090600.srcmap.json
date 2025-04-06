@@ -1,0 +1,12 @@
+{
+  "/src/capstonenext": {
+    "type": "git",
+    "url": "https://github.com/capstone-engine/capstone.git",
+    "rev": "981d648b28f3c6d89a8c676a98bb367da16a00fb"
+  },
+  "/src/capstonev5": {
+    "type": "git",
+    "url": "https://github.com/capstone-engine/capstone.git",
+    "rev": "36a9619b7372c34459d100f1c6fd6eb27326efbc"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libreoffice": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/libreoffice/core",
+    "rev": "2f920c1da7d7021774cbc9ea8dbc4aefa2409a91"
+  }
+}

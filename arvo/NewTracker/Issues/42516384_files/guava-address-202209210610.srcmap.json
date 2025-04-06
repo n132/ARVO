@@ -1,0 +1,17 @@
+{
+  "/src/guava": {
+    "type": "git",
+    "url": "https://github.com/google/guava",
+    "rev": "f248c092260a0ccdcb937b5806251480104c5df5"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "0cb913aa9d77ebd2870aa1036fd8651c2557a9a9"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/freeradius-server": {
+    "type": "git",
+    "url": "https://github.com/FreeRADIUS/freeradius-server.git",
+    "rev": "c84bf604bb442d9fa4c5227d41bf4ccb265fee84"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/pjsip": {
+    "type": "git",
+    "url": "https://github.com/pjsip/pjproject",
+    "rev": "2cf5432fdb38c4b3bd0187e2ce2aa2fbac5c6e8e"
+  }
+}

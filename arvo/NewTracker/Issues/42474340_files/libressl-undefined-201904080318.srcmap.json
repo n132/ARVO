@@ -1,0 +1,22 @@
+{
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable.git",
+    "rev": "4b6c7bfd02dec26021882f1599dbcbccdd4d2889"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/openbsd.git",
+    "rev": "c75a218cf8e99e07f144da7643d1c70958bca09a"
+  },
+  "/src/libressl.fuzzers": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/fuzz.git",
+    "rev": "3b8ad6364ec0c6baa3e8fdeb370631e38ed5886b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "357883"
+  }
+}

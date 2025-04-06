@@ -1,0 +1,27 @@
+{
+  "/src/constantine": {
+    "type": "git",
+    "url": "https://github.com/mratsim/constantine",
+    "rev": "1ad8499ae5dc26179fc6c95bce0e94de69fd5dc8"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "96871c284f0305cc72215368376260a2a9aec898"
+  },
+  "/src/mcl": {
+    "type": "git",
+    "url": "https://github.com/herumi/mcl.git",
+    "rev": "4a823f92bc518af0599e1efc02cfb21e31732007"
+  },
+  "/src/blst": {
+    "type": "git",
+    "url": "https://github.com/supranational/blst",
+    "rev": "9c87d4a09d6648e933c818118a4418349804ce7f"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "63aba63e06c03cfe7189c859599b89f7f417d5c2"
+  }
+}

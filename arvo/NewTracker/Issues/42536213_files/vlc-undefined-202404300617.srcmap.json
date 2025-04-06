@@ -1,0 +1,7 @@
+{
+  "/src/vlc": {
+    "type": "git",
+    "url": "https://github.com/videolan/vlc",
+    "rev": "f7bb59d9f51cc10b25ff86d34a3eff744e60c46e"
+  }
+}

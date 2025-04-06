@@ -1,0 +1,17 @@
+{
+  "/src/pygments": {
+    "type": "git",
+    "url": "https://github.com/pygments/pygments.git",
+    "rev": "fba5268f656868b5fab163a43f3a964bc29e5613"
+  },
+  "/src/pygments/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "cec02db916d21baa4db5b8d262d78848b3a35f4b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a763c61d89f90330bcde7c294c57cfccda1431b8"
+  }
+}

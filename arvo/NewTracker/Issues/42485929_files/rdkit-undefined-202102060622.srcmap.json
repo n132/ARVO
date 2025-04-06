@@ -1,0 +1,12 @@
+{
+  "/src/rdkit": {
+    "type": "git",
+    "url": "https://github.com/rdkit/rdkit.git",
+    "rev": "52c83c45f0213656ab963271641db696d56e7886"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

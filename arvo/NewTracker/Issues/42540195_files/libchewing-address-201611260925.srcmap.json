@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"113a00989877428e8d00ba3b250eb4af078d2266","url":"https://github.com/google/oss-fuzz.git","path":"targets/libchewing"},"/src/libchewing":{"rev":"505efbaccfb1a146ece777266ee309f7d69788f8","type":"git","url":"https://github.com/chewing/libchewing.git"}}

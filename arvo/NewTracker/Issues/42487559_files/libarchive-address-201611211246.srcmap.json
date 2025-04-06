@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"2d4e59d3ae1675f14e0b496cd2b8779e51c9ff56","url":"https://github.com/google/oss-fuzz.git","path":"targets/libarchive"},"/src/libarchive":{"rev":"412bae00626f1faa03ebfee41e33a4d69dc613d9","type":"git","url":"https://github.com/libarchive/libarchive.git"}}

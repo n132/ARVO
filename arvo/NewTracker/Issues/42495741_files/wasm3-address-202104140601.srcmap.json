@@ -1,0 +1,12 @@
+{
+  "/src/wasm3": {
+    "type": "git",
+    "url": "https://github.com/wasm3/wasm3",
+    "rev": "970849df176802c871eb0fd512f1e2b4d39d105b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

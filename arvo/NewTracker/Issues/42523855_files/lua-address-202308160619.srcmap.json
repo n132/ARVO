@@ -1,0 +1,17 @@
+{
+  "/src/testdir": {
+    "type": "git",
+    "url": "https://github.com/ligurio/lua-c-api-tests",
+    "rev": "fdcff2924951ea9d713183cfc7178c2c7ccaf84c"
+  },
+  "/src/testdir/corpus_dir": {
+    "type": "git",
+    "url": "https://github.com/ligurio/lua-c-api-corpus",
+    "rev": "98db57a95c9da887941e4eac0c3c00bfda4310ac"
+  },
+  "/src/lua": {
+    "type": "git",
+    "url": "https://github.com/lua/lua",
+    "rev": "ea39042e13645f63713425c05cc9ee4cfdcf0a40"
+  }
+}

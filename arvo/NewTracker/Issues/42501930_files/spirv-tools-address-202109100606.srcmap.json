@@ -1,0 +1,12 @@
+{
+  "/src/spirv-tools": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+    "rev": "c16224c6845e8b7243db8c8a6a70af2bf9abae74"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

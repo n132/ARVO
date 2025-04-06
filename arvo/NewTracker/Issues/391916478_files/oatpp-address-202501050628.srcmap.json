@@ -1,0 +1,7 @@
+{
+  "/src/oatpp": {
+    "type": "git",
+    "url": "https://github.com/oatpp/oatpp.git",
+    "rev": "8451ee724a0b720075494bde2fd9d223d53bef17"
+  }
+}

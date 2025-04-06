@@ -1,0 +1,12 @@
+{
+  "/src/muparser": {
+    "type": "git",
+    "url": "https://github.com/beltoforion/muparser.git",
+    "rev": "dd0efc8aee586eb3370025677f6ec9dee1da4729"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/lwan": {
+    "type": "git",
+    "url": "https://github.com/lpereira/lwan.git",
+    "rev": "7a7baf683f9ffd844ef97e535d5f22571596200a"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

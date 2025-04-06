@@ -1,0 +1,17 @@
+{
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "326875"
+  },
+  "/src/dropbear": {
+    "type": "hg",
+    "url": "https://secure.ucc.asn.au/hg/dropbear",
+    "rev": "252b406d0e9add92160cd1e368a216eca72efa7a"
+  },
+  "/src/dropbear/corpus": {
+    "type": "hg",
+    "url": "https://secure.ucc.asn.au/hg/dropbear-fuzzcorpus",
+    "rev": "24fbd3331ca09eefb3bc5a9648d44620db2ea9a9"
+  }
+}

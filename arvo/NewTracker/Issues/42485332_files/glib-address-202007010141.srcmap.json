@@ -1,0 +1,12 @@
+{
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "f77c75a1bb37865348bd384bccea3d45f7da77c6"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "518e42281f77768215851d31fc61e8970ce21481"
+  }
+}

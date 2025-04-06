@@ -1,0 +1,7 @@
+{
+  "/src/guava": {
+    "type": "git",
+    "url": "https://github.com/google/guava",
+    "rev": "5669b0c425f2b6a9d8c499b849cfd7ae7869f8c9"
+  }
+}

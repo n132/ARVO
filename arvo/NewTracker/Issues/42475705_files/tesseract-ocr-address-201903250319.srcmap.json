@@ -1,0 +1,27 @@
+{
+  "/src/tesseract-ocr-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/tesseract-ocr-fuzzers",
+    "rev": "5730e3087dee6577a89d32b309c796b05b8bc85c"
+  },
+  "/src/tessdata": {
+    "type": "git",
+    "url": "https://github.com/tesseract-ocr/tessdata",
+    "rev": "277725be3b123d384af6f1ce237fc274421e502b"
+  },
+  "/src/tesseract": {
+    "type": "git",
+    "url": "https://github.com/tesseract-ocr/tesseract",
+    "rev": "b1e305f38c7771f483cf314d6b5552cdf6222978"
+  },
+  "/src/leptonica": {
+    "type": "git",
+    "url": "https://github.com/danbloomberg/leptonica",
+    "rev": "f414750326e26301715a6ab764a48980357a1d06"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "356866"
+  }
+}

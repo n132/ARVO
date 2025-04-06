@@ -1,0 +1,12 @@
+{
+  "/src/tdengine": {
+    "type": "git",
+    "url": "https://github.com/taosdata/TDengine",
+    "rev": "221dac655d904ed097b81a2a6328070a6476b1dc"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "52dd5d479d411460c8cf2010a89f72e269d799ea"
+  }
+}

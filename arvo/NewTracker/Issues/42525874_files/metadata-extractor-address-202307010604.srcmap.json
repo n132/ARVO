@@ -1,0 +1,7 @@
+{
+  "/src/metadata-extractor": {
+    "type": "git",
+    "url": "https://github.com/drewnoakes/metadata-extractor.git",
+    "rev": "e3235eaa307e3d4b564737828b32ea2f2e429655"
+  }
+}

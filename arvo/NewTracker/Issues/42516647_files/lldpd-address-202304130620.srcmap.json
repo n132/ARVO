@@ -1,0 +1,12 @@
+{
+  "/src/lldpd": {
+    "type": "git",
+    "url": "https://github.com/lldpd/lldpd/",
+    "rev": "a9aeabdf879c25c584852a0bb5523837632f099b"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "c54b5962265671859804bb9019bef64f8011701c"
+  }
+}

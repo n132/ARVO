@@ -1,0 +1,12 @@
+{
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "fa69455d0748ae3c3318a5e2b9860ac9bb80485d"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "658a3de77d152ebe9e767a1d7d5c434fe209c60c"
+  }
+}

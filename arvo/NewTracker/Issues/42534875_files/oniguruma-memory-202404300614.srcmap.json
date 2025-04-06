@@ -1,0 +1,7 @@
+{
+  "/src/oniguruma": {
+    "type": "git",
+    "url": "https://github.com/kkos/oniguruma.git",
+    "rev": "2d08822f07847039b696ec4fb3d594e4c7b20847"
+  }
+}

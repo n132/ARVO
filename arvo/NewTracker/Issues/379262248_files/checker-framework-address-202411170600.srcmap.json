@@ -1,0 +1,7 @@
+{
+  "/src/checker-framework": {
+    "type": "git",
+    "url": "https://github.com/typetools/checker-framework",
+    "rev": "b4dcf369b3490a577e586d7a60aff502518da7db"
+  }
+}

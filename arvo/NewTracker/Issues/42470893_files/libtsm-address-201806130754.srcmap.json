@@ -1,0 +1,12 @@
+{
+  "/src/libtsm": {
+    "type": "git",
+    "url": "git://people.freedesktop.org/~dvdhrm/libtsm",
+    "rev": "b73acb4c71698a764763ae8dad94c1e8a2b8d7a3"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "334577"
+  }
+}

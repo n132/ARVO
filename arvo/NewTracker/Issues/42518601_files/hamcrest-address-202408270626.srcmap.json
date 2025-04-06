@@ -1,0 +1,7 @@
+{
+  "/src/hamcrest": {
+    "type": "git",
+    "url": "https://github.com/hamcrest/JavaHamcrest.git",
+    "rev": "6bb90de5c5e114f58d862ed2ad336671c7f50fc1"
+  }
+}

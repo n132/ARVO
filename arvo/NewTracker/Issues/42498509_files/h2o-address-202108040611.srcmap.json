@@ -1,0 +1,12 @@
+{
+  "/src/h2o": {
+    "type": "git",
+    "url": "https://github.com/h2o/h2o",
+    "rev": "772568b9cf6fbb256f51d3ddd55ce14bc7c49c37"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

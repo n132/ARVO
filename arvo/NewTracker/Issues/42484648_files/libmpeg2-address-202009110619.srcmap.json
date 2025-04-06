@@ -1,0 +1,12 @@
+{
+  "/src/libmpeg2": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libmpeg2",
+    "rev": "e76a9db32d5a84b279456b7dbc7baa7d937b4dd9"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

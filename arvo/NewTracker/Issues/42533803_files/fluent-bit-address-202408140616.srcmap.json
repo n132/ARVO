@@ -1,0 +1,17 @@
+{
+  "/src/fluent-bit/lib/cmetrics": {
+    "type": "git",
+    "url": "https://github.com/fluent/cmetrics",
+    "rev": "a3bc932740b796ffd8a3dd721c73bdcb32843412"
+  },
+  "/src/fluent-bit/lib/ctraces": {
+    "type": "git",
+    "url": "https://github.com/fluent/ctraces",
+    "rev": "242ea81b9038779203b1b85071b4a0f506c5c9cd"
+  },
+  "/src/fluent-bit": {
+    "type": "git",
+    "url": "https://github.com/fluent/fluent-bit/",
+    "rev": "960419bbb482dcaa3ac8a7d7ea5ccfd38a1efcca"
+  }
+}

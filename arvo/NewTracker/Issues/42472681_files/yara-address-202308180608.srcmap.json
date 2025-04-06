@@ -1,0 +1,7 @@
+{
+  "/src/yara": {
+    "type": "git",
+    "url": "https://github.com/VirusTotal/yara.git",
+    "rev": "bc0f0522419f1be77378120a4b946c82da4ac635"
+  }
+}

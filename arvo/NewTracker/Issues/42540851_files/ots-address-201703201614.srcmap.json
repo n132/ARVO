@@ -1,0 +1,12 @@
+{
+  "/src/ots": {
+    "type": "git",
+    "url": "https://github.com/khaledhosny/ots.git",
+    "rev": "888ad7d836fedf8b542d5caebe897b9b9cc09058"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "ec86fc2fa358b373131987e3b85fa08bef06963e"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/libdwarf-binary-samples": {
+    "type": "git",
+    "url": "https://github.com/davea42/libdwarf-binary-samples",
+    "rev": "03523cd57891fa524e74e55b0c3e257888301c30"
+  },
+  "/src/libdwarf": {
+    "type": "git",
+    "url": "https://github.com/davea42/libdwarf-code",
+    "rev": "52a8e4b9bd0fe8cff9d7e7fcb8ea6682d60c45b9"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/fastjson": {
+    "type": "git",
+    "url": "https://github.com/alibaba/fastjson",
+    "rev": "e4308b7a108cfddfd9dc815373ba15f87f81bfbd"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "c68cd02c2a816718c80a38dc2763d5e94857c5cb"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "7c2436c7114e21f029b06346421a73910deac578"
+  }
+}

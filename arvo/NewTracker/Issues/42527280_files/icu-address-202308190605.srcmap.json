@@ -1,0 +1,7 @@
+{
+  "/src/icu": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/icu.git",
+    "rev": "a7a2fdbcf257fa22c7a24cfae838675dafd5e071"
+  }
+}

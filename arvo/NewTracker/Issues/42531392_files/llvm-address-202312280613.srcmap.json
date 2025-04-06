@@ -1,0 +1,12 @@
+{
+  "/src/llvm-project": {
+    "type": "git",
+    "url": "https://github.com/llvm/llvm-project.git",
+    "rev": "98073057ee45bc4a9256ecc70dc3da20b0fd5d3b"
+  },
+  "/src/ada-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/AdaLogics/ada-fuzzers",
+    "rev": "1f58c385b6cef45080d8a12022e6ef83bb9ee34c"
+  }
+}

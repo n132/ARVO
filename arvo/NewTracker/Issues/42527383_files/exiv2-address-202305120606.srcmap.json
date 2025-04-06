@@ -1,0 +1,7 @@
+{
+  "/src/exiv2": {
+    "type": "git",
+    "url": "https://github.com/Exiv2/exiv2",
+    "rev": "0c093e91fe6a12853ba4b93ab1e41fe056d13966"
+  }
+}

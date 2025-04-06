@@ -1,0 +1,12 @@
+{
+  "/src/c-ares": {
+    "type": "git",
+    "url": "https://github.com/c-ares/c-ares.git",
+    "rev": "4d6975b3ec24aba44331d235bbcabf899be56cf2"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

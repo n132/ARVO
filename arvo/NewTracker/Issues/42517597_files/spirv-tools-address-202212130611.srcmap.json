@@ -1,0 +1,7 @@
+{
+  "/src/spirv-tools": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+    "rev": "43c99b5ee087704a5ae0909d0ce7be3eff416905"
+  }
+}

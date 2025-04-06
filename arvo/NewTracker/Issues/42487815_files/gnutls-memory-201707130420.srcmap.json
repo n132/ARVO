@@ -1,0 +1,17 @@
+{
+  "/src/gnutls/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "fd2dc9b0f7ae9cdf126010674a6c7c2e1888a313"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "9b211116b86753ac6fbc1a3ff483cc36abb20024"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "638c2576b086ea64ab6b336aafb0fefd97f5bdfc"
+  }
+}

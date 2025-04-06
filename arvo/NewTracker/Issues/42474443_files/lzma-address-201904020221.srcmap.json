@@ -1,0 +1,12 @@
+{
+  "/src/lzma-fuzz": {
+    "type": "git",
+    "url": "https://github.com/fancycode/lzma-fuzz.git",
+    "rev": "1dc367e56ea69998637fc436aff2bba3ded4ea66"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "357447"
+  }
+}

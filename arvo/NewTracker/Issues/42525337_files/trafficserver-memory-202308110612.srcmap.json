@@ -1,0 +1,12 @@
+{
+  "/src/trafficserver": {
+    "type": "git",
+    "url": "https://github.com/apache/trafficserver",
+    "rev": "68f126376f1caaa4739de4a4caab6347d651b2dd"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "f3311962ff2345da304ced497e74ec7e77ecd4db"
+  }
+}

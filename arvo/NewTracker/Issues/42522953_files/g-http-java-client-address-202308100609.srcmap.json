@@ -1,0 +1,7 @@
+{
+  "/src/project-parent/google-http-java-client": {
+    "type": "git",
+    "url": "https://github.com/googleapis/google-http-java-client/",
+    "rev": "13edd1357eb79535d943f5288ab3adf4d9dfb52a"
+  }
+}

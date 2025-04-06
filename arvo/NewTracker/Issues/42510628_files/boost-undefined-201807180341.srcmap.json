@@ -1,0 +1,12 @@
+{
+  "/src/boost": {
+    "type": "git",
+    "url": "https://github.com/boostorg/boost.git",
+    "rev": "e6eb8ff4a420a6a9e72f3ad1da6c036fa480c48d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "337344"
+  }
+}

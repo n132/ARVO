@@ -1,0 +1,12 @@
+{
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "ad448b21f8dcb0f2c60f7edcec6f00f0857c474f"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "d246f61b04836c6040fff7936de551ef92529971"
+  }
+}

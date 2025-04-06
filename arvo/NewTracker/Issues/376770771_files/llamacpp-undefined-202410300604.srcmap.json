@@ -1,0 +1,7 @@
+{
+  "/src/llama.cpp": {
+    "type": "git",
+    "url": "https://github.com/ggerganov/llama.cpp",
+    "rev": "c5b0f4b5d90297f3e729fca7f78ddb25fcab5ddc"
+  }
+}

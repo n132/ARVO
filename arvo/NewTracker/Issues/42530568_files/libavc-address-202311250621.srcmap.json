@@ -1,0 +1,7 @@
+{
+  "/src/libavc": {
+    "type": "git",
+    "url": "https://github.com/ittiam-systems/libavc.git",
+    "rev": "82f4e69094b7d6e4200d14ba64ac9937f337710d"
+  }
+}

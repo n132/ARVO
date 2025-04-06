@@ -1,0 +1,12 @@
+{
+  "/src/proj.4": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/proj.4",
+    "rev": "9a8c37ac04ce913617a2b429bbc7f8a3daa1848d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "324055"
+  }
+}

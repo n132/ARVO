@@ -1,0 +1,12 @@
+{
+  "/src/miniz": {
+    "type": "git",
+    "url": "https://github.com/richgel999/miniz.git",
+    "rev": "0bac8947c597e37a5c609a487d94bcaf6a40e9f6"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/pkillarjun/oss-fuzz-bloat",
+    "rev": "4e52c62eecf2c7d9405d4992b4b297cf193c28ae"
+  },
+  "/src/pupnp": {
+    "type": "git",
+    "url": "https://github.com/pupnp/pupnp",
+    "rev": "57042f95e16e4f2babfcc1459e91f8484a351544"
+  }
+}

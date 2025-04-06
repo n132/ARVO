@@ -1,0 +1,7 @@
+{
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "f0bc060e89a85cf64d21d7c0cad022010e874284"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libyaml": {
+    "type": "git",
+    "url": "https://github.com/yaml/libyaml",
+    "rev": "660242d6a418f0348c61057ed3052450527b3abf"
+  }
+}

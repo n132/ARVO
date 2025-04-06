@@ -1,0 +1,22 @@
+{
+  "/src/gstreamer": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/gstreamer/gstreamer.git",
+    "rev": "4c19c9243aed70e9758e3a434e8764df8ae52676"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/theora.git",
+    "rev": "7180717276af1ebc7da15c83162d6c5d6203aabf"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "7cf42ea17aef7bc1b7b21af70724840a96c2e7d0"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/vorbis.git",
+    "rev": "bb4047de4c05712bf1fd49b9584c360b8e4e0adf"
+  }
+}

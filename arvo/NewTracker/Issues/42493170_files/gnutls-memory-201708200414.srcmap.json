@@ -1,0 +1,42 @@
+{
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "12897fd34dbd37a77e4adb60750344e451c44679"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "dcda81d796de2f4a16fd7e9e7a5d07baa288f147"
+  },
+  "/src/libtasn1": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libtasn1.git",
+    "rev": "d8d805e1f2e6799bb2dff4871a8598dc83088a39"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "8c3d4f81f99ca5b235cbf9e03aede43702e54f9c"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "dd8fabbf8ee5884dce477c775d76348692226bed"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "ec2d7255807370edb0c8f429c21b9dee566410a8"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "f046f9bb8acb2583ad40f1671acd62fba5186d38"
+  },
+  "/src/gmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "1e7ec7cf42e0dac060289dc77d06305cf310f551"
+  }
+}

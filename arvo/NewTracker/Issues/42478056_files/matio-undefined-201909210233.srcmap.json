@@ -1,0 +1,17 @@
+{
+  "/src/matio": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/matio/matio",
+    "rev": "fe484df0e021abd6adecfe96a69e8a939772f07e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372447"
+  }
+}

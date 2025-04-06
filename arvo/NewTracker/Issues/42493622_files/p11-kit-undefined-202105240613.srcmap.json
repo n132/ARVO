@@ -1,0 +1,12 @@
+{
+  "/src/p11-kit": {
+    "type": "git",
+    "url": "https://github.com/p11-glue/p11-kit.git",
+    "rev": "b3243a754763f6df19351593781b88e277a324bc"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

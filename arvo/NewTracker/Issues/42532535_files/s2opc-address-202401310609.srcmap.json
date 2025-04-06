@@ -1,0 +1,12 @@
+{
+  "/src/S2OPC-fuzzing-data": {
+    "type": "git",
+    "url": "https://gitlab.com/systerel/S2OPC-fuzzing-data",
+    "rev": "1643f9b7f454d0dc0033063939c0632e4f0004ae"
+  },
+  "/src/S2OPC": {
+    "type": "git",
+    "url": "https://gitlab.com/systerel/S2OPC",
+    "rev": "567efabe975f93a5f0f5d98784f9a69b8a4423d6"
+  }
+}

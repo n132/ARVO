@@ -1,0 +1,12 @@
+{
+  "/src/hermes": {
+    "type": "git",
+    "url": "https://github.com/facebook/hermes.git",
+    "rev": "3cdc5bdc3197df8a257fa26950fe22578fa36fa9"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

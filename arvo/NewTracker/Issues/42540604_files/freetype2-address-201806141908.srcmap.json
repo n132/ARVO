@@ -1,0 +1,22 @@
+{
+  "/src/freetype2": {
+    "type": "git",
+    "url": "git://git.sv.nongnu.org/freetype/freetype2.git",
+    "rev": "a44e20879cefea41663bb36ff4af908cc4146fb8"
+  },
+  "/src/freetype2-testing": {
+    "type": "git",
+    "url": "https://github.com/cherusker/freetype2-testing.git",
+    "rev": "6707414d142f01f188ebd39329df7803d95e3323"
+  },
+  "/src/text-rendering-tests": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/text-rendering-tests.git",
+    "rev": "b7ff27b4086fe9aae7e2be6790823b8fdd2b6ccd"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "334753"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/nestegg": {
+    "type": "git",
+    "url": "https://github.com/kinetiknz/nestegg.git",
+    "rev": "90521e7f31194667101b340b8e7fc308c838a68c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "362189"
+  }
+}

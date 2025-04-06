@@ -1,0 +1,12 @@
+{
+  "/src/librdkafka": {
+    "type": "git",
+    "url": "https://github.com/edenhill/librdkafka",
+    "rev": "de865ef331cbbf6d9039ab201254214305466b7d"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

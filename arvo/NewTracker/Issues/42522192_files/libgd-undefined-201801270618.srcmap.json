@@ -1,0 +1,12 @@
+{
+  "/src/libgd": {
+    "type": "git",
+    "url": "https://github.com/libgd/libgd",
+    "rev": "14ca9e4b235e131710bb0b84a26a25cb767af363"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "323581"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/javaparser": {
+    "type": "git",
+    "url": "https://github.com/javaparser/javaparser",
+    "rev": "fdada5e50bd958a428053f505fb0a80fb9378908"
+  }
+}

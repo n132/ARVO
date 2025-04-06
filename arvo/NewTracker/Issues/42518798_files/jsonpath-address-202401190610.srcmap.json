@@ -1,0 +1,7 @@
+{
+  "/src/JsonPath": {
+    "type": "git",
+    "url": "https://github.com/json-path/JsonPath.git",
+    "rev": "49b1151b11fbb147382c9c0f1c898b1ca0d2d3ec"
+  }
+}

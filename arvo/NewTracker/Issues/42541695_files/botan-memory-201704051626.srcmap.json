@@ -1,0 +1,17 @@
+{
+  "/src/crypto-corpus": {
+    "type": "git",
+    "url": "https://github.com/randombit/crypto-corpus.git",
+    "rev": "41ed9ad051357c05cd0c3ec3e7cb2c0aa708c960"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "45896a06874d5e43714b59d3fbc78dec61fcbf6d"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "0f66138ef41a14f60aed5655a808d7c66084a6c4"
+  }
+}

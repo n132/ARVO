@@ -1,0 +1,22 @@
+{
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "0a596947f9003e765643235c25625473726b9bcd"
+  },
+  "/src/rapidjson-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/rapidjson-fuzzers.git",
+    "rev": "0bdce470b1bbddcddd132687c4e346145eebc448"
+  },
+  "/src/rapidjson": {
+    "type": "git",
+    "url": "https://github.com/Tencent/rapidjson.git",
+    "rev": "b557259f8813bed2d79e83bd2f92eb673579a82c"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

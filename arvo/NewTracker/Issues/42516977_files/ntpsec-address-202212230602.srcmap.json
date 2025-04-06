@@ -1,0 +1,12 @@
+{
+  "/src/ntpsec": {
+    "type": "git",
+    "url": "https://gitlab.com/NTPsec/ntpsec",
+    "rev": "b8900bfc21cb3df44a3d17df4acb2a533dfd36a3"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "1f27aa1df1b3897acfe03c447899248e5ad9ec86"
+  }
+}

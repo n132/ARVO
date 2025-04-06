@@ -1,0 +1,17 @@
+{
+  "/src/ovs-fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/openvswitch/ovs-fuzzing-corpus.git",
+    "rev": "e205dcb29dba2856722422b0600cc1521d8480f0"
+  },
+  "/src/openvswitch": {
+    "type": "git",
+    "url": "https://github.com/openvswitch/ovs.git",
+    "rev": "0d5450a2ae14dcb98ad9f2546fc956910c9b8f54"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "343292"
+  }
+}

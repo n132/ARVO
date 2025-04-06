@@ -1,0 +1,22 @@
+{
+  "/src/commons-geometry": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-geometry.git",
+    "rev": "b00020d34aaf657697dd30e0f730c917233dc79f"
+  },
+  "/src/commons-imaging": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-imaging.git",
+    "rev": "938ab7a982b32243493803cf6777e085e6e9ddc7"
+  },
+  "/src/commons-compress": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-compress.git",
+    "rev": "8bdf82c0a49ade31ef7a035962327c633ade5801"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

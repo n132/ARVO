@@ -1,0 +1,7 @@
+{
+  "/src/libspdm": {
+    "type": "git",
+    "url": "https://github.com/DMTF/libspdm.git",
+    "rev": "4c92ff5ced7862e4f2eea945dd723d2e1b1fc476"
+  }
+}

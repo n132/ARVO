@@ -1,0 +1,12 @@
+{
+  "/src/skcms": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/skcms.git",
+    "rev": "c5472f44e1a2c15eb60bc2fd4255c67b9004f11f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "325862"
+  }
+}

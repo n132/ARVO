@@ -1,0 +1,7 @@
+{
+  "/src/md4c": {
+    "type": "git",
+    "url": "https://github.com/mity/md4c",
+    "rev": "e25ea3d1826dddf53ee5df9075cc43b91e3d8bbf"
+  }
+}

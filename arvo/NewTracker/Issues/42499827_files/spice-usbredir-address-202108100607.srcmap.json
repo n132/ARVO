@@ -1,0 +1,12 @@
+{
+  "/src/spice-usbredir": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/spice/usbredir.git",
+    "rev": "3dae79daa70c0b62e64fc6bf1b7e68757a812db0"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

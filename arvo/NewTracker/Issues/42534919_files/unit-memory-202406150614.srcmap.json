@@ -1,0 +1,12 @@
+{
+  "/src/unit": {
+    "type": "git",
+    "url": "https://github.com/nginx/unit",
+    "rev": "35a572c2813ed2cae6af2282cb361e901a79934d"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/pkillarjun/oss-fuzz-bloat",
+    "rev": "4e52c62eecf2c7d9405d4992b4b297cf193c28ae"
+  }
+}

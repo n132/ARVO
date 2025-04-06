@@ -1,0 +1,12 @@
+{
+  "/src/pcre2": {
+    "type": "git",
+    "url": "https://github.com/PhilipHazel/pcre2",
+    "rev": "35fee4193b852cb504892352bd0155de10809889"
+  },
+  "/src/njs": {
+    "type": "hg",
+    "url": "http://hg.nginx.org/njs",
+    "rev": "10127d70e941543c419308e149243175c0f9646b"
+  }
+}

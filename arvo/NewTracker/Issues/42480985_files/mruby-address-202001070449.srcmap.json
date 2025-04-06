@@ -1,0 +1,27 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "1363bf9c051af36c555c23d734a204246c215697"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "dd89da92b59b1714bab6e2a135093948a1cf1c6a"
+  },
+  "/src/mruby_seeds": {
+    "type": "git",
+    "url": "https://github.com/bshastry/mruby_seeds.git",
+    "rev": "5a618aba8e4493eceff7a430cba7c848e6cbabfd"
+  },
+  "/src/mruby": {
+    "type": "git",
+    "url": "https://github.com/mruby/mruby",
+    "rev": "afad9391734998df4f76a6f7108278d2aa2599a0"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

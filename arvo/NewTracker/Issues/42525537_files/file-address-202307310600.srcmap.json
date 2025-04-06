@@ -1,0 +1,17 @@
+{
+  "/src/pocs": {
+    "type": "git",
+    "url": "https://github.com/corkami/pocs",
+    "rev": "1b001515bb2439084886333402b3be6f3c92e9f4"
+  },
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples.git",
+    "rev": "50f4f6ad752e982f26fab167665e763b6877c942"
+  },
+  "/src/file": {
+    "type": "git",
+    "url": "https://github.com/file/file.git",
+    "rev": "1fc9175166fc5c5117838a1dcfb309b7c595eb56"
+  }
+}

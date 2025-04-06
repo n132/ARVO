@@ -1,0 +1,22 @@
+{
+  "/src/moddable": {
+    "type": "git",
+    "url": "https://github.com/Moddable-OpenSource/moddable",
+    "rev": "aa9c5cd47d0120c286cc77eca21f275224424ebb"
+  },
+  "/src/test262": {
+    "type": "git",
+    "url": "https://github.com/tc39/test262",
+    "rev": "c95cc6873d9933b8674ec8a840f43be0fb836ec1"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "41d7725e6a12ec2e0a89b68fafacb4bb5af8fac7"
+  },
+  "/src/go-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  }
+}

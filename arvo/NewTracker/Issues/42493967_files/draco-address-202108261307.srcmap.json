@@ -1,0 +1,12 @@
+{
+  "/src/draco": {
+    "type": "git",
+    "url": "https://github.com/google/draco",
+    "rev": "c2d57bc9de5c0a2de0a25a6354e930380c27f372"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

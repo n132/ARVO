@@ -1,0 +1,12 @@
+{
+  "/src/wpantund": {
+    "type": "git",
+    "url": "https://github.com/openthread/wpantund",
+    "rev": "ed49abb6e8242d1e645691747610d8156ab7cba4"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "327104"
+  }
+}

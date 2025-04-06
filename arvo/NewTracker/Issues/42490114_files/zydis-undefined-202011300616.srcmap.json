@@ -1,0 +1,12 @@
+{
+  "/src/zydis": {
+    "type": "git",
+    "url": "https://github.com/zyantific/zydis.git",
+    "rev": "ce84ac9d25450b4de83d18ae62db12282c961023"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

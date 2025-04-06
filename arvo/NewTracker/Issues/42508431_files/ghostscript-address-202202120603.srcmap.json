@@ -1,0 +1,22 @@
+{
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "git://git.ghostscript.com/ghostpdl.git",
+    "rev": "4ef76e99d70f3f290120486434abeea24e7c6682"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/freetype/freetype2.git",
+    "rev": "3f83daeecb1a78d851b660eed025eeba362c0e4a"
+  },
+  "/src/cups": {
+    "type": "git",
+    "url": "https://github.com/apple/cups.git",
+    "rev": "0ad6ac55da2686c6fa24b05bde5e9036fd4db5d1"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

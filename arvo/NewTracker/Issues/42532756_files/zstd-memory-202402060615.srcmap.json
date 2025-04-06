@@ -1,0 +1,7 @@
+{
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd",
+    "rev": "06b5b37b8d5450f05aee920c6ba852f201cece42"
+  }
+}

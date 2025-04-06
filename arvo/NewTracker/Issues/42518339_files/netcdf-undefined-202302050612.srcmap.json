@@ -1,0 +1,7 @@
+{
+  "/src/netcdf-c": {
+    "type": "git",
+    "url": "https://github.com/Unidata/netcdf-c",
+    "rev": "26dccc25b80f6474982264cef8b18cca1af53132"
+  }
+}

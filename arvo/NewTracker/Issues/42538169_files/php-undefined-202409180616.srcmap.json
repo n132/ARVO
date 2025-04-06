@@ -1,0 +1,7 @@
+{
+  "/src/php-src": {
+    "type": "git",
+    "url": "https://github.com/php/php-src.git",
+    "rev": "e2da65de2acae5eb17de4dd6a34bd1f8f5d8c007"
+  }
+}

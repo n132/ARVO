@@ -1,0 +1,17 @@
+{
+  "/src/libcxx": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/libcxx/trunk",
+    "rev": "317402"
+  },
+  "/src/libcxxabi": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/libcxxabi/trunk",
+    "rev": "317402"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "317402"
+  }
+}

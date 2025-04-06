@@ -1,0 +1,27 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "6dcd81093c151553082a8d6495df95f5d00b5c3c"
+  },
+  "/src/fuzzer-test-suite": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzer-test-suite",
+    "rev": "a47305004cfa75181926a3804207d55b8778814f"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "3d1ea5f9eb5fc90f9f8e28447541929482cfb049"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "a627bd26a375f5c41d54f90a47c838157d1bec97"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "358023"
+  }
+}

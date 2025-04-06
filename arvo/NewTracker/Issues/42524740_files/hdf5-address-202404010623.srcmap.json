@@ -1,0 +1,7 @@
+{
+  "/src/hdf5": {
+    "type": "git",
+    "url": "https://github.com/HDFGroup/hdf5",
+    "rev": "589f5238feae51787d3925fba0cb39b1cbabf8d5"
+  }
+}

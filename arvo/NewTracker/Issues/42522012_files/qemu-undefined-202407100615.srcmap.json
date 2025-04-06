@@ -1,0 +1,12 @@
+{
+  "/src/qemu": {
+    "type": "git",
+    "url": "https://git.qemu.org/git/qemu.git",
+    "rev": "59084feb256c617063e0dbe7e64821ae8852d7cf"
+  },
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "00edb7f7453a43cff343f9e99d49f2e421e4345c"
+  }
+}

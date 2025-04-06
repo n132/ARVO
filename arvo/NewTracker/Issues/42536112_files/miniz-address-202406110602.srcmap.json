@@ -1,0 +1,7 @@
+{
+  "/src/miniz": {
+    "type": "git",
+    "url": "https://github.com/richgel999/miniz.git",
+    "rev": "8573fd7cd6f49b262a0ccc447f3c6acfc415e556"
+  }
+}

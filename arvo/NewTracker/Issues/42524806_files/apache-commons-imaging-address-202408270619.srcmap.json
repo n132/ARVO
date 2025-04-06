@@ -1,0 +1,7 @@
+{
+  "/src/commons-imaging": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-imaging.git",
+    "rev": "4dbd0db102cb5348fc924f0491067c30eca4ae10"
+  }
+}

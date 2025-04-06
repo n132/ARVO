@@ -1,0 +1,22 @@
+{
+  "/src/arrow-testing": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow-testing.git",
+    "rev": "83ada4ec0f2cfe36f4168628d7f470e6199e663a"
+  },
+  "/src/arrow": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow.git",
+    "rev": "cc4e2a54309813e6bbbb36ba50bcd22a7b71d3d9"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

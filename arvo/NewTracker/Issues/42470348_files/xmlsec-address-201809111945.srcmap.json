@@ -1,0 +1,22 @@
+{
+  "/src/libxslt": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxslt.git",
+    "rev": "6abf3c481cf12ecd2b0a8fc5f2903e15d8904673"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "123234f2cfcd9e9b9f83047eee1dc17b4c3f4407"
+  },
+  "/src/xmlsec": {
+    "type": "git",
+    "url": "https://github.com/lsh123/xmlsec",
+    "rev": "10c970891646c6c6d8b92dc18e0badf63083af07"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "341985"
+  }
+}

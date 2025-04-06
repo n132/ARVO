@@ -1,0 +1,7 @@
+{
+  "/src/pcre2": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre2/code/trunk",
+    "rev": "588"
+  }
+}

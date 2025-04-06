@@ -1,0 +1,7 @@
+{
+  "/src/unicorn": {
+    "type": "git",
+    "url": "https://github.com/unicorn-engine/unicorn.git",
+    "rev": "381850356f6fe3593186699fd34e0682f4846bd5"
+  }
+}

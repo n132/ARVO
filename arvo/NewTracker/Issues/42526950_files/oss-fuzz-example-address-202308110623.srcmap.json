@@ -1,0 +1,7 @@
+{
+  "/src/oss-fuzz-example": {
+    "type": "git",
+    "url": "https://github.com/AdaLogics/oss-fuzz-example",
+    "rev": "61e234fde0dbc8fc03b3586ffe085654723acd33"
+  }
+}

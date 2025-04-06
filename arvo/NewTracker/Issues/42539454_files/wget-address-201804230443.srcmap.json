@@ -1,0 +1,42 @@
+{
+  "/src/wget": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/wget.git",
+    "rev": "f56f970bc2b0df1d26ebd6a0a86083b37017cd70"
+  },
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "118921d28b929918365d484ae796c7584c45f8a3"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "442e04385ffe9134fdefe198726b431849decf6e"
+  },
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "b220ffb0b98105ecfc554dacf1ab892c25fbc354"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "5cd8dfa4e78313ca382f97ee477f11dd93178508"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "6e0e2506db069ae7e4e456bcc1b67c6c1a46b867"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "214bf852d8dab02bf62900e61facef2c9f48f2f4"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "330562"
+  }
+}

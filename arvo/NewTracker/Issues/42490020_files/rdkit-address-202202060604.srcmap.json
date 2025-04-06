@@ -1,0 +1,17 @@
+{
+  "/src/rdkit": {
+    "type": "git",
+    "url": "https://github.com/rdkit/rdkit.git",
+    "rev": "6e67e2bbde89c6470866fd068256c59e603e12ce"
+  },
+  "/src/eigen": {
+    "type": "git",
+    "url": "https://gitlab.com/libeigen/eigen",
+    "rev": "9441d94dccccd5db8d64179516fdc5b53994a047"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "e907b0bda2f04c16eb7f10d5b2f41a3416a3e2b8"
+  }
+}
