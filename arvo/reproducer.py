@@ -86,6 +86,8 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
     issue_date  = srcmap.name.split(".")[0].split("-")[-1]
     commit_date = str2date(issue_date,STAMP_DELAY)
     # Depends on case 344, 367, 36021, the date provided by srcmap should be in UTC-9 to UTC-12
+    if 'issue' not in issue:
+        issue['issue'] = {'localId':issue['localId']}
     if engine not in ['libfuzzer','afl','honggfuzz','centipede']:
         issue_record(issue['project'],issue['issue']['localId'],"Failed to get engine")
         return False
@@ -548,6 +550,12 @@ def saveImg(localId,issue):
         return False
 
 def verify(localId,save_img=False,save_AICC=False):
+    if localId < 40000000:
+        mapping = mapMapping()
+        if localId not in mapMapping:
+            WARN("[x] LocalId not in mapping, using obsolete localId")
+        else:
+            localId = mapping[localId]
     # if localId in avoid.avoid:
     #     print(f"[+] Please avoid waste time on issue {localId}")
     #     return False
@@ -577,6 +585,7 @@ def verify(localId,save_img=False,save_AICC=False):
         return result
     
     srcmap,issue = getIssueTuple(localId)
+
     if not srcmap or not issue:
         eventLog(f"Failed to get the srcmap or issue for case {localId}")
         return False

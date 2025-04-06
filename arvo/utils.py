@@ -42,11 +42,12 @@ ARVO_ZDC    = Path(ZDC)
 UserName    = UserName
 CLEAN_TMP   = CLEAN_TMP 
 TIME_ZONE   = TIME_ZONE
-DATADIR     = ARVO / DATA_FOLD
+DATADIR     = ARVO / DATA_FOLD2
 MetaDataFile= DATADIR / "metadata.jsonl"
 ExeLog      = ARVO  / "Log" / "FuzzerExecution"
 RM_IMAGES   = RM_IMAGES
 SORTED_IMAGES  = False
+MAPPING     = None
 session = requests.Session()
 def eventLog(s,ext=False):
     with open(ARVO/"Log"/"_Event.log",'a') as f:
@@ -362,6 +363,17 @@ def getPoc(localId,issue=None, outPath = None):
         eventLog(f"[-] getPoc {localId}: Failed to download PoC")
         return leaveRet(None,case_dir)
     return pocPath
+def mapMapping():
+    global MAPPING
+    if MAPPING:
+        return MAPPING
+    with open(ARVO/"oss_fuzz_mappings.csv","r") as f:
+            lines = f.readlines()
+    MAPPING = {}
+    for line in lines:
+        tmp  = line.split(",")
+        MAPPING[int(tmp[0])] = int(tmp[1])
+    return MAPPING
 def getSrcmaps(localId):
     def _cmp(a):
         return str(a)
