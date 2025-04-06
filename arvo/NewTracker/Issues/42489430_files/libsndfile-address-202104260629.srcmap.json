@@ -1,0 +1,12 @@
+{
+  "/src/libsndfile": {
+    "type": "git",
+    "url": "https://github.com/libsndfile/libsndfile.git",
+    "rev": "949c89122d1081d69260a16a56350624c4db5916"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "/src/skia/common": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/common.git",
+    "rev": "9737551d7a52c3db3262db5856e6bcd62c462b92"
+  },
+  "/src/skia/third_party/externals/icu": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
+    "rev": "ec9c1133693148470ffe2e5e53576998e3650c1d"
+  },
+  "/src/skia/third_party/externals/microhttpd": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libmicrohttpd",
+    "rev": "748945ec6f1c67b7efc934ab0808e1d32f2fb98d"
+  },
+  "/src/skia/third_party/externals/spirv-tools": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/SPIRV-Tools.git",
+    "rev": "1fb8c37b5718118b49eec59dc383cfa3f98643c0"
+  },
+  "/src/skia/third_party/externals/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp.git",
+    "rev": "50d1a848bc56554af8413cfe681f94286a6371b3"
+  },
+  "/src/skia/third_party/externals/expat": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/expat.git",
+    "rev": "e5aa0a2cb0a5f759ef31c0819dc67d9b14246a4a"
+  },
+  "/src/skia/third_party/externals/zlib": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib",
+    "rev": "4576304a4b9835aa8646c9735b079e1d96858633"
+  },
+  "/src/skia/third_party/externals/sdl": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/sdl",
+    "rev": "9b526d28cb2d7f0ccff0613c94bb52abc8f53b6f"
+  },
+  "/src/skia/third_party/externals/freetype": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/freetype2.git",
+    "rev": "447a0b62634802d8acdb56008cff5ff4e50be244"
+  },
+  "/src/skia/third_party/externals/dng_sdk": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/dng_sdk.git",
+    "rev": "96443b262250c390b0caefbf3eed8463ba35ecae"
+  },
+  "/src/skia/third_party/externals/spirv-headers": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/SPIRV-Headers.git",
+    "rev": "2d6ba39368a781edd82eff5df2b6bc614e892329"
+  },
+  "/src/skia/third_party/externals/harfbuzz": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/harfbuzz.git",
+    "rev": "6af6c1114a3495584ac4197c62592741c407b5a2"
+  },
+  "/src/skia/third_party/externals/imgui": {
+    "type": "git",
+    "url": "https://github.com/ocornut/imgui.git",
+    "rev": "6384eee34f08cb7eab8d835043e1738e4adcdf75"
+  },
+  "/src/skia/third_party/externals/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/libjpeg-turbo.git",
+    "rev": "6de58e0d28014caf2fc1370145f22fd6d65f63e3"
+  },
+  "/src/skia/third_party/externals/sfntly": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/googlei18n/sfntly.git",
+    "rev": "b18b09b6114b9b7fe6fc2f96d8b15e8a72f66916"
+  },
+  "/src/skia/third_party/externals/angle2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/angle/angle.git",
+    "rev": "cce8965d2c58daefb067c5de32b13ed0ffa3abe4"
+  },
+  "/src/skia/third_party/externals/jsoncpp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/open-source-parsers/jsoncpp.git",
+    "rev": "7165f6ac4c482e68475c9e1dac086f9e12fff0d0"
+  },
+  "/src/skia/third_party/externals/piex": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/piex.git",
+    "rev": "8f540f64b6c170a16fb7e6e52d61819705c1522a"
+  },
+  "/src/skia/buildtools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/buildtools.git",
+    "rev": "e6b510a9daf822bbe9f922c200c58150803d2fd8"
+  },
+  "/src/skia": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/skia.git",
+    "rev": "f3b9d4b033a663ca364e2893ea36f3f03cad22ef"
+  },
+  "/src/depot_tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
+    "rev": "b983ac1ae28165b738aa77ad56103312f0e0fc58"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "b2149934abf06a26d693033106be02fddcf044a9"
+  }
+}

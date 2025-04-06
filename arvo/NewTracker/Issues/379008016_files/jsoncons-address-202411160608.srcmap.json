@@ -1,0 +1,7 @@
+{
+  "/src/jsoncons": {
+    "type": "git",
+    "url": "https://github.com/danielaparker/jsoncons",
+    "rev": "ffd9a9193ae76f2b0063cd6dc95d98c42177f02d"
+  }
+}

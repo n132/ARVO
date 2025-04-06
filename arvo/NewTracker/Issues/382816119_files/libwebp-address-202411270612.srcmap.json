@@ -1,0 +1,12 @@
+{
+  "/src/libwebp-test-data": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp-test-data",
+    "rev": "260804d686f0491e0326a50eef491829dae09e9e"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "306335198d2419988223cac98f7c99c6975204c2"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/cups": {
+    "type": "git",
+    "url": "https://github.com/OpenPrinting/cups",
+    "rev": "df56255beb028ec4cf8bd3266be54ebc4dbb3517"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "f3311962ff2345da304ced497e74ec7e77ecd4db"
+  }
+}

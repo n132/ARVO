@@ -1,0 +1,12 @@
+{
+  "/src/sudo": {
+    "type": "git",
+    "url": "https://github.com/sudo-project/sudo",
+    "rev": "aaa2e8ddecf85903d71146532e40a14ea952ca2e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

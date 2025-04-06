@@ -1,0 +1,17 @@
+{
+  "/src/swift-protobuf": {
+    "type": "git",
+    "url": "https://github.com/apple/swift-protobuf.git",
+    "rev": "3a4b54d617ee953a82fbf04405d5d8cf9083f416"
+  },
+  "/src/llvm-project": {
+    "type": "git",
+    "url": "https://github.com/llvm/llvm-project.git",
+    "rev": "edea476142685c408ad086a5622c1a01f230a362"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "3ff4ca348c344bded53f53b0d0c4b020a188f26e"
+  }
+}

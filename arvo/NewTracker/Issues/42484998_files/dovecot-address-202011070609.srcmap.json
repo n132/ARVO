@@ -1,0 +1,12 @@
+{
+  "/src/dovecot": {
+    "type": "git",
+    "url": "https://github.com/dovecot/core",
+    "rev": "ee2d38fc66fafa741274eb9a6d31f2eeab83ed52"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

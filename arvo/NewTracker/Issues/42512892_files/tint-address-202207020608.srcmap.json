@@ -1,0 +1,17 @@
+{
+  "/src/dawn": {
+    "type": "git",
+    "url": "https://dawn.googlesource.com/dawn",
+    "rev": "c0d493ffa1e3720bba898597fc2af6121a5b01b8"
+  },
+  "/src/depot_tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
+    "rev": "78c53d11a01f8439b37010289e8bbdb139942d57"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

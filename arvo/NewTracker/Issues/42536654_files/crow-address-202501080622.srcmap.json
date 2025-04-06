@@ -1,0 +1,7 @@
+{
+  "/src/crow": {
+    "type": "git",
+    "url": "https://github.com/CrowCpp/Crow.git",
+    "rev": "77eda0d6466721b5d0b48ada92d89481f510732e"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/spring-data-redis": {
+    "type": "git",
+    "url": "https://github.com/spring-projects/spring-data-redis.git",
+    "rev": "505fd846aed11ce3e4b02977707a2daf2b1f9b52"
+  }
+}

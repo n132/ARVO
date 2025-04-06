@@ -1,0 +1,22 @@
+{
+  "/src/libsodium": {
+    "type": "git",
+    "url": "https://github.com/jedisct1/libsodium.git",
+    "rev": "15101976216b4672514772338a2adf706c4a99d6"
+  },
+  "/src/libzmq-fuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/zeromq/libzmq-fuzz-corpora.git",
+    "rev": "0d1e67c7089295cb64ff64b85773077eae1cb155"
+  },
+  "/src/libzmq": {
+    "type": "git",
+    "url": "https://github.com/zeromq/libzmq.git",
+    "rev": "d280c44fe00092d240f4da19b1247124069371c7"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/llvm-project": {
+    "type": "git",
+    "url": "https://github.com/llvm/llvm-project.git",
+    "rev": "9a5e3a43923229af2c3d8c6828ef68cb2584c941"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "518e42281f77768215851d31fc61e8970ce21481"
+  }
+}

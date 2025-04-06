@@ -1,0 +1,17 @@
+{
+  "/src/fuzzer-test-suite": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzer-test-suite",
+    "rev": "a4c174b24f36798c8f9121b6246503c17ef5c3e9"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://gitlab.com/randy408/libspng.git",
+    "rev": "a833f0f81c2e3cfb7c899c2ed7d350aca0a5d8dc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "367281"
+  }
+}

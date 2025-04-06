@@ -1,0 +1,22 @@
+{
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl.git",
+    "rev": "8e51a340f40fc80331ddac19203ef7a3e7e02d1a"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://github.com/google/boringssl.git",
+    "rev": "982279b366eccd9e4146036c7fcda7f72d2cbdff"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/catenacyber/mbedtls.git",
+    "rev": "66354ed68e9fb2e553a342921b7ac0e7d76350fd"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "332852"
+  }
+}

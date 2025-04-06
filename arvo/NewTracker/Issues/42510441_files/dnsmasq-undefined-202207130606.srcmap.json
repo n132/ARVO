@@ -1,0 +1,12 @@
+{
+  "/src/dnsmasq": {
+    "type": "git",
+    "url": "git://thekelleys.org.uk/dnsmasq.git",
+    "rev": "20b4a4ea5b19f3143add1342dde74a0be2b30a86"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

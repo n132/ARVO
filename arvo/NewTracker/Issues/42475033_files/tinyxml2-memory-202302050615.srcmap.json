@@ -1,0 +1,7 @@
+{
+  "/src/tinyxml2": {
+    "type": "git",
+    "url": "https://github.com/leethomason/tinyxml2",
+    "rev": "e05956094c27117f989d22f25b75633123d72a83"
+  }
+}

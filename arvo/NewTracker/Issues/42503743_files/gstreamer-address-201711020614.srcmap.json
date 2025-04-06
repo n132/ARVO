@@ -1,0 +1,22 @@
+{
+  "/src/gstreamer": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/gstreamer/gstreamer",
+    "rev": "4c795924dba5595fb1472864f7d27262bce247a8"
+  },
+  "/src/gst-ci": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-ci",
+    "rev": "8f4bcce46ea7fdfcb3e2a9750f34252e34c39860"
+  },
+  "/src/gst-plugins-base": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/gstreamer/gst-plugins-base",
+    "rev": "39ba6427f18f727cc5e5bf477a24a772e4aaedee"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "317188"
+  }
+}

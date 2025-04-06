@@ -1,0 +1,7 @@
+{
+  "/src/commons-codec": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-codec.git",
+    "rev": "8f8fe823c0f92e5b3b47df5b8ac056af197a9953"
+  }
+}

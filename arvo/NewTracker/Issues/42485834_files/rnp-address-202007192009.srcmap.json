@@ -1,0 +1,12 @@
+{
+  "/src/rnp": {
+    "type": "git",
+    "url": "https://github.com/rnpgp/rnp.git",
+    "rev": "d00f12fbb3369da906625ae461ad72dcd8d6daa5"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

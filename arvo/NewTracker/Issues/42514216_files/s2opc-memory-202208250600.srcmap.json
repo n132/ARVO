@@ -1,0 +1,17 @@
+{
+  "/src/S2OPC-fuzzing-data": {
+    "type": "git",
+    "url": "https://gitlab.com/systerel/S2OPC-fuzzing-data",
+    "rev": "f6b2bb3a6cbef25c58b4d70b3d80d7d0e5bbfd5e"
+  },
+  "/src/S2OPC": {
+    "type": "git",
+    "url": "https://gitlab.com/systerel/S2OPC",
+    "rev": "6f52b507a368387d5df6c81a5810c92b3b452d9f"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

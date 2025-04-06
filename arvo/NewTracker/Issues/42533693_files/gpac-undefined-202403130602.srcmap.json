@@ -1,0 +1,7 @@
+{
+  "/src/gpac": {
+    "type": "git",
+    "url": "https://github.com/gpac/gpac",
+    "rev": "efd921d952177ec597954f6644ea64683ee8d9ac"
+  }
+}

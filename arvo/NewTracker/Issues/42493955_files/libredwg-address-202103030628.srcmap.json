@@ -1,0 +1,12 @@
+{
+  "/src/libredwg": {
+    "type": "git",
+    "url": "https://github.com/LibreDWG/libredwg",
+    "rev": "f086e9d99f0ce1551348df57d6db9b904c2812be"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "333509bb0a56be9bd2e236f0e2f37d4af2dd7d59"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/ndpi": {
+    "type": "git",
+    "url": "https://github.com/ntop/nDPI.git",
+    "rev": "ddb9aa0f95ba263361b9be2ba0a122ea1e001be9"
+  }
+}

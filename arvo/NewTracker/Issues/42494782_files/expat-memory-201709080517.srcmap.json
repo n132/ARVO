@@ -1,0 +1,12 @@
+{
+  "/src/expat": {
+    "type": "git",
+    "url": "https://github.com/libexpat/libexpat",
+    "rev": "56b64ca0406d31f0a8cd93e155c38a3b30b002f8"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "312775"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/fmt": {
+    "type": "git",
+    "url": "https://github.com/fmtlib/fmt.git",
+    "rev": "e718ec3e93dc75598bfbcdaf492554ae2114ec19"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "79d75d8e42e5adf64e149ab6e1fe197cb1d4f303"
+  }
+}

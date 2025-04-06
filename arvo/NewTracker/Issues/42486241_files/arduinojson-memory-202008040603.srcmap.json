@@ -1,0 +1,12 @@
+{
+  "/src/arduinojson": {
+    "type": "git",
+    "url": "https://github.com/bblanchon/ArduinoJson.git",
+    "rev": "96b65713528476eed35dbab690be837967cedb93"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

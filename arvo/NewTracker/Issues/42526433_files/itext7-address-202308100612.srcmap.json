@@ -1,0 +1,17 @@
+{
+  "/src/project-parent/itext7": {
+    "type": "git",
+    "url": "https://github.com/itext/itext7",
+    "rev": "e5755be3919d659da9dbef75407d336b4e9c5ca4"
+  },
+  "/src/fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/strongcourage/fuzzing-corpus.git",
+    "rev": "d5aaf2c8654592f65e8792d12800317200446e7c"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "41d7725e6a12ec2e0a89b68fafacb4bb5af8fac7"
+  }
+}

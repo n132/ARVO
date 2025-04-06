@@ -1,0 +1,7 @@
+{
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "9f1a6d6f9a258886933a22239a5b81af34b28199"
+  }
+}

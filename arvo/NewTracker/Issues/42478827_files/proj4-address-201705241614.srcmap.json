@@ -1,0 +1,7 @@
+{
+  "/src/proj.4": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/proj.4",
+    "rev": "bdb02c7c5a36d501b8c856dee539a5f28db2c36f"
+  }
+}

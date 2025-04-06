@@ -1,0 +1,17 @@
+{
+  "/src/exif-samples": {
+    "type": "git",
+    "url": "https://github.com/ianare/exif-samples",
+    "rev": "9bec6b2e7174e7994f5cfcbc4d6f04dee6e94b38"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif",
+    "rev": "30e50906596aa69a484c1044abb07eaa0ffda2dd"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

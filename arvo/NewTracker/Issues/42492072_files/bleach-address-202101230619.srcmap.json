@@ -1,0 +1,17 @@
+{
+  "/src/bleach": {
+    "type": "git",
+    "url": "https://github.com/mozilla/bleach.git",
+    "rev": "90cb80be961aaf650ebc65b2ba2b789a2e9b129f"
+  },
+  "/src/bleach/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "cec02db916d21baa4db5b8d262d78848b3a35f4b"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

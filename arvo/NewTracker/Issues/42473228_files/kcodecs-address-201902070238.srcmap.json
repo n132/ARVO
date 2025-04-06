@@ -1,0 +1,27 @@
+{
+  "/src/uchardet": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/uchardet/uchardet.git",
+    "rev": "bdfd6116a965fd210ef563613763e724424728b7"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "git://anongit.kde.org/extra-cmake-modules",
+    "rev": "ba3341c83b186e021337761e5fd689614fe14177"
+  },
+  "/src/kcodecs": {
+    "type": "git",
+    "url": "git://anongit.kde.org/kcodecs",
+    "rev": "9d3fdbed7bf161d19a9440f2d33ada1e93082332"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "ddb5d390450de25e510c72b17ed8124b9186a736"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "353369"
+  }
+}

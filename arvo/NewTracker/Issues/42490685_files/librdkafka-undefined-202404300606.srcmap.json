@@ -1,0 +1,7 @@
+{
+  "/src/librdkafka": {
+    "type": "git",
+    "url": "https://github.com/edenhill/librdkafka",
+    "rev": "a5c5641c9efff1d09993098fc8ed1b8935d2b86a"
+  }
+}

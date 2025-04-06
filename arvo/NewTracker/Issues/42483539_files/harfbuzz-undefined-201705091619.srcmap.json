@@ -1,0 +1,7 @@
+{
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://anongit.freedesktop.org/git/harfbuzz.git",
+    "rev": "141b33de9a141248e2f034d55f48460159536cb9"
+  }
+}

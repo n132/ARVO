@@ -1,0 +1,12 @@
+{
+  "/src/tpm2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromiumos/third_party/tpm2",
+    "rev": "872d8d0beabd9a81c08fc34ec83285c690228aa8"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

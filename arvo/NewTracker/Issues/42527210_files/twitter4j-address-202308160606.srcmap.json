@@ -1,0 +1,7 @@
+{
+  "/src/Twitter4J": {
+    "type": "git",
+    "url": "https://github.com/Twitter4J/Twitter4J/",
+    "rev": "87ccc41fb14434e328946fa4422460990be7a2d4"
+  }
+}

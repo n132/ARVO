@@ -1,0 +1,17 @@
+{
+  "/src/ovs-fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/openvswitch/ovs-fuzzing-corpus.git",
+    "rev": "e205dcb29dba2856722422b0600cc1521d8480f0"
+  },
+  "/src/openvswitch": {
+    "type": "git",
+    "url": "https://github.com/openvswitch/ovs.git",
+    "rev": "22d0244a568b1a01b3aee4a80f942c62e12d8c5e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

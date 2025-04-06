@@ -1,0 +1,7 @@
+{
+  "/src/cpython3": {
+    "type": "git",
+    "url": "https://github.com/python/cpython.git",
+    "rev": "fe5c4c53e7bc6d780686013eaab17de2237b2176"
+  }
+}

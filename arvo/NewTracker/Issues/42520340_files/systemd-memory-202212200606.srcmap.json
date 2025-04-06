@@ -1,0 +1,7 @@
+{
+  "/src/systemd": {
+    "type": "git",
+    "url": "https://github.com/systemd/systemd",
+    "rev": "57e7af551edafa8ad840a26c28184bc6339e09ad"
+  }
+}

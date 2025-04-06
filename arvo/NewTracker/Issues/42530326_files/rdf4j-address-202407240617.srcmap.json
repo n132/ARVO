@@ -1,0 +1,7 @@
+{
+  "/src/rdf4j": {
+    "type": "git",
+    "url": "https://github.com/eclipse/rdf4j",
+    "rev": "2a998c3f30ec177ecbd3d5bbb4ad209f0c83e2a9"
+  }
+}

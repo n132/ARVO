@@ -1,0 +1,7 @@
+{
+  "/src/liblouis": {
+    "type": "git",
+    "url": "https://github.com/liblouis/liblouis",
+    "rev": "c0390a04137f1772a01cee7b2d1951e9c8d8ec15"
+  }
+}

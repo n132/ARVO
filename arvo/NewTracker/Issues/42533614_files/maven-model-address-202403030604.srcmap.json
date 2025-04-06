@@ -1,0 +1,7 @@
+{
+  "/src/maven-model": {
+    "type": "git",
+    "url": "https://github.com/apache/maven",
+    "rev": "5029cc238ce5ce03b0fb431a278889f8b788c0a7"
+  }
+}

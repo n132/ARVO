@@ -1,0 +1,27 @@
+{
+  "/src/oss-fuzz-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/oss-fuzz-fuzzers.git",
+    "rev": "66d0c7e6894a76866c8b8f6165d013682cf915fc"
+  },
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "691f40546a8f2b093e28c9c506b01e7814d329f3"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/trunk": {
+    "type": "svn",
+    "url": "http://svn.xvid.org/trunk",
+    "rev": ""
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372454"
+  }
+}

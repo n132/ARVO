@@ -1,0 +1,7 @@
+{
+  "/src/librabbitmq": {
+    "type": "git",
+    "url": "https://github.com/alanxz/rabbitmq-c",
+    "rev": "c3550e7accda82a55f7c142284de65f117b30977"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/xstream": {
+    "type": "git",
+    "url": "https://github.com/x-stream/xstream.git",
+    "rev": "eb21c8d3b0c98e7312b65cb53cecbb4c54f6c9ee"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

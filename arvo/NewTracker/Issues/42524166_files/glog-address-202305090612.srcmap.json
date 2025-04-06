@@ -1,0 +1,7 @@
+{
+  "/src/glog": {
+    "type": "git",
+    "url": "https://github.com/google/glog",
+    "rev": "674283420118bb919f83ceb3d9dee31ef43ff3aa"
+  }
+}

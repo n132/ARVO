@@ -1,0 +1,17 @@
+{
+  "/src/matio": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/matio/matio",
+    "rev": "59c370cd1ce6f92e7cfa606e50ec12e21e2ca4c6"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libxaac": {
+    "type": "git",
+    "url": "https://github.com/ittiam-systems/libxaac.git",
+    "rev": "1ce177ea0eba8bd56c22131e53df102ddf9fd6fe"
+  }
+}

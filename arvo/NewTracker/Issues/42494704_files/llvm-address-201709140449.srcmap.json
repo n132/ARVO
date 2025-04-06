@@ -1,0 +1,22 @@
+{
+  "/src/llvm/projects/compiler-rt": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/compiler-rt/trunk",
+    "rev": "313229"
+  },
+  "/src/llvm/tools/clang": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/cfe/trunk",
+    "rev": "313229"
+  },
+  "/src/llvm": {
+    "type": "svn",
+    "url": "http://llvm.org/svn/llvm-project/llvm/trunk",
+    "rev": "313229"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "313229"
+  }
+}

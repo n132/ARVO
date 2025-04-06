@@ -1,0 +1,7 @@
+{
+  "/src/p11-kit": {
+    "type": "git",
+    "url": "https://github.com/p11-glue/p11-kit.git",
+    "rev": "d7c318845405fa7ea33154082b437e4a87ee3699"
+  }
+}

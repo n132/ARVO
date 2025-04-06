@@ -1,0 +1,7 @@
+{
+  "/src/uriparser": {
+    "type": "git",
+    "url": "https://github.com/uriparser/uriparser",
+    "rev": "ec68bee8e1274b0ad4d4fe60458938f234044393"
+  }
+}

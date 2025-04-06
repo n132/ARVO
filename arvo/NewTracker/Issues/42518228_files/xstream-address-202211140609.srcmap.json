@@ -1,0 +1,12 @@
+{
+  "/src/xstream": {
+    "type": "git",
+    "url": "https://github.com/x-stream/xstream.git",
+    "rev": "cf61d543f17d284a7c878c27704857e2ebc08079"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  }
+}

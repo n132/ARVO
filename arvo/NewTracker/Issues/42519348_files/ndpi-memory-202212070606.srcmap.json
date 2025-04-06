@@ -1,0 +1,12 @@
+{
+  "/src/ndpi": {
+    "type": "git",
+    "url": "https://github.com/ntop/nDPI.git",
+    "rev": "ada4fe4aa8f88300cfc0dbe6ee965975274b1c40"
+  },
+  "/src/json-c": {
+    "type": "git",
+    "url": "https://github.com/json-c/json-c.git",
+    "rev": "79c147203e2f90806fba0487fc26ab5e649c8755"
+  }
+}

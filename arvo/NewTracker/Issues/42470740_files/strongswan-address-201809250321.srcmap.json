@@ -1,0 +1,17 @@
+{
+  "/src/strongswan": {
+    "type": "git",
+    "url": "https://github.com/strongswan/strongswan.git",
+    "rev": "8932d6070fe773ee19a83ff040d58210e8847c0c"
+  },
+  "/src/strongswan/fuzzing-corpora": {
+    "type": "git",
+    "url": "https://github.com/strongswan/fuzzing-corpora.git",
+    "rev": "28038ff76f8261d4094f17b462b6f05de66a527d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "342936"
+  }
+}

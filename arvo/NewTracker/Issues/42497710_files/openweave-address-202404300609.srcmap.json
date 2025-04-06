@@ -1,0 +1,7 @@
+{
+  "/src/openweave-core": {
+    "type": "git",
+    "url": "https://github.com/openweave/openweave-core",
+    "rev": "e3c8ca3d416a2e1687d6f5b7cec0b7d0bf1e590e"
+  }
+}

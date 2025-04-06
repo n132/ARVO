@@ -1,0 +1,37 @@
+{
+  "/src/evmone": {
+    "type": "git",
+    "url": "https://github.com/ethereum/evmone.git",
+    "rev": "f2fcd90a4e727f633feb34a06faeb022b2f1e3a7"
+  },
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "204f99488ce1ef74565239cf3963111ae4c774b7"
+  },
+  "/src/boost": {
+    "type": "git",
+    "url": "https://github.com/boostorg/boost.git",
+    "rev": "8d02ed770bbd22c7573b625657d8cc44aa19351a"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "750dfa3b67e02587166d8246543a39ca943ab5ad"
+  },
+  "/src/solidity-fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/ethereum/solidity-fuzzing-corpus.git",
+    "rev": "5f18d4ec9856cf6778f072fbf4687ab68c48d11b"
+  },
+  "/src/solidity": {
+    "type": "git",
+    "url": "https://github.com/ethereum/solidity.git",
+    "rev": "3a409c39e4ffca1ad6f0c69e299fa1b030bed59a"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

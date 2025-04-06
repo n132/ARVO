@@ -1,0 +1,12 @@
+{
+  "/src/curl_fuzzer": {
+    "type": "git",
+    "url": "https://github.com/curl/curl-fuzzer.git",
+    "rev": "1260cc64e2ba8a9facbfec7c4bbb7c80df532bf3"
+  },
+  "/src/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "5949369c9f54ceeed38e9789a17173828e654a07"
+  }
+}

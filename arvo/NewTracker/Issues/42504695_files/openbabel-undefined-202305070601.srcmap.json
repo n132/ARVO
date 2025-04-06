@@ -1,0 +1,7 @@
+{
+  "/src/openbabel": {
+    "type": "git",
+    "url": "https://github.com/openbabel/openbabel.git",
+    "rev": "2b211d6acfc0f9e1c6746a984da3483b729aa32b"
+  }
+}

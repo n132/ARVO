@@ -1,0 +1,7 @@
+{
+  "/src/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "b01a8af573c752f1e0103262531ee08a90b5af08"
+  }
+}

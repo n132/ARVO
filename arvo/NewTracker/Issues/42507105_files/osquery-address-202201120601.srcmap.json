@@ -1,0 +1,12 @@
+{
+  "/src/osquery": {
+    "type": "git",
+    "url": "https://github.com/osquery/osquery",
+    "rev": "2051e72014d3b86aec626fe4e25baaebef167d3b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ef77d552e9b89852b293c300a5a9a9c617945f43"
+  }
+}

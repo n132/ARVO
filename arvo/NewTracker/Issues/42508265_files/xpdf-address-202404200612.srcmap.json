@@ -1,0 +1,7 @@
+{
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/freetype/freetype",
+    "rev": "9a2d6d97b2d8a5d22d02948b783df12b764afa2d"
+  }
+}

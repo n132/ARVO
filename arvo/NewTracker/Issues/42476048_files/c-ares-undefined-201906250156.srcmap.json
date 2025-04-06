@@ -1,0 +1,12 @@
+{
+  "/src/c-ares": {
+    "type": "git",
+    "url": "https://github.com/c-ares/c-ares.git",
+    "rev": "b949cc3ddfbeb1b3fba571fb53b186b645e66e9c"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "364265"
+  }
+}

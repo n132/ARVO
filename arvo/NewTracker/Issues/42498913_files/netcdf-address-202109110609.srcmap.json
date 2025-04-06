@@ -1,0 +1,12 @@
+{
+  "/src/netcdf-c": {
+    "type": "git",
+    "url": "https://github.com/Unidata/netcdf-c",
+    "rev": "de403a0fe83d041aca788e3f91c0994460c0ee0b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

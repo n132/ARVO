@@ -1,0 +1,12 @@
+{
+  "/src/libpg_query": {
+    "type": "git",
+    "url": "https://github.com/pganalyze/libpg_query",
+    "rev": "0d509b1fd3a4be92400ad60ed05b55bedb9afdef"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "f4cc718fdc4571f56280a1efad3645125bee2154"
+  }
+}

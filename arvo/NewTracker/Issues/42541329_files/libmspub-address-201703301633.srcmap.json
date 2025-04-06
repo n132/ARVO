@@ -1,0 +1,17 @@
+{
+  "/src/libmspub/librevenge": {
+    "type": "git",
+    "url": "git://git.code.sf.net/p/libwpd/librevenge",
+    "rev": "dade697731bfd002d884e6b2028ea0205cd2a1c4"
+  },
+  "/src/libmspub": {
+    "type": "git",
+    "url": "git://gerrit.libreoffice.org/libmspub",
+    "rev": "635804229e087fc560925ba65234b3d6ce3a999a"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "3ce35b240eafa7993b5f52873124b045d5769355"
+  }
+}

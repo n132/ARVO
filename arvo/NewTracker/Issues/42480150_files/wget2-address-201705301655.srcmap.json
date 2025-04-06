@@ -1,0 +1,7 @@
+{
+  "/src/wget2": {
+    "type": "git",
+    "url": "https://gitlab.com/gnuwget/wget2.git",
+    "rev": "26d4c77d60f06ea14740e105c1eb77c662b200a9"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/h2o": {
+    "type": "git",
+    "url": "https://github.com/h2o/h2o",
+    "rev": "77d5f596ec400fb49fecf2395addcc27d4a1d211"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "19c6f35ba99310deabbbe5985682a7da1571b514"
+  }
+}

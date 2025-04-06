@@ -1,0 +1,32 @@
+{
+  "/src/evmone": {
+    "type": "git",
+    "url": "https://github.com/ethereum/evmone.git",
+    "rev": "f2fcd90a4e727f633feb34a06faeb022b2f1e3a7"
+  },
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "214c77e1b76e63e512bd675d1c300c80438642b6"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "e5869dd9690c3f4dfb842fb90bd07a5a9ee32172"
+  },
+  "/src/solidity-fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/ethereum/solidity-fuzzing-corpus.git",
+    "rev": "0f73ed536abfa8ea9a96346c1e41f1df8f0ac877"
+  },
+  "/src/solidity": {
+    "type": "git",
+    "url": "https://github.com/ethereum/solidity.git",
+    "rev": "4368a3b3eb9f69e84fe3a0d94d01c73e5afd0b97"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

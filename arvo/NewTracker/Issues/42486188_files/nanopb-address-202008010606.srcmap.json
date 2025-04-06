@@ -1,0 +1,12 @@
+{
+  "/src/nanopb": {
+    "type": "git",
+    "url": "https://github.com/nanopb/nanopb",
+    "rev": "a5988446e6a257a1c968f8a7a6366f5101d85413"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

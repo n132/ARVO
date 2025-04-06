@@ -1,0 +1,7 @@
+{
+  "/src/wabt": {
+    "type": "git",
+    "url": "https://github.com/WebAssembly/wabt",
+    "rev": "0df6c26d2a6122afcc2c32ff6b608326258d40d9"
+  }
+}

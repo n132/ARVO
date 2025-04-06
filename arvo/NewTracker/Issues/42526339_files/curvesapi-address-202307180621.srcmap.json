@@ -1,0 +1,7 @@
+{
+  "/src/curvesapi": {
+    "type": "git",
+    "url": "https://github.com/virtuald/curvesapi",
+    "rev": "91f82eee048bddb304ca622e4439049a205fcbba"
+  }
+}

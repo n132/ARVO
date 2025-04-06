@@ -1,0 +1,7 @@
+{
+  "/src/libchewing": {
+    "type": "git",
+    "url": "https://github.com/chewing/libchewing.git",
+    "rev": "cad4a6e149d9fe3e7d1ee13cc1f9f7939ec9a378"
+  }
+}

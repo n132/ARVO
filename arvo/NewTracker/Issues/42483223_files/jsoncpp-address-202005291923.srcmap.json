@@ -1,0 +1,12 @@
+{
+  "/src/jsoncpp": {
+    "type": "git",
+    "url": "https://github.com/open-source-parsers/jsoncpp",
+    "rev": "6aba23f4a8628d599a9ef7fa4811c4ff6e4070e2"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

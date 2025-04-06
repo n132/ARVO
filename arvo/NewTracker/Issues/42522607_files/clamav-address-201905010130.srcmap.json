@@ -1,0 +1,17 @@
+{
+  "/src/clamav-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav-fuzz-corpus.git",
+    "rev": "399ce5bb2d5c839786e79c641c00b8205e47dd4a"
+  },
+  "/src/clamav-devel": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav-devel.git",
+    "rev": "57f4d1fd10eff859e1f6ca88e842bd721f21d0d4"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "359640"
+  }
+}

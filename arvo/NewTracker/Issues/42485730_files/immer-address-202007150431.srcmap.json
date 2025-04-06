@@ -1,0 +1,12 @@
+{
+  "/src/immer": {
+    "type": "git",
+    "url": "https://github.com/arximboldi/immer.git",
+    "rev": "ad3e3556d38bb75966dd24c61a774970a7c7957e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

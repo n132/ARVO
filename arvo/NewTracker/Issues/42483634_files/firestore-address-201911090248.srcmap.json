@@ -1,0 +1,17 @@
+{
+  "/src/firebase-ios-sdk": {
+    "type": "git",
+    "url": "https://github.com/firebase/firebase-ios-sdk.git",
+    "rev": "a63dab446396fdc842b8b8d09779f5c8f40884ff"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "375507"
+  }
+}

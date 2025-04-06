@@ -1,0 +1,17 @@
+{
+  "/src/fastjson2": {
+    "type": "git",
+    "url": "https://github.com/alibaba/fastjson2",
+    "rev": "c9b25596692344d052978539120c0862b1f8c047"
+  },
+  "/src/go-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "7741ea063935a10cf0df710f9bc5deb9a6386502"
+  }
+}

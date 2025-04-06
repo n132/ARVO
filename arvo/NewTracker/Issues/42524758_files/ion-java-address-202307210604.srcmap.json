@@ -1,0 +1,7 @@
+{
+  "/src/project-parent/ion-java": {
+    "type": "git",
+    "url": "https://github.com/amazon-ion/ion-java.git",
+    "rev": "14ee3e825a6311e0284a264f2723694c96a55c48"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/perffuzz": {
+    "type": "git",
+    "url": "https://github.com/carolemieux/perffuzz",
+    "rev": "902f6e51ff3c5202d7fd2fea6c8f3f84ffc5084b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "335198"
+  },
+  "/src/firefox": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/mozilla-central/",
+    "rev": "d231a32316809f8c9efa43ed6f74484ff552c115"
+  }
+}

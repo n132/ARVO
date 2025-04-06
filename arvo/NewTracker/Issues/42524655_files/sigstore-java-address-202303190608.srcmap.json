@@ -1,0 +1,7 @@
+{
+  "/src/sigstore-java": {
+    "type": "git",
+    "url": "https://github.com/sigstore/sigstore-java",
+    "rev": "3c47e2650a714338d862492c4888d97a8ae9ad9d"
+  }
+}

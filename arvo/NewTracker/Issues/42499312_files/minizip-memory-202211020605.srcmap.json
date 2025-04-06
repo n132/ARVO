@@ -1,0 +1,12 @@
+{
+  "/src/minizip-ng": {
+    "type": "git",
+    "url": "https://github.com/zlib-ng/minizip-ng",
+    "rev": "ff817303af2335a98c271112f6bd668e7c269a8c"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  }
+}

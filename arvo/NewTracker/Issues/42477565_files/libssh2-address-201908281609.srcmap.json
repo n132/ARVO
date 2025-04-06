@@ -1,0 +1,17 @@
+{
+  "/src/libssh2": {
+    "type": "git",
+    "url": "https://github.com/cmeister2/libssh2.git",
+    "rev": "3711b0dd045650147ee0f57838d1a5c4217ffd4e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "e9be6bce2282e8db95221c9a17fd10aba9e901bc"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "370224"
+  }
+}

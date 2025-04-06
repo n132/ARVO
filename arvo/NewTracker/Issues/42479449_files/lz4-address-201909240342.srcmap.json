@@ -1,0 +1,17 @@
+{
+  "/src/lz4": {
+    "type": "git",
+    "url": "https://github.com/lz4/lz4.git",
+    "rev": "e9d8e15263df4a0529dcd22ca48c82869d19abb9"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "1f414d53535ea470bba3858bc1324081baf22c75"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "372687"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "/src/karchive": {
+    "type": "git",
+    "url": "git://anongit.kde.org/karchive",
+    "rev": "98470cd72bc6233288357999e4c0c607cec51008"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "git://anongit.kde.org/extra-cmake-modules",
+    "rev": "7f2760a07ee7f8a7f484ab048883b9374add8733"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "b7aea2bcd3b67031066e9c23f1827d4c83cfe1f3"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://git.tukaani.org/xz.git",
+    "rev": "2a22de439ec63da1927b640eda309296a1e8dce5"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "d68a667302d1251c49d2970417f30fca337c76ba"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cacf7f1d4e3d44d871b605da3b647f07d718623f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "360980"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libucl": {
+    "type": "git",
+    "url": "https://github.com/vstakhov/libucl",
+    "rev": "b6a222371c31a3c8c3757dd0dfa14d9e384fd038"
+  }
+}

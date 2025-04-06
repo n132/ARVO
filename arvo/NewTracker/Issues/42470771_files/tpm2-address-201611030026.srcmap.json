@@ -1,0 +1,7 @@
+{
+  "/src/tpm2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromiumos/third_party/tpm2/",
+    "rev": "07ec984d630c89128306671ec42b964236ce4eaf"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "36d6be20b94a36a4d4d94e30994a567ea72d9836"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "4ed2f03e18b472fa7388f975a2b4976a56cdeacc"
+  },
+  "/src/relic": {
+    "type": "git",
+    "url": "https://github.com/relic-toolkit/relic.git",
+    "rev": "d9ce2d91842d1a38c7e26e15342b636e5d63609f"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "1f71b85426f837ebcae8381897d44a3a67c73a4f"
+  }
+}

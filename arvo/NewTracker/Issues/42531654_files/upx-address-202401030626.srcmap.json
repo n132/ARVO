@@ -1,0 +1,22 @@
+{
+  "/src/upx": {
+    "type": "git",
+    "url": "https://github.com/upx/upx.git",
+    "rev": "b5ed0a637b6d791bc4e6d08070f82584db4f9844"
+  },
+  "/src/testsuite3": {
+    "type": "git",
+    "url": "https://github.com/MykolaMykhno/upx-testsuite-v3.git",
+    "rev": "30bd1b1f36fb29128d52cab4be2c02e3dcef40e4"
+  },
+  "/src/testsuite2": {
+    "type": "git",
+    "url": "https://github.com/upx/upx-testsuite-v2.git",
+    "rev": "a1b4a7c219d3f13008036a0d3376f807c027d2ea"
+  },
+  "/src/testsuite": {
+    "type": "git",
+    "url": "https://github.com/upx/upx-testsuite.git",
+    "rev": "844642407f2894ea2d5fc0912b02aa5abb12d0c6"
+  }
+}

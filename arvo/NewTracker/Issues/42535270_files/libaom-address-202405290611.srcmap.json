@@ -1,0 +1,7 @@
+{
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "4e1a5d4d08a216d71ecee10c25736abb2ffc2cdc"
+  }
+}

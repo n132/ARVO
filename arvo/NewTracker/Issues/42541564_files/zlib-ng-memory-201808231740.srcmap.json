@@ -1,0 +1,12 @@
+{
+  "/src/zlib-ng": {
+    "type": "git",
+    "url": "https://github.com/sebpop/zlib-ng.git",
+    "rev": "f7ecced3faa74e1d017f819ccc18765df922d8cd"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "340553"
+  }
+}

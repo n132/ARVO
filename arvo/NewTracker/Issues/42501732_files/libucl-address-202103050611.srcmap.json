@@ -1,0 +1,12 @@
+{
+  "/src/libucl": {
+    "type": "git",
+    "url": "https://github.com/vstakhov/libucl",
+    "rev": "64a1ad467e592d2c0c966ef9fa2daad1ea0cabac"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "79d75d8e42e5adf64e149ab6e1fe197cb1d4f303"
+  }
+}

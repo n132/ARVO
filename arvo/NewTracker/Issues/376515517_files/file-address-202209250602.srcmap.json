@@ -1,0 +1,27 @@
+{
+  "/src/pocs": {
+    "type": "git",
+    "url": "https://github.com/corkami/pocs",
+    "rev": "127008ce71f27a722cb0e6fdcc3b161cae1f8d13"
+  },
+  "/src/binary-samples": {
+    "type": "git",
+    "url": "https://github.com/DavidKorczynski/binary-samples.git",
+    "rev": "50f4f6ad752e982f26fab167665e763b6877c942"
+  },
+  "/src/file": {
+    "type": "git",
+    "url": "https://github.com/file/file.git",
+    "rev": "93ddf99bc1d4e3dd526d5ae5367c3b4c4800354f"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

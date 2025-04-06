@@ -1,0 +1,12 @@
+{
+  "/src/opensips": {
+    "type": "git",
+    "url": "https://github.com/OpenSIPS/opensips",
+    "rev": "42c5d3263ab471ddcc50fd6c0503af28c8d22f22"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "533e979010ca338df6fc415d87668f8187752915"
+  }
+}

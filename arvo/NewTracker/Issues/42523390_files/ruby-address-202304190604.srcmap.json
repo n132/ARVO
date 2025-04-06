@@ -1,0 +1,7 @@
+{
+  "/src/ruby": {
+    "type": "git",
+    "url": "https://github.com/ruby/ruby.git",
+    "rev": "628e432739e1d2578d357420aa652a97eb8c2649"
+  }
+}

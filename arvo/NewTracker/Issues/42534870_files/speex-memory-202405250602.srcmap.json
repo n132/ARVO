@@ -1,0 +1,12 @@
+{
+  "/src/speex": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/speex.git",
+    "rev": "39a7979ad7962f77b32cf74a6b531a4d6b3e7fa4"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "db5c7a49ce7ebda47b15b78471e78fb7f2483e22"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/tinyxml2": {
+    "type": "git",
+    "url": "https://github.com/leethomason/tinyxml2",
+    "rev": "8f4a9a8cc2a93709b97d0cf51d33ddd1ec33277d"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "350015"
+  }
+}

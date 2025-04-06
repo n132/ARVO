@@ -1,0 +1,27 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "214c77e1b76e63e512bd675d1c300c80438642b6"
+  },
+  "/src/fuzzer-test-suite": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzer-test-suite",
+    "rev": "51356066dc70c43c9da0ad98e887684a0394860f"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "8942a9ba43d8bb196230c321d46d6a137957a719"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/nginx": {
+    "type": "hg",
+    "url": "http://hg.nginx.org/nginx/",
+    "rev": "7015f26aef904e2ec17b4b6f6387fd3b8298f79d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/jsign": {
+    "type": "git",
+    "url": "https://github.com/ebourg/jsign.git",
+    "rev": "20b2f854c442cfc85ed78ab3ec3cf1591b35eb3e"
+  }
+}

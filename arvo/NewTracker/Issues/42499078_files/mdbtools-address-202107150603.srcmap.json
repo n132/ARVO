@@ -1,0 +1,17 @@
+{
+  "/src/mdbtestdata": {
+    "type": "git",
+    "url": "https://github.com/mdbtools/mdbtestdata",
+    "rev": "e649f792cb8f966d404e052d1523e93de0192d50"
+  },
+  "/src/mdbtools": {
+    "type": "git",
+    "url": "https://github.com/mdbtools/mdbtools",
+    "rev": "373b7ff4c4daf887269c078407cb1338942c4ea6"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

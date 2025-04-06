@@ -1,0 +1,17 @@
+{
+  "/src/ostree": {
+    "type": "git",
+    "url": "https://github.com/ostreedev/ostree",
+    "rev": "ed1146738b9aa687c7dabb0a4fd8dc2ad16244ce"
+  },
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "c1eb93d2a264372f35f140fef3777aea20595f71"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

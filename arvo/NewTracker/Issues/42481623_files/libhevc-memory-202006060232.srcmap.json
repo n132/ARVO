@@ -1,0 +1,12 @@
+{
+  "/src/libhevc": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libhevc",
+    "rev": "0af0c6a82a6425c4778277d9209f36fabc416b25"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

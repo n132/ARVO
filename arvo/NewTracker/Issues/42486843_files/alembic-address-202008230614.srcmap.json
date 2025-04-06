@@ -1,0 +1,17 @@
+{
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr",
+    "rev": "5210008ca9222e6e3ad5238ae1f29cec56c66f76"
+  },
+  "/src/alembic": {
+    "type": "git",
+    "url": "https://github.com/alembic/alembic",
+    "rev": "8f21aa9a1b252e3430aab638ec316e34a48c1346"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

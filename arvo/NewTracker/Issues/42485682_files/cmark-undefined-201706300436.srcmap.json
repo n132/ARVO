@@ -1,0 +1,12 @@
+{
+  "/src/cmark": {
+    "type": "git",
+    "url": "https://github.com/jgm/cmark.git",
+    "rev": "4b83812e6780e4a58669272a7426f1491711ca8c"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "b2149934abf06a26d693033106be02fddcf044a9"
+  }
+}

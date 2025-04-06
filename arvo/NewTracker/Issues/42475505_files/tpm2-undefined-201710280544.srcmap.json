@@ -1,0 +1,12 @@
+{
+  "/src/tpm2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromiumos/third_party/tpm2",
+    "rev": "0f114d2d7eb1950faab02fe479864da5e5d50414"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "316824"
+  }
+}

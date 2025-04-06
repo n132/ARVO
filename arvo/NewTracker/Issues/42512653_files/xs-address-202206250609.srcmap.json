@@ -1,0 +1,12 @@
+{
+  "/src/moddable": {
+    "type": "git",
+    "url": "https://github.com/Moddable-OpenSource/moddable",
+    "rev": "5d280e30f061c25d028e749d9754c8c8929f7897"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/wt": {
+    "type": "git",
+    "url": "https://github.com/emweb/wt.git",
+    "rev": "c10dbd54e3151fa48851f30aff9ad0a582f1a7b6"
+  }
+}

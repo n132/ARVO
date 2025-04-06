@@ -1,0 +1,7 @@
+{
+  "/src/re2": {
+    "type": "git",
+    "url": "https://code.googlesource.com/re2",
+    "rev": "580e53b741643e7cc91aae9fb951825c5309f20c"
+  }
+}

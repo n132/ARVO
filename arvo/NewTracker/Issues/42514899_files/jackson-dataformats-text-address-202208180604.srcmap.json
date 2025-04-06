@@ -1,0 +1,12 @@
+{
+  "/src/jackson-dataformats-text": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-dataformats-text.git",
+    "rev": "48f08d72a1021765f3ce131d20a0a5980f3eb431"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

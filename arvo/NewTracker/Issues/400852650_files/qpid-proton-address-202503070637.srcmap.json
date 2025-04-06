@@ -1,0 +1,7 @@
+{
+  "/src/qpid-proton": {
+    "type": "git",
+    "url": "https://github.com/apache/qpid-proton.git",
+    "rev": "cfa3fb5c9daa8a652e71b14a8ed71e31eaa9d645"
+  }
+}

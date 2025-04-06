@@ -1,0 +1,12 @@
+{
+  "/src/mysql-server": {
+    "type": "git",
+    "url": "https://github.com/mysql/mysql-server",
+    "rev": "f8cdce86448a211511e8a039c62580ae16cb96f5"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/nccl": {
+    "type": "git",
+    "url": "https://github.com/NVIDIA/nccl",
+    "rev": "d97a32fac84f69cbd022ffdc57d5687c760742c7"
+  }
+}

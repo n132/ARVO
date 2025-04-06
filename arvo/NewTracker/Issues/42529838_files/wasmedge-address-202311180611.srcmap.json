@@ -1,0 +1,12 @@
+{
+  "/src/WasmEdge-unittest": {
+    "type": "git",
+    "url": "https://github.com/second-state/WasmEdge-unittest.git",
+    "rev": "90bab7b0ec225afefff6791a38d37010ccb7fa7e"
+  },
+  "/src/WasmEdge": {
+    "type": "git",
+    "url": "https://github.com/WasmEdge/WasmEdge.git",
+    "rev": "9ba5f8faeacc35ea41033a4e384bef9cc18e9f5c"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/jackson-modules-java8": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-modules-java8",
+    "rev": "f82c3af6eb968a9f02ab810be6562dd27d5a3d26"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

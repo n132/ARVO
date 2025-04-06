@@ -1,0 +1,7 @@
+{
+  "/src/ada-url": {
+    "type": "git",
+    "url": "https://github.com/ada-url/ada",
+    "rev": "6b3f8a9602b1beb5fe6ffcfb24af9d8aa3da7491"
+  }
+}

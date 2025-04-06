@@ -1,0 +1,12 @@
+{
+  "/src/rdkit": {
+    "type": "git",
+    "url": "https://github.com/rdkit/rdkit.git",
+    "rev": "ee8c35a236eb1ce7997bcd7a0c20bbb8efbe1254"
+  },
+  "/src/eigen": {
+    "type": "git",
+    "url": "https://gitlab.com/libeigen/eigen",
+    "rev": "283dec7f257d463ff66d688cda17f78118eb3caa"
+  }
+}

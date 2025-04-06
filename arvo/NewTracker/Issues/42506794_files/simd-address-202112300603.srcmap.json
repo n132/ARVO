@@ -1,0 +1,12 @@
+{
+  "/src/Simd": {
+    "type": "git",
+    "url": "https://github.com/ermig1979/Simd",
+    "rev": "8c137db257b22bc355e0084e79071aaee7652575"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

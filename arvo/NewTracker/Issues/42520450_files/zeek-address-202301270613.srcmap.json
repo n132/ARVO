@@ -1,0 +1,7 @@
+{
+  "/src/zeek": {
+    "type": "git",
+    "url": "https://github.com/zeek/zeek",
+    "rev": "b1b25e4d3482cf6357dc3a8bb91335081a7197bb"
+  }
+}

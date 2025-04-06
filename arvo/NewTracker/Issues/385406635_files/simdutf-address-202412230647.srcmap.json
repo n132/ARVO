@@ -1,0 +1,7 @@
+{
+  "/src/simdutf": {
+    "type": "git",
+    "url": "https://github.com/simdutf/simdutf",
+    "rev": "4e721231df51524110a5a6b68b1a0f1adc57a1da"
+  }
+}

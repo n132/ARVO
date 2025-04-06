@@ -1,0 +1,37 @@
+{
+  "/src/powsybl-open-loadflow": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-open-loadflow",
+    "rev": "71db7502e36f468770d8809c807305a4f81378fd"
+  },
+  "/src/powsybl-entsoe": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-entsoe",
+    "rev": "6e6e08320b4b8a61da0decba452f327433a92af6"
+  },
+  "/src/powsybl-dynawo": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-dynawo",
+    "rev": "bbced23dacb63e1db6b6f316c2281a8fa33c4741"
+  },
+  "/src/powsybl-open-rao": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-open-rao",
+    "rev": "4bc12b4766ee89bf034cfbe97f5b766c104635e7"
+  },
+  "/src/powsybl-metrix": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-metrix",
+    "rev": "527091ba158eeb76081d01a8633ed59f260bc994"
+  },
+  "/src/powsybl-diagram": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-diagram",
+    "rev": "9faa82a9e90c04f1e30dacab9b96547c25793db2"
+  },
+  "/src/powsybl-core": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-core",
+    "rev": "455fd74f3b9d03754ab8774b50d59e07823a793c"
+  }
+}

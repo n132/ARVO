@@ -1,0 +1,7 @@
+{
+  "/src/upb": {
+    "type": "git",
+    "url": "https://github.com/protocolbuffers/upb.git",
+    "rev": "808706b3f132e05e66f4efe36f4d980ecc934c2c"
+  }
+}

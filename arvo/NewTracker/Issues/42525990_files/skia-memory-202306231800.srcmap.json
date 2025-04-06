@@ -1,0 +1,217 @@
+{
+  "/src/skia": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/skia.git",
+    "rev": "7b6aae68a11fcdaaebac9bdb499f439798245ec6"
+  },
+  "/src/skia/third_party/externals/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp.git",
+    "rev": "fd7b5d48464475408d32d2611bdb6947d4246b97"
+  },
+  "/src/skia/third_party/externals/angle2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/angle/angle.git",
+    "rev": "c1ba8e6f28d82f301498c94b32c516bba8df09ea"
+  },
+  "/src/skia/third_party/externals/spirv-headers": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/SPIRV-Headers.git",
+    "rev": "3469b164e25cee24435029a569933cb42578db5d"
+  },
+  "/src/skia/third_party/externals/perfetto": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/perfetto",
+    "rev": "8cacafbf6496da31259e2f3802301d36bbf788a9"
+  },
+  "/src/skia/third_party/externals/vulkan-deps": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/vulkan-deps",
+    "rev": "994861071dc589877c2001da4783f58b923ce2fd"
+  },
+  "/src/skia/third_party/externals/dawn": {
+    "type": "git",
+    "url": "https://dawn.googlesource.com/dawn.git",
+    "rev": "8278361fbbefb1ee3cdb249f29b45c3f6682ccb9"
+  },
+  "/src/skia/third_party/externals/vulkan-headers": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Headers",
+    "rev": "c1a8560c5cf5e7bd6dbc71fe69b1a317411c36b8"
+  },
+  "/src/skia/third_party/externals/microhttpd": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libmicrohttpd",
+    "rev": "748945ec6f1c67b7efc934ab0808e1d32f2fb98d"
+  },
+  "/src/skia/third_party/externals/highway": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/google/highway.git",
+    "rev": "424360251cdcfc314cfc528f53c872ecd63af0f0"
+  },
+  "/src/skia/third_party/externals/oboe": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/google/oboe.git",
+    "rev": "b02a12d1dd821118763debec6b83d00a8a0ee419"
+  },
+  "/src/skia/third_party/externals/harfbuzz": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/harfbuzz/harfbuzz.git",
+    "rev": "09a266236147497bd8149240062c31c16fbc81e3"
+  },
+  "/src/skia/third_party/externals/vulkanmemoryallocator": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator",
+    "rev": "7de5cc00de50e71a3aab22dea52fbb7ff4efceb6"
+  },
+  "/src/skia/third_party/externals/brotli": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/google/brotli.git",
+    "rev": "6d03dfbedda1615c4cba1211f8d81735575209c8"
+  },
+  "/src/skia/third_party/externals/libgav1": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/codecs/libgav1.git",
+    "rev": "0fb779c1e169fe6c229cd1fa9cc6ea6feeb441da"
+  },
+  "/src/skia/third_party/externals/vulkan-tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/Vulkan-Tools",
+    "rev": "d38513edda0fc4eb5ffe144bad7246b7f26448f4"
+  },
+  "/src/skia/third_party/externals/abseil-cpp": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/abseil/abseil-cpp.git",
+    "rev": "cb436cf0142b4cbe47aae94223443df7f82e2920"
+  },
+  "/src/skia/third_party/externals/dng_sdk": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/dng_sdk.git",
+    "rev": "c8d0c9b1d16bfda56f15165d39e0ffa360a11123"
+  },
+  "/src/skia/third_party/externals/egl-registry": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/EGL-Registry",
+    "rev": "a0bca08de07c7d7651047bedc0b653cfaaa4f2ae"
+  },
+  "/src/skia/third_party/externals/wuffs": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/google/wuffs-mirror-release-c.git",
+    "rev": "a0041ac0310b3156b963e2f2bea09245f25ec073"
+  },
+  "/src/skia/third_party/externals/piex": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/piex.git",
+    "rev": "bb217acdca1cc0c16b704669dd6f91a1b509c406"
+  },
+  "/src/skia/third_party/externals/vello": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/linebender/vello.git",
+    "rev": "ef2630ad9c647b90863cb0915701d54725733968"
+  },
+  "/src/skia/third_party/externals/libjxl": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/gitlab.com/wg1/jpeg-xl.git",
+    "rev": "a205468bc5d3a353fb15dae2398a101dff52f2d3"
+  },
+  "/src/skia/third_party/externals/libyuv": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/libyuv/libyuv.git",
+    "rev": "d248929c059ff7629a85333699717d7a677d8d96"
+  },
+  "/src/skia/third_party/externals/expat": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/libexpat/libexpat.git",
+    "rev": "441f98d02deafd9b090aea568282b28f66a50e36"
+  },
+  "/src/skia/third_party/externals/zlib": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/zlib",
+    "rev": "c876c8f87101c5a75f6014b0f832499afeb65b73"
+  },
+  "/src/skia/third_party/externals/imgui": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/ocornut/imgui.git",
+    "rev": "55d35d8387c15bf0cfd71861df67af8cfbda7456"
+  },
+  "/src/skia/third_party/externals/jinja2": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/jinja2",
+    "rev": "ee69aa00ee8536f61db6a451f3858745cf587de6"
+  },
+  "/src/skia/third_party/externals/spirv-tools": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/SPIRV-Tools.git",
+    "rev": "04cdb2d344706052c7a2d359294e830ebac63e74"
+  },
+  "/src/skia/third_party/externals/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/deps/libjpeg_turbo.git",
+    "rev": "ed683925e4897a84b3bffc5c1414c85b97a129a3"
+  },
+  "/src/skia/third_party/externals/freetype": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/freetype2.git",
+    "rev": "d857bd535b6c7e877f262a9b61ed21ee11b35dab"
+  },
+  "/src/skia/third_party/externals/emsdk": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/emscripten-core/emsdk.git",
+    "rev": "4a48a752e6a8bef6f222622f2b4926d5eb3bdeb3"
+  },
+  "/src/skia/third_party/externals/sfntly": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/googlei18n/sfntly.git",
+    "rev": "b55ff303ea2f9e26702b514cf6a3196a2e3e2974"
+  },
+  "/src/skia/third_party/externals/icu": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/deps/icu.git",
+    "rev": "a0718d4f121727e30b8d52c7a189ebf5ab52421f"
+  },
+  "/src/skia/third_party/externals/spirv-cross": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/external/github.com/KhronosGroup/SPIRV-Cross",
+    "rev": "2d3a152081ca6e6bea7093940d0f81088fe4d01c"
+  },
+  "/src/skia/third_party/externals/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "f49462dc93784bf34148715eee36ab6697ca0b35"
+  },
+  "/src/skia/third_party/externals/markupsafe": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/third_party/markupsafe",
+    "rev": "0944e71f4b2cb9a871bcbe353f95e889b64a611a"
+  },
+  "/src/skia/third_party/externals/libpng": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/third_party/libpng.git",
+    "rev": "386707c6d19b974ca2e3db7f5c61873813c6fe44"
+  },
+  "/src/skia/third_party/externals/d3d12allocator": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/D3D12MemoryAllocator.git",
+    "rev": "169895d529dfce00390a20e69c2f516066fe7a3b"
+  },
+  "/src/skia/third_party/externals/swiftshader": {
+    "type": "git",
+    "url": "https://swiftshader.googlesource.com/SwiftShader",
+    "rev": "afd97bf1e9148cf31b850af8b63d288a6ed9f0f8"
+  },
+  "/src/skia/third_party/externals/opengl-registry": {
+    "type": "git",
+    "url": "https://skia.googlesource.com/external/github.com/KhronosGroup/OpenGL-Registry",
+    "rev": "14b80ebeab022b2c78f84a573f01028c96075553"
+  },
+  "/src/skia/buildtools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/src/buildtools.git",
+    "rev": "b138e6ce86ae843c42a1a08f37903207bebcca75"
+  },
+  "/src/depot_tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
+    "rev": "98d3bb27f08135a49722ff8702dbf551b18267b5"
+  }
+}

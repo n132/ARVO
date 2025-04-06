@@ -1,0 +1,7 @@
+{
+  "/src/krb5": {
+    "type": "git",
+    "url": "https://github.com/krb5/krb5.git",
+    "rev": "0a23b0cd9466e8a7c6fb82fce185be6e0834ce26"
+  }
+}

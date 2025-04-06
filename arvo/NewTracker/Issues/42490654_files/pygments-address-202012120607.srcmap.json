@@ -1,0 +1,12 @@
+{
+  "/src/pygments": {
+    "type": "git",
+    "url": "https://github.com/pygments/pygments.git",
+    "rev": "f91804ff4772e3ab41f46e28d370f57898700333"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/h3": {
+    "type": "git",
+    "url": "https://github.com/uber/h3",
+    "rev": "446ecee4560c5bce84a78475893d95a1049aef53"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "a976295b2acaff8461a906c461f5bb25dafdf557"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

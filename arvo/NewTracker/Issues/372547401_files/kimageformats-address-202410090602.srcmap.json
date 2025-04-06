@@ -1,0 +1,87 @@
+{
+  "/src/jxrlib": {
+    "type": "git",
+    "url": "https://github.com/4creators/jxrlib.git",
+    "rev": "f7521879862b9085318e814c6157490dd9dbbdb4"
+  },
+  "/src/LibRaw": {
+    "type": "git",
+    "url": "https://github.com/LibRaw/LibRaw",
+    "rev": "9bcb8a1d9593ba67e4eb67fed716efc5e1353d5c"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "4a3b22d2600f92d8706fb72d85d52bfee2acbd54"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "fde0990258cee3d720780b0d0d6dd48365e6ab65"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg.git",
+    "rev": "39e8c50a2f9bdcf36810ee3d41bcbf1cc78968ae"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "c7855dd9a0407f4b2c33661b99bf5a802fb7522d"
+  },
+  "/src/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "183485b155ff8e56501753d0f73b6c58bb170a24"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "8ad484f8a18ed1853c094e7d3a4e023b2a92df28"
+  },
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kimageformats.git",
+    "rev": "97120b2537a56f8856df7cdf2142f6c94b9fee29"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "f33b3679d6e5b140a855e07b89bed5b901c1df6a"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "c377f4e9b72b11e8216dd5f4cc472258e4cfb578"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "5abfa28d452aee5420ac09b0b30b2283329fd234"
+  },
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+    "rev": "a1a00ffeecf627bbbc010d40700720bee48b2af7"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "dbca3d078ec581600600abebbb18769d3d713914"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "956320f8502c59468afd2b43557e1c94bb256eaa"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "da23998e9afc8aabf0ecb91033ccedad90eb6916"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "d476828316d05d54c6fd6a068b121b30c147b5cd"
+  }
+}

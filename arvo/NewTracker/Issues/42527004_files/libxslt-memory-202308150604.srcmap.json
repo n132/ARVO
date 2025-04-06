@@ -1,0 +1,12 @@
+{
+  "/src/libxslt": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxslt.git",
+    "rev": "f86c64b6d5a11eef881f08a64627df6a8c77febb"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "e2ab48b9b5f5a97da76d6c90f0630ad0486bac6e"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/resiprocate": {
+    "type": "git",
+    "url": "https://github.com/resiprocate/resiprocate.git",
+    "rev": "712af05af74a12c44017a6ff05fef3ec4dda1ba0"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "dcc9838c3b94ab58aa432f85a47b09dcd365071b"
+  }
+}

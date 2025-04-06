@@ -1,0 +1,12 @@
+{
+  "/src/kamailio": {
+    "type": "git",
+    "url": "https://github.com/kamailio/kamailio",
+    "rev": "8f23548c4d201445e29e73cd0f2efab6a7dc5c04"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

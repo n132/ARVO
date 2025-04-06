@@ -1,0 +1,22 @@
+{
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "9e040ff74dc33fa30995b3a0d136f4ae4e18f53a"
+  },
+  "/src/pupnp": {
+    "type": "git",
+    "url": "https://github.com/pupnp/pupnp",
+    "rev": "a3f40ec03898260433449c9d02ae6898cb4f449f"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

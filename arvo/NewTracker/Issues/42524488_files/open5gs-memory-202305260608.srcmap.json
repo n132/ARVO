@@ -1,0 +1,7 @@
+{
+  "/src/open5gs": {
+    "type": "git",
+    "url": "https://github.com/open5gs/open5gs.git",
+    "rev": "c8b81094dbe83217d907636501bfae3930ffc2f0"
+  }
+}

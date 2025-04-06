@@ -1,0 +1,17 @@
+{
+  "/src/spring-boot": {
+    "type": "git",
+    "url": "https://github.com/spring-projects/spring-boot",
+    "rev": "adcd3acbc2f07a427e13c65821350dcb935ba2f7"
+  },
+  "/src/spring-boot/spring-framework": {
+    "type": "git",
+    "url": "https://github.com/spring-projects/spring-framework",
+    "rev": "496b1879ab92146581cef7052f53a7f97686cb39"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"8699847a4222dd623baa6b99d37e337ec32ffd7f","url":"https://github.com/google/oss-fuzz.git","path":"/projects/json/"},"/src/json":{"rev":"42fa3f0568da51fd0cec78f0c22c39b029477945","type":"git","url":"https://github.com/nlohmann/json.git"}}

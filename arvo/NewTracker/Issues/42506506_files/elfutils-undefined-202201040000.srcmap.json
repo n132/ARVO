@@ -1,0 +1,12 @@
+{
+  "/src/elfutils": {
+    "type": "git",
+    "url": "git://sourceware.org/git/elfutils.git",
+    "rev": "9f70a762ab88ceebb8a48a7c9c3ce39ff7f205af"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "/src/libpsl": {
+    "type": "git",
+    "url": "https://github.com/rockdaboot/libpsl.git",
+    "rev": "304ca775222f022699c91a782eb777604106924a"
+  },
+  "/src/libidn": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libidn.git",
+    "rev": "2e49b6f62b0d940a58c0f51f2bb3e4ee3f85fdad"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "75a674b1a3c4432fc7c6855423b4cbf2ced6821b"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "36eeafa7eda88ed751bedbd7a72f91509eef8de1"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "ccb0dc48489bd057a2a8b52091eb16639a29fc83"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

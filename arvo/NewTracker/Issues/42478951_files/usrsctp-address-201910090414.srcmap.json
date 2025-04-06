@@ -1,0 +1,17 @@
+{
+  "/src/usrsctp": {
+    "type": "git",
+    "url": "https://github.com/weinrank/usrsctp",
+    "rev": "2ac450065e53c111e8a79bbfc35cc829c0316975"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "374139"
+  }
+}

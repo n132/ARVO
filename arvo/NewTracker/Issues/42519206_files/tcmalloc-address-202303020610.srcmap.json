@@ -1,0 +1,7 @@
+{
+  "/src/tcmalloc": {
+    "type": "git",
+    "url": "https://github.com/google/tcmalloc",
+    "rev": "ddd78bd825ae112c4974e04da4c9f1f72553aaab"
+  }
+}

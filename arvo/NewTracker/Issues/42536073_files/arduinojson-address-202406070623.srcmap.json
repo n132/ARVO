@@ -1,0 +1,7 @@
+{
+  "/src/arduinojson": {
+    "type": "git",
+    "url": "https://github.com/bblanchon/ArduinoJson.git",
+    "rev": "5b88b2c1f6bd78af21fc2036f2357253b563accb"
+  }
+}

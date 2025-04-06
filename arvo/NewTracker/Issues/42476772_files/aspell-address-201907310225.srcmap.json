@@ -1,0 +1,12 @@
+{
+  "/src/aspell": {
+    "type": "git",
+    "url": "https://github.com/cmeister2/aspell.git",
+    "rev": "8c04d6c85711942fa60b22fc1a2dbb78bda55f60"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "367381"
+  }
+}

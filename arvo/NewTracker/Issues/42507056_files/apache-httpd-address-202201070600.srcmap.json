@@ -1,0 +1,22 @@
+{
+  "/src/httpd": {
+    "type": "git",
+    "url": "https://github.com/apache/httpd",
+    "rev": "ed611d3754bc38f2d9c9aabf0fb7becd8d8fdc7d"
+  },
+  "/src/fuzz-headers": {
+    "type": "git",
+    "url": "https://github.com/AdaLogics/fuzz-headers",
+    "rev": "af84402d46e5d668364d561687291344608d4c9d"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  },
+  "/src/pcre2": {
+    "type": "svn",
+    "url": "svn://vcs.exim.org/pcre2/code/trunk",
+    "rev": "1317"
+  }
+}

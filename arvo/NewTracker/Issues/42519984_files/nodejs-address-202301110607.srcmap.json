@@ -1,0 +1,7 @@
+{
+  "/src/node": {
+    "type": "git",
+    "url": "https://github.com/nodejs/node",
+    "rev": "384e1b5174976be75432184e0530b7cb5b00b124"
+  }
+}

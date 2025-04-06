@@ -1,0 +1,12 @@
+{
+  "/src/md4c": {
+    "type": "git",
+    "url": "https://github.com/mity/md4c",
+    "rev": "3478ec69c1196766a49325edd355656eb660214e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a252943236b12c080248747bee06c9c5084b871e"
+  }
+}

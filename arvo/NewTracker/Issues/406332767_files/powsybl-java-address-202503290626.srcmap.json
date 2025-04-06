@@ -1,0 +1,42 @@
+{
+  "/src/powsybl-seed-corpus": {
+    "type": "git",
+    "url": "https://github.com/arthurscchan/powsybl-seed-corpus",
+    "rev": "4fd05042bf39370e5ad8f9a3b468fe047262a668"
+  },
+  "/src/powsybl-open-loadflow": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-open-loadflow",
+    "rev": "cbb24e93c445328f1e7775648eb5133c16ba6e32"
+  },
+  "/src/powsybl-entsoe": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-entsoe",
+    "rev": "69f8892b6f13e3ffcb78cc6cbd5dce5cb3befbe0"
+  },
+  "/src/powsybl-dynawo": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-dynawo",
+    "rev": "42b083cbc158e62520ad58811aea063c5f7d4e43"
+  },
+  "/src/powsybl-open-rao": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-open-rao",
+    "rev": "7d3717d5021c7fddc374ef1a0999f01c8e636d50"
+  },
+  "/src/powsybl-metrix": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-metrix",
+    "rev": "9bd2aea2fc8a40b6d8442da969132ced5ad588c4"
+  },
+  "/src/powsybl-diagram": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-diagram",
+    "rev": "f0799cfb1e64fe16ac27c26a1961303fda3b3b80"
+  },
+  "/src/powsybl-core": {
+    "type": "git",
+    "url": "https://github.com/powsybl/powsybl-core",
+    "rev": "455fd74f3b9d03754ab8774b50d59e07823a793c"
+  }
+}

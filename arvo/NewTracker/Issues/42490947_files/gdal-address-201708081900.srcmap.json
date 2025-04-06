@@ -1,0 +1,17 @@
+{
+  "/src/gdal/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "18eac3df1b02a5f7ec4c008b3347357f37ad7851"
+  },
+  "/src/gdal": {
+    "type": "git",
+    "url": "https://github.com/OSGeo/gdal",
+    "rev": "aa06a0e192e7cc44bfd35d8105adcebd6a4d7246"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "6d39c6ba7f52b61664c982d6ac89d7491b6f8730"
+  }
+}

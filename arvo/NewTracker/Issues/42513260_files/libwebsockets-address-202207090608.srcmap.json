@@ -1,0 +1,12 @@
+{
+  "/src/libwebsockets": {
+    "type": "git",
+    "url": "https://github.com/warmcat/libwebsockets.git",
+    "rev": "6fb072d5c9da12e9e558897a5294bce64b545577"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

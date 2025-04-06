@@ -1,0 +1,7 @@
+{
+  "/src/coturn": {
+    "type": "git",
+    "url": "https://github.com/coturn/coturn",
+    "rev": "99cc8aaa655d3cccc312474ef4dddaca2bae317a"
+  }
+}

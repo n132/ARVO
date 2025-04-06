@@ -1,0 +1,12 @@
+{
+  "/src/astc-encoder": {
+    "type": "git",
+    "url": "https://github.com/ARM-software/astc-encoder",
+    "rev": "d38f6a509d6ca74598087e8a8f91f22d07a85293"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

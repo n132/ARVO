@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"539f0db2338c5692c95fc66e3871262c93e682f4","url":"https://github.com/google/oss-fuzz.git","path":"/projects/pcre2/"},"/src/pcre2":{"rev":"672","type":"svn","url":"svn://vcs.exim.org/pcre2/code/trunk"}}

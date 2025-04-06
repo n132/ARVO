@@ -1,0 +1,7 @@
+{
+  "/src/jolt": {
+    "type": "git",
+    "url": "https://github.com/bazaarvoice/jolt/",
+    "rev": "990aee98233362dd0a1c8975056f280c55305c19"
+  }
+}

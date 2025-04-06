@@ -1,0 +1,27 @@
+{
+  "/src/pillow-wheels": {
+    "type": "git",
+    "url": "https://github.com/python-pillow/pillow-wheels",
+    "rev": "61d40c91ccfe0f5dfb34913b7f4e683e6ba12364"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "beae033a907378b47d1b351b5593525ef459cd49"
+  },
+  "/src/Pillow": {
+    "type": "git",
+    "url": "https://github.com/python-pillow/Pillow",
+    "rev": "9887544fafcd13cc8afcfa0c6d0f2e6facc1a8b8"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "baa82e7189677bb9086beb5d9b5e58018d991607"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "a7877416a87506424053e52e41f7a995c05367a4"
+  }
+}

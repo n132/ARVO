@@ -1,0 +1,7 @@
+{
+  "/src/docker-client": {
+    "type": "git",
+    "url": "https://github.com/spotify/docker-client",
+    "rev": "9a7c3b4994be9a55988f821f7177029201ff6aef"
+  }
+}

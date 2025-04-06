@@ -1,0 +1,7 @@
+{
+  "/src/libtpms": {
+    "type": "git",
+    "url": "https://github.com/stefanberger/libtpms",
+    "rev": "db997a843b306b9aa588a76060f6c147bccafaca"
+  }
+}

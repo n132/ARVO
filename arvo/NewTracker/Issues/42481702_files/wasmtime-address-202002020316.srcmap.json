@@ -1,0 +1,17 @@
+{
+  "/src/wasmtime": {
+    "type": "git",
+    "url": "https://github.com/bytecodealliance/wasmtime",
+    "rev": "ea4faa4a01bc268b418f6a574d4464b78aaa5793"
+  },
+  "/src/wasmtime/wasmtime-libfuzzer-corpus": {
+    "type": "git",
+    "url": "https://github.com/bytecodealliance/wasmtime-libfuzzer-corpus",
+    "rev": "6b0f82885da9c1aceadd22635c0570b58969cfc7"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

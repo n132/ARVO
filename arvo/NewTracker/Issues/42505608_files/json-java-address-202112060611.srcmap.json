@@ -1,0 +1,12 @@
+{
+  "/src/json-java": {
+    "type": "git",
+    "url": "https://github.com/stleary/JSON-java",
+    "rev": "f1b0210b8acdbc5f5316bc5507e2f3630506a9a3"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

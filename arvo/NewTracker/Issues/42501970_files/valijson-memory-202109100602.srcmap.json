@@ -1,0 +1,12 @@
+{
+  "/src/valijson": {
+    "type": "git",
+    "url": "https://github.com/tristanpenman/valijson",
+    "rev": "ad7dac75a5796e248335780890ec7dc3c9231772"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

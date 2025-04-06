@@ -1,0 +1,7 @@
+{
+  "/src/flex": {
+    "type": "git",
+    "url": "https://github.com/westes/flex",
+    "rev": "b162ab50f43a7723d2b2d9ac176df5bca8aaf0ad"
+  }
+}

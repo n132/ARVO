@@ -1,0 +1,17 @@
+{
+  "/src/cyclonedds": {
+    "type": "git",
+    "url": "https://github.com/eclipse-cyclonedds/cyclonedds",
+    "rev": "f8b686d3b47137a3de1891d247cda8363a2a09d3"
+  },
+  "/src/centipede": {
+    "type": "git",
+    "url": "https://github.com/google/centipede.git",
+    "rev": "a976295b2acaff8461a906c461f5bb25dafdf557"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/assimp": {
+    "type": "git",
+    "url": "https://github.com/assimp/assimp.git",
+    "rev": "5a4f7c0a375fd2acc3bda9414d21efe711346ede"
+  }
+}

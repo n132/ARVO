@@ -1,0 +1,12 @@
+{
+  "/src/spring-framework": {
+    "type": "git",
+    "url": "https://github.com/spring-projects/spring-framework",
+    "rev": "f877f81ae405922b8db0383d33af51e8fed94a41"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"fddc314e69631a01268e162169d8578c32a47c93","url":"https://github.com/google/oss-fuzz.git","path":"/projects/llvm_libcxxabi/"},"/src/libcxxabi":{"rev":"292428","type":"svn","url":"http://llvm.org/svn/llvm-project/libcxxabi/trunk"}}

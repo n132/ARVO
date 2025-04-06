@@ -1,0 +1,7 @@
+{
+  "/src/mrab-regex": {
+    "type": "git",
+    "url": "https://github.com/mrabarnett/mrab-regex",
+    "rev": "be75782535bd817bc3fa18f8e9d875366340ead7"
+  }
+}

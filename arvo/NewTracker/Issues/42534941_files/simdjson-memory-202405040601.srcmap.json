@@ -1,0 +1,7 @@
+{
+  "/src/simdjson": {
+    "type": "git",
+    "url": "https://github.com/simdjson/simdjson.git",
+    "rev": "52406402ed1f8ff246b18ddcfced9d2f4e98ccc9"
+  }
+}

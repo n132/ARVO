@@ -1,0 +1,17 @@
+{
+  "/src/clamav-fuzz-corpus": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav-fuzz-corpus.git",
+    "rev": "399ce5bb2d5c839786e79c641c00b8205e47dd4a"
+  },
+  "/src/clamav-devel": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav-devel.git",
+    "rev": "d5a733ef9031886827a6650312e31b57af11aeff"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

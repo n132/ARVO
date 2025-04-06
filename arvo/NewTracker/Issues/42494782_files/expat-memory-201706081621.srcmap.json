@@ -1,0 +1,12 @@
+{
+  "/src/expat": {
+    "type": "git",
+    "url": "https://github.com/libexpat/libexpat",
+    "rev": "632bb9f39e343bd502ed8bfdf62131add941be23"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "2ac50c9432f4856b505e3f9cb7f4e7161f5e182c"
+  }
+}

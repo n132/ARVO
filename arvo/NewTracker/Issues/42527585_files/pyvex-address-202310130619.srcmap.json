@@ -1,0 +1,12 @@
+{
+  "/src/pyvex": {
+    "type": "git",
+    "url": "https://github.com/angr/pyvex.git",
+    "rev": "cab692be759b173dcbecf572d72fa67d8a12a307"
+  },
+  "/src/archinfo": {
+    "type": "git",
+    "url": "https://github.com/angr/archinfo.git",
+    "rev": "062065b3cce8c7dec337bc32a017f7c49d91aef0"
+  }
+}

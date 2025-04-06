@@ -1,0 +1,7 @@
+{
+  "/src/xstream": {
+    "type": "git",
+    "url": "https://github.com/x-stream/xstream.git",
+    "rev": "ab4a1729543e47f66889d2331ea65cca30dc7138"
+  }
+}

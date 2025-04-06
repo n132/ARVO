@@ -1,0 +1,17 @@
+{
+  "/src/aspell-fuzz": {
+    "type": "git",
+    "url": "https://github.com/gnuaspell/aspell-fuzz.git",
+    "rev": "576059dab2137514bdd236c8189039b557263bd4"
+  },
+  "/src/aspell": {
+    "type": "git",
+    "url": "https://github.com/gnuaspell/aspell.git",
+    "rev": "c5a9fb86292f9e4de87af8f3a951fc2dc69c7f21"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "367797"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/elfutils": {
+    "type": "git",
+    "url": "git://sourceware.org/git/elfutils.git",
+    "rev": "4961f9ae2f11795022166698aa15a15f48ec8c5b"
+  }
+}

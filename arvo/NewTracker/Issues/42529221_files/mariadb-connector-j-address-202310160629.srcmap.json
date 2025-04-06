@@ -1,0 +1,7 @@
+{
+  "/src/mariadb-connector-j": {
+    "type": "git",
+    "url": "https://github.com/mariadb-corporation/mariadb-connector-j",
+    "rev": "706016b7bbb469e9890571ad9b45660ce7e2c2f9"
+  }
+}

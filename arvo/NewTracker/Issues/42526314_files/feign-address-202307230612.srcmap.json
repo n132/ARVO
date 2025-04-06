@@ -1,0 +1,7 @@
+{
+  "/src/feign": {
+    "type": "git",
+    "url": "https://github.com/openfeign/feign",
+    "rev": "8c187bbf5cac59fd2812048a496deb0ef8387d82"
+  }
+}

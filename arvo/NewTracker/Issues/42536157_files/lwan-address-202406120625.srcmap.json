@@ -1,0 +1,7 @@
+{
+  "/src/lwan": {
+    "type": "git",
+    "url": "https://github.com/lpereira/lwan.git",
+    "rev": "2fbd55d5fc0fcefd2fa6ac748c9e5ce50ab9f424"
+  }
+}

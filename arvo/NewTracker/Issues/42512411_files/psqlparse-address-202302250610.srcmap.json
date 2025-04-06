@@ -1,0 +1,7 @@
+{
+  "/src/psqlparse": {
+    "type": "git",
+    "url": "https://github.com/alculquicondor/psqlparse",
+    "rev": "72decb854590f70cbc54c549cd033df4a256b68b"
+  }
+}

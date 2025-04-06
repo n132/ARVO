@@ -1,0 +1,12 @@
+{
+  "/src/jettison": {
+    "type": "git",
+    "url": "https://github.com/jettison-json/jettison.git",
+    "rev": "814476b602ab6eeee86696c6b831ab83c18f4487"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

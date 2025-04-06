@@ -1,0 +1,17 @@
+{
+  "/src/corpora": {
+    "type": "git",
+    "url": "https://github.com/dvyukov/go-fuzz-corpus",
+    "rev": "c42c1b2914c7503500996ee15927d3ab3d2ba968"
+  },
+  "/src/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "b3c247b292e67a96eeca5b812b284f042ceea948"
+  },
+  "/src/commons-configuration": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-configuration.git",
+    "rev": "dc50853f1fbd291fd1fca0d106345004166b6d43"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/postgis": {
+    "type": "git",
+    "url": "https://git.osgeo.org/gogs/postgis/postgis.git",
+    "rev": "7a056c8019561045fe7ccc3f7de28d83f92520a9"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "315434"
+  }
+}

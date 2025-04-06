@@ -1,0 +1,12 @@
+{
+  "/src/c-blosc": {
+    "type": "git",
+    "url": "https://github.com/Blosc/c-blosc.git",
+    "rev": "e3fdd3e506a23ec66d9f3fe2fe346e4a03b1787a"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "518e42281f77768215851d31fc61e8970ce21481"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/junrar": {
+    "type": "git",
+    "url": "https://github.com/junrar/junrar.git",
+    "rev": "9ea7d0f7abd9a0d8e1b2a02ebf139b2469167933"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/lxml": {
+    "type": "git",
+    "url": "https://github.com/lxml/lxml",
+    "rev": "a9f31d9ba0f6db7b0c6576b4b9014a4ea7649eca"
+  }
+}

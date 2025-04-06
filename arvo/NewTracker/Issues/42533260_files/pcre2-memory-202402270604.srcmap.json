@@ -1,0 +1,7 @@
+{
+  "/src/pcre2": {
+    "type": "git",
+    "url": "https://github.com/PCRE2Project/pcre2",
+    "rev": "e8db6fa7137f4c6f66cb87e0a3c9467252ec1ef7"
+  }
+}

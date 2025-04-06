@@ -1,0 +1,17 @@
+{
+  "/src/tmux-fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/tmux/tmux-fuzzing-corpus.git",
+    "rev": "73b1e642654f90279f62bfbf91aa6eb0b3b98646"
+  },
+  "/src/tmux": {
+    "type": "git",
+    "url": "https://github.com/tmux/tmux.git",
+    "rev": "742e67080586e212f3c6adbdc1c59bf56b0712b1"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5dd35f5281afec0955c08fe9f99e3c83222b7764"
+  }
+}

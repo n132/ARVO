@@ -1,0 +1,17 @@
+{
+  "/src/freetype2": {
+    "type": "git",
+    "url": "git://git.sv.nongnu.org/freetype/freetype2.git",
+    "rev": "2c256e6dac16c1a5ab2e30f0b0add281a7e7fdfc"
+  },
+  "/src/text-rendering-tests": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/text-rendering-tests.git",
+    "rev": "a3484605827b60c8c3b77eba13622adcd502db17"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "2773e2d4e3b975ff1b6eebb5637d83c893edc57f"
+  }
+}

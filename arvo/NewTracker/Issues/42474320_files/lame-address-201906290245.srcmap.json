@@ -1,0 +1,17 @@
+{
+  "/src/LAME-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/LAME-fuzzers",
+    "rev": "b7906421843636b2646e760856a9bd4c84249491"
+  },
+  "/src/lame": {
+    "type": "svn",
+    "url": "https://svn.code.sf.net/p/lame/svn/trunk/lame",
+    "rev": "6444"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "364705"
+  }
+}

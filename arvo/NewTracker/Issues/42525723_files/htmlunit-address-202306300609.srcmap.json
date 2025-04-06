@@ -1,0 +1,7 @@
+{
+  "/src/htmlunit": {
+    "type": "git",
+    "url": "https://github.com/HtmlUnit/htmlunit.git",
+    "rev": "9bbf08dbc137a81f1bf7138fadee145015faaf8d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libreoffice": {
+    "type": "git",
+    "url": "https://git.libreoffice.org/core",
+    "rev": "bd159d4f4f827821782926cc13f8b5c4c8a63a3d"
+  }
+}

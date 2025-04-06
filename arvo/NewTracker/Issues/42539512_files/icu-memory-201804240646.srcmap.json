@@ -1,0 +1,12 @@
+{
+  "/src/icu": {
+    "type": "svn",
+    "url": "http://source.icu-project.org/repos/icu/trunk/icu4c",
+    "rev": "41269"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "330687"
+  }
+}

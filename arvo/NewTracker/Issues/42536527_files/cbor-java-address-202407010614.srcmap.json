@@ -1,0 +1,7 @@
+{
+  "/src/cbor-java": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/cbor-java",
+    "rev": "3bcaeafe943411543f051b8142b62ffe45589356"
+  }
+}

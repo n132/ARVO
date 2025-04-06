@@ -1,0 +1,12 @@
+{
+  "/src/pcre2": {
+    "type": "git",
+    "url": "https://github.com/PCRE2Project/pcre2",
+    "rev": "4fa5b8bd206135447f55e7f5f8d9294474051a44"
+  },
+  "/src/libyang": {
+    "type": "git",
+    "url": "https://github.com/CESNET/libyang",
+    "rev": "fba28260f382d81cf8f4b91b24cd717b52324fc2"
+  }
+}

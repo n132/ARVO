@@ -1,0 +1,7 @@
+{
+  "/src/bloaty": {
+    "type": "git",
+    "url": "https://github.com/google/bloaty.git",
+    "rev": "39259087cdfa6156211dcc640e6355df62f72041"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/tinygltf": {
+    "type": "git",
+    "url": "https://github.com/syoyo/tinygltf.git",
+    "rev": "d71c6f61f341b5fcb3b7235ca6ce4244dac9261a"
+  }
+}

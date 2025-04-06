@@ -1,0 +1,7 @@
+{
+  "/src/tarantool": {
+    "type": "git",
+    "url": "https://github.com/tarantool/tarantool",
+    "rev": "abefe2c6a2c890c1ee1549c26060a1487b546f60"
+  }
+}

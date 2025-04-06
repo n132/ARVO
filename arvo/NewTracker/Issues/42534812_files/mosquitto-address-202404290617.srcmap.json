@@ -1,0 +1,12 @@
+{
+  "/src/cJSON": {
+    "type": "git",
+    "url": "https://github.com/ralight/cJSON",
+    "rev": "04564d8d6911725c5bc48d8c4b4126d37967d939"
+  },
+  "/src/mosquitto": {
+    "type": "git",
+    "url": "https://github.com/eclipse/mosquitto",
+    "rev": "2754b6667d64069bcc3f5e24d43acc83a3a9f27a"
+  }
+}

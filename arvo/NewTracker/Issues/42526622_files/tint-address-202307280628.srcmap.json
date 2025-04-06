@@ -1,0 +1,12 @@
+{
+  "/src/dawn": {
+    "type": "git",
+    "url": "https://dawn.googlesource.com/dawn",
+    "rev": "2b228f35c708b6cb28b5aafe5ced71be9d4bd7ba"
+  },
+  "/src/depot_tools": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/tools/depot_tools.git",
+    "rev": "4eaefabc5dca618fc07ac550fda35ba7a45a38f8"
+  }
+}

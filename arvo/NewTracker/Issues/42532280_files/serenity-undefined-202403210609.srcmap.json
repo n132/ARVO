@@ -1,0 +1,7 @@
+{
+  "/src/serenity": {
+    "type": "git",
+    "url": "https://github.com/SerenityOS/serenity",
+    "rev": "2874380849972896b9ee7de0893cfbfc255f83de"
+  }
+}

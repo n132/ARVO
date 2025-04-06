@@ -1,0 +1,7 @@
+{
+  "/src/pcl": {
+    "type": "git",
+    "url": "https://github.com/PointCloudLibrary/pcl",
+    "rev": "383b530b5475dce220e5fd45097db587fadf019d"
+  }
+}

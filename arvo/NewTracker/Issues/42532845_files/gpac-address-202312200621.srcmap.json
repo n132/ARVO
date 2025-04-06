@@ -1,0 +1,12 @@
+{
+  "/src/testsuite": {
+    "type": "git",
+    "url": "https://github.com/gpac/testsuite",
+    "rev": "9a754a5a4e5f2eb28822d3fc1038e79bc9a240fa"
+  },
+  "/src/gpac": {
+    "type": "git",
+    "url": "https://github.com/gpac/gpac",
+    "rev": "4ae83a02bbad74fa4420bfda6eb6e7f8774eca5a"
+  }
+}

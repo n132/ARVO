@@ -1,0 +1,17 @@
+{
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "8e2f0ee62596cb1dec7e149ccf047a2506049af9"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "d0f11a6a0f3ab7b0b13510a34682d6e3aa7b72bd"
+  },
+  "/src/relic": {
+    "type": "git",
+    "url": "https://github.com/relic-toolkit/relic.git",
+    "rev": "6fde832c4eb4ea0094b8f96380e453b40292adb1"
+  }
+}

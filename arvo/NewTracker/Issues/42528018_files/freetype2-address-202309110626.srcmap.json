@@ -1,0 +1,12 @@
+{
+  "/src/freetype2-testing": {
+    "type": "git",
+    "url": "https://github.com/freetype/freetype2-testing.git",
+    "rev": "787dc2675537eef0e1efbb14e1b60d9df1725893"
+  },
+  "/src/text-rendering-tests": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/text-rendering-tests.git",
+    "rev": "3c15042d47f8ab5c1d490cd9708511a7452d72aa"
+  }
+}

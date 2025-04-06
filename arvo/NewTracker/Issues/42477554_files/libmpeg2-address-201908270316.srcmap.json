@@ -1,0 +1,12 @@
+{
+  "/src/libmpeg2": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/libmpeg2",
+    "rev": "1d318a57b826e97ecbacb3a5ec809e1902c32482"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "370007"
+  }
+}

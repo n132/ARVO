@@ -1,0 +1,17 @@
+{
+  "/src/JSONTestSuite": {
+    "type": "git",
+    "url": "https://github.com/nst/JSONTestSuite.git",
+    "rev": "d64aefb55228d9584d3e5b2433f720ea8fd00c82"
+  },
+  "/src/wuffs": {
+    "type": "git",
+    "url": "https://github.com/google/wuffs.git",
+    "rev": "b645180357d2ba2a5dcd610fff4ffe2872540dad"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "2102264acf5c271b7560a82771b3af8136af9354"
+  }
+}

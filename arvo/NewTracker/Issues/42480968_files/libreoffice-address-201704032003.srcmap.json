@@ -1,0 +1,12 @@
+{
+  "/src/libreoffice": {
+    "type": "git",
+    "url": "git://anongit.freedesktop.org/libreoffice/core",
+    "rev": "1a1d1a86e9129ec3885610b641179b30f9bf5e79"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "d04cf77f04fc8ef022f9429f6729c22da9af43c2"
+  }
+}

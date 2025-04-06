@@ -1,0 +1,7 @@
+{
+  "/src/sudo": {
+    "type": "git",
+    "url": "https://github.com/sudo-project/sudo",
+    "rev": "f17aebe6aafae454531a90e03b6fd1d8f392cf46"
+  }
+}

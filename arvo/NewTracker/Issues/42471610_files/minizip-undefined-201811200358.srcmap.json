@@ -1,0 +1,12 @@
+{
+  "/src/minizip": {
+    "type": "git",
+    "url": "https://github.com/nmoinvaz/minizip",
+    "rev": "82fa1b39c02d6bceb09fe1d8c6186b3a0329fd0f"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "347286"
+  }
+}

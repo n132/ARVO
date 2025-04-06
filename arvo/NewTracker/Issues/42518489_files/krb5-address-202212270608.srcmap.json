@@ -1,0 +1,12 @@
+{
+  "/src/krb5": {
+    "type": "git",
+    "url": "https://github.com/krb5/krb5",
+    "rev": "50b7ae4b971d2e7b9d16230de966ec5452a367c6"
+  },
+  "/src/oss-fuzz-bloat": {
+    "type": "git",
+    "url": "https://github.com/0x34d/oss-fuzz-bloat",
+    "rev": "1f27aa1df1b3897acfe03c447899248e5ad9ec86"
+  }
+}

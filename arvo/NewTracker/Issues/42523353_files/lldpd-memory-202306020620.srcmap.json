@@ -1,0 +1,7 @@
+{
+  "/src/lldpd": {
+    "type": "git",
+    "url": "https://github.com/lldpd/lldpd.git",
+    "rev": "dc13f3e6328f8a38bba329edb26c54e695cbfa63"
+  }
+}

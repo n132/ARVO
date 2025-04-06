@@ -1,0 +1,37 @@
+{
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "ec20f4178950a54f4bfbed72c2bbbabe6561c414"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "de5b53466cd5dd4dac88330d1d30afb3e372af34"
+  },
+  "/src/libtasn1": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/libtasn1.git",
+    "rev": "8ba9fbf4baa6bbe8bb1c396cb2622ebf5e097abe"
+  },
+  "/src/libidn2": {
+    "type": "git",
+    "url": "https://gitlab.com/libidn/libidn2.git",
+    "rev": "64ab4040fe92951dd880caafbc05d5e9a6ac370b"
+  },
+  "/src/libunistring": {
+    "type": "git",
+    "url": "https://git.savannah.gnu.org/git/libunistring.git",
+    "rev": "e4cbbc6ad5ee2f36ede10f2826d2163bc9366e36"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "c0a126e201dd4f8f148835724dd2b2651e6f9d18"
+  },
+  "/src/gmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "7ecb3b2beea1b08a78f490b10c4231e2f99137ba"
+  }
+}

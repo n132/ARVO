@@ -1,0 +1,12 @@
+{
+  "/src/stb": {
+    "type": "git",
+    "url": "https://github.com/nothings/stb.git",
+    "rev": "b42009b3b9d4ca35bc703f5310eedc74f584be58"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

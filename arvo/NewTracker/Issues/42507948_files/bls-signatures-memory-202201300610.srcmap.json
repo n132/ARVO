@@ -1,0 +1,37 @@
+{
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "05543ea58f85abfdea72f4617c753b9466f8e202"
+  },
+  "/src/mcl": {
+    "type": "git",
+    "url": "https://github.com/herumi/mcl.git",
+    "rev": "41497c9cf9b38edb6d1aafbafaf2237848b0dee7"
+  },
+  "/src/bls-signatures": {
+    "type": "git",
+    "url": "https://github.com/Chia-Network/bls-signatures.git",
+    "rev": "bc7628958d96c4683709525d850f49e5d7b1ecfa"
+  },
+  "/src/blst": {
+    "type": "git",
+    "url": "https://github.com/supranational/blst",
+    "rev": "88330f86d462af5a9aa903924e2060f2c633d129"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "9e0c74106f514e2178aa2e52dc56f46a0412bbe2"
+  },
+  "/src/fuzz-introspector": {
+    "type": "git",
+    "url": "https://github.com/ossf/fuzz-introspector.git",
+    "rev": "9e3393cd551b65a6bf2de6495013b415f315f74e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

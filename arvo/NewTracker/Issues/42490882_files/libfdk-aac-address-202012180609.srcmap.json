@@ -1,0 +1,12 @@
+{
+  "/src/aac": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/aac/",
+    "rev": "b831187d3a47f3cbe5d0060f4f064621eb484efd"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "/src/libressl": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/portable.git",
+    "rev": "a7ca886cb03e52718b51f9dd35ea15f28db71a2b"
+  },
+  "/src/libressl/openbsd": {
+    "type": "git",
+    "url": "https://github.com/libressl/openbsd.git",
+    "rev": "5f0541740b8c555fa2c751e63fae55680a69afe6"
+  },
+  "/src/botan": {
+    "type": "git",
+    "url": "https://github.com/randombit/botan.git",
+    "rev": "d488402dbfe35fdfb5b09e96718c15ab33760500"
+  },
+  "/src/cryptofuzz-corpora": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz-corpora",
+    "rev": "af25d1b595b284001bc97edd0afd62ca157db4d8"
+  },
+  "/src/cryptofuzz": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/cryptofuzz",
+    "rev": "037057f22c72dc0ba48643f872bf8ffcc14d4bcd"
+  },
+  "/src/libressl.fuzzers": {
+    "type": "git",
+    "url": "https://github.com/libressl-portable/fuzz.git",
+    "rev": "42eba397a218c03d3b02eb07021bfc6203ebc21c"
+  }
+}

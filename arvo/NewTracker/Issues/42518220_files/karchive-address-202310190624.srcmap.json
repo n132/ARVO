@@ -1,0 +1,32 @@
+{
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "e4248bcb57dfcf8564753c317d01cff8c62fe3b8"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "93ad5b0b55d26a8fdfa4fca41dc2ca35603576ee"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "da6e958319e95fe564d3b30c931492dd666bfaff"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://git.tukaani.org/xz.git",
+    "rev": "c60b25569d414bb73b705977a4dd342f8f9f1965"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "0b6ebe6fad8adb1ec95bb5529c5af2185d40c2cf"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "ac8f12c97d1afd9bafa9c710f827d40a407d3266"
+  }
+}

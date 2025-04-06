@@ -1,0 +1,12 @@
+{
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  },
+  "/src/mozilla-central": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/mozilla-central/",
+    "rev": "89fef9703703e6ca5427be85d477097aa2a09ba4"
+  }
+}

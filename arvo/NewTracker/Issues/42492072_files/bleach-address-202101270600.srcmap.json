@@ -1,0 +1,22 @@
+{
+  "/src/bleach": {
+    "type": "git",
+    "url": "https://github.com/mozilla/bleach.git",
+    "rev": "c045a8b2a02bfb77bb9cacd5d3e5926c056074d2"
+  },
+  "/src/bleach/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "cec02db916d21baa4db5b8d262d78848b3a35f4b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "068bef5eab942df0a133c92522f2ab81b28ac636"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

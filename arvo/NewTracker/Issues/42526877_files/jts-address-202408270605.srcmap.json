@@ -1,0 +1,7 @@
+{
+  "/src/jts": {
+    "type": "git",
+    "url": "https://github.com/locationtech/jts",
+    "rev": "b78fe0145588954bb8408a1a230580f0d68e2a5a"
+  }
+}

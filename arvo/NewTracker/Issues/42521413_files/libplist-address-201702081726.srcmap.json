@@ -1,0 +1,1 @@
+{"/src":{"type":"git","rev":"4a0d196a012f2e78782b558957e614ca972bb239","url":"https://github.com/google/oss-fuzz.git","path":"/projects/libplist/"},"/src/libplist":{"rev":"1bf28fb685f0ec46db3495004fa5fadb3d9d10ad","type":"git","url":"https://github.com/libimobiledevice/libplist"}}

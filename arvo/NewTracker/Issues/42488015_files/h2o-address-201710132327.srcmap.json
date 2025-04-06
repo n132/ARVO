@@ -1,0 +1,12 @@
+{
+  "/src/h2o": {
+    "type": "git",
+    "url": "https://github.com/h2o/h2o",
+    "rev": "36b013b61e01e5281c21004058ed6244a4f9aa7e"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "315774"
+  }
+}

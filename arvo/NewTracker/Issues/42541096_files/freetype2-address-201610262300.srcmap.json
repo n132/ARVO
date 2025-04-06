@@ -1,0 +1,7 @@
+{
+  "/src/freetype2": {
+    "type": "git",
+    "url": "git://git.sv.nongnu.org/freetype/freetype2.git",
+    "rev": "9c45ac39661af69119e95d25e4d4dc09c6467d43"
+  }
+}

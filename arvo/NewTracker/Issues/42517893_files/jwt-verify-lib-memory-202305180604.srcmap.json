@@ -1,0 +1,7 @@
+{
+  "/src/jwt_verify_lib": {
+    "type": "git",
+    "url": "https://github.com/google/jwt_verify_lib.git",
+    "rev": "b59e8075d4a4f975ba6f109e1916d6e60aeb5613"
+  }
+}

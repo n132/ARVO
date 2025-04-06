@@ -1,0 +1,7 @@
+{
+  "/src/wasmer": {
+    "type": "git",
+    "url": "https://github.com/wasmerio/wasmer",
+    "rev": "c742ae9d19b34dc73181d1da4b4004a2c6bbfda9"
+  }
+}

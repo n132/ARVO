@@ -1,0 +1,12 @@
+{
+  "/src/vulkan-loader": {
+    "type": "git",
+    "url": "https://github.com/khronosgroup/Vulkan-Loader",
+    "rev": "4c1027dc7e12adc8da50f00f5b219e81ddd2d85d"
+  },
+  "/src/vulkan-headers": {
+    "type": "git",
+    "url": "https://github.com/khronosgroup/Vulkan-Headers",
+    "rev": "d4a196d8c84e032d27f999adcea3075517c1c97f"
+  }
+}

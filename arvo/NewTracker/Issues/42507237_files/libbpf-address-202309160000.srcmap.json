@@ -1,0 +1,7 @@
+{
+  "/src/libbpf": {
+    "type": "git",
+    "url": "https://github.com/libbpf/libbpf",
+    "rev": "56069cda7897afdd0ae2478825845c7a7308c878"
+  }
+}

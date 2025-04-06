@@ -1,0 +1,12 @@
+{
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "5844f4ef3dfa5a943c0ddd45ca82064df0dd792b"
+  },
+  "/src/llvm_libcxxabi": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/libcxxabi/trunk",
+    "rev": "309660"
+  }
+}

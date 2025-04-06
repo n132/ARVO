@@ -1,0 +1,12 @@
+{
+  "/src/xmlpull": {
+    "type": "git",
+    "url": "https://github.com/xmlpull-org/xmlpull-api-v1",
+    "rev": "abeaa4aa87b2625af70c32f658f44e11355fe568"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

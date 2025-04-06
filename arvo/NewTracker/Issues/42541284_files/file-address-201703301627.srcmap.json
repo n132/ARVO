@@ -1,0 +1,12 @@
+{
+  "/src/file": {
+    "type": "git",
+    "url": "https://github.com/file/file.git",
+    "rev": "22067c96ba2d61e6628bd1afa2ae3940c3cd46ca"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "3ce35b240eafa7993b5f52873124b045d5769355"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/croaring": {
+    "type": "git",
+    "url": "https://github.com/RoaringBitmap/CRoaring",
+    "rev": "95de500c8dcbf2ba01c2677fe9097ce7db2f4f70"
+  }
+}

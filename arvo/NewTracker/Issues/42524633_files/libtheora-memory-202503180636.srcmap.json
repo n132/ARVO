@@ -1,0 +1,22 @@
+{
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "bbd75f2806d18009aeca0f3b8fdcc6e7a3929686"
+  },
+  "/src/oss-fuzz-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/tmatth/oss-fuzz-fuzzers.git",
+    "rev": "11034a802e9c63a4b0aa4012fd0d3a6d515a4b33"
+  },
+  "/src/libtheora": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/theora.git",
+    "rev": "8f4aba13fea361f0873b81d38ed2daa56f024912"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "7cf42ea17aef7bc1b7b21af70724840a96c2e7d0"
+  }
+}

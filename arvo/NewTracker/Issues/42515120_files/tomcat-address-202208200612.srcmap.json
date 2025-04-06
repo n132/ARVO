@@ -1,0 +1,12 @@
+{
+  "/src/tomcat": {
+    "type": "git",
+    "url": "https://github.com/apache/tomcat",
+    "rev": "00c6bc21a05a387114d4f26002d251f5be9dab0b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

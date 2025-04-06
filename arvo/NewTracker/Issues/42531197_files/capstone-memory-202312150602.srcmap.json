@@ -1,0 +1,12 @@
+{
+  "/src/capstonenext": {
+    "type": "git",
+    "url": "https://github.com/aquynh/capstone.git",
+    "rev": "4fc80d82f9134e5b4ed0173a7c79a9b221c87626"
+  },
+  "/src/capstonev5": {
+    "type": "git",
+    "url": "https://github.com/aquynh/capstone.git",
+    "rev": "ee75e4b9a4fd77939c86786c0ed3cd1697ddb8cf"
+  }
+}

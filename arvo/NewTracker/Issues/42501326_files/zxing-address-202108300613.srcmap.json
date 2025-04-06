@@ -1,0 +1,12 @@
+{
+  "/src/zxing": {
+    "type": "git",
+    "url": "https://github.com/zxing/zxing",
+    "rev": "d2027d0e0f210d35feda20902315e89dedf311ad"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

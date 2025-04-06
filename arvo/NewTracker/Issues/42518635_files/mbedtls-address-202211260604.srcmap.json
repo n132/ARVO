@@ -1,0 +1,17 @@
+{
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl.git",
+    "rev": "667a8501f0b6e5705fd611d5bb3ca24848b07154"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://github.com/google/boringssl.git",
+    "rev": "a880d2ac8261adca474f8682c5fe4420717e8d08"
+  },
+  "/src/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/Mbed-TLS/mbedtls.git",
+    "rev": "590ae5363d8df4cee236847c0c053158b50d8964"
+  }
+}

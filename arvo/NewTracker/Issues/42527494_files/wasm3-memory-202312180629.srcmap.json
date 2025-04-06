@@ -1,0 +1,7 @@
+{
+  "/src/wasm3": {
+    "type": "git",
+    "url": "https://github.com/wasm3/wasm3",
+    "rev": "7ed176d98586bf22aaa6db3b2d379af4c3cb0655"
+  }
+}

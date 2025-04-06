@@ -1,0 +1,27 @@
+{
+  "/src/flac-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/flac-fuzzers.git",
+    "rev": "77da3744ff9c39d8b083be443c21364d6ab8f8f9"
+  },
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "80959c63d899f3265afdde8ce5dac30d5c2ee9f1"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://github.com/xiph/ogg.git",
+    "rev": "6449883ccacfee276ed9d99fa047342cdc51ab88"
+  },
+  "/src/flac": {
+    "type": "git",
+    "url": "https://github.com/xiph/flac.git",
+    "rev": "88ddb5b59e092f12ca18b73857a15235caf07fa1"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "369182"
+  }
+}

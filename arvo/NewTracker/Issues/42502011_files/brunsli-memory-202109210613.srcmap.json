@@ -1,0 +1,12 @@
+{
+  "/src/brunsli": {
+    "type": "git",
+    "url": "https://github.com/google/brunsli.git",
+    "rev": "1a264ac8851c47ab375ed160667a289d12e09e0b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "4fe572b80f76ff0b0e916b639d1e04d5af48b157"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libredwg": {
+    "type": "git",
+    "url": "https://github.com/LibreDWG/libredwg",
+    "rev": "56d392a7e5ae5f522004ff92396dabd468f8d810"
+  }
+}

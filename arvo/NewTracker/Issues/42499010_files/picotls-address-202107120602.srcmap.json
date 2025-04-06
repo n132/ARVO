@@ -1,0 +1,12 @@
+{
+  "/src/picotls": {
+    "type": "git",
+    "url": "https://github.com/h2o/picotls",
+    "rev": "9accdf4af580e2ad883c929f8ca7a4cc58f15379"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

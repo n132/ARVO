@@ -1,0 +1,7 @@
+{
+  "/src/ots": {
+    "type": "git",
+    "url": "https://github.com/khaledhosny/ots.git",
+    "rev": "d51fceea592507b78cf6c5fd90ba9ef6b969ffd1"
+  }
+}

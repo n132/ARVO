@@ -1,0 +1,7 @@
+{
+  "/src/Simd": {
+    "type": "git",
+    "url": "https://github.com/ermig1979/Simd",
+    "rev": "7401c6211111173992b8d35f906fbf283e0efddb"
+  }
+}

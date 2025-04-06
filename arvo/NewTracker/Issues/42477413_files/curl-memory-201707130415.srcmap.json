@@ -1,0 +1,12 @@
+{
+  "/src/curl": {
+    "type": "git",
+    "url": "https://github.com/curl/curl.git",
+    "rev": "7333b497a0c031e57e3c5527f26102ca239409d7"
+  },
+  "/src/libfuzzer": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer",
+    "rev": "638c2576b086ea64ab6b336aafb0fefd97f5bdfc"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/lz4": {
+    "type": "git",
+    "url": "https://github.com/lz4/lz4.git",
+    "rev": "ab9e29ef1f4cee78c31665556e5cfaacbf8b0604"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

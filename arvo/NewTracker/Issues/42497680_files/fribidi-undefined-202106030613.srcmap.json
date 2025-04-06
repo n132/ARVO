@@ -1,0 +1,12 @@
+{
+  "/src/fribidi": {
+    "type": "git",
+    "url": "https://github.com/fribidi/fribidi.git",
+    "rev": "441c173cbb3562f4b89745ac2bbaaa632b4fe9f5"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

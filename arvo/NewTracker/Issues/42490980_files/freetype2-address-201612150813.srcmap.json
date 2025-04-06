@@ -1,0 +1,1 @@
+{"/src/freetype2":{"rev":"3bd79cc257499f1850a1bace21f3ae371e3b40f0","type":"git","url":"git://git.sv.nongnu.org/freetype/freetype2.git"},"/src":{"type":"git","rev":"12a616fc2df044f28605fc5a4ef49bce2bccbdc6","url":"https://github.com/google/oss-fuzz.git","path":"/projects/freetype2/"}}

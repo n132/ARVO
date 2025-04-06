@@ -1,0 +1,7 @@
+{
+  "/src/commons-compress": {
+    "type": "git",
+    "url": "https://gitbox.apache.org/repos/asf/commons-compress.git",
+    "rev": "fdc6fc22bfb60a3faabd8d81fd485c5d44400c12"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/commons-jxpath": {
+    "type": "git",
+    "url": "https://github.com/apache/commons-jxpath.git",
+    "rev": "6209bbdd9dec1d4d18e62f1530ec0fb5830674ab"
+  }
+}

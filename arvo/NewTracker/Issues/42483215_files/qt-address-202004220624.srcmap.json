@@ -1,0 +1,27 @@
+{
+  "/src/AFL": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "b6bb2f13b14b47d1db38495e9d4830c316a65d68"
+  },
+  "/src/qtqa": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtqa.git",
+    "rev": "ff87df77b166a4de1c1f6fbd6397fb0c876d9074"
+  },
+  "/src/qt": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qt5.git",
+    "rev": "4d435697fadc55f6a10eba0d4df4a1b30e56b380"
+  },
+  "/src/qt/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "e10e5318bc02a48a866b76b6f0b7f268d16af642"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "8da80951dd7eeeb3e3b5a3bcd36c485045f40274"
+  }
+}

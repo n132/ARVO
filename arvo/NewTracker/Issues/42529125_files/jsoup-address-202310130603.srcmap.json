@@ -1,0 +1,7 @@
+{
+  "/src/jsoup": {
+    "type": "git",
+    "url": "https://github.com/jhy/jsoup/",
+    "rev": "c42b0fe9987d42cc55bca9394bdafa5476f1060b"
+  }
+}

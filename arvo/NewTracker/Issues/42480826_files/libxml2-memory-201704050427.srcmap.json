@@ -1,0 +1,12 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "git://git.gnome.org/libxml2",
+    "rev": "e905f08123e4a6e7731549e6f09dadff4cab65bd"
+  },
+  "/src": {
+    "type": "git",
+    "url": "https://github.com/google/oss-fuzz.git",
+    "rev": "26d50f18fcc728311ff7a6d3d9d505d96707731d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/openthread": {
+    "type": "git",
+    "url": "https://github.com/openthread/openthread",
+    "rev": "151444f7dd808aa8fb1431804a6f5649e0569b17"
+  }
+}

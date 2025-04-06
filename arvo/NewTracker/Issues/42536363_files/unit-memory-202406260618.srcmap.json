@@ -1,0 +1,7 @@
+{
+  "/src/unit": {
+    "type": "git",
+    "url": "https://github.com/nginx/unit.git",
+    "rev": "8e254a4d6762da22bc1967140ef85cf8fedfa02d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/libgit2": {
+    "type": "git",
+    "url": "https://github.com/libgit2/libgit2",
+    "rev": "cefe6c4562304c9e23948b8e745c16e24921707f"
+  }
+}

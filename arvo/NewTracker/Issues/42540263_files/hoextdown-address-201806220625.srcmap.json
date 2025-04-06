@@ -1,0 +1,17 @@
+{
+  "/src/hoextdown": {
+    "type": "git",
+    "url": "https://github.com/kjdev/hoextdown.git",
+    "rev": "165d182f32c92adf3623f63525cec9e676b2db1b"
+  },
+  "/src/perffuzz": {
+    "type": "git",
+    "url": "https://github.com/carolemieux/perffuzz",
+    "rev": "902f6e51ff3c5202d7fd2fea6c8f3f84ffc5084b"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "335320"
+  }
+}

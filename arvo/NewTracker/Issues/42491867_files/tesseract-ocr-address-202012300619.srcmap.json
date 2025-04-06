@@ -1,0 +1,22 @@
+{
+  "/src/tessdata": {
+    "type": "git",
+    "url": "https://github.com/tesseract-ocr/tessdata",
+    "rev": "4767ea922bcc460e70b87b1d303ebdfed0897da8"
+  },
+  "/src/tesseract": {
+    "type": "git",
+    "url": "https://github.com/tesseract-ocr/tesseract",
+    "rev": "53503b34be191363082f90ef4316576102c01ca0"
+  },
+  "/src/leptonica": {
+    "type": "git",
+    "url": "https://github.com/danbloomberg/leptonica",
+    "rev": "15334407524a77c392289900cf5c7fa60a8d4e77"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

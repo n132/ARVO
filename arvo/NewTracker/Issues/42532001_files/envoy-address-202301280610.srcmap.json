@@ -1,0 +1,7 @@
+{
+  "/src/envoy": {
+    "type": "git",
+    "url": "https://github.com/envoyproxy/envoy.git",
+    "rev": "236f2eb3d6d709a2014bb743be43a2a0cf207003"
+  }
+}

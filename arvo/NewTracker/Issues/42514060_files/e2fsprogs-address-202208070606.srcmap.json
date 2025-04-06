@@ -1,0 +1,12 @@
+{
+  "/src/e2fsprogs": {
+    "type": "git",
+    "url": "https://github.com/tytso/e2fsprogs",
+    "rev": "88ac43ed6a46caa2851b4a60b838bba9f151bd09"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "c208dcf9c573e3d85990c7dea777646f7fa4961c"
+  }
+}

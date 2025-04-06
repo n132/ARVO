@@ -1,0 +1,12 @@
+{
+  "/src/tcmalloc": {
+    "type": "git",
+    "url": "https://github.com/google/tcmalloc",
+    "rev": "778abcc57b634d93f2b9fe196f556673402b9a53"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "ef77d552e9b89852b293c300a5a9a9c617945f43"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/jackson-datatypes-collections": {
+    "type": "git",
+    "url": "https://github.com/FasterXML/jackson-datatypes-collections",
+    "rev": "18834a6962c1fbb58bbdeb185922d080bb361510"
+  }
+}

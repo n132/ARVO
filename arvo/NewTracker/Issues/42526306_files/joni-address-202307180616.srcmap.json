@@ -1,0 +1,7 @@
+{
+  "/src/joni": {
+    "type": "git",
+    "url": "https://github.com/jruby/joni",
+    "rev": "6a0d556f7c24d77b0735e3d4fcfc2e3207174b4d"
+  }
+}

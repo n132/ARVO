@@ -1,0 +1,7 @@
+{
+  "/src/qemu": {
+    "type": "git",
+    "url": "https://git.qemu.org/git/qemu.git",
+    "rev": "8fa379170c2a12476021f5f50d6cf3f672e79e7b"
+  }
+}

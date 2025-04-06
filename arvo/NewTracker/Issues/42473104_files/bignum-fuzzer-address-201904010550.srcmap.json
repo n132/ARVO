@@ -1,0 +1,32 @@
+{
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://boringssl.googlesource.com/boringssl",
+    "rev": "a4af5f85bdbb67ed037292bc9dff1faae31050f9"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "31b6ed76dfd53529b74e79830c81372d0b756929"
+  },
+  "/src/bignum-fuzzer": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/bignum-fuzzer",
+    "rev": "d99d380f2b7303aeaf5b95f759c48827c60bce0d"
+  },
+  "/src/go": {
+    "type": "git",
+    "url": "https://github.com/golang/go",
+    "rev": "4091cf972a37418c847426bd15709cd0128fad81"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "357375"
+  },
+  "/src/libgmp": {
+    "type": "hg",
+    "url": "https://gmplib.org/repo/gmp/",
+    "rev": "036ddbf61ac6183c38f98c2f98cdd63ceaf17cc6"
+  }
+}

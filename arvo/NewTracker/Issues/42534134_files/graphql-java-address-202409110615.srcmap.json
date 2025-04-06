@@ -1,0 +1,7 @@
+{
+  "/src/graphql-java": {
+    "type": "git",
+    "url": "https://github.com/graphql-java/graphql-java",
+    "rev": "d6dbf6156e8a90a1420a7cee957de0b22100d47f"
+  }
+}
