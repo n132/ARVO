@@ -37,7 +37,6 @@ OSS_WORK    = Path(OSS_WORK_DIR)
 OSS_IMG     = Path(OSS_SAVED_IMG)          
 OSS_LOCK    = Path(OSS_LOCK_DIR)           
 OSS_ERR     = ARVO / 'CrashLog'
-ARVO_AICC   = Path(XxX)
 ARVO_ZDC    = Path(ZDC)
 UserName    = UserName
 CLEAN_TMP   = CLEAN_TMP 
@@ -106,7 +105,7 @@ def initARVODir(dirs):
         if not dir_check(i):
             panic(f"Failed to init {i.name}")
 
-initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_AICC,ARVO_ZDC])
+initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
     with open(OSS_DB_MAP,'w') as f:

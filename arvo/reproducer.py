@@ -76,7 +76,7 @@ def reproducerPrepareOssFuzz(project_name,commit_date):
         eventLog(f"[-] reproducerPrepareOssFuzz {project_name}: Fail to locate the project")
         return leaveRet(False,tmp_dir)
     return (tmp_dir, proj_dir)
-def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=False,save_AICC=False,ForceNoErrDump=False,patches=None,oss_fuzz_commit=False,custom_script=[]):
+def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=False,ForceNoErrDump=False,patches=None,oss_fuzz_commit=False,custom_script=[]):
     # Get Basic Information
     fuzzer_info = issue['job_type'].split("_")
     engine      = fuzzer_info[0]
@@ -96,11 +96,11 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
         return False
     return build_fuzzer_with_source(issue['issue']['localId'],issue['project'],
             srcmap,sanitizer,engine,arch,commit_date,replace_dep=replace_dep,
-            save_img=save_img,verifyFix=verifyFix,save_AICC=save_AICC, 
+            save_img=save_img,verifyFix=verifyFix, 
             ForceNoErrDump = ForceNoErrDump,patches=patches,oss_fuzz_commit=oss_fuzz_commit,custom_script=custom_script)
 
 def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,commit_date,replace_dep=None,\
-    save_img=False,verifyFix=False,save_AICC=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[]):
+    save_img=False,verifyFix=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[]):
     global REBUTTAL_EXP
     '''
     Most projects are git repos, but we still have:
@@ -301,24 +301,16 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 source_path= source_dir/"src",
                                 mount_path=Path("/src"),
                                 save_img=save_img,noDump=ForceNoErrDump,
-                                save_AICC=save_AICC,custom_script=custom_script)
+                                custom_script=custom_script)
     rootRM(source_dir)
     return leaveRet(result,tmp_dir)
 
 def build_fuzzers_impl( localId,project,project_dir,engine,
     sanitizer,architecture,source_path,
-    mount_path=None,save_img=False,noDump=False,save_AICC=False,custom_script=[]):
+    mount_path=None,save_img=False,noDump=False,custom_script=[]):
     global DEAMON_CMD
     project_out  = OSS_OUT  / str(localId) 
     project_work = OSS_WORK / str(localId)
-
-    if save_AICC != False:
-        AICC_OUT = ARVO_AICC / str(localId)
-        AICC_OUT.mkdir(exist_ok=True)
-        AICC_OUT = AICC_OUT / f"{save_AICC}"
-        assert(save_AICC in ['vul','fix']) # save_AICC should be a tag 
-        AICC_OUT.mkdir(exist_ok=True) 
-        # Now in this function AICC_OUT -> ARVO_AICC / localId / [vul/fix] 
 
     if not project_out.exists():
         project_out.mkdir()        
@@ -339,11 +331,6 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
         issue_record(project,localId,f"Failed to build DockerImage")
         return False
     
-    if save_AICC:
-        execute(['sudo','rm','-rf',str( AICC_OUT/"targets")])        
-        shutil.copytree(project_dir, AICC_OUT/"targets",symlinks=True)
-        with open(AICC_OUT/"docker_build.sh",'w') as f:
-            f.write(" ".join(["docker","build",'-t',f'gcr.io/oss-fuzz/{localId}','--file', "targets/Dockerfile","targets"]))
 
     if DUMPERR and dumpErr!=None and dumpErr.exists():
         os.remove(str(dumpErr))
@@ -378,17 +365,6 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
                 '-v',
                 '%s:%s' % (item, mount_path / item.name),
             ]
-    if save_AICC:
-        backUpCmd = copy.deepcopy(command)
-        backUpCmd += [
-            '-v', '$PWD/targets/out:/out',
-            '-v', '$PWD/targets:/src',
-            '-v', '$PWD/targets/work:/work',
-            '-t', f'gcr.io/oss-fuzz/{localId}'
-        ]
-        with open(AICC_OUT/"docker_run.sh",'w') as f:
-            f.write(" ".join(["docker","run",'--privileged','--rm']+backUpCmd))
-    
 
     command += [
                 '-v',
@@ -413,19 +389,13 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
         
         result = docker_run(command,dumpErr=dumpErr)
     if not result:
-        if save_AICC:
-            shutil.rmtree(AICC_OUT)
         print('[-] Failed to Build Targets')
         return False
     else:
         if DUMPERR!=False and dumpErr!= None and dumpErr.exists():
             if str(dumpErr) != "/dev/null":
                 os.remove(str(dumpErr))
-        if save_AICC:
-            with open(AICC_OUT/"pull_source.sh",'w') as f:
-                f.write(f"./docker_build.sh\ndocker run -v $PWD/targets:/mnt gcr.io/oss-fuzz/{localId} mv /src /mnt\n")
-            with open(AICC_OUT/"run.sh",'w') as f:
-                f.write("./docker_build.sh\n./docker_run.sh\n")
+
     if save_img:
         DEAMON_CMD = []
         cur_idx = 0 
@@ -549,7 +519,7 @@ def saveImg(localId,issue):
         shutil.rmtree(imgSavePath)
         return False
 
-def verify(localId,save_img=False,save_AICC=False):
+def verify(localId,save_img=False):
     if NEW_ISSUE_TRACKER and localId < 40000000:
         mapping = mapMapping()
         if localId not in mapMapping:
@@ -580,8 +550,6 @@ def verify(localId,save_img=False,save_AICC=False):
                 remove_oss_fuzz_img(localId)
             except:
                 pass
-        if save_AICC and result == False:
-            shutil.rmtree(ARVO_AICC / f"{localId}")
         return result
     
     srcmap,issue = getIssueTuple(localId)
@@ -610,8 +578,7 @@ def verify(localId,save_img=False,save_AICC=False):
     if save_img:
         old_res = build_from_srcmap(old_srcmap,issue,save_img="Vul")
     else:
-        tag = 'vul' if save_AICC else save_AICC
-        old_res = build_from_srcmap(old_srcmap,issue,save_AICC=tag)
+        old_res = build_from_srcmap(old_srcmap,issue)
     if not old_res:
         issue_record(issue['project'],localId,f"Fail to build old fuzzers from srcmap")
         return leave(False)
@@ -637,8 +604,7 @@ def verify(localId,save_img=False,save_AICC=False):
     if save_img:
         new_res = build_from_srcmap(new_srcmap,issue,save_img="Fix",verifyFix=True)
     else:
-        tag = 'fix' if save_AICC else save_AICC
-        new_res = build_from_srcmap(new_srcmap,issue,verifyFix=True,save_AICC=tag)
+        new_res = build_from_srcmap(new_srcmap,issue,verifyFix=True)
     if not new_res:
         issue_record(issue['project'],localId,f"Fail to build new fuzzers from srcmap")
         return leave(False)
