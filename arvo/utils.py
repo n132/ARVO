@@ -29,17 +29,17 @@ FUZZER_ARGS     =   'FUZZER_ARGS="-rss_limit_mb=2560 -timeout=25"'
 AFL_FUZZER_ARGS =   'AFL_FUZZER_ARGS="-m none"'
 
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = gcloud_key
-OSS_TMP     = Path(TMP)                    
+OSS_TMP     = Path(TMP)
 ARVO        = Path(ARVO_DIR)
 REPORTS_DIR = Path(REPORTS_DIR)
 OSS_OUT     = Path(OSS_OUT_DIR)
-OSS_WORK    = Path(OSS_WORK_DIR)           
-OSS_IMG     = Path(OSS_SAVED_IMG)          
-OSS_LOCK    = Path(OSS_LOCK_DIR)           
+OSS_WORK    = Path(OSS_WORK_DIR)
+OSS_IMG     = Path(OSS_SAVED_IMG)
+OSS_LOCK    = Path(OSS_LOCK_DIR)
 OSS_ERR     = ARVO / 'CrashLog'
 ARVO_ZDC    = Path(ZDC)
 UserName    = UserName
-CLEAN_TMP   = CLEAN_TMP 
+CLEAN_TMP   = CLEAN_TMP
 TIME_ZONE   = TIME_ZONE
 DATADIR     = ARVO / NEW_ISSUE_TRACKER if NEW_ISSUE_TRACKER else ARVO / DATA_FOLD
 MetaDataFile= DATADIR / "metadata.jsonl"
@@ -119,7 +119,7 @@ def leaveRet(return_val,tmp_dir):
         else:
             for _ in tmp_dir:
                 clean_dir(_)
-    return return_val  
+    return return_val
 def remove_oss_fuzz_img(localId):
     try:
         print(f"[+] Delete images, {localId}")
@@ -494,12 +494,12 @@ def downloadPoc(issue,path,name):
     session = requests.Session()
     url = issue['reproducer']
     response = session.head(url, allow_redirects=True)
-    
+
     if response.status_code != 200:
         return False
     reproducer_path = path / name
     response = session.get(url)
-    
+
     if response.status_code != 200:
         return False
     reproducer_path.write_bytes(response.content)
@@ -544,7 +544,7 @@ def dumpReport(localId,d):
     with open(fname,'w') as f:
         f.write(json.dumps(d, indent=4))
     print("[+] Report Created: "+str(localId))
-    return 
+    return
 #==================================================================
 #
 #                  Version Control Part Starts
@@ -578,7 +578,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         dest = Path(dest)
     else:
         dest = tmpDir()
-    
+
     if not _git_clone(url,dest,name):
         eventLog(f"[!] - clone: Failed to clone {url}")
         return False
@@ -630,7 +630,7 @@ def svn_clone(url,commit=None,dest=None,rename=None):
         if rename:
             name = rename
         else:
-            name = list(tmp.iterdir)[0]                
+            name = list(tmp.iterdir)[0]
         tmp = tmp / name
         if check_call(['svn',"up",'--force','-r', commit], cwd=tmp)==False:
             return False
@@ -659,7 +659,7 @@ def hg_clone(url,commit=None,dest=None,rename=None):
         if rename:
             name = rename
         else:
-            name = list(tmp.iterdir())[0]                
+            name = list(tmp.iterdir())[0]
         tmp = tmp / name
         if check_call(['hg',"update", '--clean', '-r', commit], cwd=tmp) and \
         check_call(['hg',"purge", '--config', 'extensions.purge='], cwd=tmp):
@@ -685,7 +685,7 @@ def dbCOPY(url,dest,name):
             return False
     else:
         return False
-    
+
 #==================================================================
 #
 #                  Crash Check Part
@@ -694,11 +694,11 @@ def dbCOPY(url,dest,name):
 def pocResultChecker(returnCode,logfile, args, recursive_call):
     if returnCode == 0: # not crash
         return True
-    elif returnCode == 124 and ("timeout" in args): # timeout 
+    elif returnCode == 124 and ("timeout" in args): # timeout
         return True
     # Handle of old fuzzing targets that only supports `fuzz < poc`
     elif returnCode == 255 and not recursive_call:
-        # It could be some old version of fuzzing engine 
+        # It could be some old version of fuzzing engine
         # `WARNING: using the deprecated call style `/out/pdf_fuzzer 1000`
         # If it still dies with /out/fuzzer < /tmp/poc we keep the first log file
         # check if Running: "WARNING: iterations invalid /tmp/poc" in the str
@@ -722,10 +722,10 @@ def pocResultChecker(returnCode,logfile, args, recursive_call):
 def fuzzerExecution(args, log_tag, recursive_call = False):
     cmd = ['docker','run','--rm','--privileged']
     cmd.extend(args)
-    
+
     if recursive_call:
         print("$"*0x20)
-        print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"'])) 
+        print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
         # print commands for debugging
     else:
         print(" ".join(cmd))
@@ -736,7 +736,7 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
     return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
-    out  = OSS_OUT / str(issue['localId']) 
+    out  = OSS_OUT / str(issue['localId'])
     local_ubsan_op = UBSAN_OPTIONS+":detect_uninitialized=0" if not detect_uninitialized else UBSAN_OPTIONS
     return fuzzerExecution(['-e', ASAN_OPTIONS, '-e',local_ubsan_op, '-e', MSAN_OPTIONS,
             "-v",f"{case}:/tmp/poc",
@@ -744,7 +744,7 @@ def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True)
 
 def crashVerify(issue,reproduce_case,tag,timeout=180,detect_uninitialized=True):
     # Return True if NOT crash
-    # Return False if crash 
+    # Return False if crash
     print(" "*0x20)
     print("$"*0x20)
     print(" "*0x20)
@@ -821,7 +821,7 @@ def remove_issue_data(localIds):
     target = DATADIR/"Issues"
     for x in localIds:
         fname = str(x)+"_files"
-        try:       
+        try:
             shutil.rmtree(target/fname)
         except:
             pass
@@ -837,7 +837,7 @@ def issueFilter():
             res.append(localId)
             print(f"[!] Have less than 2 srcmaps, deleting issue {localId}...")
         srcmap = getSrcmaps(localId)
-        
+
         # Filter out Borken srcmap
         out = False
         for x in srcmap:
@@ -853,8 +853,8 @@ def issueFilter():
                     break
             if out == True:
                 break
-        # Filter out non-c langauge 
-                
+        # Filter out non-c langauge
+
         language = getLanguage(localId)
         if language not in ["c",'c++']:
             nonC.append(localId)
@@ -862,7 +862,7 @@ def issueFilter():
         else:
             pass
             # print(localId)
-        
+
         # Filter out the false positive cases:
         xxx = []
         for y in srcmap:
