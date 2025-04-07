@@ -7,10 +7,14 @@ from .utils import *
 import json
 from tqdm import tqdm
 from google.cloud import storage
-
-META = ARVO / DATA_FOLD2
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+
+if not NEW_ISSUE_TRACKER:
+    WARN("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
+    exit(1)
+META = ARVO / NEW_ISSUE_TRACKER
+
 def getIssueIds():
     localIds = []
     session = requests.Session()
