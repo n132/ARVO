@@ -11,14 +11,10 @@ from .utils import *
 Explorer = Path(ARVO/ "Explorer")
 if not Explorer.exists():
     Explorer.mkdir()
-def removeSucceed(issues):
-    with open("Results.json") as f:
-        data = f.readlines()
-    done    = [json.loads(x)['localId'] for x in data]
-    return [_  for _ in issues if _ not in done]
-def removeReported(issues):
-    reports = getReports()
-    return [_  for _ in issues if _ not in reports]
+def removeSucceed(localIds):
+    return [_  for _ in localIds if _ not in getDone()]
+def removeReported(localIds):
+    return [_  for _ in localIds if _ not in getReports()]
 def touchLogfile(log_file):
     if not log_file.exists():
         log_file.touch()

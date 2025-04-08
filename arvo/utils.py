@@ -219,17 +219,22 @@ def getDate(localId,tag="vul"):
         srcmap_name = srcmaps[1].name
     commit_date = srcmap_name.split(".")[0].split("-")[-1]
     return str2date(commit_date,STAMP_DELAY)
-def getDone(avoid=False,avoid_list=['binutils','libreoffice']):
-    with open(ARVO/"Results.json") as f:
-        data = f.readlines()
-    if avoid:
-        av = []
-        for pname in avoid_list:
-            av.extend(listProject(pname))
-    else:
-        av = []
-    done    = [json.loads(x)['localId'] for x in data if (json.loads(x)['localId'] not in av and json.loads(x)['pass'])]
-    return done
+
+def getDone(avoid=False, avoid_list=['binutils', 'libreoffice']):
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        if avoid:
+            placeholders = ','.join('?' for _ in avoid_list)
+            query = f"SELECT localId FROM arvo WHERE reproduced = 1 AND project NOT IN ({placeholders})"
+            cursor = conn.execute(query, avoid_list)
+        else:
+            cursor = conn.execute("SELECT localId FROM arvo WHERE reproduced = 1")
+        return [row[0] for row in cursor.fetchall()]
+    except:
+        return False
+    finally:
+        conn.close()
+
 def getEngine(localId):
     # ['afl', 'libfuzzer', 'honggfuzz']
     issue = getIssue(localId)
@@ -487,7 +492,14 @@ def issue_record(name,localId,des,log_addr = "_CrashLOGs"):
         f.write(f"| {name} | {localId} | {des} |\n")
     return
 def getReports():
-    return [int(x.name[:-5]) for x in REPORTS_DIR.iterdir()]
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.execute("SELECT localId FROM arvo WHERE patch_located = 1")
+        return [row[0] for row in cursor.fetchall()]
+    except:
+        return False
+    finally:
+        conn.close()
 def getReport(localId):
     fname = REPORTS_DIR/f"{localId}.json"
     if fname.exists():
@@ -500,12 +512,7 @@ def loadReport(localId):
     with open(fname) as f:
         d = json.loads(f.read())
     return d
-def dumpReport(localId,d):
-    fname = REPORTS_DIR / f"{localId}.json"
-    with open(fname,'w') as f:
-        f.write(json.dumps(d, indent=4))
-    print("[+] Report Created: "+str(localId))
-    return
+
 #==================================================================
 #
 #                  Version Control Part Starts
