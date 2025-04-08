@@ -15,8 +15,7 @@ dependencies = [
     "google-cloud-storage",
     "filelock",
     "setuptools",
-    "tqdm",
-    "zipfile"
+    "tqdm"
 ]
 
 [build-system]
