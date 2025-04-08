@@ -434,6 +434,7 @@ def fileReport(localId,fix_commit):
     return True
 def report(localId,verified=False):
     # Step1: Verfy if the case is reproduciable currently
+    localId = localIdMapping(localId)
     done = getDone()
     if not verified:
         print(f"[+] Verifying {localId}")
