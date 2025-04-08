@@ -10,10 +10,8 @@ from google.cloud import storage
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
 
-if not NEW_ISSUE_TRACKER:
-    WARN("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
-    exit(1)
-META = ARVO / NEW_ISSUE_TRACKER
+if NEW_ISSUE_TRACKER:
+    META = ARVO / NEW_ISSUE_TRACKER
 
 def getIssueIds():
     localIds = []
@@ -301,10 +299,10 @@ def syncMeta(localIds):
     # load the meta to metadata.jsonl
     getIssues(localIds)
     
-        
-def getSrcmap():
-    pass
 def getMeta():
+    if not NEW_ISSUE_TRACKER:
+        WARN("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
+        exit(1)
     if not META.exists():
         META.mkdir()
     localIds = getIssueIds()
