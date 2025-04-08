@@ -415,7 +415,7 @@ def fileReport(localId,fix_commit):
     fix = reportFix(vulComponentUrl,fix_commit)
     res = dict()
     res['fix']      = fix
-    res['verify']   = "0"
+    res['verify']   = False
     res['localId']  = localId
     res['project']  = pname
     # data from original issues
@@ -430,17 +430,17 @@ def fileReport(localId,fix_commit):
     res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
-    return True
+    return res
 def report(localId,verified=False):
     # Step1: Verfy if the case is reproduciable currently
     localId = localIdMapping(localId)
-    done = getDone()
+    
     if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to report {localId}: Unable to verify")
+            eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
             return False
-        
+        done = getDone()
         if localId not in done:
             lock = FileLock(ARVO/"Results.json.lock")
             while(1):
@@ -452,9 +452,9 @@ def report(localId,verified=False):
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x40)
     if fix_commit == False or fix_commit=="":
-        eventLog(f"[-] Failed to locate the fixes for issue {localId}")
+        eventLog(f"[-] Failed to locate the patches for issue {localId}")
         return False
-    
+    # return fix_commit
     # Step3: File the report 
     return fileReport(localId,fix_commit)
 #============================

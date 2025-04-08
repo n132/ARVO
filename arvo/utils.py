@@ -1,13 +1,13 @@
 import re, shutil, requests, sys, hashlib, math, tiktoken, zipfile
 from datetime       import datetime
 from base58         import b58encode
-from .utils_sql     import *
 from .utils_exec    import *
 from .utils_docker  import *
 from .DB_Manager    import *
 from .utils_log     import *
 from .transform     import PnameTable, trans_table
 from .utils_init    import *
+from .utils_sql     import *
 
 # Init ARVO Directorys
 def dir_check(path):
@@ -30,6 +30,7 @@ if not OSS_DB_MAP.exists():
 session = requests.Session()
 
 def eventLog(s,ext=False):
+    FAIL(s)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
         f.write(s+"\n")
     if ext:
