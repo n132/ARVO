@@ -1,3 +1,4 @@
+# TODO: THIS SCRIPT DIED AFTER CHANGING TO SQLITE
 import json 
 import pandas as pd
 import collections
