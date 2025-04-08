@@ -940,7 +940,7 @@ def sync_db():
     weird_cases = []
     for x in tqdm(done):
         localId = x 
-        project = getPname(localId,True)
+        project = getPname(localId)
         reproduced = True
         report = getReport(localId)
         docker_env = "TODO"
