@@ -1,4 +1,4 @@
-import re, shutil, requests, sys, hashlib, math, tiktoken
+import re, shutil, requests, sys, hashlib, math, tiktoken, zipfile
 from datetime       import datetime
 from base58         import b58encode
 from .utils_sql     import *
