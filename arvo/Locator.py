@@ -432,10 +432,11 @@ def fileReport(localId,fix_commit):
     res['repo_addr']    = vulComponentUrl
     dumpReport(localId,res)
     return True
-def report(localId,debug=False):
+def report(localId,verified=False):
     # Step1: Verfy if the case is reproduciable currently
+    localId = localIdMapping(localId)
     done = getDone()
-    if not debug:
+    if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
             eventLog(f"[-] Failed to report {localId}: Unable to verify")
