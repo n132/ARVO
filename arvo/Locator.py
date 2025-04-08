@@ -430,7 +430,6 @@ def fileReport(localId,fix_commit):
     res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
-    dumpReport(localId,res)
     return True
 def report(localId,verified=False):
     # Step1: Verfy if the case is reproduciable currently
