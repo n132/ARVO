@@ -46,8 +46,22 @@ def insert_entry(data):
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, data)
         conn.commit()
-    finally:
+    except:
         FAIL("[-] FAILED to INSERT to DB")
+        return False
+    finally:
+        conn.close()
+def delete_entry(localId):
+    conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    try:
+        conn.execute("BEGIN EXCLUSIVE")
+        conn.execute("DELETE FROM arvo WHERE localId = ?", (localId,))
+        conn.commit()
+        return True
+    except:
+        FAIL("[-] FAILED to DELETE from DB")
+        return False
+    finally:
         conn.close()
 def arvoRecorded(local_id):
     conn = sqlite3.connect(DB_PATH)
@@ -59,7 +73,7 @@ def arvoRecorded(local_id):
         return cursor.fetchone()
     except:
         FAIL("[-] Failed to access DB")
-        return None
+        return False
     finally:
         conn.close()
 # def sync_db():
