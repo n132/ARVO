@@ -5,6 +5,7 @@ import sqlite3
 from tqdm           import tqdm
 from .utils_init    import *
 from .utils_log     import *
+from .utils         import *
 DB_PATH = ARVO / "arvo.db"
 
 def db_init():
@@ -50,7 +51,7 @@ def insert_entry(data):
 
 def sync_db():
     done = getDone()
-    db_done = getDBDone()
+    db_done = db_getDone()
     todo = [x for x in done if x not in db_done]
     weird_cases = []
     for x in tqdm(todo):
