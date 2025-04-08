@@ -427,7 +427,7 @@ def fileReport(localId,fix_commit):
         res['severity'] = issue['severity']
     except:
         pass
-    res['report']       = json.loads(open(DATADIR / "Issues" / (str(localId) + "_files")/(str(localId)+".json")).read())
+    res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
     dumpReport(localId,res)
