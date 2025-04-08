@@ -2,6 +2,7 @@ import re, os, json, shutil, requests, sys, hashlib, math, tiktoken
 from datetime   import datetime
 from pathlib    import Path
 from base58     import b58encode
+from tqdm       import tqdm
 
 from .utils_exec import *
 from .utils_docker import *
@@ -267,7 +268,7 @@ def getDone(avoid=False,avoid_list=['binutils','libreoffice']):
             av.extend(listProject(pname))
     else:
         av = []
-    done    = [json.loads(x)['localId'] for x in data if json.loads(x)['localId'] not in av]
+    done    = [json.loads(x)['localId'] for x in data if (json.loads(x)['localId'] not in av and json.loads(x)['pass'])]
     return done
 def getEngine(localId):
     # ['afl', 'libfuzzer', 'honggfuzz']
@@ -889,5 +890,80 @@ def silentRun(func, *args, **kwargs):
     result = func(*args, **kwargs)
     sys.stdout = original_stdout
     return result
+########################################################
+# Sqlite support for ARVO
+########################################################
+import sqlite3
+import threading
+DB_PATH = ARVO / "arvo.db"
+# sql_lock = threading.Lock()
+
+def init_db():
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute("""
+        CREATE TABLE IF NOT EXISTS arvo (
+            localId INTEGER PRIMARY KEY,
+            project TEXT NOT NULL,
+            reproduced BOOLEAN NOT NULL,
+            docker_env TEXT,
+            patch_located BOOLEAN,
+            patch_url TEXT,
+            verified BOOLEAN,
+            fuzz_target TEXT,
+            fuzz_engine TEXT,
+            sanitizer TEXT,
+            crash_type TEXT,
+            crash_output TEXT,
+            severity TEXT,
+            report TEXT
+        )
+        """)
+        conn.commit()
+init_db()
+def insert_entry(data):
+    conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    if(1):
+        conn.execute("BEGIN EXCLUSIVE")
+        conn.execute("""
+        INSERT INTO arvo (
+            localId, project, reproduced, docker_env, patch_located,
+            patch_url, verified, fuzz_target, fuzz_engine,
+            sanitizer, crash_type, crash_output, severity, report
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """, data)
+        conn.commit()
+    # finally:
+    #     conn.close()
+
+def sync_db():
+    done = getDone()
+    weird_cases = []
+    for x in tqdm(done):
+        localId = x 
+        project = getPname(localId,True)
+        reproduced = True
+        report = getReport(localId)
+        docker_env = "TODO"
+        if report:
+            patch_located = True
+            patch_url     = report['fix']
+            verified      = True if report['verify'] == '1' else False
+            assert(localId == report['localId'])
+            if(project != report['project']):
+                weird_cases.append(localId)
+                continue
+            fuzz_target    = "TODO"
+            fuzz_engine    = report['fuzzer']
+            sanitizer      = report['sanitizer']
+            crash_type     = report['crash_type']
+            crash_output   = "TODO"
+            severity       = report['severity'] if 'severity' in report else "UNK"
+            report         = json.dumps(report,indent=4)
+            insert_entry((localId, project, reproduced, docker_env, patch_located,
+            patch_url, verified, fuzz_target, fuzz_engine,
+            sanitizer, crash_type, crash_output, severity, report))
+        else:
+            pass
+    print(weird_cases)
 if __name__ == "__main__":
     issueFilter()
