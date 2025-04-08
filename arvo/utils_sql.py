@@ -15,7 +15,8 @@ def db_init():
             localId INTEGER PRIMARY KEY,
             project TEXT NOT NULL,
             reproduced BOOLEAN NOT NULL,
-            docker_env TEXT,
+            reproducer_vul TEXT,
+            reproducer_fix TEXT,
             patch_located BOOLEAN,
             patch_url TEXT,
             verified BOOLEAN,
@@ -39,16 +40,28 @@ def insert_entry(data):
         conn.execute("BEGIN EXCLUSIVE")
         conn.execute("""
         INSERT INTO arvo (
-            localId, project, reproduced, docker_env, patch_located,
+            localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
             patch_url, verified, fuzz_target, fuzz_engine,
             sanitizer, crash_type, crash_output, severity, report
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, data)
         conn.commit()
     finally:
         FAIL("[-] FAILED to INSERT to DB")
         conn.close()
-
+def arvoRecorded(local_id):
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.execute("""
+            SELECT reproduced, patch_located 
+            FROM arvo WHERE localId = ?
+        """, (local_id,))
+        return cursor.fetchone()
+    except:
+        FAIL("[-] Failed to access DB")
+        return None
+    finally:
+        conn.close()
 # def sync_db():
 #     done = getDone()
 #     db_done = db_getDone()
