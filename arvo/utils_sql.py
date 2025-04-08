@@ -2,10 +2,11 @@
 # Sqlite support for ARVO
 ########################################################
 import sqlite3
-from tqdm       import tqdm
-from ._profile import ARVO
-
+from tqdm           import tqdm
+from .utils_init    import *
+from .utils_log     import *
 DB_PATH = ARVO / "arvo.db"
+
 def db_init():
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute("""
@@ -44,7 +45,7 @@ def insert_entry(data):
         """, data)
         conn.commit()
     finally:
-        WARN("[-] FAILED to INSERT to DB")
+        FAIL("[-] FAILED to INSERT to DB")
         conn.close()
 
 def sync_db():
