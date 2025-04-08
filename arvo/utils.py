@@ -850,8 +850,14 @@ def silentRun(func, *args, **kwargs):
     result = func(*args, **kwargs)
     sys.stdout = original_stdout
     return result
-
-
+def localIdMapping(localId):
+    if NEW_ISSUE_TRACKER and localId < 40000000:
+        mapping = mapMapping()
+        if localId not in mapping:
+            WARN("[x] LocalId not in mapping, using obsolete localId")
+        else:
+            localId = mapping[localId]
+    return localId
 
 # Init sql db
 db_init() 

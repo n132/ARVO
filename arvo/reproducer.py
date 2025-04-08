@@ -520,12 +520,7 @@ def saveImg(localId,issue):
         return False
 
 def verify(localId,save_img=False):
-    if NEW_ISSUE_TRACKER and localId < 40000000:
-        mapping = mapMapping()
-        if localId not in mapping:
-            WARN("[x] LocalId not in mapping, using obsolete localId")
-        else:
-            localId = mapping[localId]
+    localId = localIdMapping(localId)
     # if localId in avoid.avoid:
     #     print(f"[+] Please avoid waste time on issue {localId}")
     #     return False
