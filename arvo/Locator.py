@@ -728,8 +728,8 @@ def reproduce(localId, dockerize = True, update = True):
     
     reproduced      = True
 
-    reproducer_vul = f"docker run -it n132/arvo:{localId}-vul arvo"
-    reproducer_fix = f"docker run -it n132/arvo:{localId}-fix arvo"
+    reproducer_vul = f"docker run --rm -it n132/arvo:{localId}-vul arvo"
+    reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
     patch_located  = False if res == False else True
@@ -746,7 +746,7 @@ def reproduce(localId, dockerize = True, update = True):
     # We still have the layers cached so it's not hard to re-run and get some info
 
     # Get fuzz_target
-    cmd = f"docker run -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
+    cmd = f"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode == 0:
         fuzz_target = result.stdout.strip()
@@ -756,11 +756,11 @@ def reproduce(localId, dockerize = True, update = True):
 
     # Get Stdout/Stderr
     tmpfile = tmpFile()
-    cmd = f"docker run -it n132/arvo:{localId}-vul arvo".split(" ")
+    cmd = f"docker run --rm -it n132/arvo:{localId}-vul arvo".split(" ")
     with open(tmpfile, "w") as f:
         subprocess.run(cmd, stdout=f,stderr=f)
-    with open(tmpfile,'r') as f:
-        crash_output = f.read()
+    with open(tmpfile,'rb') as f:
+        crash_output = f.read().decode("utf-8", errors="replace").replace("�", "\x00")
     os.remove(tmpfile)
     
 
