@@ -20,12 +20,5 @@ def INFO(s):
 def SUCCESS(s):
     print(f"{bcolors.OKGREEN}{s}{bcolors.ENDC}")
 
-def _TEST():
-    WARN("WARN")
-    FAIL("FAIL")
-    INFO("INFO")
-    SUCCESS('SUCCESS')
-    return True
-
 if __name__ == "__main__":
-    _TEST()
+    pass
