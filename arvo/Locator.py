@@ -715,6 +715,64 @@ def vZero(localId,retryChance=None):
     log.mkdir(parents=True,exist_ok=True)
     target_commit = dichotomy_search(commits+["ZDV"],localId,pname,poc,'vZero')
     return leaveRet(target_commit,poc.parent)
+def reproduce(localId, dockerize = True, update = True):
+    localId = localIdMapping(localId)
+    exist_record  = arvoRecorded(localId)
+    if exist_record and not update:
+        INFO("[+] Record Exists")
+        return True
+    
+    if (not verify(localId,dockerize)):
+        eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
+        return False
+    
+    reproduced      = True
+
+    reproducer_vul = f"docker run -it n132/arvo:{localId}-vul arvo"
+    reproducer_fix = f"docker run -it n132/arvo:{localId}-fix arvo"
+
+    res = report(localId,True)
+    patch_located  = False if res == False else True
+    patch_located  = True
+    patch_url      = res['fix']
+    verified       = res['verify']
+    reproduced     = True
+    project        = getPname(localId)
+    fuzz_engine    = res['fuzzer']
+    sanitizer      = res['sanitizer']
+    crash_type     = res['crash_type']
+    severity       = res['severity'] if 'severity' in res else "UNK"
+
+    # We still have the layers cached so it's not hard to re-run and get some info
+
+    # Get fuzz_target
+    cmd = f"docker run -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if result.returncode == 0:
+        fuzz_target = result.stdout.strip()
+    else:
+        FAIL("Command failed:", result.stderr.strip())
+        fuzz_target = "FAILED_TO_GET"
+
+    # Get Stdout/Stderr
+    tmpfile = tmpFile()
+    cmd = f"docker run -it n132/arvo:{localId}-vul arvo".split(" ")
+    with open(tmpfile, "w") as f:
+        subprocess.run(cmd, stdout=f,stderr=f)
+    with open(tmpfile,'r') as f:
+        crash_output = f.read()
+    os.remove(tmpfile)
+    
+
+    
+    if exist_record and delete_entry(localId):
+        insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
+        patch_url, verified, fuzz_target, fuzz_engine,
+        sanitizer, crash_type, crash_output, severity, res['report']))
+        return True
+    else:
+        FAIL("FAILED TO DELETE EXISTING RECORD")
+        return False
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         report(int(sys.argv[1]),debug=True)
