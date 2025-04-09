@@ -46,6 +46,7 @@ def insert_entry(data):
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, data)
         conn.commit()
+        return True
     except:
         FAIL("[-] FAILED to INSERT to DB")
         return False
