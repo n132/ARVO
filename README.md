@@ -12,11 +12,11 @@ If you only need the metadata (interactive docker images):
 
 ```shell
 # Reproduce Vul/Fix
-docker run --rm -it n132/arvo:25402-vul arvo
-docker run --rm -it n132/arvo:25402-fix arvo
+docker run --rm -it n132/arvo:42487096-vul arvo
+docker run --rm -it n132/arvo:42487096-fix arvo
 # Re-compile Vul/Fix
-docker run --rm -it n132/arvo:25402-vul arvo compile 
-docker run --rm -it n132/arvo:25402-fix arvo compile
+docker run --rm -it n132/arvo:42487096-vul arvo compile 
+docker run --rm -it n132/arvo:42487096-fix arvo compile
 ```
 
 More metadata is store in: [ARVO-meta][3]
@@ -28,9 +28,9 @@ See [GitHub Action Example][4] for an example of the database rebuild. Full func
 - Filling in arvo/_profile.py with credentials
 - OSS-Fuzz metadata (currently blocked by [a recent change][5])
 
-An example of rebuilding case-25402:
+An example of rebuilding case-42487096:
 ```sh
-git cloned https://github.com/n132/ARVO-Pub.git ARVO
+git cloned https://github.com/n132/ARVO.git
 cd ARVO
 python3 -m venv arvo-run # create the venv
 source ./arvo-run/bin/activate # enable venv
