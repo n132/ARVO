@@ -765,14 +765,14 @@ def reproduce(localId, dockerize = True, update = True):
     
 
     
-    if exist_record and delete_entry(localId):
-        insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
+    if exist_record:
+        if not delete_entry(localId):
+            return False
+    
+    return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
         sanitizer, crash_type, crash_output, severity, res['report']))
-        return True
-    else:
-        FAIL("FAILED TO DELETE EXISTING RECORD")
-        return False
+
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         report(int(sys.argv[1]),debug=True)
