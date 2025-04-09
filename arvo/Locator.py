@@ -764,7 +764,6 @@ def reproduce(localId, dockerize = True, update = True):
     os.remove(tmpfile)
     
 
-    
     if exist_record:
         if not delete_entry(localId):
             return False
