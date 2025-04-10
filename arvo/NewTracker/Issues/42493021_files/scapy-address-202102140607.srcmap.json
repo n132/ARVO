@@ -1,0 +1,12 @@
+{
+  "/src/scapy": {
+    "type": "git",
+    "url": "https://github.com/secdev/scapy.git",
+    "rev": "226b0d366424450602975f076d965547c19d907f"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "aeb7d7048371cd91ab9280c3958f1c35e5d5e758"
+  }
+}
