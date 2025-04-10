@@ -553,7 +553,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         eventLog(f"[!] - clone: Failed to clone {url}")
         return False
     if commit:
-        print(f"[+] Checkout to commit {commit}")
+        INFO(f"[+] Checkout to commit {commit}")
         if name==None:
             name = list(dest.iterdir())[0]
         if _check_out(commit,dest / name):
@@ -566,10 +566,10 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
                 if commit_date==None:
                     eventLog(f"[!] - clone: Failed to checkout {name} but it's not the main component, using the latest version")
                     return dest
-                print("[!] Failed to checkout, try a version before required commit")
+                WARN("[!] Failed to checkout, try a version before required commit")
                 cmd = ["git", "log", f"--before='{commit_date.isoformat()}'", "--format='%H'", "-n1"]
                 commit = execute(cmd , dest/ name).decode().strip("'")
-                print(f"[+] Checkout to {commit}")
+                INFO(f"[+] Checkout to {commit}")
                 if _check_out(commit, dest / name):
                     return dest
                 else:
@@ -702,7 +702,7 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
     with open(log_tag,'w') as f:
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
-    print(f"[+] The return value is {returnCode}")
+    INFO(f"[+] The return value is {returnCode}")
     return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
@@ -795,61 +795,7 @@ def remove_issue_data(localIds):
             shutil.rmtree(target/fname)
         except:
             pass
-def issueFilter():
-    localids = getAllLocalIds()[::-1]
-    res = []
-    nonC = []
-    broken_srcmaps = []
-    false_positives = []
-    for localId in localids:
-        target_dir = Path(DATADIR)/"Issues"/(str(localId)+"_files")
-        if len(list(target_dir.iterdir())) <3:
-            res.append(localId)
-            print(f"[!] Have less than 2 srcmaps, deleting issue {localId}...")
-        srcmap = getSrcmaps(localId)
 
-        # Filter out Borken srcmap
-        out = False
-        for x in srcmap:
-            with open(x) as f:
-                data = json.loads(f.read())
-            for key in data.keys():
-                item = data[key]
-                values = list(item.values())
-                if "unknown" in values or "UNKNOWN" in values:
-                    broken_srcmaps.append(localId)
-                    print("[-] Borkenscrmap: ",broken_srcmaps)
-                    out = True
-                    break
-            if out == True:
-                break
-        # Filter out non-c langauge
-
-        language = getLanguage(localId)
-        if language not in ["c",'c++']:
-            nonC.append(localId)
-            print(f"[!] Non-C/C++ projects found-> {localId}:{language}")
-        else:
-            pass
-            # print(localId)
-
-        # Filter out the false positive cases:
-        xxx = []
-        for y in srcmap:
-            file_hash = hashlib.md5()
-            with open(y,'rb') as f:
-                file_hash.update(f.read())
-            xxx.append(file_hash.digest())
-        if len(set(xxx)) != len(xxx):
-            print(f"[!] Found false positives: {localId}")
-            false_positives.append(localId)
-    res.extend(broken_srcmaps)
-    res.extend(nonC)
-    res.extend(false_positives)
-    res = list(set(res))
-    remove_issue_meta(res)
-    remove_issue_data(res)
-    print("Done")
 def tokenLen(message: str,model='gpt-4'):
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(message))
@@ -872,4 +818,4 @@ def localIdMapping(localId):
 db_init() 
 
 if __name__ == "__main__":
-    issueFilter()
+    pass
