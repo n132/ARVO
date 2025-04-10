@@ -13,7 +13,7 @@ class DfTool():
         blankLine = re.compile(r'\n(\s)*\n',re.MULTILINE)
         self.content = blankLine.sub("\n",self.content)
         
-    def panic(self,s):
+    def PANIC(self,s):
         print(f"[-] {s}")
         exit(1)
     def flush(self):

@@ -20,7 +20,7 @@ def dir_check(path):
 def initARVODir(dirs):
     for i in dirs:
         if not dir_check(i):
-            panic(f"Failed to init {i.name}")
+            PANIC(f"Failed to init {i.name}")
 initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
@@ -51,7 +51,7 @@ def json_file_check(path):
         return True
     except:
         return False
-def panic(s):
+def PANIC(s):
     FAIL(s)
     exit(1)
 def tmpDir(path=OSS_TMP,pre="ARVO_",dont_mk=False):
@@ -88,7 +88,7 @@ def remove_oss_fuzz_img(localId):
         imgName = f"gcr.io/oss-fuzz/{localId}"
         docker_rmi(imgName)
     except:
-        panic("[!] Fail to remove Changed Images")
+        PANIC("[!] Fail to remove Changed Images")
 #==================================================================
 #
 #                  OSS-fuzz meta retrive

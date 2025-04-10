@@ -248,7 +248,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                 if x in meta:
                     item_rev = meta[x]['rev']
                 else:
-                    panic(f"[x] Weird Key Found {localId}: {x}")
+                    PANIC(f"[x] Weird Key Found {localId}: {x}")
         # Prepare the dependencies and record them. We'll use -v to mount them to the docker container
         if(item_type=='git'):
             clone_res = clone(item_url,item_rev,src,item_name,commit_date=commit_date)

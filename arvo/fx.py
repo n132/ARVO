@@ -89,7 +89,7 @@ def BenchMarkAPI(localId,fix):
     repo_dir = gt.repo
     vul_code = runFixGetVulCode(diff_file,repo_dir)
     if not vul_code:
-        panic("[X] Has more than one hunks. Not support now.")
+        PANIC("[X] Has more than one hunks. Not support now.")
     
     target_file = vul_code[3]  
 
@@ -125,7 +125,7 @@ def runFix(localId,module,lite=False,logDiff=False,tag=""):
     repo_dir = gt.repo
     vul_code = runFixGetVulCode(diff_file,repo_dir)
     if not vul_code:
-        panic("[X] Has more than one hunks. Not support now.")
+        PANIC("[X] Has more than one hunks. Not support now.")
     
     # 3. Perform Fixing
     if(module in ["Codex","gpt-3.5-turbo-instrct","code-davinci-edit-001"]):
@@ -153,7 +153,7 @@ def runFix(localId,module,lite=False,logDiff=False,tag=""):
         else:
             fixes, ori_code, target_file = res
     else:
-        panic("UNK Module")
+        PANIC("UNK Module")
     
     # 4. Verification: Try to build and verify all possibe fixes
     # Only choce the first one since we don't have resource to test all

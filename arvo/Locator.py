@@ -81,7 +81,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
             res = crashVerify(issue, poc,log)
             lock.release()
         else:
-            panic("[!] Log file is locked")
+            PANIC("[!] Log file is locked")
         
 
         remove_oss_fuzz_img(localId)
@@ -156,7 +156,7 @@ def dichotomy_search(commits_list,localId,pname,poc,tag):
         # More detailed methods are used in tracer
         return dichotomy_search(commits_list[mid+1:],localId,pname,poc,tag)
     else:
-        panic(f"Impossible to reach here")
+        PANIC(f"Impossible to reach here")
 def list_commits(localId,pname):
     # Step1: Get Basic Information
     inclusive = True
@@ -255,12 +255,12 @@ def vulCommit(localId,retryChance=None):
             execute(['git','submodule','init'],gt.repo)
             sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
             if not sub_path:
-                panic("Failed to get the submodule path")
+                PANIC("Failed to get the submodule path")
             sub_path = str(Path(pname)/sub_path.decode())
             print("".join(['git','config','--file','.git/config',f'submodule.{x[0]}.url']))
             sub_url = execute(['git','config','--file','.git/config',f'submodule.{x[0]}.url'],gt.repo)
             if not sub_url:
-                panic("Failed to get the submodule path")
+                PANIC("Failed to get the submodule path")
             sub_url = sub_url.decode()
             appendix = ["bash",'-c',f'rm -rf {sub_path} && git clone {sub_url} {sub_path} && pushd {sub_path} && git checkout {x[1]} && popd && compile']
             INFO(f"Trying {sub_path}...")
@@ -287,7 +287,7 @@ def vulCommit(localId,retryChance=None):
                 else:
                     return leaveRet(found,poc.parent)
             else:
-                panic(f"Impossible to reach here")
+                PANIC(f"Impossible to reach here")
         # Can't work it out, still return the submodule update commit 
         WARN("Failed to locate the specific submodule matters")
     return leaveRet(target_commit,poc.parent)
@@ -320,7 +320,7 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
             INFO(f"Still Buggy:{submodule_info[0]} {sub_commit}")
             continue
         else:
-            panic(f"Impossible to reach here")
+            PANIC(f"Impossible to reach here")
     if not found:
         # Failed to locate
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
@@ -522,7 +522,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
         TURBO = False
         curCrash = getCrashSummary(log.parent / f"{commits_list[mid]}.exec.log")
         if curCrash == False:
-            panic(f"[+] Broken crash info for {localId}")
+            PANIC(f"[+] Broken crash info for {localId}")
         if targetCrash == curCrash:
             # Only compare the summary, since the DEDUPTOKEN could be so different for UAF
             dichotomy_log(localId,f"[+] [{commits_list[mid]}]: Crash", tag)
@@ -533,7 +533,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
 
             return dichotomy_search_TC(commits_list[:mid+1],localId,pname,poc,tag,targetCrash,oss_fuzz_commit)
     else:
-        panic(f"Impossible to reach here")
+        PANIC(f"Impossible to reach here")
 def lifeSpan_getInitTimeStamp(localId,oss_commit=False):
     project = getPname(localId, False)
     if project == False:
