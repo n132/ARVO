@@ -1,0 +1,22 @@
+{
+  "/src/libfido2": {
+    "type": "git",
+    "url": "https://github.com/Yubico/libfido2",
+    "rev": "8e09587f8ab277eeb947ff568ad8971851e0edb1"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl",
+    "rev": "64a1b940d2b640e5edf0feae90e81bbb6b4941e7"
+  },
+  "/src/libcbor": {
+    "type": "git",
+    "url": "https://github.com/PJK/libcbor",
+    "rev": "97b865d8280725f936067ad86673219c1019d101"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}
