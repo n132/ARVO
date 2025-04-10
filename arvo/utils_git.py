@@ -479,8 +479,7 @@ def _TEST():
         elif vtype == 'svn':
             URL = 'https://svn.code.sf.net/p/freeimage/svn'
         else:
-            print("Unknown TYPE")
-            exit(1)
+            PANIC("Unknown TYPE")
         repo = GitTool(URL,vtype,latest=True)
         assert(repo)
         SUCCESS("T: [GitTools][Clone][Pass]")
