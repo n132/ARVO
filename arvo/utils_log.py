@@ -8,17 +8,13 @@ class bcolors:
     ENDC = '\033[0m'
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
-def WARN(s):
-    print(f"{bcolors.WARNING}{s}{bcolors.ENDC}")
-
-def FAIL(s):
-    print(f"{bcolors.FAIL}{s}{bcolors.ENDC}")
-
-def INFO(s):
-    print(f"{bcolors.OKBLUE}{s}{bcolors.ENDC}")
-
-def SUCCESS(s):
-    print(f"{bcolors.OKGREEN}{s}{bcolors.ENDC}")
-
+def WARN(s):    print(f"{bcolors.WARNING}{s}{bcolors.ENDC}")
+def FAIL(s):    print(f"{bcolors.FAIL}{s}{bcolors.ENDC}")
+def INFO(s):    print(f"{bcolors.OKBLUE}{s}{bcolors.ENDC}")
+def SUCCESS(s): print(f"{bcolors.OKGREEN}{s}{bcolors.ENDC}")
+def LOGO(s):    print(f"{bcolors.OKCYAN}{s}{bcolors.ENDC}")
+def PANIC(s):
+    FAIL(s)
+    exit(1)
 if __name__ == "__main__":
     pass
