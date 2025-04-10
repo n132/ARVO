@@ -51,9 +51,6 @@ def json_file_check(path):
         return True
     except:
         return False
-def PANIC(s):
-    FAIL(s)
-    exit(1)
 def tmpDir(path=OSS_TMP,pre="ARVO_",dont_mk=False):
     name = pre+b58encode(os.urandom(16)).decode()
     res = Path(path)
