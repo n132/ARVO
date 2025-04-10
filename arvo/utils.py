@@ -489,6 +489,7 @@ def str2date(issue_date,offset="+0000"):
     return datetime.strptime(issue_date+" "+offset, '%Y%m%d%H%M %z')
 def issue_record(name,localId,des,log_addr = "_CrashLOGs"):
     filename = ARVO / log_addr
+    FAIL(f"| {name} | {localId} | {des} |\n")
     with open(filename,'a+') as f:
         f.write(f"| {name} | {localId} | {des} |\n")
     return
