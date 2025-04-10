@@ -782,7 +782,7 @@ def remove_issue_meta(localIds):
     data  = [json.loads(x) for x in data]
     new_data = []
     for x in data:
-        if x['issue']['localId'] not in localIds:
+        if x['localId'] not in localIds:
             new_data.append(x)
     with open(MetaDataFile,'w') as f:
         for x in new_data:
