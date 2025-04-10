@@ -8,22 +8,22 @@ class DiffTool():
         if isinstance(id,int):
             diff = getDiff(id) 
             if not diff:
-                panic(f"[+] Failed to get the Diff file for {id}")
+                PANIC(f"[+] Failed to get the Diff file for {id}")
             with open(diff) as f:
                 self.diff = f.read()
         elif type(id) == type(Path("/tmp")):
             if not id.exists():
-                panic(f"[+] Failed to get the Diff file for {id}")
+                PANIC(f"[+] Failed to get the Diff file for {id}")
             with open(id) as f:
                 self.diff = f.read()
         elif isinstance(id,str):
             id = Path(id)
             if not id.exists():
-                panic(f"[+] Failed to get the Diff file for {id}")
+                PANIC(f"[+] Failed to get the Diff file for {id}")
             with open(id) as f:
                 self.diff = f.read()
         else:
-            panic(f"[+] InValid input for diff")
+            PANIC(f"[+] InValid input for diff")
     def splitHunks(self):
         res = []
         # function_pattern = r'^\s*[a-zA-Z_][a-zA-Z0-9_]*\s+[a-zA-Z_][a-zA-Z0-9_]*\s*\(.*\)\s*{'
