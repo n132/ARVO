@@ -30,10 +30,6 @@ def db_init():
         )
         """)
         conn.commit()
-def db_getDone():
-    with sqlite3.connect(DB_PATH) as conn:
-        cursor = conn.execute("SELECT localId FROM arvo")
-        return [row[0] for row in cursor.fetchall()]
 def insert_entry(data):
     conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
     try:
