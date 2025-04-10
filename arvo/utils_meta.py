@@ -39,14 +39,6 @@ def metaFilter():
                     break
             if out == True:
                 break
-        # Filter out non-c langauge
-        # language = getLanguage(localId)
-        # if language not in ["c",'c++']:
-        #     nonC.append(localId)
-        #     print(f"[!] Non-C/C++ projects found-> {localId}:{language}")
-        # else:
-        #     pass
-            # print(localId)
 
         # Filter out the false positive cases:
         xxx = []
@@ -60,12 +52,11 @@ def metaFilter():
             false_positives.append(localId)    
     res.extend(broken_srcmaps)
     print(false_positives)
-    # res.extend(nonC)
     # res.extend(false_positives)
     res = list(set(res))
     remove_issue_meta(res)
     remove_issue_data(res)
-    print("Done")
+    SUCCESS("Done")
 def getIssueIds():
     localIds = []
     session = requests.Session()
