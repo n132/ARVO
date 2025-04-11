@@ -751,7 +751,7 @@ def reproduce(localId, dockerize = True, update = True):
     if result.returncode == 0:
         fuzz_target = result.stdout.strip()
     else:
-        FAIL("Command failed:", result.stderr.strip())
+        FAIL(f"Command failed: {result.stderr.strip()}")
         fuzz_target = "FAILED_TO_GET"
 
     # Get Stdout/Stderr
