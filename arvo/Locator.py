@@ -81,7 +81,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
             res = crashVerify(issue, poc,log)
             lock.release()
         else:
-            panic("[!] Log file is locked")
+            PANIC("[!] Log file is locked")
         
 
         remove_oss_fuzz_img(localId)
@@ -156,7 +156,7 @@ def dichotomy_search(commits_list,localId,pname,poc,tag):
         # More detailed methods are used in tracer
         return dichotomy_search(commits_list[mid+1:],localId,pname,poc,tag)
     else:
-        panic(f"Impossible to reach here")
+        PANIC(f"Impossible to reach here")
 def list_commits(localId,pname):
     # Step1: Get Basic Information
     inclusive = True
@@ -255,12 +255,12 @@ def vulCommit(localId,retryChance=None):
             execute(['git','submodule','init'],gt.repo)
             sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
             if not sub_path:
-                panic("Failed to get the submodule path")
+                PANIC("Failed to get the submodule path")
             sub_path = str(Path(pname)/sub_path.decode())
             print("".join(['git','config','--file','.git/config',f'submodule.{x[0]}.url']))
             sub_url = execute(['git','config','--file','.git/config',f'submodule.{x[0]}.url'],gt.repo)
             if not sub_url:
-                panic("Failed to get the submodule path")
+                PANIC("Failed to get the submodule path")
             sub_url = sub_url.decode()
             appendix = ["bash",'-c',f'rm -rf {sub_path} && git clone {sub_url} {sub_path} && pushd {sub_path} && git checkout {x[1]} && popd && compile']
             INFO(f"Trying {sub_path}...")
@@ -287,7 +287,7 @@ def vulCommit(localId,retryChance=None):
                 else:
                     return leaveRet(found,poc.parent)
             else:
-                panic(f"Impossible to reach here")
+                PANIC(f"Impossible to reach here")
         # Can't work it out, still return the submodule update commit 
         WARN("Failed to locate the specific submodule matters")
     return leaveRet(target_commit,poc.parent)
@@ -320,7 +320,7 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
             INFO(f"Still Buggy:{submodule_info[0]} {sub_commit}")
             continue
         else:
-            panic(f"Impossible to reach here")
+            PANIC(f"Impossible to reach here")
     if not found:
         # Failed to locate
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
@@ -415,7 +415,7 @@ def fileReport(localId,fix_commit):
     fix = reportFix(vulComponentUrl,fix_commit)
     res = dict()
     res['fix']      = fix
-    res['verify']   = "0"
+    res['verify']   = False
     res['localId']  = localId
     res['project']  = pname
     # data from original issues
@@ -427,21 +427,20 @@ def fileReport(localId,fix_commit):
         res['severity'] = issue['severity']
     except:
         pass
-    res['report']       = json.loads(open(DATADIR / "Issues" / (str(localId) + "_files")/(str(localId)+".json")).read())
+    res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
-    dumpReport(localId,res)
-    return True
+    return res
 def report(localId,verified=False):
     # Step1: Verfy if the case is reproduciable currently
     localId = localIdMapping(localId)
-    done = getDone()
+    
     if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to report {localId}: Unable to verify")
+            eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
             return False
-        
+        done = getDone()
         if localId not in done:
             lock = FileLock(ARVO/"Results.json.lock")
             while(1):
@@ -453,9 +452,9 @@ def report(localId,verified=False):
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x40)
     if fix_commit == False or fix_commit=="":
-        eventLog(f"[-] Failed to locate the fixes for issue {localId}")
+        eventLog(f"[-] Failed to locate the patches for issue {localId}")
         return False
-    
+    # return fix_commit
     # Step3: File the report 
     return fileReport(localId,fix_commit)
 #============================
@@ -523,7 +522,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
         TURBO = False
         curCrash = getCrashSummary(log.parent / f"{commits_list[mid]}.exec.log")
         if curCrash == False:
-            panic(f"[+] Broken crash info for {localId}")
+            PANIC(f"[+] Broken crash info for {localId}")
         if targetCrash == curCrash:
             # Only compare the summary, since the DEDUPTOKEN could be so different for UAF
             dichotomy_log(localId,f"[+] [{commits_list[mid]}]: Crash", tag)
@@ -534,7 +533,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
 
             return dichotomy_search_TC(commits_list[:mid+1],localId,pname,poc,tag,targetCrash,oss_fuzz_commit)
     else:
-        panic(f"Impossible to reach here")
+        PANIC(f"Impossible to reach here")
 def lifeSpan_getInitTimeStamp(localId,oss_commit=False):
     project = getPname(localId, False)
     if project == False:
@@ -716,6 +715,63 @@ def vZero(localId,retryChance=None):
     log.mkdir(parents=True,exist_ok=True)
     target_commit = dichotomy_search(commits+["ZDV"],localId,pname,poc,'vZero')
     return leaveRet(target_commit,poc.parent)
+def reproduce(localId, dockerize = True, update = True):
+    localId = localIdMapping(localId)
+    exist_record  = arvoRecorded(localId)
+    if exist_record and not update:
+        INFO("[+] Record Exists")
+        return True
+    
+    if (not verify(localId,dockerize)):
+        eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
+        return False
+    
+    reproduced      = True
+
+    reproducer_vul = f"docker run --rm -it n132/arvo:{localId}-vul arvo"
+    reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
+
+    res = report(localId,True)
+    patch_located  = False if res == False else True
+    patch_located  = True
+    patch_url      = res['fix']
+    verified       = res['verify']
+    reproduced     = True
+    project        = getPname(localId)
+    fuzz_engine    = res['fuzzer']
+    sanitizer      = res['sanitizer']
+    crash_type     = res['crash_type']
+    severity       = res['severity'] if 'severity' in res else "UNK"
+
+    # We still have the layers cached so it's not hard to re-run and get some info
+
+    # Get fuzz_target
+    cmd = f"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+    if result.returncode == 0:
+        fuzz_target = result.stdout.strip()
+    else:
+        FAIL(f"Command failed: {result.stderr.strip()}")
+        fuzz_target = "FAILED_TO_GET"
+
+    # Get Stdout/Stderr
+    tmpfile = tmpFile()
+    cmd = f"docker run --rm -it n132/arvo:{localId}-vul arvo".split(" ")
+    with open(tmpfile, "w") as f:
+        subprocess.run(cmd, stdout=f,stderr=f)
+    with open(tmpfile,'rb') as f:
+        crash_output = f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+    os.remove(tmpfile)
+    
+
+    if exist_record:
+        if not delete_entry(localId):
+            return False
+    
+    return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
+        patch_url, verified, fuzz_target, fuzz_engine,
+        sanitizer, crash_type, crash_output, severity, res['report']))
+
 if __name__ == '__main__':
     if len(sys.argv) == 2:
         report(int(sys.argv[1]),debug=True)

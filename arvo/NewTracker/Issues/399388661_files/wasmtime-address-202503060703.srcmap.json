@@ -1,0 +1,17 @@
+{
+  "/src/wasmtime": {
+    "type": "git",
+    "url": "https://github.com/bytecodealliance/wasmtime",
+    "rev": "e929b63daa7700440c806c3bfbf31474e8fc9d5e"
+  },
+  "/src/regalloc2": {
+    "type": "git",
+    "url": "https://github.com/bytecodealliance/regalloc2",
+    "rev": "925df1b4674435a9322e21912926a68749517861"
+  },
+  "/src/wasm-tools": {
+    "type": "git",
+    "url": "https://github.com/bytecodealliance/wasm-tools",
+    "rev": "2f3b2f9ef705db8bc768047607cd7f1e39c99b20"
+  }
+}

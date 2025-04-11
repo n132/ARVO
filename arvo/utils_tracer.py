@@ -55,7 +55,7 @@ def customSrcmap_PM(srcmap):
     #     data[vk]['rev']=commit
     # else:
     #     leaveRet(0xdeadbeef,wd)
-    #     panic(f"[!] Can't find the key({vk}) in json data")
+    #     PANIC(f"[!] Can't find the key({vk}) in json data")
     
     # readstat-address-201901210219.srcmap.json
     Bsrcmap = wd / srcmap[idx].name
@@ -101,7 +101,7 @@ def customSrcmap(srcmap,pname,commit):
         data[vk]['rev']=commit
     else:
         leaveRet(0xdeadbeef,wd)
-        panic(f"[!] Can't find the key({vk}) in json data")
+        PANIC(f"[!] Can't find the key({vk}) in json data")
     
     # readstat-address-201901210219.srcmap.json
     ts = commitDate(data[vk]['url'],commit,data[vk]['type'])

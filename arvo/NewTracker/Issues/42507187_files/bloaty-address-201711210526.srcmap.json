@@ -1,0 +1,12 @@
+{
+  "/src/bloaty": {
+    "type": "git",
+    "url": "https://github.com/google/bloaty.git",
+    "rev": "a042af3a742ccf26eeee95224b7f68fabad122b7"
+  },
+  "/src/libfuzzer": {
+    "type": "svn",
+    "url": "https://llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer",
+    "rev": "318727"
+  }
+}

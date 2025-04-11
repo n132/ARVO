@@ -1,13 +1,13 @@
 import re, shutil, requests, sys, hashlib, math, tiktoken, zipfile
 from datetime       import datetime
 from base58         import b58encode
-from .utils_sql     import *
 from .utils_exec    import *
 from .utils_docker  import *
 from .DB_Manager    import *
 from .utils_log     import *
 from .transform     import PnameTable, trans_table
 from .utils_init    import *
+from .utils_sql     import *
 
 # Init ARVO Directorys
 def dir_check(path):
@@ -20,7 +20,7 @@ def dir_check(path):
 def initARVODir(dirs):
     for i in dirs:
         if not dir_check(i):
-            panic(f"Failed to init {i.name}")
+            PANIC(f"Failed to init {i.name}")
 initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
@@ -30,6 +30,7 @@ if not OSS_DB_MAP.exists():
 session = requests.Session()
 
 def eventLog(s,ext=False):
+    FAIL(s)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
         f.write(s+"\n")
     if ext:
@@ -50,9 +51,6 @@ def json_file_check(path):
         return True
     except:
         return False
-def panic(s):
-    FAIL(s)
-    exit(1)
 def tmpDir(path=OSS_TMP,pre="ARVO_",dont_mk=False):
     name = pre+b58encode(os.urandom(16)).decode()
     res = Path(path)
@@ -87,7 +85,7 @@ def remove_oss_fuzz_img(localId):
         imgName = f"gcr.io/oss-fuzz/{localId}"
         docker_rmi(imgName)
     except:
-        panic("[!] Fail to remove Changed Images")
+        PANIC("[!] Fail to remove Changed Images")
 #==================================================================
 #
 #                  OSS-fuzz meta retrive
@@ -219,17 +217,22 @@ def getDate(localId,tag="vul"):
         srcmap_name = srcmaps[1].name
     commit_date = srcmap_name.split(".")[0].split("-")[-1]
     return str2date(commit_date,STAMP_DELAY)
-def getDone(avoid=False,avoid_list=['binutils','libreoffice']):
-    with open(ARVO/"Results.json") as f:
-        data = f.readlines()
-    if avoid:
-        av = []
-        for pname in avoid_list:
-            av.extend(listProject(pname))
-    else:
-        av = []
-    done    = [json.loads(x)['localId'] for x in data if (json.loads(x)['localId'] not in av and json.loads(x)['pass'])]
-    return done
+
+def getDone(avoid=False, avoid_list=['binutils', 'libreoffice']):
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        if avoid:
+            placeholders = ','.join('?' for _ in avoid_list)
+            query = f"SELECT localId FROM arvo WHERE reproduced = 1 AND project NOT IN ({placeholders})"
+            cursor = conn.execute(query, avoid_list)
+        else:
+            cursor = conn.execute("SELECT localId FROM arvo WHERE reproduced = 1")
+        return [row[0] for row in cursor.fetchall()]
+    except:
+        return False
+    finally:
+        conn.close()
+
 def getEngine(localId):
     # ['afl', 'libfuzzer', 'honggfuzz']
     issue = getIssue(localId)
@@ -483,11 +486,19 @@ def str2date(issue_date,offset="+0000"):
     return datetime.strptime(issue_date+" "+offset, '%Y%m%d%H%M %z')
 def issue_record(name,localId,des,log_addr = "_CrashLOGs"):
     filename = ARVO / log_addr
+    FAIL(f"| {name} | {localId} | {des} |\n")
     with open(filename,'a+') as f:
         f.write(f"| {name} | {localId} | {des} |\n")
     return
 def getReports():
-    return [int(x.name[:-5]) for x in REPORTS_DIR.iterdir()]
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.execute("SELECT localId FROM arvo WHERE patch_located = 1")
+        return [row[0] for row in cursor.fetchall()]
+    except:
+        return False
+    finally:
+        conn.close()
 def getReport(localId):
     fname = REPORTS_DIR/f"{localId}.json"
     if fname.exists():
@@ -500,12 +511,7 @@ def loadReport(localId):
     with open(fname) as f:
         d = json.loads(f.read())
     return d
-def dumpReport(localId,d):
-    fname = REPORTS_DIR / f"{localId}.json"
-    with open(fname,'w') as f:
-        f.write(json.dumps(d, indent=4))
-    print("[+] Report Created: "+str(localId))
-    return
+
 #==================================================================
 #
 #                  Version Control Part Starts
@@ -544,7 +550,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         eventLog(f"[!] - clone: Failed to clone {url}")
         return False
     if commit:
-        print(f"[+] Checkout to commit {commit}")
+        INFO(f"[+] Checkout to commit {commit}")
         if name==None:
             name = list(dest.iterdir())[0]
         if _check_out(commit,dest / name):
@@ -557,10 +563,10 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
                 if commit_date==None:
                     eventLog(f"[!] - clone: Failed to checkout {name} but it's not the main component, using the latest version")
                     return dest
-                print("[!] Failed to checkout, try a version before required commit")
+                WARN("[!] Failed to checkout, try a version before required commit")
                 cmd = ["git", "log", f"--before='{commit_date.isoformat()}'", "--format='%H'", "-n1"]
                 commit = execute(cmd , dest/ name).decode().strip("'")
-                print(f"[+] Checkout to {commit}")
+                INFO(f"[+] Checkout to {commit}")
                 if _check_out(commit, dest / name):
                     return dest
                 else:
@@ -693,7 +699,7 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
     with open(log_tag,'w') as f:
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
-    print(f"[+] The return value is {returnCode}")
+    INFO(f"[+] The return value is {returnCode}")
     return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
@@ -773,7 +779,7 @@ def remove_issue_meta(localIds):
     data  = [json.loads(x) for x in data]
     new_data = []
     for x in data:
-        if x['issue']['localId'] not in localIds:
+        if x['localId'] not in localIds:
             new_data.append(x)
     with open(MetaDataFile,'w') as f:
         for x in new_data:
@@ -786,61 +792,7 @@ def remove_issue_data(localIds):
             shutil.rmtree(target/fname)
         except:
             pass
-def issueFilter():
-    localids = getAllLocalIds()[::-1]
-    res = []
-    nonC = []
-    broken_srcmaps = []
-    false_positives = []
-    for localId in localids:
-        target_dir = Path(DATADIR)/"Issues"/(str(localId)+"_files")
-        if len(list(target_dir.iterdir())) <3:
-            res.append(localId)
-            print(f"[!] Have less than 2 srcmaps, deleting issue {localId}...")
-        srcmap = getSrcmaps(localId)
 
-        # Filter out Borken srcmap
-        out = False
-        for x in srcmap:
-            with open(x) as f:
-                data = json.loads(f.read())
-            for key in data.keys():
-                item = data[key]
-                values = list(item.values())
-                if "unknown" in values or "UNKNOWN" in values:
-                    broken_srcmaps.append(localId)
-                    print("[-] Borkenscrmap: ",broken_srcmaps)
-                    out = True
-                    break
-            if out == True:
-                break
-        # Filter out non-c langauge
-
-        language = getLanguage(localId)
-        if language not in ["c",'c++']:
-            nonC.append(localId)
-            print(f"[!] Non-C/C++ projects found-> {localId}:{language}")
-        else:
-            pass
-            # print(localId)
-
-        # Filter out the false positive cases:
-        xxx = []
-        for y in srcmap:
-            file_hash = hashlib.md5()
-            with open(y,'rb') as f:
-                file_hash.update(f.read())
-            xxx.append(file_hash.digest())
-        if len(set(xxx)) != len(xxx):
-            print(f"[!] Found false positives: {localId}")
-            false_positives.append(localId)
-    res.extend(broken_srcmaps)
-    res.extend(nonC)
-    res.extend(false_positives)
-    res = list(set(res))
-    remove_issue_meta(res)
-    remove_issue_data(res)
-    print("Done")
 def tokenLen(message: str,model='gpt-4'):
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(message))
@@ -863,4 +815,4 @@ def localIdMapping(localId):
 db_init() 
 
 if __name__ == "__main__":
-    issueFilter()
+    pass

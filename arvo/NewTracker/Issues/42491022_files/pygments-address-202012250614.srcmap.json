@@ -1,0 +1,17 @@
+{
+  "/src/pygments": {
+    "type": "git",
+    "url": "https://github.com/pygments/pygments.git",
+    "rev": "bd378d0ef57a6bc53e9079c9363a6eab0d54f0dc"
+  },
+  "/src/pygments/fuzzing": {
+    "type": "git",
+    "url": "https://github.com/google/fuzzing",
+    "rev": "25089a66c7995ec365d074fe681161edc718531e"
+  },
+  "/src/afl": {
+    "type": "git",
+    "url": "https://github.com/google/AFL.git",
+    "rev": "82b5e359463238d790cadbe2dd494d6a4928bff3"
+  }
+}

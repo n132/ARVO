@@ -46,7 +46,7 @@ def getDesc(localId):
 def extractDesc(localId):
     crash_logs = ARVO / "Log" / "Round1" / f"{localId}_vul.log"
     if not crash_logs.exists():
-        panic("[-] Unable to extract the crash info from the log file. We may need to generate it first...")
+        PANIC("[-] Unable to extract the crash info from the log file. We may need to generate it first...")
     with open(crash_logs,'rb') as f:
         crashInfo = f.read()
     return crashInfo
@@ -131,7 +131,7 @@ There is a sanitizer crash report for the possible bug:
     # "gpt-3.5-turbo-instruct",
     # "code-davinci-edit-001"
     if model not in ["gpt-3.5-turbo-instruct","code-davinci-edit-001"]:
-        panic(f"[X] Invalid Model {model}")
+        PANIC(f"[X] Invalid Model {model}")
     res = performCompletionFix(code.decode(),prompt,model=model,n=1,temperature=TEMP)
     print(res)
     fixed_code = list(set([ x['text'].encode()  for x in res['choices'] if "error" not in x.keys() ]))

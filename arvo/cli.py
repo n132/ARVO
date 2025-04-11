@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 from .reproducer import verify
 from .utils import *
-from .Locator import report
+from .Locator import reproduce
 from .utils_log import *
 
 def cli_reproduce(localId):
@@ -18,17 +18,9 @@ def cli_reproduce(localId):
         return False
 
 def cli_report(localId):
-    target = Path(f"./Reports/{localId}.json")
-    if target.exists():
-        print(f"[+] Report exists: {target}")
-        return json.loads(target.read_text())
-    res = report(localId)
-    if res:
-        print(f"[+] Generated report: {target}")
-        return json.loads(target.read_text())
-    else:
-        print("[-] Failed to Report")
-        return False
+    pass
+    # TODO
+    # reproduce(localId,False,False)
 def cli_list(pname):
     res = listProject(pname)
     if not res:
