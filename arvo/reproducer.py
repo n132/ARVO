@@ -8,7 +8,6 @@ BuildData = collections.namedtuple(
 from .transform import trans_table
 # Global
 import copy
-
 DEAMON_CMD = []
 def doPatchMain(localId,dockerfile,patches):
     pname = getPname(localId)
@@ -584,6 +583,10 @@ def false_positive(localId):
                         returnCode = execute_ret(cmd,stdout=f,stderr=f)
                         f.write(f"\nReturn Code: {returnCode}\n".encode())
         res.append(pocResultChecker(returnCode,LogDir/x.name,[],True))
+    # clean poc and downloaded binary
+    if CLEAN_TMP:
+        shutil.rmtree(poc.parent)
+        shutil.rmtree(store)
     if res != [False,True]:
         return True # False positive
     else:
