@@ -1,6 +1,7 @@
 from .utils import *
 from .utils_core import *
 from .utils_git import *
+from .dev import *
 import collections
 BuildData = collections.namedtuple(
     'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
@@ -518,7 +519,84 @@ def saveImg(localId,issue):
         docker_rm(cnf)
         shutil.rmtree(imgSavePath)
         return False
+OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
+def false_positive(localId):
+    # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
+    # return true  when it's likely a false positive
+    # return false when it's not a false positive
+    # return none  when we can't decide
+    store = OSS_Fuzz_Arch / str(localId)
+    if not store.exists():
+        store.mkdir(parents=True, exist_ok=True)
+        if not getOSSFuzzer(localId, store):
+            shutil.rmtree(store)
+            return False
+        for target in store.iterdir():
+            with zipfile.ZipFile(target, "r") as zf:
+                file_list = zf.namelist()
+            single_file = True if len(file_list)==1 else False
+            subprocess.run(["unar",str(target)],cwd=store)
+            if single_file:
+                new_dir = store / target.name.split(".")[0]
+                new_dir.mkdir()
+                subprocess.run(["mv",file_list[0],str(new_dir)],cwd=store)
+    todo = []
+    for target in store.iterdir():
+        if "zip" not in target.name:
+            todo.append(target)
+    if(len(todo) !=2):
+        WARN("FAILED to get the fuzz target")
+        return None
+    todo.sort(key=lambda x: x.name)
+
+    LogDir = ARVO/"Log"/"false_positive"
+    if not LogDir.exists():
+        LogDir.mkdir()
+    poc = getPoc(localId)
+    if not poc:
+        return None
+    res = []
+    for x in todo:
+        fuzz_target = getFuzzer(localId,x)
+        if fuzz_target == None:
+            WARN(f"{localId=} {x=} can't find the fuzz target")
+            continue
+        cmd = ['docker','run','--rm','--privileged']
+        cmd.extend(["-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
+            f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
+            f'/out/{fuzz_target.name}','/tmp/poc'])
+    
+        with open(LogDir/x.name,'wb') as f:
+            print(" ".join(cmd))
+            returnCode = execute_ret(cmd,stdout=f,stderr=f)
+            f.write(f"\nReturn Code: {returnCode}\n".encode())
+        if returnCode == 255: # deprecated style
+            with open(LogDir/x.name,'rb') as f:
+                if_warn = b"WARNING: using the deprecated call style " in f.read()
+            if if_warn:
+                    cmd = ['docker','run','--rm','--privileged']
+                    cmd.extend(["-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
+                        f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
+                        f'/tmp/{fuzz_target.name}','/tmp/poc'])
+                    with open(LogDir/x.name,'wb') as f:
+                        print(" ".join(cmd))
+                        returnCode = execute_ret(cmd,stdout=f,stderr=f)
+                        f.write(f"\nReturn Code: {returnCode}\n".encode())
+        res.append(pocResultChecker(returnCode,LogDir/x.name,[],True))
+    if res != [False,True]:
+        return True # False positive
+    else:
+        return False
+def false_positives(localIds,failed_on_verify=True):
+    # The passed localIds must return 
+    confirmed = []
+    for localId in localIds:
+        if failed_on_verify != True and verify(localId):
+            continue
+        if false_positive(localId)==True:
+            confirmed.append(localId)
+    return confirmed
 def verify(localId,save_img=False):
     localId = localIdMapping(localId)
     # if localId in avoid.avoid:
