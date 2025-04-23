@@ -240,6 +240,8 @@ def vulCommit(localId,retryChance=None):
         if not gt:
             return False
         diff_file = gt.showCommit(target_commit)
+        if not diff_file:
+            return False
         ifsub = checkIfSubmodule(diff_file)
     
     if ifsub == None:
