@@ -8,6 +8,8 @@ from .utils_log     import *
 from .transform     import PnameTable, trans_table
 from .utils_init    import *
 from .utils_sql     import *
+from rich.progress import Progress
+from collections.abc import Sized
 
 # Init ARVO Directorys
 def dir_check(path):
@@ -259,19 +261,17 @@ def getArch(localId):
 def getPname(localId,srcmapCheck=True):
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
+        FAIL("[FAILED] to get srcmap/issue")
         return False
     if 'project' not in issue:
+        FAIL("[FAILED] to get project feild in issue")
         return False
     else:
         pname = issue['project']
-    if srcmapCheck == False:
-        return pname
-    if pname in PnameTable:
-        return PnameTable[pname]
-    with open(srcmap[0]) as f:
-        info1 = json.load(f)
-    with open(srcmap[1]) as f:
-        info2 = json.load(f)
+    if srcmapCheck == False: return pname # return when no check
+    if pname in PnameTable: return PnameTable[pname] # handling special cases
+    with open(srcmap[0]) as f: info1 = json.load(f)
+    with open(srcmap[1]) as f: info2 = json.load(f)
     except_name = "/src/"+pname
     if (except_name in info1) and (except_name in info2) and (info1[except_name]!=info2[except_name]):
         return pname
@@ -347,6 +347,13 @@ def getSrcmaps(localId):
     srcmap = list(issue_dir.glob('*.srcmap.json'))
     srcmap.sort(key=_cmp)
     return srcmap
+def bar(iterable, description="[ARVO]"):
+    total = len(iterable) if isinstance(iterable, Sized) else None
+    with Progress() as progress:
+        task = progress.add_task(description, total=total)
+        for item in iterable:
+            yield item
+            progress.update(task, advance=1)
 def listProject(pro_names):
     if type(pro_names) == type(""):
         pro_names = [pro_names]
