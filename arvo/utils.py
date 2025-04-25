@@ -507,17 +507,36 @@ def getReports():
     finally:
         conn.close()
 def getReport(localId):
-    fname = REPORTS_DIR/f"{localId}.json"
-    if fname.exists():
-        return json.loads(open(fname).read())
-    return False
-def loadReport(localId):
-    fname = REPORTS_DIR / f"{localId}.json"
-    if not fname.exists():
-        return None
-    with open(fname) as f:
-        d = json.loads(f.read())
-    return d
+    conn = sqlite3.connect(DB_PATH)
+    try:
+        cursor = conn.execute(f"SELECT * FROM arvo WHERE localId = {localId}")
+        meta_data = cursor.fetchall()[0]
+        res = {}
+        res['localId'] = meta_data[0]
+        res['project'] = meta_data[1]
+        res['reproduced'] = True if meta_data[2] else False
+        res['reproducer_vul'] = meta_data[3]
+        res['reproducer_fix'] = meta_data[4]
+        res['patch_located'] = True if meta_data[5] else False
+        res['patch_url'] = meta_data[6]
+        res['verified'] = True if meta_data[7] else False
+        res['fuzz_target'] = meta_data[8]
+        res['fuzz_engine'] = meta_data[9]
+        res['sanitizer'] = meta_data[10]
+        res['crash_type'] = meta_data[11]
+        res['crash_output'] = meta_data[12]
+        res['severity'] = meta_data[13]
+        res['report']  = meta_data[14]
+        return res
+    except:
+        FAIL(f"[FAILED] to find the reported case: {localId}")
+        return False
+    finally:
+        conn.close()
+    # fname = REPORTS_DIR/f"{localId}.json"
+    # if fname.exists():
+    #     return json.loads(open(fname).read())
+    # return False
 
 #==================================================================
 #
