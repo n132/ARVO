@@ -5,7 +5,6 @@ from datetime import datetime
 from .utils_log import *
 from .utils import *
 import json
-from tqdm import tqdm
 from google.cloud import storage
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
@@ -183,8 +182,7 @@ def getIssues(issue_ids):
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
-    # print(done)
-    for x in tqdm(issue_ids):
+    for x in bar(issue_ids):
         if x in done:
             continue
         res = getIssue(x)
@@ -315,10 +313,11 @@ def data_download(localIds = None):
             metadata[mdline['localId']] = mdline
     to_remove = []
     #for localId in metadata:
-    for localId in tqdm(metadata):
+    for localId in bar(metadata):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
         if issue_dir.exists():
+            print(issue_dir)
             done = []
             for x in issue_dir.iterdir():
                 done.append(x)
@@ -338,8 +337,9 @@ def data_download(localIds = None):
             WARN("[!] Failed to download the srcmap")
             to_remove.append(localId)
             continue
-    remove_issue_meta(to_remove)
-    remove_issue_data(to_remove)
+    print(to_remove)
+    # remove_issue_meta(to_remove)
+    # remove_issue_data(to_remove)
     return True
 def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
