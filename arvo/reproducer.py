@@ -130,7 +130,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     
     dockerfile = project_dir / 'Dockerfile'
     if DEBUG:
-        print(f"[+] dockerfile: {dockerfile}")
+        INFO(f"[+] dockerfile: {dockerfile}")
     build_data = BuildData(
         sanitizer=sanitizer,
         architecture=arch,
@@ -158,7 +158,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     sortedKey = sorted(unsorted, key=len)
     mainCompoinent = getPname(localId)
     if DEBUG:
-        print(f"[+] Main Component: {mainCompoinent}")
+        INFO(f"[+] Main Component: {mainCompoinent}")
     if mainCompoinent == False:
         return leaveRet(False,tmp_dir)
     if "/src/xz" in sortedKey:
@@ -167,12 +167,12 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
 
     for x in sortedKey:
         if DEBUG:
-            print(f"[+] Prepare Dependency: {x}")
+            INFO(f"[+] Prepare Dependency: {x}")
         if skipComponent(project_name,x):
             continue
         
         if REBUTTAL_EXP and "/src/"+mainCompoinent!=x:
-            print(f"[+] Not main components, Skip {x}")
+            INFO(f"[+] Not main components, Skip {x}")
             continue
         if verifyFix and mainCompoinent==x:
             approximate = '+'
@@ -197,11 +197,9 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         # if ( item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git') or \
         #     (item_name=='afl' and item_url=='https://github.com/google/AFL.git'):
         if ( item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git'):
-                # print("[+] AFL++: Use the one on BaseIMG")
                 continue
         if( item_name == 'libfuzzer' and
             'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url):
-                # print("[+] libfuzzer: Use the one on BaseIMG")
                 continue
         
         # Broken Revision
@@ -322,7 +320,7 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     
     if DUMPERR!=False:
         dumpErr = OSS_ERR / f"{localId}_Image.log"
-        print(f"[+] Check the output in file: {str(dumpErr)}")
+        INFO(f"[+] Check the output in file: {str(dumpErr)}")
     else:
         dumpErr = None
 
@@ -335,7 +333,7 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     if DUMPERR and dumpErr!=None and dumpErr.exists():
         os.remove(str(dumpErr))
     if DEBUG:
-        print('[+] Cleaning existing out dir')
+        INFO('[+] Cleaning existing out dir')
     if DEBUG:
         rm_output = None
     else:
@@ -380,7 +378,7 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     else:
         if DUMPERR!=False and noDump==False:
             dumpErr = OSS_ERR / f"{localId}_Compile.log"
-            print(f"[+] Check the output in file: {str(dumpErr)}")
+            INFO(f"[+] Check the output in file: {str(dumpErr)}")
         elif noDump == '/dev/null':
             dumpErr = Path('/dev/null')
             # [+] Hide the output
@@ -389,7 +387,7 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
         
         result = docker_run(command,dumpErr=dumpErr)
     if not result:
-        print('[-] Failed to Build Targets')
+        FAIL('[-] Failed to Build Targets')
         return False
     else:
         if DUMPERR!=False and dumpErr!= None and dumpErr.exists():
@@ -431,14 +429,12 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
             if(docker_cp(pr[0],f"reproducer_{localId}:"+pr[1])==False):
                 return False
         # Save the command which includes ENV
-    
     return True
 def permissionResolve(target_path):
     # Test Code to make testing faster
     res = execute_ret(["sudo","chown","-R",f"{UserName}:{UserName}",target_path])
     if res!=0:
         FAIL(f"[-] Chown result = {res}")
-
 def saveCommand(fpath,image,issue):
     global DEAMON_CMD
     envs = ['-e',ASAN_OPTIONS,'-e',MSAN_OPTIONS,'-e',UBSAN_OPTIONS,'-e',FUZZER_ARGS,'-e',AFL_FUZZER_ARGS]
@@ -514,7 +510,7 @@ def saveImg(localId,issue):
         docker_rmi(f"n132/arvo:{localId}-fix")
         return True
     else:
-        print(f"[-] Failed to dockerize {localId}")
+        FAIL(f"[-] Failed to dockerize {localId}")
         docker_rm(cnv)
         docker_rm(cnf)
         shutil.rmtree(imgSavePath)
@@ -568,7 +564,7 @@ def false_positive(localId):
             f'/out/{fuzz_target.name}','/tmp/poc'])
     
         with open(LogDir/x.name,'wb') as f:
-            print(" ".join(cmd))
+            INFO(" ".join(cmd))
             returnCode = execute_ret(cmd,stdout=f,stderr=f)
             f.write(f"\nReturn Code: {returnCode}\n".encode())
         if returnCode == 255: # deprecated style
@@ -580,7 +576,7 @@ def false_positive(localId):
                         f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
                         f'/tmp/{fuzz_target.name}','/tmp/poc'])
                     with open(LogDir/x.name,'wb') as f:
-                        print(" ".join(cmd))
+                        INFO(" ".join(cmd))
                         returnCode = execute_ret(cmd,stdout=f,stderr=f)
                         f.write(f"\nReturn Code: {returnCode}\n".encode())
         res.append(pocResultChecker(returnCode,LogDir/x.name,[],True))
@@ -603,12 +599,9 @@ def false_positives(localIds,failed_on_verify=True):
     return confirmed
 def verify(localId,save_img=False):
     localId = localIdMapping(localId)
-    # if localId in avoid.avoid:
-    #     print(f"[+] Please avoid waste time on issue {localId}")
-    #     return False
     # if Save_img == True, we should make sure there is no two workers working
     # on the same localId or confliction may happen
-    print(localId)
+    INFO(f"[+] Working on {localId}")
 
     built_img = False
     if save_img:
@@ -637,7 +630,7 @@ def verify(localId,save_img=False):
     if 'project' not in issue.keys():
         issue['project'] = issue['fuzzer'].split("_")[1]
     case_dir = tmpDir()
-    print("[+] Downloading PoC")
+    INFO("[+] Downloading PoC")
     try:
         case_path = downloadPoc(issue,case_dir,"crash_case")
     except:
@@ -651,7 +644,7 @@ def verify(localId,save_img=False):
         return leave(False)
     old_srcmap =  srcmap[0]
     new_srcmap =  srcmap[1]
-    print("[+] Build the Vulnerable Version")
+    INFO("[+] Build the Vulnerable Version")
     if save_img:
         old_res = build_from_srcmap(old_srcmap,issue,save_img="Vul")
     else:
@@ -674,7 +667,7 @@ def verify(localId,save_img=False):
         if not doCommitNclean(localId,'vul'):
             return leave(False)
      
-    print("[+] Build the Fixed Version")
+    INFO("[+] Build the Fixed Version")
     if save_img:
         remove_oss_fuzz_img(localId) # Remove docker image
     built_img = False
