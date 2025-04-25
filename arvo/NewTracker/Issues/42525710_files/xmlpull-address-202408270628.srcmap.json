@@ -1,7 +1,0 @@
-{
-  "/src/xmlpull": {
-    "type": "git",
-    "url": "https://github.com/xmlpull-org/xmlpull-api-v1",
-    "rev": "21127efba74f6f147e867e2bcf3e8b2a9624cc2c"
-  }
-}

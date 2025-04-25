@@ -1,7 +1,0 @@
-{
-  "/src/jdom": {
-    "type": "git",
-    "url": "https://github.com/hunterhacker/jdom.git",
-    "rev": "c6065f684bdff5cebf5f23b2859c5e4c89fd89db"
-  }
-}
