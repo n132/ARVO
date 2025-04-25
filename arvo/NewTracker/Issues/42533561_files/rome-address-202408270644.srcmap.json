@@ -1,7 +1,0 @@
-{
-  "/src/rome": {
-    "type": "git",
-    "url": "https://github.com/rometools/rome.git",
-    "rev": "6b4a7e89cbf67dab0be32e7517f3d8ae3c2b4d75"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "/src/threetenbp": {
-    "type": "git",
-    "url": "https://github.com/ThreeTen/threetenbp",
-    "rev": "adcdbc462b4e93e68e6f9c9a82217d0478b7d635"
-  }
-}

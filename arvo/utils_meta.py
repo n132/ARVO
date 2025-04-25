@@ -317,7 +317,6 @@ def data_download(localIds = None):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
         if issue_dir.exists():
-            print(issue_dir)
             done = []
             for x in issue_dir.iterdir():
                 done.append(x)
@@ -337,9 +336,8 @@ def data_download(localIds = None):
             WARN("[!] Failed to download the srcmap")
             to_remove.append(localId)
             continue
-    print(to_remove)
-    # remove_issue_meta(to_remove)
-    # remove_issue_data(to_remove)
+    remove_issue_meta(to_remove)
+    remove_issue_data(to_remove)
     return True
 def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")

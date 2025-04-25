@@ -1,7 +1,0 @@
-{
-  "/src/project-parent/jsqlparser": {
-    "type": "git",
-    "url": "https://github.com/JSQLParser/JSqlParser/",
-    "rev": "c59a088dfaee75af33ed2b819033e6cbae32c155"
-  }
-}
