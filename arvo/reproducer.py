@@ -436,7 +436,8 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
 def permissionResolve(target_path):
     # Test Code to make testing faster
     res = execute_ret(["sudo","chown","-R",f"{UserName}:{UserName}",target_path])
-    print(f"[+] Chown result = {res}")
+    if res!=0:
+        FAIL(f"[-] Chown result = {res}")
 
 def saveCommand(fpath,image,issue):
     global DEAMON_CMD
