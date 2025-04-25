@@ -15,7 +15,7 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.replace(r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',"RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
         
     dft = DfTool(dockerfile_path)
-    dft.replaceOnce(r'RUN apt',"RUN apt update -y && apt install git -y && apt upgrade ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt")
+    dft.replaceOnce(r'RUN apt',"RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt")
     dft.strReplaceAll(globalStrReplace)
 
     if project == "lcms":
