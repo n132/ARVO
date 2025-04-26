@@ -527,6 +527,8 @@ def getReport(localId):
         res['crash_output'] = meta_data[12]
         res['severity'] = meta_data[13]
         res['report']  = meta_data[14]
+        res['fix_commit']  = meta_data[15]
+        res['language']  = meta_data[16]
         return res
     except:
         FAIL(f"[FAILED] to find the reported case: {localId}")
