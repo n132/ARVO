@@ -26,7 +26,9 @@ def db_init():
             crash_type TEXT,
             crash_output TEXT,
             severity TEXT,
-            report TEXT
+            report TEXT,
+            fix_commit TEXT,
+            language TEXT
         )
         """)
         conn.commit()
@@ -38,8 +40,8 @@ def insert_entry(data):
         INSERT INTO arvo (
             localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
             patch_url, verified, fuzz_target, fuzz_engine,
-            sanitizer, crash_type, crash_output, severity, report
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            sanitizer, crash_type, crash_output, severity, report, fix_commit, language
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, data)
         conn.commit()
         return True

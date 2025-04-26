@@ -723,7 +723,6 @@ def reproduce(localId, dockerize = True, update = True):
     if exist_record and not update:
         INFO("[+] Record Exists")
         return True
-    
     if (not verify(localId,dockerize)):
         eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
         return False
@@ -744,7 +743,8 @@ def reproduce(localId, dockerize = True, update = True):
     sanitizer      = res['sanitizer']
     crash_type     = res['crash_type']
     severity       = res['severity'] if 'severity' in res else "UNK"
-
+    fix_commit     = res['fix_commit']
+    language       = getLanguage(localId)
     # We still have the layers cached so it's not hard to re-run and get some info
 
     # Get fuzz_target
@@ -772,7 +772,7 @@ def reproduce(localId, dockerize = True, update = True):
     
     return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
-        sanitizer, crash_type, crash_output, severity, res['report']))
+        sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language))
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
