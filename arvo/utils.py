@@ -719,7 +719,7 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
     cmd.extend(args)
     if DEBUG:
         if not recursive_call:
-            print("$"*0x20)
+            INFO("="*0x20)
             print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
         else:
             print(" ".join(cmd))
@@ -727,6 +727,8 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
     INFO(f"[+] The execution return value is {returnCode}")
+    INFO("="*0x20)
+
     return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
