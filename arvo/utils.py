@@ -717,17 +717,16 @@ def pocResultChecker(returnCode,logfile, args, recursive_call):
 def fuzzerExecution(args, log_tag, recursive_call = False):
     cmd = ['docker','run','--rm','--privileged']
     cmd.extend(args)
-
-    if recursive_call:
-        print("$"*0x20)
-        print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
-        # print commands for debugging
-    else:
-        print(" ".join(cmd))
+    if DEBUG:
+        if not recursive_call:
+            print("$"*0x20)
+            print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
+        else:
+            print(" ".join(cmd))
     with open(log_tag,'w') as f:
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
-    INFO(f"[+] The return value is {returnCode}")
+    INFO(f"[+] The execution return value is {returnCode}")
     return pocResultChecker(returnCode,log_tag, args, recursive_call)
 
 def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True):
