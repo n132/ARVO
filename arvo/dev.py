@@ -27,7 +27,7 @@ from .utils_exec import *
 #                    supported_sanitizers=['address'],
 #                    supported_architectures=['x86_64']),
 # }
-def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=None):
+def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=None,limit=107374182400):
     if arch=='i386':
         if engine == 'libfuzzer':
             bucket =  'clusterfuzz-builds-i386'
@@ -50,6 +50,12 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
     else:
         return False
     url = f'gs://{bucket}/{pname}/{srcmap_name}.zip'
+
+    #    gcloud storage du  gs://clusterfuzz-builds/suricata/suricata-undefined-202109100611.zip
+    out = subprocess.check_output(['gsutil', 'du', url]).decode()
+    if int(out.strip().split()[0]) > limit:
+        return False
+
     if storage== None:
         target_dir = tmpDir()
     else:
@@ -77,7 +83,7 @@ def getOSSFuzzerbyName(localId,srcmap_name,storage):
     donwloadFuzzer(pname, srcmap_name, engine, arch, storage)
     return list(storage.iterdir())[0]
 
-def getOSSFuzzer(localId,storage=None):
+def getOSSFuzzer(localId,storage=None,limit=107374182400):
     issue = getIssue(localId)
     if issue == False:
         return False
@@ -94,10 +100,13 @@ def getOSSFuzzer(localId,storage=None):
     
     
     srcmap_name = getSrcmaps(localId)[0].name.split(".")[0]
-    donwloadFuzzer(pname, srcmap_name, engine, arch, storage)
-
+    res = donwloadFuzzer(pname, srcmap_name, engine, arch, storage, limit = limit)
+    if not res:
+        return False
     srcmap_name = getSrcmaps(localId)[1].name.split(".")[0]
-    donwloadFuzzer(pname, srcmap_name, engine, arch, storage)
+    res = donwloadFuzzer(pname, srcmap_name, engine, arch, storage, limit = limit)
+    if not res:
+        return False
     return True
     
 
