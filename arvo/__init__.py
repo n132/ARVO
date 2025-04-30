@@ -20,3 +20,4 @@ from .dev import *
 from .Locator import *
 from .utils_meta import *
 from .utils_sql import *
+from .utils_detector import *

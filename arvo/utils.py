@@ -404,6 +404,8 @@ def getAllIssues():
     return res
 def getIssue(localId):
     data = getMetadata()
+    if isinstance(localId,str):
+        localId = int(localId)
     for _ in data:
         issue = json.loads(_)
         if(issue['localId']==localId):
@@ -686,10 +688,14 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def pocResultChecker(returnCode,logfile, args, recursive_call):
+def pocResultChecker(returnCode,logfile, args, recursive_call=False):
+    with open(logfile,'rb') as f:
+        log_ctx = f.read()
+    if b"error while loading shared libraries" in log_ctx:
+        PANIC("[PANIC] RUNNING ENV WAS BROKEN")
     if returnCode == 0: # not crash
         return True
-    elif returnCode == 124 and ("timeout" in args): # timeout
+    elif ("timeout" in args) and returnCode == 124: # timeout
         return True
     # Handle of old fuzzing targets that only supports `fuzz < poc`
     elif returnCode == 255 and not recursive_call:
@@ -697,8 +703,6 @@ def pocResultChecker(returnCode,logfile, args, recursive_call):
         # `WARNING: using the deprecated call style `/out/pdf_fuzzer 1000`
         # If it still dies with /out/fuzzer < /tmp/poc we keep the first log file
         # check if Running: "WARNING: iterations invalid /tmp/poc" in the str
-        with open(logfile,'rb') as f:
-            log_ctx  = f.read()
         if b"WARNING: iterations invalid" not in log_ctx:
             return False # crashes
         else:
@@ -708,8 +712,6 @@ def pocResultChecker(returnCode,logfile, args, recursive_call):
             new_args = args[:-2] + ["bash", "-c" , f'cat {poc_path} | {fuzz_target}'] # remove original command
             return fuzzerExecution(new_args, logfile, True)
     else:
-        with open(logfile,'rb') as f:
-            log_ctx  = f.read()
         if b'out-of-memory' in log_ctx:
             return True # Out of mem
         return False # Crashes
