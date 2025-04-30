@@ -50,7 +50,7 @@ def metaFilter():
             INFO(f"[!] Found false positives: {localId}")
             false_positives.append(localId)    
     res.extend(broken_srcmaps)
-    print(false_positives)
+    # print(false_positives)
     # res.extend(false_positives)
     res = list(set(res))
     remove_issue_meta(res)
