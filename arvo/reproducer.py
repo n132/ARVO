@@ -535,8 +535,8 @@ def false_positive(localId,focec_retest = False):
 
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
-    if not getOSSFuzzer(localId, store):
-        return _leaveRet(None,"[FAILED] to download the binary from gcloud")
+    if not getOSSFuzzer(localId, store,limit=(1<<30)):
+        return _leaveRet(None,"[FAILED] too much to download, do it later")
     for target in store.iterdir():
         with zipfile.ZipFile(target, "r") as zf:
             file_list = zf.namelist()
@@ -565,7 +565,8 @@ def false_positive(localId,focec_retest = False):
         fuzz_target = getFuzzer(localId,x)
         if fuzz_target == None: return _leaveRet(None,"[FAILED] {localId=} {x} can't find the fuzz target")
         cmd = ['docker','run','--rm','--privileged']
-        args = ["-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
+        args = ['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
+                "-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
             f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
             f'/out/{fuzz_target.name}','/tmp/poc']
         cmd.extend(args)
@@ -578,7 +579,8 @@ def false_positive(localId,focec_retest = False):
                 if_warn = b"WARNING: using the deprecated call style " in f.read()
             if if_warn:
                     cmd = ['docker','run','--rm','--privileged']
-                    args = ["-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
+                    args = ['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
+                            "-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
                         f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
                         f'/tmp/{fuzz_target.name}','/tmp/poc']
                     cmd.extend(args)
