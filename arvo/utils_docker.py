@@ -140,7 +140,7 @@ def docker_push(name):
 def docker_login():
     res = subprocess.run(["docker","login"])
     return res.returncode
-def docker_run(args,rm=True,dumpErr=None):
+def docker_run(args,rm=True,logFile=None):
     if rm:
         cmd = ['docker','run','--rm','--privileged']
     else:
@@ -150,8 +150,8 @@ def docker_run(args,rm=True,dumpErr=None):
 
     cmd.extend(args)
     INFO("[+] Docker Run: \n"+" ".join(cmd))
-    if dumpErr!=None:
-        with open(dumpErr,'w') as f:
+    if logFile:
+        with open(logFile,'w') as f:
             res = check_call(cmd,stdout=f,stderr=f)
             f.write("\n"+" ".join(cmd)+"\n")
             return res
