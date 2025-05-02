@@ -191,25 +191,22 @@ def getProjectYaml(localId,tag='vul'):
         porjymal = f.read()
     return leaveRet(porjymal,tmp_dir)
 def getLanguage(localId):
-    # Try the easier way:
+    # Fast Path
     project_name = getPname(localId,False)
-    if project_name in PLanguage.keys():
-        return PLanguage[project_name]
-    # Complex Way:
+    if project_name in PLanguage.keys(): return PLanguage[project_name]
+    # Slow Path
     porjymal = getProjectYaml(localId)
     if porjymal== False:
         eventLog(f"[!] getLanguage: Failed to get project.yaml file, {localId}")
         return False
     res = re.findall(r'language\s*:\s*([^\s]+)',porjymal)
-    if len(res) == 1:
-        language = str(res[0])
-        PLanguage[project_name] = language
-        with open("./_PLLOG.json",'w') as f:
-            f.write(json.dumps(PLanguage,indent=4))
-        return language
-    else:
+    if len(res) != 1:
         eventLog(f"[!] getLanguage: Get more than one languages, {localId}")
         return False
+    language = str(res[0])
+    PLanguage[project_name] = language
+    return language
+        
 def getDate(localId,tag="vul"):
     srcmaps = getSrcmaps(localId)
     if len(srcmaps)!=2:
