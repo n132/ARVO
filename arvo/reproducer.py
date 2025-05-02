@@ -87,8 +87,7 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
     issue_date  = srcmap.name.split(".")[0].split("-")[-1]
     commit_date = str2date(issue_date,STAMP_DELAY)
     # Depends on case 344, 367, 36021, the date provided by srcmap should be in UTC-9 to UTC-12
-    if 'issue' not in issue:
-        issue['issue'] = {'localId':issue['localId']}
+    if 'issue' not in issue: issue['issue'] = {'localId':issue['localId']}
     if engine not in ['libfuzzer','afl','honggfuzz','centipede']:
         issue_record(issue['project'],issue['issue']['localId'],"Failed to get engine")
         return False
@@ -103,35 +102,23 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
 def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,commit_date,replace_dep=None,\
     save_img=False,verifyFix=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[]):
     global REBUTTAL_EXP
-    '''
-    Most projects are git repos, but we still have:
-    hg: njs, graphicsmagick...
-
-    '''
     # Build source_dir
-    def rootRM(dir_path):
-        if CLEAN_TMP:
-            dir_name = str(dir_path).split("/")[-1]
-            docker_run(["-v", f"{OSS_TMP}:/mnt" , "ubuntu", "/bin/bash", "-c",
-                        f"rm -rf /mnt/{dir_name}"]) 
+        
+
 
     srcmap_items = json.loads(open(srcmap).read())
     if not oss_fuzz_commit:
         if "/src" in srcmap_items and srcmap_items['/src']['url']=='https://github.com/google/oss-fuzz.git':
             res = reproducerPrepareOssFuzz(project_name,srcmap_items['/src']['rev'])
         else:
-            # Reset OSS-Fuzz to get Dependencies 
             res = reproducerPrepareOssFuzz(project_name,commit_date)
     else:
         res = reproducerPrepareOssFuzz(project_name,oss_fuzz_commit)
-    if not res:
-        return False
-    else:
-        tmp_dir , project_dir = res
+    if not res: return False
+    else: tmp_dir , project_dir = res
     
     dockerfile = project_dir / 'Dockerfile'
-    if DEBUG:
-        INFO(f"[+] dockerfile: {dockerfile}")
+    INFO(f"[+] dockerfile: {dockerfile}")
     build_data = BuildData(
         sanitizer=sanitizer,
         architecture=arch,
@@ -158,17 +145,15 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     unsorted = list(data.keys())
     sortedKey = sorted(unsorted, key=len)
     mainCompoinent = getPname(localId)
-    if DEBUG:
-        INFO(f"[+] Main Component: {mainCompoinent}")
+    INFO(f"[+] Main Component: {mainCompoinent}")
     if mainCompoinent == False:
         return leaveRet(False,tmp_dir)
-    if "/src/xz" in sortedKey:
+    if "/src/xz" in sortedKey: # Edge case
         ForceNoErrDump = True
     
 
     for x in sortedKey:
-        if DEBUG:
-            INFO(f"[+] Prepare Dependency: {x}")
+        INFO(f"[+] Prepare Dependency: {x}")
         if skipComponent(project_name,x):
             continue
         
@@ -195,13 +180,10 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
 
         if specialComponent(project_name,newKey,data[newKey],dockerfile,commit_date):
             continue
-        # if ( item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git') or \
-        #     (item_name=='afl' and item_url=='https://github.com/google/AFL.git'):
-        if ( item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git'):
-                continue
-        if( item_name == 'libfuzzer' and
-            'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url):
-                continue
+        if item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git':
+            continue
+        if item_name == 'libfuzzer' and 'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url:
+            continue
         
         # Broken Revision
         if item_rev=="" or item_rev == "UNKNOWN":
@@ -301,7 +283,8 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 mount_path=Path("/src"),
                                 save_img=save_img,noDump=ForceNoErrDump,
                                 custom_script=custom_script)
-    rootRM(source_dir)
+    # we need sudo since the docker container root touched the folder
+    if not CLEAN_TMP: check_call(["sudo","rm","-rf",source_dir])
     return leaveRet(result,tmp_dir)
 
 def build_fuzzers_impl( localId,project,project_dir,engine,
@@ -333,8 +316,7 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
 
     if DUMPERR and dumpErr!=None and dumpErr.exists():
         os.remove(str(dumpErr))
-    if DEBUG:
-        INFO('[+] Cleaning existing out dir')
+    INFO('[+] Cleaning existing out dir')
     if DEBUG:
         rm_output = None
     else:
@@ -574,7 +556,7 @@ def false_positive(localId,focec_retest = False):
         with open(LogDir/f"{localId}_{tag}.log",'wb') as f:
             returnCode = execute_ret(cmd,stdout=f,stderr=f)
             f.write(f"\nReturn Code: {returnCode}\n".encode())
-        if returnCode == 255: # deprecated style
+        if returnCode == 255: # deprecated style    
             with open(LogDir/f"{localId}_{tag}.log",'rb') as f:
                 if_warn = b"WARNING: using the deprecated call style " in f.read()
             if if_warn:

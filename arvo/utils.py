@@ -67,23 +67,24 @@ def tmpFile():
     tmpfile.touch()
     return tmpfile
 def clean_dir(victim):
-    if victim.exists():
-        try:
-            shutil.rmtree(victim)
-            return True
-        except:
-            return False
+    if not victim.exists():
+        return True
+    try:
+        shutil.rmtree(victim)
+        return True
+    except:
+        WARN(f"[FAILED] to remove tmp file {victim}")
+        return False
 def leaveRet(return_val,tmp_dir):
-    if CLEAN_TMP:
-        if type(tmp_dir) !=type([]):
-            clean_dir(tmp_dir)
-        else:
-            for _ in tmp_dir:
-                clean_dir(_)
+    if not CLEAN_TMP: return return_val
+    if type(tmp_dir) != list:
+        clean_dir(tmp_dir)
+    else:
+        for _ in tmp_dir: clean_dir(_)
     return return_val
 def remove_oss_fuzz_img(localId):
     try:
-        print(f"[+] Delete images, {localId}")
+        INFO(f"[+] Delete images, {localId}")
         imgName = f"gcr.io/oss-fuzz/{localId}"
         docker_rmi(imgName)
     except:
@@ -437,7 +438,6 @@ def getFuzzer(localId,wkdir):
         return True if (wkdir / name).exists() else False
     def _findFuzzer(key,off):
         name = "_".join(issue[key].split("_")[off:])
-        print(name)
         if _checkexist(name):
             return wkdir / name
         else:
@@ -722,9 +722,9 @@ def fuzzerExecution(args, log_tag, recursive_call = False):
     if DEBUG:
         if not recursive_call:
             INFO("="*0x20)
-            print(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
+            INFO(" ".join(cmd[:-1] + [f'"{cmd[-1]}"']))
         else:
-            print(" ".join(cmd))
+            INFO(" ".join(cmd))
     with open(log_tag,'w') as f:
         returnCode = execute_ret(cmd,stdout=f,stderr=f)
         f.write(f"\nReturn Code: {returnCode}\n")
@@ -743,9 +743,9 @@ def ifCrash(fuzz_target,case,issue,log_tag,timeout, detect_uninitialized = True)
 def crashVerify(issue,reproduce_case,tag,timeout=180,detect_uninitialized=True):
     # Return True if NOT crash
     # Return False if crash
-    print(" "*0x20)
-    print("$"*0x20)
-    print(" "*0x20)
+    INFO(" "*0x20)
+    INFO("$"*0x20)
+    INFO(" "*0x20)
 
     if not check_call(['sudo','chown','-R',f'{UserName}:{UserName}',str(issue['localId'])],OSS_OUT):
         return None
@@ -763,9 +763,9 @@ def crashVerify(issue,reproduce_case,tag,timeout=180,detect_uninitialized=True):
 
     if tag == None:
         shutil.rmtree(log_tag.parent)
-    print(" "*0x20)
-    print("$"*0x20)
-    print(" "*0x20)
+    INFO(" "*0x20)
+    INFO("$"*0x20)
+    INFO(" "*0x20)
     return res
 
 #==================================================================
