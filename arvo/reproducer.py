@@ -8,8 +8,11 @@ BuildData = collections.namedtuple(
     'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
 from .transform import trans_table
 # Global
-import copy
 DEAMON_CMD = []
+def permissionResolve(target_path):
+    res = execute_ret(["sudo","chown","-R",f"{UserName}:{UserName}",target_path])
+    if res!=0: FAIL(f"[-] Chown result = {res}")
+
 def doPatchMain(localId,dockerfile,patches):
     pname = getPname(localId)
     dft = DfTool(dockerfile)
@@ -291,46 +294,25 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     sanitizer,architecture,source_path,
     mount_path=None,save_img=False,noDump=False,custom_script=[]):
     global DEAMON_CMD
+    # Set the LogFile
+    logFile = OSS_ERR / f"{localId}_Image.log"
+    INFO(f"[+] Check the output in file: {logFile}")
+
+    # Clean The WORK/OUT DIR
     project_out  = OSS_OUT  / str(localId) 
     project_work = OSS_WORK / str(localId)
-
-    if not project_out.exists():
-        project_out.mkdir()        
-    if not project_work.exists():
-        project_work.mkdir()
+    if project_out.exists():  check_call(["sudo","rm","-rf",project_out])
+    if project_work.exists(): check_call(["sudo","rm","-rf",project_work])
+    project_out.mkdir()
+    project_work.mkdir()
     
     args = ['-t',f'gcr.io/oss-fuzz/{localId}','--file', str(project_dir/"Dockerfile"), str(project_dir)]
-    
-    
-    if DUMPERR!=False:
-        dumpErr = OSS_ERR / f"{localId}_Image.log"
-        INFO(f"[+] Check the output in file: {str(dumpErr)}")
-    else:
-        dumpErr = None
-
-
-    if not docker_build(args,dumpErr=dumpErr):
+    if not docker_build(args,logFile=logFile):
         issue_record(project,localId,f"Failed to build DockerImage")
         return False
     
-
-    if DUMPERR and dumpErr!=None and dumpErr.exists():
-        os.remove(str(dumpErr))
-    INFO('[+] Cleaning existing out dir')
-    if DEBUG:
-        rm_output = None
-    else:
-        rm_output = "/dev/null"
-    docker_run([
-        '-v',
-        '%s:/out' % project_out , '-t',
-        f'gcr.io/oss-fuzz/{localId}', '/bin/bash', '-c', 'rm -rf /out/*'
-    ],dumpErr=rm_output)
-    docker_run([
-        '-v',
-        '%s:/work' % project_work , '-t',
-        f'gcr.io/oss-fuzz/{localId}', '/bin/bash', '-c', 'rm -rf /work/*'
-    ],dumpErr=rm_output)
+    # Build Succeed, Try Compiling
+    if logFile and logFile.exists(): os.remove(str(logFile))
     env = [
         'FUZZING_ENGINE=' + engine,
         'SANITIZER=' + sanitizer,
@@ -340,42 +322,33 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     command = sum([['-e', x] for x in env], [])
 
     additional_script(project,source_path)
+
+    # Mount the Source/Dependencies (we try to replace this with modifying dockerfile)
     if source_path and mount_path:
         for item in source_path.iterdir():  
-            command += [
-                '-v',
-                '%s:%s' % (item, mount_path / item.name),
-            ]
+            command += [ '-v', '%s:%s' % (item, mount_path / item.name)]
+    # Mount out/work dir
+    command += ['-v', '%s:/out' % project_out, '-v','%s:/work' % project_work, '-t', f'gcr.io/oss-fuzz/{localId}']
+    # supports for submodule tracker
+    command += custom_script
 
-    command += [
-                '-v',
-                '%s:/out' % project_out, '-v',
-                '%s:/work' % project_work, '-t',
-                f'gcr.io/oss-fuzz/{localId}'
-    ]
-    
-    # support submodule tracker
-    command+= custom_script
     if save_img != False:
         result = docker_run(["--name",f"arvo_deamon_{localId}_{save_img}"]+command,rm=False)
     else:
-        if DUMPERR!=False and noDump==False:
-            dumpErr = OSS_ERR / f"{localId}_Compile.log"
-            INFO(f"[+] Check the output in file: {str(dumpErr)}")
-        elif noDump == '/dev/null':
-            dumpErr = Path('/dev/null')
-            # [+] Hide the output
+        if noDump == '/dev/null':
+            logFile = Path('/dev/null')
+        elif noDump == False:
+            logFile = OSS_ERR / f"{localId}_Compile.log"
+            INFO(f"[+] Check the output in file: {str(logFile)}")
         else:
-            dumpErr = None
-        
-        result = docker_run(command,dumpErr=dumpErr)
+            logFile = None
+        result = docker_run(command,logFile=logFile)
     if not result:
         FAIL('[-] Failed to Build Targets')
         return False
     else:
-        if DUMPERR!=False and dumpErr!= None and dumpErr.exists():
-            if str(dumpErr) != "/dev/null":
-                os.remove(str(dumpErr))
+        if logFile and logFile.exists() and str(logFile) != "/dev/null":
+            os.remove(str(logFile))
 
     if save_img:
         DEAMON_CMD = []
@@ -413,11 +386,8 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
                 return False
         # Save the command which includes ENV
     return True
-def permissionResolve(target_path):
-    # Test Code to make testing faster
-    res = execute_ret(["sudo","chown","-R",f"{UserName}:{UserName}",target_path])
-    if res!=0:
-        FAIL(f"[-] Chown result = {res}")
+
+
 def saveCommand(fpath,image,issue):
     global DEAMON_CMD
     envs = ['-e',ASAN_OPTIONS,'-e',MSAN_OPTIONS,'-e',UBSAN_OPTIONS,'-e',FUZZER_ARGS,'-e',AFL_FUZZER_ARGS]
