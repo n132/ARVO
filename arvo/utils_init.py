@@ -6,7 +6,6 @@ from pathlib        import Path
 #                          Global Settings
 #
 #==================================================================
-DUMPERR = True
 REBUTTAL_EXP = False
 DEBUG = DEBUG
 
