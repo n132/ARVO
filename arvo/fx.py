@@ -39,10 +39,8 @@ def verify_FIX(localId,repo_dir,pname):
     # localId, int
     # return value: -1 error, 0 False, 1 True
     def leave(result):
-        if CLEAN_TMP and case_dir:
-            clean_dir(case_dir)
-        if(RM_IMAGES):
-            remove_oss_fuzz_img(localId)
+        if CLEAN_TMP and case_dir: clean_dir(case_dir)
+        if RM_IMAGES: remove_oss_fuzz_img(localId)
         return result
     
     srcmap,issue = getIssueTuple(localId)
