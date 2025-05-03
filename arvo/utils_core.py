@@ -71,7 +71,6 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.replace(r"RUN git clone .*wireshark.*","")
     dft.cleanComments()
     assert(dft.flush()==True)
-    INFO("[+] Dockerfile: Fixed")
     return True
 def rebaseDockerfile(dockerfile_path,commit_date):
     def _getBase(date,repo="gcr.io/oss-fuzz-base/base-builder"):
@@ -193,12 +192,9 @@ def specialComponent(pname,itemKey,item,dockerfile,commit_date):
         return False
     if pname == 'gnutls' and itemKey == '/src/gnutls/nettle' :
         # Just Ignore since we have submodule update --init
-        with open(dockerfile) as f:
-            dt = f.read()
-        if item['rev'] not in dt: 
-            return True
-        else:
-            return False
+        with open(dockerfile) as f: dt = f.read()
+        if item['rev'] not in dt:  return True
+        else: return False
     return False
 def combineLines(lines):
     res = []
