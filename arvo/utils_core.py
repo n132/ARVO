@@ -1,7 +1,8 @@
 from .utils import *
-from glob import glob
+from dateutil.parser import parse
+from bisect import bisect_right
+import time
 from .transform import globalStrReplace
-from dateutil import parser
 #########################################
 # Core Area for reproducing
 #########################################
@@ -73,42 +74,24 @@ def fixDockerfile(dockerfile_path,project=None):
     INFO("[+] Dockerfile: Fixed")
     return True
 def rebaseDockerfile(dockerfile_path,commit_date):
-
-    def _listOssBaseImagebyTime(date,repo="gcr.io/oss-fuzz-base/base-builder"):
-        cmd =f"gcloud container images list-tags {repo}"
-        cmd+=f''' --format="table(digest.slice(7:).join(''))"'''
-        cmd+=f' --filter="timestamp.datetime <= {date} "'
-        cmd+=f' --limit 1'
-        if DEBUG:
-            print(f"[+] Locating a proper base Image:\n{cmd}")
-        try:
-            res = os.popen(cmd).read() 
-            match = re.search(r"[a-f0-9]{64}",res)
-            if DEBUG:
-                print(match.group(0))
-            return match.group(0)
-        except:
-            return False
-    def _listOssBaseImagebyTime_local(date):
-        global SORTED_IMAGES
-        if not SORTED_IMAGES:
-            # Get the path to the current file
-            current_file = Path(__file__).resolve()
-            module_root = current_file.parent
-            # Reference a data file next to this script
-            data_file = module_root / "images.json"
-            with open(data_file, 'r') as file:
-                data = json.load(file)
-            SORTED_IMAGES = data['versions']
-        pre = SORTED_IMAGES[0]
-        date = parser.parse(date)
-        for x in range(1,len(SORTED_IMAGES)):
-            # print(type(date),date,SORTED_IMAGES[x]['createTime'])
-            if(date <= parser.parse(SORTED_IMAGES[x]['createTime'])):
-                return pre['name'].split("sha256:")[-1]
-            pre = SORTED_IMAGES[x]
-        return SORTED_IMAGES[-1]['name'].split("sha256:")[-1]
-    
+    def _getBase(date,repo="gcr.io/oss-fuzz-base/base-builder"):
+        cache_name = repo.split("/")[-1]
+        CACHE_FILE = f"/tmp/{cache_name}_cache.json"
+        CACHE_TTL = 86400  # 24 hours
+        if os.path.exists(CACHE_FILE) and (time.time() - os.path.getmtime(CACHE_FILE)) < CACHE_TTL:
+            with open(CACHE_FILE, 'r') as f: res = json.load(f)
+        else:
+            cmd = [
+                "gcloud", "container", "images", "list-tags",
+                repo, "--format=json", "--sort-by=timestamp"
+            ]
+            res = execute(cmd).decode()
+            res = json.loads(res)
+            with open(CACHE_FILE, 'w') as f: f.write(json.dumps(res,indent=4))
+        ts = []
+        for x in res: ts.append(int(parse(x['timestamp']['datetime']).timestamp()))
+        target_ts = int(parse(date).timestamp())
+        return res[bisect_right(ts, target_ts - 1) - 1]['digest'].split(":")[1]
     # Load the Dockerfile
     try:
         with open(dockerfile_path) as f: data = f.read()
@@ -124,22 +107,7 @@ def rebaseDockerfile(dockerfile_path,commit_date):
     if "@sha256" in repo: repo = repo.split("@sha256")[0]
     if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer': repo = "gcr.io/oss-fuzz-base/base-builder"
 
-    if repo == 'gcr.io/oss-fuzz-base/base-builder':
-        image_hash = _listOssBaseImagebyTime_local(commit_date)
-    else:
-        image_hash = _listOssBaseImagebyTime(commit_date,repo)
-    if image_hash == False : # Unlikely
-        # Use the latest image
-        eventLog(f"[-] rebaseDockerfile: Failed to find a valid base-builder for {repo}")
-        repo = "gcr.io/oss-fuzz-base/base-builder"
-        image_hash = _listOssBaseImagebyTime_local(commit_date)
-        if image_hash==False :
-            eventLog(f"[-] rebaseDockerfile: Failed twice to find a correct base image. Using Latest base-builder")
-            data = re.sub(r"FROM .*",f"FROM gcr.io/oss-fuzz-base/base-builder",data)
-            with open(dockerfile_path,'w') as f:
-                f.write(data)
-            return True
-    # Replace Base
+    image_hash = _getBase(commit_date,repo)
     data = re.sub(r"FROM .*",f"FROM {repo}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
     with open(dockerfile_path,'w') as f: f.write(data)
     return True

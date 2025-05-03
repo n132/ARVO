@@ -16,7 +16,9 @@ dependencies = [
     "filelock",
     "setuptools",
     "rich",
-    "collections"
+    "collections",
+    "dateutil",
+    "bisect"
 ]
 
 [build-system]
