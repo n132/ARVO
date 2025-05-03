@@ -161,7 +161,6 @@ def ccBuild(localId,poc,tag,patches):
         return leaveRet("Failed to Compile",cts.parent)
     else:
         eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
-
 def patchVerification(localId):
     if getVulComponentProtocol(localId) != 'git':
         return False
