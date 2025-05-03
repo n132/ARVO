@@ -70,10 +70,10 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.replace(r"RUN git clone .*wireshark.*","")
     dft.cleanComments()
     assert(dft.flush()==True)
-    if DEBUG:
-        print("[+] Dockerfile: Fixed")
+    INFO("[+] Dockerfile: Fixed")
     return True
 def rebaseDockerfile(dockerfile_path,commit_date):
+
     def _listOssBaseImagebyTime(date,repo="gcr.io/oss-fuzz-base/base-builder"):
         cmd =f"gcloud container images list-tags {repo}"
         cmd+=f''' --format="table(digest.slice(7:).join(''))"'''
@@ -89,12 +89,6 @@ def rebaseDockerfile(dockerfile_path,commit_date):
             return match.group(0)
         except:
             return False
-    try:
-        with open(dockerfile_path) as f:
-            data = f.read()
-    except:
-        eventLog(f"[-] rebaseDockerfile: No such a dockerfile: {dockerfile_path}")
-        return False
     def _listOssBaseImagebyTime_local(date):
         global SORTED_IMAGES
         if not SORTED_IMAGES:
@@ -114,20 +108,27 @@ def rebaseDockerfile(dockerfile_path,commit_date):
                 return pre['name'].split("sha256:")[-1]
             pre = SORTED_IMAGES[x]
         return SORTED_IMAGES[-1]['name'].split("sha256:")[-1]
+    
+    # Load the Dockerfile
+    try:
+        with open(dockerfile_path) as f: data = f.read()
+    except:
+        eventLog(f"[-] rebaseDockerfile: No such a dockerfile: {dockerfile_path}")
+        return False
+    # Locate the Repo
     res = re.search(r'FROM .*',data)
     if(res == None):
         eventLog(f"[-] rebaseDockerfile: Failed to get the base-image: {dockerfile_path}")
         return False
-    repo = res[0][5:]
-    if "@sha256" in repo:
-        repo = repo.split("@sha256")[0]
-    if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer':
-        repo = "gcr.io/oss-fuzz-base/base-builder"
-    if repo=='gcr.io/oss-fuzz-base/base-builder':
+    else: repo = res[0][5:]
+    if "@sha256" in repo: repo = repo.split("@sha256")[0]
+    if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer': repo = "gcr.io/oss-fuzz-base/base-builder"
+
+    if repo == 'gcr.io/oss-fuzz-base/base-builder':
         image_hash = _listOssBaseImagebyTime_local(commit_date)
     else:
         image_hash = _listOssBaseImagebyTime(commit_date,repo)
-    if image_hash == False :
+    if image_hash == False : # Unlikely
         # Use the latest image
         eventLog(f"[-] rebaseDockerfile: Failed to find a valid base-builder for {repo}")
         repo = "gcr.io/oss-fuzz-base/base-builder"
@@ -138,11 +139,9 @@ def rebaseDockerfile(dockerfile_path,commit_date):
             with open(dockerfile_path,'w') as f:
                 f.write(data)
             return True
-    image_name = repo
-    # SUCCESS(image_hash)
-    data = re.sub(r"FROM .*",f"FROM {image_name}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
-    with open(dockerfile_path,'w') as f:
-        f.write(data)
+    # Replace Base
+    data = re.sub(r"FROM .*",f"FROM {repo}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
+    with open(dockerfile_path,'w') as f: f.write(data)
     return True
 def extraScritps(pname,oss_dir,source_dir):
     """
@@ -211,7 +210,6 @@ NoOperation = [
     "/src",
     "/src/LPM/external.protobuf/src/external.protobuf",
     "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
-
 ]
 def skipComponent(pname,itemName):
     itemName = itemName.strip(" ")
@@ -234,9 +232,6 @@ def specialComponent(pname,itemKey,item,dockerfile,commit_date):
         else:
             return False
     return False
-def additional_script(project,source_path=None):
-    return True
-
 def combineLines(lines):
     res = []
     flag = 0
