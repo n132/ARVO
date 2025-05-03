@@ -83,12 +83,10 @@ def leaveRet(return_val,tmp_dir):
         for _ in tmp_dir: clean_dir(_)
     return return_val
 def remove_oss_fuzz_img(localId):
-    try:
-        INFO(f"[+] Delete images, {localId}")
-        imgName = f"gcr.io/oss-fuzz/{localId}"
-        docker_rmi(imgName)
-    except:
-        PANIC("[!] Fail to remove Changed Images")
+    imgName = f"gcr.io/oss-fuzz/{localId}"
+    INFO(f"[+] Delete images, {imgName}")
+    docker_rmi(imgName)
+
 #==================================================================
 #
 #                  OSS-fuzz meta retrive
@@ -443,8 +441,7 @@ def getFuzzer(localId,wkdir):
                 if _checkexist(name):
                     return wkdir / name
                 else:
-                    issue_record(issue['project'],localId,f"Failed to get the fuzzer in fuzzer/fuzz_target")
-                    return None
+                    return issue_record(issue['project'],localId,f"Failed to get the fuzzer",retv=None)
     if "fuzz_target" in issue:
         return _findFuzzer("fuzz_target",0)
     elif "fuzzer" in issue:
@@ -454,11 +451,9 @@ def getFuzzer(localId,wkdir):
         if _checkexist(name):
             return wkdir / name
         else:
-            issue_record(issue['project'],localId,f"Failed to get the fuzzer in summary")
-            return None
+            return issue_record(issue['project'],localId,f"Failed to get the fuzzer in summary",retv=None)
     else:
-        issue_record(issue['project'],localId,f"Doesn't specify a fuzzer")
-        return None
+        return issue_record(issue['project'],localId,f"Doesn't specify a fuzzer",retv=None)
 def downloadPoc(issue,path,name):
     global session
     session = requests.Session()
@@ -490,12 +485,12 @@ def getMetadata():
     return data
 def str2date(issue_date,offset="+0000"):
     return datetime.strptime(issue_date+" "+offset, '%Y%m%d%H%M %z')
-def issue_record(name,localId,des,log_addr = "_CrashLOGs"):
+def issue_record(name,localId,des,log_addr = "_CrashLOGs",retv=False):
     filename = ARVO / log_addr
     FAIL(f"| {name} | {localId} | {des} |")
     with open(filename,'a+') as f:
         f.write(f"| {name} | {localId} | {des} |\n")
-    return
+    return retv
 def getReports():
     conn = sqlite3.connect(DB_PATH)
     try:
