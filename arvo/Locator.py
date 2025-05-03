@@ -82,7 +82,6 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
             lock.release()
         else:
             PANIC("[!] Log file is locked")
-        
 
         remove_oss_fuzz_img(localId)
         print(f"Result: {commit}:{res}")
