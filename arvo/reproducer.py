@@ -6,6 +6,8 @@ import collections
 BuildData = collections.namedtuple(
     'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
 from .transform import trans_table
+from . import utils_ctx 
+
 # Global
 CONTAINER_ENV = []
 def permissionResolve(target_path):
@@ -253,6 +255,8 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         eventLog(f"[-] build_fuzzer_with_source: Fail to Fix Build.sh, {localId}")
         return leaveRet(False,[tmp_dir,source_dir])
     if patches: doPatchMain(localId,dockerfile,patches) # Only used in special mode
+    # Used for AIxCC Target Gen
+    utils_ctx.BUIL_DIR = project_dir if utils_ctx.BUIL_DIR == None else utils_ctx.BUIL_DIR
     # Let's Build It
     result = build_fuzzers_impl(localId,project=project_name,
                                 project_dir= project_dir,
@@ -449,7 +453,7 @@ def verify(localId,save_img=False):
         if not docker_cp(case_path.absolute(),f"reproducer_{localId}:"+"/tmp/poc"):
             return False
         return False if not doCommitClean(localId,tag) else True
-        
+    
     def pushImg(): return pushImgRemote(localId,issue) if save_img else True
     localId = localIdMapping(localId)
     INFO(f"[+] Working on {localId}")
