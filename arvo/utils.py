@@ -92,11 +92,12 @@ def remove_oss_fuzz_img(localId):
 #                  OSS-fuzz meta retrive
 #
 #==================================================================
-def get_projectInfo(localId,pname):
+def get_projectInfo(localId,pname=None):
     srcmap = getSrcmaps(localId)
     if(len(srcmap)!=2):
         eventLog(f"[-] get_projectInfo: Can't find enough srcmaps: {localId}")
         exit(1)
+    if not pname: pname = getPname(localId)
     with open(srcmap[0]) as f:
         info1 = json.load(f)["/src/"+pname]
     with open(srcmap[1]) as f:
