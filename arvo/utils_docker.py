@@ -34,8 +34,8 @@ class DfTool():
         lines = self.content.split("\n")
         lines[pos] = line
         self.content = "\n".join(lines)
-    def replace(self,old,new):
-        self.content = re.sub(old,new,self.content)
+    def replace(self,old,new,flags=0):
+        self.content = re.sub(old,new,self.content,flags=flags)
     def replaceOnce(self,old,new):
         self.content = re.sub(old,new,self.content,count=1)
     def insertLineBefore(self,target,newline):
