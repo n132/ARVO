@@ -15,10 +15,7 @@ dependencies = [
     "google-cloud-storage",
     "filelock",
     "setuptools",
-    "rich",
-    "collections",
-    "dateutil",
-    "bisect"
+    "rich"
 ]
 
 [build-system]
