@@ -105,7 +105,7 @@ def rebaseDockerfile(dockerfile_path,commit_date):
     else: repo = res[0][5:]
     if "@sha256" in repo: repo = repo.split("@sha256")[0]
     if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer': repo = "gcr.io/oss-fuzz-base/base-builder"
-
+    if ":" in repo: repo = repo.split(":")[0]
     image_hash = _getBase(commit_date,repo)
     data = re.sub(r"FROM .*",f"FROM {repo}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
     with open(dockerfile_path,'w') as f: f.write(data)
