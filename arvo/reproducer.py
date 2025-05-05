@@ -13,6 +13,7 @@ CONTAINER_ENV = []
 def permissionResolve(target_path):
     res = execute_ret(["sudo","chown","-R",f"{UserName}:{UserName}",target_path])
     if res!=0: FAIL(f"[-] Chown result = {res}")
+    return res
 def doPatchMain(localId,dockerfile,patches):
     pname = getPname(localId)
     dft = DfTool(dockerfile)
