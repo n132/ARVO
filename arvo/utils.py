@@ -334,6 +334,14 @@ def mapMapping():
         tmp  = line.split(",")
         MAPPING[int(tmp[0])] = int(tmp[1])
     return MAPPING
+def mapMappingRev():
+    with open(ARVO/"oss_fuzz_mappings.csv","r") as f:
+            lines = f.readlines()
+    res = {}
+    for line in lines:
+        tmp  = line.split(",")
+        res[int(tmp[1])] = int(tmp[0])
+    return res
 def getSrcmaps(localId):
     def _cmp(a):
         return str(a)
