@@ -311,18 +311,15 @@ def build_fuzzers_impl( localId,project,project_dir,engine,
     # supports for submodule tracker
     command += custom_script
 
-    # if save_img:
-    #     result = docker_run(["--name",f"arvo_body_{localId}_{save_img}"]+command,rm=False)
-    # else:
-    if(1):
-        if noDump == '/dev/null':
-            logFile = Path('/dev/null')
-        elif noDump == False:
-            logFile = OSS_ERR / f"{localId}_Compile.log"
-            INFO(f"[+] Check the output in file: {str(logFile)}")
-        else:
-            logFile = None
-        result = docker_run(command,logFile=logFile)
+    
+    if noDump == '/dev/null':
+        logFile = Path('/dev/null')
+    elif noDump == False:
+        logFile = OSS_ERR / f"{localId}_Compile.log"
+        INFO(f"[+] Check the output in file: {str(logFile)}")
+    else:
+        logFile = None
+    result = docker_run(command,logFile=logFile)
     if not result:
         FAIL('[-] Failed to Build Targets')
         return False

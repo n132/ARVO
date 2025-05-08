@@ -8,6 +8,7 @@ import json
 import sys
 from .results import addNewcase
 # fmt: off
+import configparser
 
 
 #==================================================================
@@ -249,27 +250,27 @@ def vulCommit(localId,retryChance=None):
         pass
     else:
         submodules = parseSubmoduleUpdate(ifsub)
-
+        def get_submodule_url(path, gitmodules_path=".gitmodules"):
+            parser = configparser.ConfigParser()
+            parser.read(gitmodules_path)
+            
+            for section in parser.sections():
+                if section.startswith('submodule "') and parser[section].get("path") == path:
+                    return parser[section].get("url")
+            return None
         for x in submodules:
             # docker run .... ""
             # TODO bisect
+            
             execute(['git','submodule','init'],gt.repo)
-            sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
-            if not sub_path:
-                PANIC("Failed to get the submodule path")
-            sub_path = str(Path(pname)/sub_path.decode())
-            print("".join(['git','config','--file','.git/config',f'submodule.{x[0]}.url']))
-            sub_url = execute(['git','config','--file','.git/config',f'submodule.{x[0]}.url'],gt.repo)
-            if not sub_url:
-                PANIC("Failed to get the submodule path")
-            sub_url = sub_url.decode()
+            # sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
+            # if not sub_path:
+            #     PANIC("Failed to get the submodule path")
+            sub_path = str(Path(pname)/x[0])
+            sub_url = get_submodule_url(sub_path)
+
             appendix = ["bash",'-c',f'rm -rf {sub_path} && git clone {sub_url} {sub_path} && pushd {sub_path} && git checkout {x[1]} && popd && compile']
             INFO(f"Trying {sub_path}...")
-            # if sub_path == 'qt/qtbase':
-            #     res = False
-            # else: 
-            #     res = True
-            #
             res = checkBuild(target_commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
             if res == None:
                 # Failed to Compile/Build: combine it and its next commit
@@ -732,6 +733,8 @@ def reproduce(localId, dockerize = True, update = True):
     reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
+    if not res:
+        return False
     patch_located  = False if res == False else True
     patch_located  = True
     patch_url      = res['fix']
