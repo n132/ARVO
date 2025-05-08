@@ -625,12 +625,8 @@ def svn_clone(url,commit=None,dest=None,rename=None):
         eventLog(f"[!] - svn_clone: Failed to clone {url}")
         return False
     if commit:
-        if rename:
-            name = rename
-        else:
-            name = list(tmp.iterdir)[0]
-        tmp = tmp / name
-        if check_call(['svn',"up",'--force','-r', commit], cwd=tmp)==False:
+        name = rename if rename else list(tmp.iterdir)[0]
+        if execute(['svn',"up",'--force','-r', commit], cwd=tmp / name)==False:
             return False
     return tmp
 def hg_clone(url,commit=None,dest=None,rename=None):
