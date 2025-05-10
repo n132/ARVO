@@ -224,11 +224,6 @@ def vulCommit(localId,retryChance=None):
     if log.exists():
         shutil.rmtree(log)
     log.mkdir(parents=True,exist_ok=True)
-    # Debugging Code:
-    # if(localId==35566):
-    #     target_commit = '105cddfef22a52e560e8e4091ae60ba6f171d73f'
-    # else:
-        # target_commit = dichotomy_search(commits,localId,pname,poc,'bisect')
     target_commit = dichotomy_search(commits,localId,pname,poc,'bisect')
     # Get the gt
     
@@ -733,9 +728,8 @@ def reproduce(localId, dockerize = True, update = True):
     reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
-    if not res:
-        return False
-    patch_located  = False if res == False else True
+    if not res: return False
+    patch_located  = True
     patch_located  = True
     patch_url      = res['fix']
     verified       = res['verify']

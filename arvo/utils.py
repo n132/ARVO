@@ -581,7 +581,6 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         eventLog(f"[!] - clone: Failed to clone {url}")
         return False
     if commit:
-        INFO(f"[+] Checkout to commit {commit}")
         if name==None:
             name = list(dest.iterdir())[0]
         if _check_out(commit,dest / name):
