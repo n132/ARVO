@@ -161,7 +161,7 @@ class DockerfileModifier():
         linenum = ct
     return res, linenum
 
-class GitTool():
+class VersionControlTool():
 
   def __init__(self,
                oriRepo,
@@ -169,7 +169,7 @@ class GitTool():
                revision=None,
                latest=False) -> None:
     if vctype not in ['git', 'hg', 'svn']:
-      FAIL(f'[-] GitTool: Does not support {vctype}', ext=True)
+      FAIL(f'[-] VersionControlTool: Does not support {vctype}', ext=True)
     self.type = vctype
     if type(oriRepo) == str:
       repoPath = Path(oriRepo)
@@ -178,11 +178,11 @@ class GitTool():
     if not repoPath.exists():
       repoPath = self.clone(oriRepo, revision)
     if not repoPath:
-      FAIL(f'[-] GitTool: Failed to init {oriRepo}', ext=True)
+      FAIL(f'[-] VersionControlTool: Failed to init {oriRepo}', ext=True)
     self.repo = repoPath
     self.name = self.repo.name
     if latest and not self.pull():
-      FAIL(f'[-] GitTool: Failed to Update {oriRepo}', ext=True)
+      FAIL(f'[-] VersionControlTool: Failed to Update {oriRepo}', ext=True)
 
   def pull(self):
     if self.type == 'git':
@@ -1015,7 +1015,7 @@ def prepare_ossfuzz(project_name, commit_date):
         )
         return leave_ret(False, tmp_dir)
   # 3. Reset OSS Fuzz
-  gt = GitTool(tmp_oss_fuzz_dir)
+  gt = VersionControlTool(tmp_oss_fuzz_dir)
   if gt.reset(oss_fuzz_commit) == False:
     FAIL("[-] Fail to Reset OSS-Fuzz")
     return leave_ret(False, tmp_dir)
