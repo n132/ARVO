@@ -777,7 +777,7 @@ def special_component(pname, itemKey, item, dockerfile, commit_date):
   return False
 
 
-def update_revision_info(dockerfile, localId, src_path, item, commit_date,
+def update_revision_info(dockerfile, src_path, item, commit_date,
                        approximate):
   item_url = item['url']
   item_rev = item['rev']
@@ -1222,7 +1222,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
 
     # Try to perform checkout in dockerfile,
     # which could make reproducing more reliable
-    if update_revision_info(dockerfile, localId, newKey, data[newKey],
+    if update_revision_info(dockerfile, newKey, data[newKey],
                           commit_date, approximate):
       continue
 
