@@ -1,5 +1,5 @@
-#This file is created to transform the url to some moved repo.
-TRANS_TABLE = {
+#This file is created to update the url to some moved repo.
+update_table = {
     '/src/freetype2':
         'git://git.sv.nongnu.org/freetype/freetype2.git',
     '/src/pcre2':
@@ -72,14 +72,14 @@ TRANS_TABLE = {
         'https://cgit.ghostscript.com/ghostpdl.git',
 }
 # Only include non git project
-TRANS_TYPE = {'/src/graphicsmagick': "hg"}
+changed_type = {'/src/graphicsmagick': "hg"}
 
-KEYChanges = {
+changed_key = {
     '/src/mdbtools/test': '/src/mdbtools',
 }
 
 # Order matters please don't change it if you are not sure the influence
-globalStrReplace = {
+global_str_replace = {
     'git://git.gnome.org/libxml2':
         "https://gitlab.gnome.org/GNOME/libxml2.git",
     'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2':
@@ -161,15 +161,15 @@ PnameTable = {
 }
 
 
-def trans_table(item_name, item_url, item_type):
-  if item_name in KEYChanges:
-    item_name = KEYChanges[item_name]
-  if item_name in TRANS_TABLE:
-    if item_name in TRANS_TYPE:
-      type = TRANS_TYPE[item_name]
+def update_resource_info(item_name, item_url, item_type):
+  if item_name in changed_key:
+    item_name = changed_key[item_name]
+  if item_name in update_table:
+    if item_name in changed_type:
+      type = changed_type[item_name]
     else:
       type = 'git'
-    return item_name, TRANS_TABLE[item_name], type
+    return item_name, update_table[item_name], type
   else:
     return item_name, item_url, item_type
 

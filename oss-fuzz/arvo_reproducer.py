@@ -42,6 +42,18 @@ warnings.filterwarnings("ignore",
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
+def INFO(s):
+  logging.info(s)
+
+
+def WARN(s):
+  logging.warning(s)
+
+
+def FAIL(s, res=False):
+  logging.error(s)
+  return res
+
 
 class DockerfileModifier():
 
@@ -62,15 +74,13 @@ class DockerfileModifier():
     except:
       return False
     
-
-  def strReplaceAll(self, paires):
-    for key in paires:
-      self.content = self.content.replace(key, paires[key])
-
-  def strReplace(self, old, new):
+  def str_replace(self, old, new):
     self.content = self.content.replace(old, new)
 
-  def replaceLineat(self, pos, line):
+  def str_replace_all(self, paires):
+    for key in paires: self.str_replace(key,paires[key])
+
+  def replace_line_at(self, pos, line):
     lines = self.content.split("\n")
     lines[pos] = line
     self.content = "\n".join(lines)
@@ -78,27 +88,27 @@ class DockerfileModifier():
   def replace(self, old, new, flags=0):
     self.content = re.sub(old, new, self.content, flags=flags)
 
-  def replaceOnce(self, old, new):
+  def replace_once(self, old, new):
     self.content = re.sub(old, new, self.content, count=1)
 
-  def insertLineBefore(self, target, newline):
-    lineNum = self.locateStr(target)
+  def insert_line_before(self, target, newline):
+    lineNum = self.locate_str(target)
     if lineNum == False:
       return False
-    self.insertLineat(lineNum, newline)
+    self.insert_line_at(lineNum, newline)
 
-  def insertLineAfter(self, target, newline):
-    lineNum = self.locateStr(target)
+  def insert_line_after(self, target, newline):
+    lineNum = self.locate_str(target)
     if lineNum == False:
       return False
-    self.insertLineat(lineNum + 1, newline)
+    self.insert_line_at(lineNum + 1, newline)
 
-  def insertLineat(self, pos, line):
+  def insert_line_at(self, pos, line):
     lines = self.content.split("\n")
     lines.insert(pos, line)
     self.content = "\n".join(lines)
 
-  def removeRange(self, starts, ends):
+  def remove_range(self, starts, ends):
     lines = self.content.split("\n")
     new_lines = []
     for num in range(len(lines)):
@@ -107,7 +117,7 @@ class DockerfileModifier():
       new_lines.append(lines[num])
     self.content = '\n'.join(new_lines)
 
-  def cleanComments(self):
+  def clean_comments(self):
     pattern = re.compile(r'^#.*', re.MULTILINE)
     # Remove comments from each line
     self.content = pattern.sub('', self.content)
@@ -115,7 +125,7 @@ class DockerfileModifier():
     # Remove any empty lines left after removing comments
     self.content = newline_pattern.sub('', self.content)
 
-  def locateStr(self, keyword):
+  def locate_str(self, keyword):
     ct = 0
     linenum = False
     lines = self.content.split("\n")
@@ -127,7 +137,7 @@ class DockerfileModifier():
       ct += 1
     return linenum
 
-  def getLine(self, keyword):
+  def get_line(self, keyword):
     res = []
     lines = self.content.split("\n")
     ct = 0
@@ -151,6 +161,96 @@ class DockerfileModifier():
         linenum = ct
     return res, linenum
 
+class GitTool():
+
+  def __init__(self,
+               oriRepo,
+               vctype='git',
+               revision=None,
+               latest=False) -> None:
+    if vctype not in ['git', 'hg', 'svn']:
+      FAIL(f'[-] GitTool: Does not support {vctype}', ext=True)
+    self.type = vctype
+    if type(oriRepo) == str:
+      repoPath = Path(oriRepo)
+    else:
+      repoPath = oriRepo
+    if not repoPath.exists():
+      repoPath = self.clone(oriRepo, revision)
+    if not repoPath:
+      FAIL(f'[-] GitTool: Failed to init {oriRepo}', ext=True)
+    self.repo = repoPath
+    self.name = self.repo.name
+    if latest and not self.pull():
+      FAIL(f'[-] GitTool: Failed to Update {oriRepo}', ext=True)
+
+  def pull(self):
+    if self.type == 'git':
+      return git_pull(self.repo)
+    elif self.type == 'hg':
+      return hg_pull(self.repo)
+    else:
+      return svn_pull(self.repo)
+
+  def clone(self, url, revision=None):
+    if self.type == 'git':
+      repo = clone(url, revision)
+      if repo != False:
+        self.repo = list(repo.iterdir())[0]
+      else:
+        return False
+    elif self.type == 'hg':
+      repo = hg_clone(url, revision)
+      if repo != False:
+        self.repo = list(repo.iterdir())[0]
+      else:
+        return False
+    else:
+      repo = svn_clone(url, revision)
+      if repo != False:
+        self.repo = list(repo.iterdir())[0]
+      else:
+        return False
+    return self.repo
+
+  def commit_date(self, commit):
+    if self.type == 'git':
+      res = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
+      if res != False:
+        return time_reformat(res.decode())
+    elif self.type == 'hg':
+      res = execute(['hg', 'log', '-r', commit, '--template', '{date}'],
+                    self.repo)
+      if res != False:
+        return datetime.utcfromtimestamp(int(res.decode().split(".")[0])).strftime('%Y%m%d%H%M')
+    else:
+      res = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
+      if res != False:
+        res = res.decode()
+        res = res.split('\n')
+        if len(res) == 1:
+          return False
+        res = res[1].split(' | ')[2].split(' (')[0]
+        return time_reformat(res)
+
+    return False
+
+  def reset(self, commit):
+    if self.type == 'git':
+      cmd = ['git', 'reset', '--hard', commit]
+      with open('/dev/null', 'w') as f:
+        return check_call(cmd, self.repo, stdout=f)
+    elif self.type == 'hg':
+      cmd1 = ['hg', 'update', '--clean', '-r', commit]
+      cmd2 = ['hg', "purge", '--config', 'extensions.purge=']
+      if check_call(cmd1, self.repo) and check_call(cmd2, self.repo):
+        return True
+      else:
+        return False
+    elif self.type == "svn":
+      return check_call(['svn', "up", '--force', '-r', commit], cwd=self.repo)
+    else:
+      return False
 
 def git_pull(cwd):
   with open("/dev/null", 'w') as f:
@@ -219,7 +319,7 @@ def clone(url,
   return dest
 
 
-def timeTransfer(original_str):
+def time_reformat(original_str):
   # Parse the datetime string to a datetime object, specifying the original format
   original_dt = datetime.strptime(original_str, "%Y-%m-%d %H:%M:%S %z")
   # Convert the datetime object to UTC
@@ -227,15 +327,6 @@ def timeTransfer(original_str):
   # Format the UTC datetime object to the new string format without timezone information
   formatted_str = utc_dt.strftime("%Y%m%d%H%M")
   return formatted_str
-
-
-def stamp2Date(unix_timestamp):
-  # Convert Unix timestamp to datetime in UTC
-  dt_utc = datetime.utcfromtimestamp(unix_timestamp)
-
-  # Format the datetime object to the desired format
-  return dt_utc.strftime('%Y%m%d%H%M')
-
 
 def svn_clone(url, commit=None, dest=None, rename=None):
 
@@ -288,132 +379,6 @@ def hg_clone(url, commit=None, dest=None, rename=None):
   return tmp
 
 
-class GitTool():
-
-  def __init__(self,
-               oriRepo,
-               vctype='git',
-               revision=None,
-               latest=False) -> None:
-    if vctype not in ['git', 'hg', 'svn']:
-      FAIL(f'[-] GitTool: Does not support {vctype}', ext=True)
-    self.type = vctype
-    if type(oriRepo) == str:
-      repoPath = Path(oriRepo)
-    else:
-      repoPath = oriRepo
-    if not repoPath.exists():
-      repoPath = self.clone(oriRepo, revision)
-    if not repoPath:
-      FAIL(f'[-] GitTool: Failed to init {oriRepo}', ext=True)
-    self.repo = repoPath
-    self.name = self.repo.name
-    if latest and not self.pull():
-      FAIL(f'[-] GitTool: Failed to Update {oriRepo}', ext=True)
-
-  def pull(self):
-    if self.type == 'git':
-      return git_pull(self.repo)
-    elif self.type == 'hg':
-      return hg_pull(self.repo)
-    else:
-      return svn_pull(self.repo)
-
-  def clone(self, url, revision=None):
-    if self.type == 'git':
-      repo = clone(url, revision)
-      if repo != False:
-        self.repo = list(repo.iterdir())[0]
-      else:
-        return False
-    elif self.type == 'hg':
-      repo = hg_clone(url, revision)
-      if repo != False:
-        self.repo = list(repo.iterdir())[0]
-      else:
-        return False
-    else:
-      repo = svn_clone(url, revision)
-      if repo != False:
-        self.repo = list(repo.iterdir())[0]
-      else:
-        return False
-    return self.repo
-
-  def commitDate(self, commit):
-    if self.type == 'git':
-      res = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
-      if res != False:
-        return timeTransfer(res.decode())
-    elif self.type == 'hg':
-      res = execute(['hg', 'log', '-r', commit, '--template', '{date}'],
-                    self.repo)
-      if res != False:
-        return stamp2Date(int(res.decode().split(".")[0]))
-    else:
-      res = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
-      if res != False:
-        res = res.decode()
-        res = res.split('\n')
-        if len(res) == 1:
-          return False
-        res = res[1].split(' | ')[2].split(' (')[0]
-        return timeTransfer(res)
-
-    return False
-
-  def reset(self, commit):
-    if self.type == 'git':
-      cmd = ['git', 'reset', '--hard', commit]
-      with open('/dev/null', 'w') as f:
-        return check_call(cmd, self.repo, stdout=f)
-    elif self.type == 'hg':
-      cmd1 = ['hg', 'update', '--clean', '-r', commit]
-      cmd2 = ['hg', "purge", '--config', 'extensions.purge=']
-      if check_call(cmd1, self.repo) and check_call(cmd2, self.repo):
-        return True
-      else:
-        return False
-    elif self.type == "svn":
-      return check_call(['svn', "up", '--force', '-r', commit], cwd=self.repo)
-    else:
-      return False
-
-  def _copy(self):
-    try:
-      org = self.repo
-      new = Path(tempfile.mkdtemp())
-      shutil.copytree(org, new / self.name, symlinks=True)
-      return new / self.name
-    except:
-      return False
-
-  def getRecentCommit(self, commits_list, time_seconds=3600 * 24 * (2.5)):
-    '''
-        We can do it more precisly but I don't want to 
-        spend time on this.
-        '''
-    t1 = self.timestamp(commits_list[0])
-    t2 = self.timestamp(commits_list[-1])
-
-    if t1 is False or t2 is False:
-      return False
-
-    if int(t2 - t1) / (3600 * 24) < 5:
-      '''
-            The bugs is fixed in 5 days:
-            The fix happened very fast so there is no
-            need to shrink the range
-            '''
-      return False
-    else:
-
-      targetTS = t2 - time_seconds
-      commit = self.getCommitbyTimestamp(targetTS)
-      if (commit in commits_list) and (commit != commits_list[0]):
-        return commit
-      else:
-        return False
 
 
 def execute(cmd, cwd=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
@@ -444,20 +409,6 @@ def check_call(cmd, cwd=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
       return False
   except Exception as e:
     return False
-
-
-def INFO(s):
-  logging.info(s)
-
-
-def WARN(s):
-  logging.warning(s)
-
-
-def FAIL(s, res=False):
-  logging.error(s)
-  return res
-
 
 def parse_oss_fuzz_report(report_text: bytes, localId: int) -> dict:
   text = report_text.decode(
@@ -521,7 +472,7 @@ def parse_oss_fuzz_report(report_text: bytes, localId: int) -> dict:
   return res
 
 
-def fetchIssue(localId):
+def fetch_issue(localId):
   url = f'https://issues.oss-fuzz.com/action/issues/{localId}/events?currentTrackerId=391'
   session = requests.Session()
   # Step 1: Get the token from the cookie
@@ -564,7 +515,7 @@ def fetchIssue(localId):
 
 
 # Parse the job type into parts
-def fixBuildScript(file, pname):
+def fix_build_script(file, pname):
   if not file.exists():
     return True
   dft = DockerfileModifier(file)
@@ -575,26 +526,26 @@ def fixBuildScript(file, pname):
         https://github.com/madler/zlib.git
         '''
     script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
-    dft.insertLineat(0, script)
+    dft.insert_line_at(0, script)
   elif pname == 'libreoffice':
     '''
         If you don't want to destroy your life. 
         Please leave this project alone. too hard to fix and the compiling takes several hours
         '''
     line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
-    dft.insertLineBefore(
+    dft.insert_line_before(
         line,
         "sed -i 's/make fuzzers/make fuzzers -i/g' $SRC/libreoffice/bin/oss-fuzz-build.sh"
     )
-    dft.insertLineBefore(
+    dft.insert_line_before(
         line,
         "sed -n -i '/#starting corpuses/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
     )
-    dft.insertLineBefore(
+    dft.insert_line_before(
         line,
         r"sed -n -i '/pushd instdir\/program/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
     )
-    dft.insertLineBefore(
+    dft.insert_line_before(
         line,
         'echo "pushd instdir/program && mv *fuzzer $OUT" >> $SRC/libreoffice/bin/oss-fuzz-build.sh'
     )
@@ -615,14 +566,14 @@ def fixBuildScript(file, pname):
         ends = num
         break
     if starts != -1 and ends != -1:
-      dft.removeRange(starts, ends)
+      dft.remove_range(starts, ends)
   elif pname in ['libredwg', 'duckdb']:
     dft.replace(r'^make$', 'make -j`nproc`\n')
   assert (dft.flush() == True)
   return True
 
 
-def getPname(issue, srcmap):
+def get_pname(issue, srcmap):
   if 'project' not in issue:
     FAIL("[FAILED] to get project feild in issue")
     return False
@@ -640,7 +591,7 @@ def getPname(issue, srcmap):
         f"Failed to locate the main component, plz add that to PnameTable")
 
 
-def getLanguage(project_dir):
+def get_language(project_dir):
   porjymal = project_dir / "project.yaml"
   if not porjymal.exists():
     return False
@@ -648,12 +599,12 @@ def getLanguage(project_dir):
     porjymal = f.read()
   res = re.findall(r'language\s*:\s*([^\s]+)', porjymal)
   if len(res) != 1:
-    FAIL(f"[!] getLanguage: Get more than one languages")
+    FAIL(f"[!] Get more than one languages")
     return False
   return str(res[0])
 
 
-def skipComponent(pname, itemName):
+def skip_component(pname, itemName):
   NoOperation = [
       "/src",
       "/src/LPM/external.protobuf/src/external.protobuf",
@@ -669,7 +620,7 @@ def skipComponent(pname, itemName):
   return False
 
 
-def dockerfileCleaner(dockerfile):
+def dockerfile_cleaner(dockerfile):
   dft = DockerfileModifier(dockerfile)
   dft.replace(r'(--single-branch\s+)', "")  # --single-branch
   dft.replace(r'(--branch\s+\S+\s+|-b\s\S+\s+|--branch=\S+\s+)',
@@ -677,7 +628,7 @@ def dockerfileCleaner(dockerfile):
   dft.flush()
 
 
-def fixDockerfile(dockerfile_path, project=None):
+def fix_dockerfile(dockerfile_path, project=None):
   # todo: complex manual work to make it faster
   def _x265Fix(dft):
     # The order of following two lines matters
@@ -689,31 +640,31 @@ def fixDockerfile(dockerfile_path, project=None):
         "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
 
   dft = DockerfileModifier(dockerfile_path)
-  dft.replaceOnce(
+  dft.replace_once(
       r'RUN apt',
       "RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt"
   )
-  dft.strReplaceAll(globalStrReplace)
+  dft.str_replace_all(global_str_replace)
 
   if project == "lcms":
     dft.replace(r'#add more seeds from the testbed dir.*\n', "")
   elif project == 'wolfssl':
-    dft.strReplace(
+    dft.str_replace(
         'RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip $SRC/corpus_wolfssl_disable-fastmath.zip',
         "RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef"
     )
   elif project == 'skia':
-    dft.strReplace('RUN wget', "# RUN wget")
+    dft.str_replace('RUN wget', "# RUN wget")
     line = 'COPY build.sh $SRC/'
-    dft.insertLineAfter(line, "RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
+    dft.insert_line_after(line, "RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
   elif project == 'libreoffice':
-    dft.strReplace('RUN ./bin/oss-fuzz-setup.sh',\
+    dft.str_replace('RUN ./bin/oss-fuzz-setup.sh',\
     "RUN sed -i 's|svn export --force -q https://github.com|#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
-    dft.strReplace('RUN svn export', '# RUN svn export')
-    dft.strReplace('ADD ', '# ADD ')
-    dft.strReplace('RUN zip', '# RUN zip')
-    dft.strReplace('RUN mkdir afl-testcases', "# RUN mkdir afl-testcases")
-    dft.strReplace(
+    dft.str_replace('RUN svn export', '# RUN svn export')
+    dft.str_replace('ADD ', '# ADD ')
+    dft.str_replace('RUN zip', '# RUN zip')
+    dft.str_replace('RUN mkdir afl-testcases', "# RUN mkdir afl-testcases")
+    dft.str_replace(
         'RUN ./bin/oss-fuzz-setup.sh',
         "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related stuff
   elif project == 'graphicsmagick':  # Done
@@ -736,30 +687,30 @@ def fixDockerfile(dockerfile_path, project=None):
     dft.replace(r"ADD", '# ADD')
     dft.replace(r"RUN wget", '#RUN wget')
   elif project == 'quickjs':
-    dft.strReplace('https://github.com/horhof/quickjs',
+    dft.str_replace('https://github.com/horhof/quickjs',
                    'https://github.com/bellard/quickjs')
   elif project == 'cryptofuzz':
     line = "RUN cd $SRC/libressl && ./update.sh"
-    dft.insertLineBefore(
+    dft.insert_line_before(
         line,
         "RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
   elif project == 'libyang':
-    dft.strReplace(
+    dft.str_replace(
         'RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',
         "RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
   elif project == "yara":
     if 'bison' not in dft.content:
       line = "RUN git clone https://github.com/VirusTotal/yara.git"
-      dft.insertLineBefore(line, "RUN apt install -y bison")
+      dft.insert_line_before(line, "RUN apt install -y bison")
   elif project == "lwan":
-    dft.strReplace('git://github.com/lpereira/lwan',
+    dft.str_replace('git://github.com/lpereira/lwan',
                    'https://github.com/lpereira/lwan.git')
   elif project == "radare2":
-    dft.strReplace("https://github.com/radare/radare2-regressions",
+    dft.str_replace("https://github.com/radare/radare2-regressions",
                    'https://github.com/rlaemmert/radare2-regressions.git')
   elif project == "wireshark":
     dft.replace(r"RUN git clone .*wireshark.*", "")
-  dft.cleanComments()
+  dft.clean_comments()
   assert (dft.flush() == True)
   return True
 
@@ -794,7 +745,7 @@ def docker_run(args, rm=True, logFile=None):
     return check_call(cmd)
 
 
-def extraScritps(pname, oss_dir, source_dir):
+def extra_scritps(pname, oss_dir, source_dir):
   """
     This function allows us to modify build.sh scripts and other stuff to modify the compiling setting
     """
@@ -811,7 +762,7 @@ def extraScritps(pname, oss_dir, source_dir):
   return True
 
 
-def specialComponent(pname, itemKey, item, dockerfile, commit_date):
+def special_component(pname, itemKey, item, dockerfile, commit_date):
   if pname == 'libressl' and itemKey == '/src/libressl/openbsd':
     return False
   if pname == 'gnutls' and itemKey == '/src/gnutls/nettle':
@@ -825,7 +776,7 @@ def specialComponent(pname, itemKey, item, dockerfile, commit_date):
   return False
 
 
-def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
+def update_revision_info(dockerfile, localId, src_path, item, commit_date,
                        approximate):
   item_url = item['url']
   item_rev = item['rev']
@@ -836,7 +787,7 @@ def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
     keyword = keyword[4:]
   elif keyword.startswith("https:"):
     keyword = keyword[5:]
-  hits, ct = dft.getLine(keyword)
+  hits, ct = dft.get_line(keyword)
   d = dict()
   d['localId'] = localId
   d['url'] = item_url
@@ -872,8 +823,8 @@ def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
                 Replace the original line with ADD/COPY command
                 Then RUN init/update the submodule
                 """
-        dft.replaceLineat(ct - 1, f"ADD {rep_path.name} {src_path}")
-        dft.insertLineat(
+        dft.replace_line_at(ct - 1, f"ADD {rep_path.name} {src_path}")
+        dft.insert_line_at(
             ct,
             f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'"
         )
@@ -883,19 +834,19 @@ def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
         # Insert Mode
         if item_type == "git":
           if approximate == '-':
-            dft.insertLineat(
+            dft.insert_line_at(
                 ct,
                 f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
             )
           else:
-            dft.insertLineat(
+            dft.insert_line_at(
                 ct,
                 f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
             )
           dft.flush()
           return True
         elif item_type == 'hg':
-          dft.insertLineat(
+          dft.insert_line_at(
               ct,
               f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"'''
           )
@@ -909,9 +860,9 @@ def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
           return False
 
 
-def rebaseDockerfile(dockerfile_path, commit_date):
+def rebase_dockerfile(dockerfile_path, commit_date):
 
-  def _getBase(date, repo="gcr.io/oss-fuzz-base/base-builder"):
+  def _get_base(date, repo="gcr.io/oss-fuzz-base/base-builder"):
     cache_name = repo.split("/")[-1]
     CACHE_FILE = f"/tmp/{cache_name}_cache.json"
     CACHE_TTL = 86400  # 24 hours
@@ -940,12 +891,12 @@ def rebaseDockerfile(dockerfile_path, commit_date):
       data = f.read()
   except:
     return FAIL(
-        f"[-] rebaseDockerfile: No such a dockerfile: {dockerfile_path}")
+        f"[-]No such a dockerfile: {dockerfile_path}")
   # Locate the Repo
   res = re.search(r'FROM .*', data)
   if (res == None):
     return FAIL(
-        f"[-] rebaseDockerfile: Failed to get the base-image: {dockerfile_path}"
+        f"[-] Failed to get the base-image: {dockerfile_path}"
     )
   else:
     repo = res[0][5:]
@@ -955,7 +906,7 @@ def rebaseDockerfile(dockerfile_path, commit_date):
     repo = "gcr.io/oss-fuzz-base/base-builder"
   if ":" in repo:
     repo = repo.split(":")[0]
-  image_hash = _getBase(commit_date, repo)
+  image_hash = _get_base(commit_date, repo)
   # We insert update insce some old dockerfile doesn't have that line
   data = re.sub(
       r"FROM .*",
@@ -976,7 +927,7 @@ def clean_dir(victim):
     return False
 
 
-def leaveRet(return_val, tmp_dir):
+def leave_ret(return_val, tmp_dir):
   if type(tmp_dir) != list:
     clean_dir(tmp_dir)
   else:
@@ -985,7 +936,7 @@ def leaveRet(return_val, tmp_dir):
   return return_val
 
 
-def getSanitizer(fuzzer_sanitizer):
+def get_sanitizer(fuzzer_sanitizer):
   if (fuzzer_sanitizer == 'asan'):
     fuzzer_sanitizer = "address"
   elif (fuzzer_sanitizer == 'msan'):
@@ -997,7 +948,7 @@ def getSanitizer(fuzzer_sanitizer):
   return fuzzer_sanitizer
 
 
-def downloadPoc(issue, path, name):
+def download_poc(issue, path, name):
   global session
   session = requests.Session()
   url = issue['reproducer']
@@ -1041,7 +992,7 @@ def parse_job_type(job_type):
   return parsed
 
 
-def reproducerPrepareOssFuzz(project_name, commit_date):
+def prepare_ossfuzz(project_name, commit_date):
   # 1. Clone OSS Fuzz
   tmp_dir = clone("https://github.com/google/oss-fuzz.git", name="oss-fuzz")
   # 2. Get the Commit Close to Commit_Date
@@ -1060,14 +1011,14 @@ def reproducerPrepareOssFuzz(project_name, commit_date):
       oss_fuzz_commit = execute(cmd, tmp_oss_fuzz_dir).splitlines()[0].strip()
       if oss_fuzz_commit == False:
         FAIL(
-            '[-] reproducerPrepareOssFuzz: Failed to get oldest oss-fuzz commit'
+            '[-] Failed to get oldest oss-fuzz commit'
         )
-        return leaveRet(False, tmp_dir)
+        return leave_ret(False, tmp_dir)
   # 3. Reset OSS Fuzz
   gt = GitTool(tmp_oss_fuzz_dir)
   if gt.reset(oss_fuzz_commit) == False:
-    FAIL("[-] reproducerPrepareOssFuzz: Fail to Reset OSS-Fuzz")
-    return leaveRet(False, tmp_dir)
+    FAIL("[-] Fail to Reset OSS-Fuzz")
+    return leave_ret(False, tmp_dir)
   # 4. Locate Project Dir
   tmp_list = [x for x in tmp_oss_fuzz_dir.iterdir() if x.is_dir()]
   if tmp_oss_fuzz_dir / "projects" in tmp_list:
@@ -1076,9 +1027,9 @@ def reproducerPrepareOssFuzz(project_name, commit_date):
     proj_dir = tmp_oss_fuzz_dir / "targets" / project_name
   else:
     FAIL(
-        f"[-] reproducerPrepareOssFuzz {project_name}: Fail to locate the project"
+        f"[-] Fail to locate the project({project_name}) in oss-fuzz"
     )
-    return leaveRet(False, tmp_dir)
+    return leave_ret(False, tmp_dir)
   return (tmp_dir, proj_dir)
 
 
@@ -1172,7 +1123,7 @@ def build_from_srcmap(srcmap, issue, tag):
   # Get Basic Information
   fuzzer_info = issue['job_type'].split("_")
   engine = fuzzer_info[0]
-  sanitizer = getSanitizer(fuzzer_info[1])
+  sanitizer = get_sanitizer(fuzzer_info[1])
   arch = 'i386' if fuzzer_info[2] == 'i386' else 'x86_64'
   # Get Issue Date
   issue_date = srcmap.name.split(".")[0].split("-")[-1]
@@ -1194,9 +1145,9 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
   srcmap_items = json.loads(open(srcmap).read())
   if "/src" in srcmap_items and srcmap_items['/src'][
       'url'] == 'https://github.com/google/oss-fuzz.git':
-    res = reproducerPrepareOssFuzz(project_name, srcmap_items['/src']['rev'])
+    res = prepare_ossfuzz(project_name, srcmap_items['/src']['rev'])
   else:
-    res = reproducerPrepareOssFuzz(project_name, commit_date)
+    res = prepare_ossfuzz(project_name, commit_date)
   if not res:
     return False
   else:
@@ -1209,14 +1160,14 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
                          project_name=project_name)
 
   # Step ZERO: Rebase Dockerfiles
-  if not rebaseDockerfile(dockerfile, str(commit_date).replace(" ", "-")):
+  if not rebase_dockerfile(dockerfile, str(commit_date).replace(" ", "-")):
     FAIL(f"[-] build_fuzzer_with_source: Fail to Rebase Dockerfile, {localId}")
-    return leaveRet(False, tmp_dir)
+    return leave_ret(False, tmp_dir)
   # Step ONE: Fix Dockerfiles
-  dockerfileCleaner(dockerfile)
-  if not fixDockerfile(dockerfile, project_name):
+  dockerfile_cleaner(dockerfile)
+  if not fix_dockerfile(dockerfile, project_name):
     FAIL(f"[-] build_fuzzer_with_source: Fail to Fix Dockerfile, {localId}")
-    return leaveRet(False, tmp_dir)
+    return leave_ret(False, tmp_dir)
 
   # Step TWO: Prepare Dependencies
   with open(srcmap) as f:
@@ -1227,15 +1178,15 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
   docker_volume = []
   unsorted = list(data.keys())
   sortedKey = sorted(unsorted, key=len)
-  mainCompoinent = getPname(issue, srcmap)
+  mainCompoinent = get_pname(issue, srcmap)
   if mainCompoinent == False:
-    return leaveRet(False, tmp_dir)
+    return leave_ret(False, tmp_dir)
   ForceNoErrDump = True if "/src/xz" in sortedKey else False
 
   # Handle Srcmap Info
   for x in sortedKey:
     # INFO(f"[+] Prepare Dependency: {x}")
-    if skipComponent(project_name, x):
+    if skip_component(project_name, x):
       continue
 
     if tag == 'fix' and mainCompoinent == x:
@@ -1245,7 +1196,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
 
     newD = {}
     newD['rev'] = data[x]['rev']
-    newKey, newD['url'], newD['type'] = trans_table(x, data[x]['url'],
+    newKey, newD['url'], newD['type'] = update_resource_info(x, data[x]['url'],
                                                     data[x]['type'])
 
     del (data[x])
@@ -1257,7 +1208,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
     item_rev = data[newKey]['rev']
     item_name = "/".join(item_name.split("/")[2:])
 
-    if specialComponent(project_name, newKey, data[newKey], dockerfile,
+    if special_component(project_name, newKey, data[newKey], dockerfile,
                         commit_date):
       continue
     if item_name == 'aflplusplus' and item_url == 'https://github.com/AFLplusplus/AFLplusplus.git':
@@ -1268,19 +1219,19 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
     # Broken Revision
     if item_rev == "" or item_rev == "UNKNOWN":
       FAIL(f"Broken Meta: No Revision Provided")
-      return leaveRet(False, [tmp_dir, source_dir])
+      return leave_ret(False, [tmp_dir, source_dir])
     # Ignore not named dependencies if it's not main
     if item_name.strip(" ") == "" and len(data.keys()) == 1:
       FAIL(f"Broken Meta: Found Not Named Dep")
-      return leaveRet(False, [tmp_dir, source_dir])
+      return leave_ret(False, [tmp_dir, source_dir])
     # Borken type
     if item_type not in ['git', 'svn', 'hg']:
       FAIL(f"Broken Meta: No support for {item_type}")
-      return leaveRet(False, [tmp_dir, source_dir])
+      return leave_ret(False, [tmp_dir, source_dir])
 
     # Try to perform checkout in dockerfile,
     # which could make reproducing more reliable
-    if updateRevisionInfo(dockerfile, localId, newKey, data[newKey],
+    if update_revision_info(dockerfile, localId, newKey, data[newKey],
                           commit_date, approximate):
       continue
 
@@ -1295,7 +1246,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
         FAIL(
             f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}"
         )
-        return leaveRet(False, [tmp_dir, source_dir])
+        return leave_ret(False, [tmp_dir, source_dir])
       elif clone_res == None:
         command = f'git log --before="{commit_date.isoformat()}" -n 1 --format="%H"'
         res = subprocess.run(command,
@@ -1309,28 +1260,28 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
           FAIL(
               f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}"
           )
-          return leaveRet(False, [tmp_dir, source_dir])
+          return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(newKey)
     elif (item_type == 'svn'):
       if not svn_clone(item_url, item_rev, src, item_name):
         FAIL(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
-        return leaveRet(False, [tmp_dir, source_dir])
+        return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(newKey)
     elif (item_type == 'hg'):
       if not hg_clone(item_url, item_rev, src, item_name):
         FAIL(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
-        return leaveRet(False, [tmp_dir, source_dir])
+        return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(newKey)
     else:
       FAIL(f"[Failed] to support {item_type}")
       exit(1)
   # Step Three: Extra Scripts
-  if not extraScritps(project_name, project_dir, source_dir):
+  if not extra_scritps(project_name, project_dir, source_dir):
     FAIL(f"[-] build_fuzzer_with_source: Fail to Run ExtraScripts, {localId}")
-    return leaveRet(False, [tmp_dir, source_dir])
-  if not fixBuildScript(project_dir / "build.sh", project_name):
+    return leave_ret(False, [tmp_dir, source_dir])
+  if not fix_build_script(project_dir / "build.sh", project_name):
     FAIL(f"[-] build_fuzzer_with_source: Fail to Fix Build.sh, {localId}")
-    return leaveRet(False, [tmp_dir, source_dir])
+    return leave_ret(False, [tmp_dir, source_dir])
   # Let's Build It
   result = build_fuzzers_impl(localId,
                               project_dir=project_dir,
@@ -1342,7 +1293,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
                               noDump=ForceNoErrDump)
   # we need sudo since the docker container root touched the folder
   check_call(["sudo", "rm", "-rf", source_dir])
-  return leaveRet(result, tmp_dir)
+  return leave_ret(result, tmp_dir)
 
 
 def build_fuzzers_impl(localId,
@@ -1383,7 +1334,7 @@ def build_fuzzers_impl(localId,
       'FUZZING_ENGINE=' + engine,
       'SANITIZER=' + sanitizer,
       'ARCHITECTURE=' + architecture,
-      'FUZZING_LANGUAGE=' + getLanguage(project_dir),
+      'FUZZING_LANGUAGE=' + get_language(project_dir),
   ]
   command = sum([['-e', x] for x in env], [])
 
@@ -1420,7 +1371,7 @@ def build_fuzzers_impl(localId,
 def arvo_reproducer(localId, tag):
   INFO(f"[+] Working on {localId}")
   # 1. Fetch the basic info for the vul
-  issue = fetchIssue(localId)  # TODO, ask for a fast way
+  issue = fetch_issue(localId)  # TODO, ask for a fast way
   if not issue:
     return FAIL(f"Failed to get the srcmap or issue for {localId}")
   tmpdir = Path(tempfile.mkdtemp())
@@ -1438,7 +1389,7 @@ def arvo_reproducer(localId, tag):
   INFO("[+] Downloading PoC")
   case_dir = Path(tempfile.mkdtemp())
   try:
-    case_path = downloadPoc(issue, case_dir, "crash_case")
+    case_path = download_poc(issue, case_dir, "crash_case")
   except:
     return FAIL(f"Fail to Download the Reproducer")
   INFO(f"POC: {case_path}")
