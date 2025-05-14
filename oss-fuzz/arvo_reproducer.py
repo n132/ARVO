@@ -472,7 +472,7 @@ def update_revision_info(dockerfile, src_path, item, commit_date, approximate):
     return True
 
 
-# Main reproducing functions
+# Main reproducing entries
 def build_fuzzers_impl(localId,
                        project_dir,
                        engine,
