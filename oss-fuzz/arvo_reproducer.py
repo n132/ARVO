@@ -169,7 +169,7 @@ class VersionControlTool():
                revision=None,
                latest=False) -> None:
     if vctype not in ['git', 'hg', 'svn']:
-      FAIL(f'[-] VersionControlTool: Does not support {vctype}', ext=True)
+      FAIL(f'VersionControlTool: Does not support {vctype}', ext=True)
     self.type = vctype
     if type(oriRepo) == str:
       repoPath = Path(oriRepo)
@@ -178,11 +178,11 @@ class VersionControlTool():
     if not repoPath.exists():
       repoPath = self.clone(oriRepo, revision)
     if not repoPath:
-      FAIL(f'[-] VersionControlTool: Failed to init {oriRepo}', ext=True)
+      FAIL(f'VersionControlTool: Failed to init {oriRepo}', ext=True)
     self.repo = repoPath
     self.name = self.repo.name
     if latest and not self.pull():
-      FAIL(f'[-] VersionControlTool: Failed to Update {oriRepo}', ext=True)
+      FAIL(f'VersionControlTool: Failed to Update {oriRepo}', ext=True)
 
   def pull(self):
     if self.type == 'git':
@@ -292,7 +292,7 @@ def clone(url,
   if not _git_clone(url, dest, name):
     return FAIL(f"[!] - clone: Failed to clone {url}")
   if commit:
-    INFO(f"[+] Checkout to commit {commit}")
+    INFO(f"Checkout to commit {commit}")
     name = list(dest.iterdir())[0] if name == None else name
     if _check_out(commit, dest / name):
       return dest
@@ -311,7 +311,7 @@ def clone(url,
             "--format='%H'", "-n1"
         ]
         commit = execute(cmd, dest / name).decode().strip("'")
-        INFO(f"[+] Checkout to {commit}")
+        INFO(f"Checkout to {commit}")
         if _check_out(commit, dest / name):
           return dest
         else:
@@ -719,7 +719,7 @@ def fix_dockerfile(dockerfile_path, project=None):
 def docker_build(args, logFile=None):
   cmd = ['docker', 'build']
   cmd.extend(args)
-  INFO("[+] Docker Build: \n" + " ".join(cmd))
+  INFO("Docker Build: \n" + " ".join(cmd))
   if logFile:
     with open(logFile, 'w') as f:
       res = check_call(cmd, stderr=f, stdout=f)
@@ -736,7 +736,7 @@ def docker_run(args, rm=True, logFile=None):
     cmd = ['docker', 'run', '--privileged']
 
   cmd.extend(args)
-  INFO("[+] Docker Run: \n" + " ".join(cmd))
+  INFO("Docker Run: \n" + " ".join(cmd))
   if logFile:
     with open(logFile, 'w') as f:
       res = check_call(cmd, stdout=f, stderr=f)
@@ -763,7 +763,7 @@ def extra_scritps(pname, oss_dir, source_dir):
   return True
 
 
-def special_component(pname, itemKey, item, dockerfile, commit_date):
+def special_component(pname, itemKey, item, dockerfile):
   if pname == 'libressl' and itemKey == '/src/libressl/openbsd':
     return False
   if pname == 'gnutls' and itemKey == '/src/gnutls/nettle':
@@ -881,14 +881,11 @@ def rebase_dockerfile(dockerfile_path, commit_date):
     with open(dockerfile_path) as f:
       data = f.read()
   except:
-    return FAIL(
-        f"[-]No such a dockerfile: {dockerfile_path}")
+    return FAIL(f"No such a dockerfile: {dockerfile_path}")
   # Locate the Repo
   res = re.search(r'FROM .*', data)
-  if (res == None):
-    return FAIL(
-        f"[-] Failed to get the base-image: {dockerfile_path}"
-    )
+  if res == None:
+    return FAIL("Failed to get the base-image: {dockerfile_path}")
   else:
     repo = res[0][5:]
   if "@sha256" in repo:
@@ -1001,14 +998,12 @@ def prepare_ossfuzz(project_name, commit_date):
       cmd = ['git', 'log', '--reverse', '--format=%H']
       oss_fuzz_commit = execute(cmd, tmp_oss_fuzz_dir).splitlines()[0].strip()
       if oss_fuzz_commit == False:
-        FAIL(
-            '[-] Failed to get oldest oss-fuzz commit'
-        )
+        FAIL('Failed to get oldest oss-fuzz commit')
         return leave_ret(False, tmp_dir)
   # 3. Reset OSS Fuzz
   gt = VersionControlTool(tmp_oss_fuzz_dir)
   if gt.reset(oss_fuzz_commit) == False:
-    FAIL("[-] Fail to Reset OSS-Fuzz")
+    FAIL("Failed to Reset OSS-Fuzz")
     return leave_ret(False, tmp_dir)
   # 4. Locate Project Dir
   tmp_list = [x for x in tmp_oss_fuzz_dir.iterdir() if x.is_dir()]
@@ -1017,9 +1012,7 @@ def prepare_ossfuzz(project_name, commit_date):
   elif tmp_oss_fuzz_dir / "targets" in tmp_list:
     proj_dir = tmp_oss_fuzz_dir / "targets" / project_name
   else:
-    FAIL(
-        f"[-] Fail to locate the project({project_name}) in oss-fuzz"
-    )
+    FAIL(f"Failed to locate the project({project_name}) in oss-fuzz")
     return leave_ret(False, tmp_dir)
   return (tmp_dir, proj_dir)
 
@@ -1144,7 +1137,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
   else:
     tmp_dir, project_dir = res
   dockerfile = project_dir / 'Dockerfile'
-  INFO(f"[+] dockerfile: {dockerfile}")
+  INFO(f"dockerfile: {dockerfile}")
   build_data = BuildData(sanitizer=sanitizer,
                          architecture=arch,
                          engine=engine,
@@ -1152,12 +1145,12 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
 
   # Step ZERO: Rebase Dockerfiles
   if not rebase_dockerfile(dockerfile, str(commit_date).replace(" ", "-")):
-    FAIL(f"[-] build_fuzzer_with_source: Fail to Rebase Dockerfile, {localId}")
+    FAIL(f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {localId}")
     return leave_ret(False, tmp_dir)
   # Step ONE: Fix Dockerfiles
   dockerfile_cleaner(dockerfile)
   if not fix_dockerfile(dockerfile, project_name):
-    FAIL(f"[-] build_fuzzer_with_source: Fail to Fix Dockerfile, {localId}")
+    FAIL(f"build_fuzzer_with_source: Failed to Fix Dockerfile, {localId}")
     return leave_ret(False, tmp_dir)
 
   # Step TWO: Prepare Dependencies
@@ -1176,7 +1169,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
 
   # Handle Srcmap Info
   for x in sortedKey:
-    # INFO(f"[+] Prepare Dependency: {x}")
+    # INFO(f"Prepare Dependency: {x}")
     if skip_component(project_name, x):
       continue
 
@@ -1199,8 +1192,7 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
     item_rev = data[newKey]['rev']
     item_name = "/".join(item_name.split("/")[2:])
 
-    if special_component(project_name, newKey, data[newKey], dockerfile,
-                        commit_date):
+    if special_component(project_name, newKey, data[newKey], dockerfile):
       continue
     if item_name == 'aflplusplus' and item_url == 'https://github.com/AFLplusplus/AFLplusplus.git':
       continue
@@ -1264,14 +1256,14 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
         return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(newKey)
     else:
-      FAIL(f"[Failed] to support {item_type}")
+      FAIL(f"Failed to support {item_type}")
       exit(1)
   # Step Three: Extra Scripts
   if not extra_scritps(project_name, project_dir, source_dir):
-    FAIL(f"[-] build_fuzzer_with_source: Fail to Run ExtraScripts, {localId}")
+    FAIL(f"Failed to Run ExtraScripts, {localId}")
     return leave_ret(False, [tmp_dir, source_dir])
   if not fix_build_script(project_dir / "build.sh", project_name):
-    FAIL(f"[-] build_fuzzer_with_source: Fail to Fix Build.sh, {localId}")
+    FAIL(f"Failed to Fix Build.sh, {localId}")
     return leave_ret(False, [tmp_dir, source_dir])
   # Let's Build It
   result = build_fuzzers_impl(localId,
@@ -1298,7 +1290,7 @@ def build_fuzzers_impl(localId,
                        custom_script=[]):
   # Set the LogFile
   logFile = OSS_ERR / f"{localId}_Image.log"
-  INFO(f"[+] Check the output in file: {logFile}")
+  INFO(f"Check the output in file: {logFile}")
 
   # Clean The WORK/OUT DIR
   project_out = OSS_OUT / f"{localId}_OUT"
@@ -1344,13 +1336,13 @@ def build_fuzzers_impl(localId,
 
   if noDump == False:
     logFile = OSS_ERR / f"{localId}_Compile.log"
-    INFO(f"[+] Check the output in file: {str(logFile)}")
+    INFO(f"Check the output in file: {str(logFile)}")
   else:
     logFile = None
 
   result = docker_run(command, logFile=logFile)
   if result == False:
-    FAIL('[-] Failed to Build Targets')
+    FAIL('Failed to Build Targets')
     return False
   else:
     if logFile and logFile.exists() and str(logFile) != "/dev/null":
@@ -1360,7 +1352,7 @@ def build_fuzzers_impl(localId,
 
 
 def arvo_reproducer(localId, tag):
-  INFO(f"[+] Working on {localId}")
+  INFO(f"Working on {localId}")
   # 1. Fetch the basic info for the vul
   issue = fetch_issue(localId)  # TODO, ask for a fast way
   if not issue:
@@ -1377,23 +1369,23 @@ def arvo_reproducer(localId, tag):
     issue['project'] = issue['fuzzer'].split("_")[1]
 
   # 2. Download the PoC
-  INFO("[+] Downloading PoC")
+  INFO("Downloading PoC")
   case_dir = Path(tempfile.mkdtemp())
   try:
     case_path = download_poc(issue, case_dir, "crash_case")
   except:
-    return FAIL(f"Fail to Download the Reproducer")
+    return FAIL(f"Failed to Download the Reproducer")
   INFO(f"POC: {case_path}")
   if not case_path or not case_path.exists():
-    return FAIL(f"Fail to Download the Reproducer")
+    return FAIL(f"Failed to Download the Reproducer")
 
   # 3. Build the Vulnerabel Software
-  INFO("[+] Building the Binary")
+  INFO("Building the Binary")
 
   res = build_from_srcmap(srcmap, issue, tag)
 
   if not res:
-    return FAIL(f"Fail to build old fuzzers from srcmap")
+    return FAIL(f"Failed to build old fuzzers from srcmap")
   return True
 
 
