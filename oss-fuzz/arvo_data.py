@@ -1,4 +1,5 @@
-#This file is created to update the url to some moved repo.
+from arvo_utils import *
+
 update_table = {
     '/src/freetype2':
         'git://git.sv.nongnu.org/freetype/freetype2.git',
@@ -72,13 +73,11 @@ update_table = {
         'https://cgit.ghostscript.com/ghostpdl.git',
 }
 # Only include non git project
-changed_type = {'/src/graphicsmagick': "hg"}
-
+changed_type = {'/src/graphicsmagick': 'hg'}
 changed_key = {
     '/src/mdbtools/test': '/src/mdbtools',
 }
-
-# Order matters please don't change it if you are not sure the influence
+# Order matters
 global_str_replace = {
     'git://git.gnome.org/libxml2':
         "https://gitlab.gnome.org/GNOME/libxml2.git",
@@ -153,9 +152,9 @@ global_str_replace = {
     " --depth ":
         " --jobs ",
 }
-# The las
-PnameTable = {
-    'libpng-proto': "libprotobuf-mutator",  # Only one issue...
+
+pname_table = {
+    'libpng-proto': "libprotobuf-mutator",
     'pcapplusplus': "PcapPlusPlus",
     'skia-ftz': 'skia',
 }
