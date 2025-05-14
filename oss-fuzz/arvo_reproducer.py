@@ -406,9 +406,9 @@ def update_revision_info(dockerfile, src_path, item, commit_date, approximate):
   item_type = item['type']
   dft = DockerfileModifier(dockerfile)
 
-  if keyword.startswith("http:"):
+  if item_url.startswith("http:"):
     keyword = item_url[4:]
-  elif keyword.startswith("https:"):
+  elif item_url.startswith("https:"):
     keyword = item_url[5:]
   else:
     keyword = item_url
