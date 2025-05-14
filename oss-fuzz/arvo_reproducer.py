@@ -347,204 +347,57 @@ def prepare_ossfuzz(project_name, commit_date):
   return (tmp_dir, proj_dir)
 
 
-def fix_build_script(file, pname):
-  if not file.exists():
-    return True
-  dft = DockerfileModifier(file)
-  if pname == "uwebsockets":
-    '''
-        https://github.com/alexhultman/zlib
-        ->
-        https://github.com/madler/zlib.git
-        '''
-    script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
-    dft.insert_line_at(0, script)
-  elif pname == 'libreoffice':
-    '''
-        If you don't want to destroy your life. 
-        Please leave this project alone. too hard to fix and the compiling takes several hours
-        '''
-    line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
-    dft.insert_line_before(
-        line,
-        "sed -i 's/make fuzzers/make fuzzers -i/g' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
-    dft.insert_line_before(
-        line,
-        "sed -n -i '/#starting corpuses/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
-    dft.insert_line_before(
-        line,
-        r"sed -n -i '/pushd instdir\/program/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
-    dft.insert_line_before(
-        line,
-        'echo "pushd instdir/program && mv *fuzzer $OUT" >> $SRC/libreoffice/bin/oss-fuzz-build.sh'
-    )
-  elif pname == 'jbig2dec':
-    dft.replace('unzip.*', 'exit 0')
-  elif pname == "ghostscript":
-    old = r"mv \$SRC\/freetype freetype"
-    new = "cp -r $SRC/freetype freetype"
-    dft.replace(old, new)
-  elif pname == 'openh264':
-    lines = dft.content.split("\n")
-    starts = -1
-    ends = -1
-    for num in range(len(lines)):
-      if "# prepare corpus" in lines[num]:
-        starts = num
-      elif "# build" in lines[num]:
-        ends = num
-        break
-    if starts != -1 and ends != -1:
-      dft.remove_range(starts, ends)
-  elif pname in ['libredwg', 'duckdb']:
-    dft.replace(r'^make$', 'make -j`nproc`\n')
-  assert (dft.flush() == True)
-  return True
+def rebase_dockerfile(dockerfile_path, commit_date):
 
-
-def skip_component(pname, itemName):
-  NoOperation = [
-      "/src",
-      "/src/LPM/external.protobuf/src/external.protobuf",
-      "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
-  ]
-  itemName = itemName.strip(" ")
-  # Special for skia, Skip since they are done by submodule init
-  if pname in ['skia', 'skia-ftz']:
-    if itemName.startswith("/src/skia/"):
-      return True
-  if itemName in NoOperation:
-    return True
-  return False
-
-
-def dockerfile_cleaner(dockerfile):
-  dft = DockerfileModifier(dockerfile)
-  dft.replace(r'(--single-branch\s+)', "")  # --single-branch
-  dft.replace(r'(--branch\s+\S+\s+|-b\s\S+\s+|--branch=\S+\s+)',
-              "")  # remove --branch or -b
-  dft.flush()
-
-
-def fix_dockerfile(dockerfile_path, project=None):
-  # todo: complex manual work to make it faster
-  def _x265Fix(dft):
-    # The order of following two lines matters
-    dft.replace(
-        r'RUN\shg\sclone\s.*bitbucket.org/multicoreware/x265\s*(x265)*',
-        "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
-    dft.replace(
-        r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',
-        "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
-
-  dft = DockerfileModifier(dockerfile_path)
-  dft.replace_once(
-      r'RUN apt',
-      "RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt"
-  )
-  dft.str_replace_all(global_str_replace)
-
-  if project == "lcms":
-    dft.replace(r'#add more seeds from the testbed dir.*\n', "")
-  elif project == 'wolfssl':
-    dft.str_replace(
-        'RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip $SRC/corpus_wolfssl_disable-fastmath.zip',
-        "RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef"
-    )
-  elif project == 'skia':
-    dft.str_replace('RUN wget', "# RUN wget")
-    line = 'COPY build.sh $SRC/'
-    dft.insert_line_after(line, "RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
-  elif project == 'libreoffice':
-    dft.str_replace('RUN ./bin/oss-fuzz-setup.sh',\
-    "RUN sed -i 's|svn export --force -q https://github.com|#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
-    dft.str_replace('RUN svn export', '# RUN svn export')
-    dft.str_replace('ADD ', '# ADD ')
-    dft.str_replace('RUN zip', '# RUN zip')
-    dft.str_replace('RUN mkdir afl-testcases', "# RUN mkdir afl-testcases")
-    dft.str_replace(
-        'RUN ./bin/oss-fuzz-setup.sh',
-        "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related stuff
-  elif project == 'graphicsmagick':
-    line = r'RUN hg clone .* graphicsmagick'
-    dft.replace(
-        line,
-        'RUN (CMD="hg clone --insecure https://foss.heptapod.net/graphicsmagick/graphicsmagick graphicsmagick" && for x in `seq 1 100`; do $($CMD); if [ $? -eq 0 ]; then break; fi; done)'
-    )
-    _x265Fix(dft)
-  elif project == 'libheif':
-    _x265Fix(dft)
-  elif project == 'ffmpeg':
-    _x265Fix(dft)
-  elif project == 'imagemagick':
-    dft.replace(r'RUN svn .*heic_corpus.*',
-                "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
-  elif project == "jbig2dec":
-    dft.replace(r'RUN cd tests .*', "")
-  elif project == 'dlplibs':
-    dft.replace(r"ADD", '# ADD')
-    dft.replace(r"RUN wget", '#RUN wget')
-  elif project == 'quickjs':
-    dft.str_replace('https://github.com/horhof/quickjs',
-                    'https://github.com/bellard/quickjs')
-  elif project == 'cryptofuzz':
-    line = "RUN cd $SRC/libressl && ./update.sh"
-    dft.insert_line_before(
-        line,
-        "RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
-  elif project == 'libyang':
-    dft.str_replace(
-        'RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',
-        "RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
-  elif project == "yara":
-    if 'bison' not in dft.content:
-      line = "RUN git clone https://github.com/VirusTotal/yara.git"
-      dft.insert_line_before(line, "RUN apt install -y bison")
-  elif project == "lwan":
-    dft.str_replace('git://github.com/lpereira/lwan',
-                    'https://github.com/lpereira/lwan.git')
-  elif project == "radare2":
-    dft.str_replace("https://github.com/radare/radare2-regressions",
-                    'https://github.com/rlaemmert/radare2-regressions.git')
-  elif project == "wireshark":
-    dft.replace(r"RUN git clone .*wireshark.*", "")
-  dft.clean_comments()
-  assert (dft.flush() == True)
-  return True
-
-
-def extra_scritps(pname, source_dir):
-  """
-    This function allows us to modify build.sh scripts and other stuff to modify the compiling setting
-    """
-  if pname == 'imagemagick':
-    target = source_dir / "src" / pname / "Magick++" / "fuzz" / "build.sh"
-    if target.exists():
-      with open(target) as f:
-        lines = f.readlines()
-      for x in range(3):
-        if "zip" in lines[-x]:
-          del (lines[-x])
-      with open(target, 'w') as f:
-        f.write("\n".join(lines))
-  return True
-
-
-def special_component(pname, itemKey, item, dockerfile):
-  if pname == 'libressl' and itemKey == '/src/libressl/openbsd':
-    return False
-  if pname == 'gnutls' and itemKey == '/src/gnutls/nettle':
-    # Just Ignore since we have submodule update --init
-    with open(dockerfile) as f:
-      dt = f.read()
-    if item['rev'] not in dt:
-      return True
+  def _get_base(date, repo="gcr.io/oss-fuzz-base/base-builder"):
+    cache_name = repo.split("/")[-1]
+    CACHE_FILE = f"/tmp/{cache_name}_cache.json"
+    CACHE_TTL = 86400  # 24 hours
+    if os.path.exists(CACHE_FILE) and (
+        time.time() - os.path.getmtime(CACHE_FILE)) < CACHE_TTL:
+      with open(CACHE_FILE, 'r') as f:
+        res = json.load(f)
     else:
-      return False
-  return False
+      cmd = [
+          "gcloud", "container", "images", "list-tags", repo, "--format=json",
+          "--sort-by=timestamp"
+      ]
+      res = execute(cmd)
+      res = json.loads(res)
+      with open(CACHE_FILE, 'w') as f:
+        f.write(json.dumps(res, indent=4))
+    ts = []
+    for x in res:
+      ts.append(int(parse(x['timestamp']['datetime']).timestamp()))
+    target_ts = int(parse(date).timestamp())
+    return res[bisect_right(ts, target_ts - 1) - 1]['digest'].split(":")[1]
+
+  # Load the Dockerfile
+  try:
+    with open(dockerfile_path) as f:
+      data = f.read()
+  except:
+    return FAIL(f"No such a dockerfile: {dockerfile_path}")
+  # Locate the Repo
+  res = re.search(r'FROM .*', data)
+  if res == None:
+    return FAIL("Failed to get the base-image: {dockerfile_path}")
+  else:
+    repo = res[0][5:]
+  if "@sha256" in repo:
+    repo = repo.split("@sha256")[0]
+  if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer':
+    repo = "gcr.io/oss-fuzz-base/base-builder"
+  if ":" in repo:
+    repo = repo.split(":")[0]
+  image_hash = _get_base(commit_date, repo)
+  # We insert update insce some old dockerfile doesn't have that line
+  data = re.sub(
+      r"FROM .*",
+      f"FROM {repo}@sha256:" + image_hash + "\nRUN apt-get update -y\n", data)
+  with open(dockerfile_path, 'w') as f:
+    f.write(data)
+  return True
 
 
 def update_revision_info(dockerfile, src_path, item, commit_date, approximate):
@@ -617,59 +470,6 @@ def update_revision_info(dockerfile, src_path, item, commit_date, approximate):
       return False
     dft.flush()
     return True
-
-
-def rebase_dockerfile(dockerfile_path, commit_date):
-
-  def _get_base(date, repo="gcr.io/oss-fuzz-base/base-builder"):
-    cache_name = repo.split("/")[-1]
-    CACHE_FILE = f"/tmp/{cache_name}_cache.json"
-    CACHE_TTL = 86400  # 24 hours
-    if os.path.exists(CACHE_FILE) and (
-        time.time() - os.path.getmtime(CACHE_FILE)) < CACHE_TTL:
-      with open(CACHE_FILE, 'r') as f:
-        res = json.load(f)
-    else:
-      cmd = [
-          "gcloud", "container", "images", "list-tags", repo, "--format=json",
-          "--sort-by=timestamp"
-      ]
-      res = execute(cmd)
-      res = json.loads(res)
-      with open(CACHE_FILE, 'w') as f:
-        f.write(json.dumps(res, indent=4))
-    ts = []
-    for x in res:
-      ts.append(int(parse(x['timestamp']['datetime']).timestamp()))
-    target_ts = int(parse(date).timestamp())
-    return res[bisect_right(ts, target_ts - 1) - 1]['digest'].split(":")[1]
-
-  # Load the Dockerfile
-  try:
-    with open(dockerfile_path) as f:
-      data = f.read()
-  except:
-    return FAIL(f"No such a dockerfile: {dockerfile_path}")
-  # Locate the Repo
-  res = re.search(r'FROM .*', data)
-  if res == None:
-    return FAIL("Failed to get the base-image: {dockerfile_path}")
-  else:
-    repo = res[0][5:]
-  if "@sha256" in repo:
-    repo = repo.split("@sha256")[0]
-  if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer':
-    repo = "gcr.io/oss-fuzz-base/base-builder"
-  if ":" in repo:
-    repo = repo.split(":")[0]
-  image_hash = _get_base(commit_date, repo)
-  # We insert update insce some old dockerfile doesn't have that line
-  data = re.sub(
-      r"FROM .*",
-      f"FROM {repo}@sha256:" + image_hash + "\nRUN apt-get update -y\n", data)
-  with open(dockerfile_path, 'w') as f:
-    f.write(data)
-  return True
 
 
 # Main reproducing functions
@@ -770,7 +570,6 @@ def build_fuzzer_with_source(localId, project_name, srcmap, sanitizer, engine,
     FAIL(f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {localId}")
     return leave_ret(False, tmp_dir)
   # Step ONE: Fix Dockerfiles
-  dockerfile_cleaner(dockerfile)
   if not fix_dockerfile(dockerfile, project_name):
     FAIL(f"build_fuzzer_with_source: Failed to Fix Dockerfile, {localId}")
     return leave_ret(False, tmp_dir)
