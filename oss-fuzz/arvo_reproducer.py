@@ -43,7 +43,7 @@ logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-class DfTool():
+class DockerfileModifier():
 
   def __init__(self, path) -> None:
     self.path = path
@@ -56,15 +56,12 @@ class DfTool():
     self.content = blankLine.sub("\n", self.content)
 
   def flush(self):
-    return self.writeDf()
-
-  def writeDf(self):
     try:
-      with open(self.path, 'w') as f:
-        f.write(self.content)
+      with open(self.path, 'w') as f: f.write(self.content)
+      return True
     except:
       return False
-    return True
+    
 
   def strReplaceAll(self, paires):
     for key in paires:
@@ -101,11 +98,6 @@ class DfTool():
     lines.insert(pos, line)
     self.content = "\n".join(lines)
 
-  def appendLine(self, line):
-    lines = self.content.split("\n")
-    lines.append(line)
-    self.content = "\n".join(lines)
-
   def removeRange(self, starts, ends):
     lines = self.content.split("\n")
     new_lines = []
@@ -122,13 +114,6 @@ class DfTool():
     newline_pattern = re.compile(r'^\n', re.MULTILINE)
     # Remove any empty lines left after removing comments
     self.content = newline_pattern.sub('', self.content)
-
-  def getDockerCMD(self, line):
-    CMD = line.split(" ")[0]
-    if CMD != "":
-      return CMD
-    else:
-      return None
 
   def locateStr(self, keyword):
     ct = 0
@@ -582,7 +567,7 @@ def fetchIssue(localId):
 def fixBuildScript(file, pname):
   if not file.exists():
     return True
-  dft = DfTool(file)
+  dft = DockerfileModifier(file)
   if pname == "uwebsockets":
     '''
         https://github.com/alexhultman/zlib
@@ -685,7 +670,7 @@ def skipComponent(pname, itemName):
 
 
 def dockerfileCleaner(dockerfile):
-  dft = DfTool(dockerfile)
+  dft = DockerfileModifier(dockerfile)
   dft.replace(r'(--single-branch\s+)', "")  # --single-branch
   dft.replace(r'(--branch\s+\S+\s+|-b\s\S+\s+|--branch=\S+\s+)',
               "")  # remove --branch or -b
@@ -703,7 +688,7 @@ def fixDockerfile(dockerfile_path, project=None):
         r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',
         "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
 
-  dft = DfTool(dockerfile_path)
+  dft = DockerfileModifier(dockerfile_path)
   dft.replaceOnce(
       r'RUN apt',
       "RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt"
@@ -845,7 +830,7 @@ def updateRevisionInfo(dockerfile, localId, src_path, item, commit_date,
   item_url = item['url']
   item_rev = item['rev']
   item_type = item['type']
-  dft = DfTool(dockerfile)
+  dft = DockerfileModifier(dockerfile)
   keyword = item_url
   if keyword.startswith("http:"):
     keyword = keyword[4:]
