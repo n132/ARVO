@@ -668,7 +668,7 @@ def fix_dockerfile(dockerfile_path, project=None):
     dft.str_replace(
         'RUN ./bin/oss-fuzz-setup.sh',
         "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related stuff
-  elif project == 'graphicsmagick':  # Done
+  elif project == 'graphicsmagick':
     line = r'RUN hg clone .* graphicsmagick'
     dft.replace(
         line,
@@ -783,82 +783,72 @@ def update_revision_info(dockerfile, localId, src_path, item, commit_date,
   item_rev = item['rev']
   item_type = item['type']
   dft = DockerfileModifier(dockerfile)
-  keyword = item_url
+
   if keyword.startswith("http:"):
-    keyword = keyword[4:]
+    keyword = item_url[4:]
   elif keyword.startswith("https:"):
-    keyword = keyword[5:]
-  hits, ct = dft.get_line(keyword)
-  d = dict()
-  d['localId'] = localId
-  d['url'] = item_url
-  d['type'] = item_type
-  # Case Miss
-  if len(hits) == 0:
-    d['reason'] = "Not Found"
-    return False
-  # Case MisMatch
-  elif len(hits) != 1:
-    d['reason'] = "More then one results"
-    return False
-  # Case Hit
+    keyword = item_url[5:]
   else:
-    line = hits[0]
-    if item_type == 'git':
-      pat = re.compile(rf"{item_type}\s+clone")
-    # Could not be a clone command
-    elif item_type == 'hg':
-      pat = re.compile(rf"{item_type}\s+clone")
-    elif item_type == 'svn':
-      pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
-    else:
-      return False
-    if len(pat.findall(line)) != 1:
-      d['reason'] = f"Missing type: {item_type}, {line}"
-      return False
-    else:
-      if type(commit_date) == type(Path("/tmp")):
-        rep_path = commit_date
-        # Replace mode
-        """
-                Replace the original line with ADD/COPY command
-                Then RUN init/update the submodule
-                """
-        dft.replace_line_at(ct - 1, f"ADD {rep_path.name} {src_path}")
+    keyword = item_url
+
+  hits, ct = dft.get_line(keyword)
+  # mismatch
+  if len(hits) != 1:
+    return False
+  line = hits[0]
+  if item_type == 'git':
+    pat = re.compile(rf"{item_type}\s+clone")
+  elif item_type == 'hg':
+    pat = re.compile(rf"{item_type}\s+clone")
+  elif item_type == 'svn':
+    pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
+  else:
+    return FAIL("NOT supported protocol")
+  
+  if len(pat.findall(line)) != 1: # mismatch
+    return False
+  
+  if isinstance(commit_date, Path):
+    rep_path = commit_date
+    # Replace mode: for bisection
+    """
+            Replace the original line with ADD/COPY command
+            Then RUN init/update the submodule
+            """
+    dft.replace_line_at(ct - 1, f"ADD {rep_path.name} {src_path}")
+    dft.insert_line_at(
+        ct,
+        f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'"
+    )
+    dft.flush()
+    return True
+  else:
+    # Insertion Mode
+    if item_type == "git":
+      if approximate == '-':
         dft.insert_line_at(
             ct,
-            f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'"
+            f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
         )
-        dft.flush()
-        return True
       else:
-        # Insert Mode
-        if item_type == "git":
-          if approximate == '-':
-            dft.insert_line_at(
-                ct,
-                f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
-            )
-          else:
-            dft.insert_line_at(
-                ct,
-                f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
-            )
-          dft.flush()
-          return True
-        elif item_type == 'hg':
-          dft.insert_line_at(
-              ct,
-              f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"'''
-          )
-          dft.flush()
-          return True
-        elif item_type == "svn":
-          dft.replace(pat, f"RUN svn checkout -r {item_rev}")
-          dft.flush()
-          return True
-        else:
-          return False
+        dft.insert_line_at(
+            ct,
+            f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
+        )
+    elif item_type == 'hg':
+      # TODO: support approximate
+      dft.insert_line_at(
+          ct,
+          f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"'''
+      )
+    elif item_type == "svn":
+      # TODO: support approximate
+      dft.replace(pat, f"RUN svn checkout -r {item_rev}")
+    else:
+      return False
+    dft.flush()
+    return True
+    
 
 
 def rebase_dockerfile(dockerfile_path, commit_date):
