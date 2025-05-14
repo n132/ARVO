@@ -25,6 +25,7 @@ jobs:
     - name: Setup /src/ARVO
       run: |
         sudo mkdir /src
+        sudo mkdir /data
         sudo cp -a $GITHUB_WORKSPACE /src/ARVO
         sudo chown -R $USER:$USER /src
         sudo chown -R $USER:$USER /data
