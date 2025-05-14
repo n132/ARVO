@@ -473,6 +473,7 @@ def parse_oss_fuzz_report(report_text: bytes, localId: int) -> dict:
 
 
 def fetch_issue(localId):
+  # TODO: Replace this with proper issue tracker API calls
   url = f'https://issues.oss-fuzz.com/action/issues/{localId}/events?currentTrackerId=391'
   session = requests.Session()
   # Step 1: Get the token from the cookie
