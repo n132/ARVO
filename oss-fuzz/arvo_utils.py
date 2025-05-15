@@ -30,7 +30,10 @@ def FAIL(s, res=False):
   return res
 
 
-def execute(cmd, cwd=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
+def execute(cmd,
+            cwd=Path("/tmp"),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE):
   try:
     res = subprocess.run(cmd,
                          cwd=cwd,
@@ -45,7 +48,10 @@ def execute(cmd, cwd=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
     return False
 
 
-def check_call(cmd, cwd=None, stdout=subprocess.PIPE, stderr=subprocess.PIPE):
+def check_call(cmd,
+               cwd=Path("/tmp"),
+               stdout=subprocess.PIPE,
+               stderr=subprocess.PIPE):
   try:
     res = subprocess.run(cmd,
                          cwd=cwd,
