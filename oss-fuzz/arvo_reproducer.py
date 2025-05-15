@@ -723,7 +723,7 @@ def build_from_srcmap(srcmap, issue, tag):
 def arvo_reproducer(localId, tag):
   INFO(f"Working on {localId}")
   # 1. Fetch the basic info for the vul
-  issue = fetch_issue(localId)  # TODO, ask for a fast way
+  issue = fetch_issue(localId)  # TODO, refactor a fast way
   if not issue:
     return FAIL(f"Failed to get the srcmap or issue for {localId}")
   tmpdir = Path(tempfile.mkdtemp())
