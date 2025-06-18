@@ -35,6 +35,8 @@ TRANS_TABLE = {
 '/src/gdal/poppler': 'https://gitlab.freedesktop.org/poppler/poppler.git',
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
+'/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
+'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
 }
 # Only include non git project
 TRANS_TYPE = {
@@ -64,6 +66,8 @@ globalStrReplace = {
 'svn co http://svn.xiph.org/trunk/ogg':"git clone https://github.com/xiph/ogg.git",
 'http://lcamtuf.coredump.cx/afl/demo/afl_testcases.tgz':'https://lcamtuf.coredump.cx/afl/demo/afl_testcases.tgz',
 'https://downloads.apache.org/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.zip':'https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.6.3/apache-maven-3.6.3-bin.zip',
+"https://downloads.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.zip",
+"https://downloads.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip": "https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.5/apache-maven-3.8.5-bin.zip",
 'https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.zip':'https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.6/apache-maven-3.8.6-bin.zip',
 "https://dlcdn.apache.org/maven/maven-3/3.8.5/binaries/apache-maven-3.8.5-bin.zip":'https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.8.5/apache-maven-3.8.5-bin.zip',
 "https://opus-codec.org/static/testvectors/opus_testvectors.tar.gz":"http://opus-codec.org/static/testvectors/opus_testvectors.tar.gz",
@@ -80,9 +84,10 @@ globalStrReplace = {
 'https://github.com/erikd/libsndfile.git':"https://github.com/libsndfile/libsndfile.git",
 "https://anongit.freedesktop.org/git/poppler/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
 'git.ghostscript.com/ghostpdl.git':'cgit.ghostscript.com/ghostpdl.git',
+"wget https://boostorg.jfrog.io/artifactory/main/release/1.74.0/source/boost_1_74_0.tar.bz2": "wget https://sourceforge.net/projects/boost/files/boost/1.74.0/boost_1_74_0.tar.gz/download -O boost_1_74_0.tar.gz && gunzip -c boost_1_74_0.tar.gz | bzip2 > boost_1_74_0.tar.bz2",
 " --depth=1":"",
 " --depth 1":"",
-" --depth ":" --jobs ", 
+" --depth ":" --jobs ",
 }
 # The las 
 PnameTable = {

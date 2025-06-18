@@ -224,15 +224,9 @@ dir_check(Match_DIR)
 dir_check(MisMatch_DIR)
 
 
-def reportMiss(localId,s):
-    with open(MisMatch_DIR / f"{localId}.json", 'a+') as f:
-        f.write(s+"\n")
-    return False
+
     
-def reportHit(localId,s):
-    with open(Match_DIR / f"{localId}.json", 'a+') as f:
-        f.write(s+"\n")
-    return True
+
 def dockerfileCleaner(dockerfile):
     dft = DfTool(dockerfile)
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
@@ -242,27 +236,31 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
+
     dft = DfTool(dockerfile)
-    keyword = item_url
+    keyword = item['old_url']
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
     hits, ct = dft.getLine(keyword)
-    d = dict()
-    d['localId'] = localId
-    d['url'] = item_url
-    d['type'] = item_type
     # Case Miss
     if len(hits) == 0:
-        d['reason'] = "Not Found"
-        return reportMiss(localId,json.dumps(d,indent=4))
+        WARN(f"Not Found {item_url=} for {localId=}")
+        return False
     # Case MisMatch
     elif len(hits) != 1:
-        d['reason'] = "More then one results"
-        return reportMiss(localId,json.dumps(d,indent=4))
+        WARN(f"Found more than one lines containing {item_url=} for {localId=}")
+        return False
     # Case Hit
     else:
+        if item['old_url']!= item['url']:
+            new_url = item['url']
+            if new_url.startswith("http:"):
+                new_url = new_url[4:]
+            elif new_url.startswith("https:"):
+                new_url = new_url[5:]
+            dft.replace(keyword,new_url)
         line = hits[0]
         if item_type == 'git':
             pat = re.compile(rf"{item_type}\s+clone")
@@ -274,8 +272,8 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         else:
             return False
         if len(pat.findall(line)) != 1:
-            d['reason'] = f"Missing type: {item_type}, {line}"
-            return reportMiss(localId,json.dumps(d,indent=4))
+            WARN(f"Mismatch the type of component downloading, where {item_type=} for {localId=}")
+            return False
         else:
             if type(commit_date) == type(Path("/tmp")):
                 rep_path = commit_date
@@ -287,7 +285,7 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
                 dft.replaceLineat(ct-1,f"ADD {rep_path.name} {src_path}")
                 dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'")
                 dft.flush()
-                return reportHit(localId,json.dumps(d,indent=4))
+                return True
             else:
                 # Insert Mode
                 if item_type == "git":
@@ -296,15 +294,15 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
                     else:
                         dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
                     dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
+                    return True
                 elif item_type == 'hg':
                     dft.insertLineat(ct,f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"''')
                     dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
+                    return True
                 elif item_type == "svn":
                     dft.replace(pat,f"RUN svn checkout -r {item_rev}")
                     dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
+                    return True
                 else:
                     return False
 
