@@ -149,7 +149,6 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     
     # Handle Srcmap Info
     for x in sortedKey:
-        # INFO(f"[+] Prepare Dependency: {x}")
         if skipComponent(project_name,x):
             continue
         
@@ -163,6 +162,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         
         newD = {}
         newD['rev'] = data[x]['rev']
+        newD['old_url'] = data[x]['url']
         newKey, newD['url'], newD['type'] = trans_table(x,data[x]['url'],data[x]['type'])
         
         del(data[x])
@@ -209,7 +209,6 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         else:
             if updateRevisionInfo(dockerfile,localId,newKey,data[newKey],commit_date,approximate):
                 continue
-            
         if item_rev == 'xXxXx': # Branch For patch locating
             with open(getSrcmaps(localId)[0]) as f:
                 meta= json.loads(f.read())
