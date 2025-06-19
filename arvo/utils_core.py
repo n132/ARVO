@@ -18,20 +18,20 @@ def fixDockerfile(dockerfile_path,project=None):
     dft = DfTool(dockerfile_path)
     dft.replaceOnce(r'RUN apt',"RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt")
     dft.strReplaceAll(globalStrReplace)
-
+    def repl(match):
+        ver_us = match.group(1)
+        ver_dot = ver_us.replace('_', '.')
+        return f'RUN wget https://archives.boost.io/release/{ver_dot}/source/boost_{ver_us}.tar.bz2'
+    pattern = r'RUN wget .*?/boost_(\d+_\d+_\d+)\.tar\.bz2'
+    replacement = r'RUN wget https://archives.boost.io/release/\1/source/boost_\1.tar.bz2'
+    dft.replace(pattern,repl)
     if project == "lcms":
         dft.replace(r'#add more seeds from the testbed dir.*\n',"")
     elif project =='wolfssl':
         pattern = r'RUN gsutil cp .*? (\$SRC/[^ ]+\.zip)'
         replacement = r'RUN touch dummy && zip -j \1 dummy'
         dft.replace(pattern,replacement)
-        def repl(match):
-            ver_us = match.group(1)
-            ver_dot = ver_us.replace('_', '.')
-            return f'RUN wget https://archives.boost.io/release/{ver_dot}/source/boost_{ver_us}.tar.bz2'
-        pattern = r'RUN wget .*?/boost_(\d+_\d+_\d+)\.tar\.bz2'
-        replacement = r'RUN wget https://archives.boost.io/release/\1/source/boost_\1.tar.bz2'
-        dft.replace(pattern,repl)
+        
     elif project == 'skia':
         dft.strReplace('RUN wget',"# RUN wget")
         line = 'COPY build.sh $SRC/'
