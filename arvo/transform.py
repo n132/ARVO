@@ -89,7 +89,7 @@ globalStrReplace = {
 " --depth ":" --jobs ",
 }
 # The las 
-PnameTable = {
+pname_table = {
     'libpng-proto':"libprotobuf-mutator", # Only one issue...
     'pcapplusplus':"PcapPlusPlus",
     'skia-ftz':'skia',

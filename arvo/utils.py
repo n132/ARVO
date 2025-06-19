@@ -1,11 +1,11 @@
-import re, shutil, requests, sys, hashlib, math, tiktoken, zipfile
+import re, shutil, requests, sys, math, tiktoken
 from datetime       import datetime
 from base58         import b58encode
 from .utils_exec    import *
 from .utils_docker  import *
 from .DB_Manager    import *
 from .utils_log     import *
-from .transform     import PnameTable, trans_table
+from .transform     import pname_table, trans_table
 from .utils_init    import *
 from .utils_sql     import *
 from rich.progress import Progress
@@ -266,7 +266,7 @@ def getPname(localId,srcmapCheck=True):
     else:
         pname = issue['project']
     if srcmapCheck == False: return pname # return when no check
-    if pname in PnameTable: return PnameTable[pname] # handling special cases
+    if pname in pname_table: return pname_table[pname] # handling special cases
     with open(srcmap[0]) as f: info1 = json.load(f)
     with open(srcmap[1]) as f: info2 = json.load(f)
     except_name = "/src/"+pname
