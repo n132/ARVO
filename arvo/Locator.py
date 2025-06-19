@@ -565,7 +565,7 @@ def lifeSpan_prepareProject(localId,pname):
     vulnerable_commit = ti["rev"]
     return gt, beg_commit, vulnerable_commit
 def lifeSpan(localId):
-    global CHANCE, OSS_FUZZ_DIR, TURBO
+    global CHANCE, TURBO
     # 1. Get Pname
     print(f"[+] Working on {localId}")
     CHANCE  = 0x10
