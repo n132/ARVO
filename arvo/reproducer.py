@@ -162,7 +162,6 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         
         newD = {}
         newD['rev'] = data[x]['rev']
-        newD['old_url'] = data[x]['url']
         newKey, newD['url'], newD['type'] = trans_table(x,data[x]['url'],data[x]['type'])
         
         del(data[x])

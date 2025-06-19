@@ -22,7 +22,17 @@ def fixDockerfile(dockerfile_path,project=None):
     if project == "lcms":
         dft.replace(r'#add more seeds from the testbed dir.*\n',"")
     elif project =='wolfssl':
-        dft.strReplace('RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip $SRC/corpus_wolfssl_disable-fastmath.zip',"RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef")
+        pattern = r'RUN gsutil cp .*? (\$SRC/[^ ]+\.zip)'
+        replacement = r'RUN touch dummy && zip -j \1 dummy'
+        dft.replace(pattern,replacement)
+        def repl(match):
+            ver_us = match.group(1)
+            ver_dot = ver_us.replace('_', '.')
+            return f'RUN wget https://archives.boost.io/release/{ver_dot}/source/boost_{ver_us}.tar.bz2'
+        
+        pattern = r'RUN wget .*?/boost_(\d+_\d+_\d+)\.tar\.bz2'
+        replacement = r'RUN wget https://archives.boost.io/release/\1/source/boost_\1.tar.bz2'
+        dft.replace(pattern,repl)
     elif project == 'skia':
         dft.strReplace('RUN wget',"# RUN wget")
         line = 'COPY build.sh $SRC/'
@@ -238,11 +248,14 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     item_type   = item['type']
 
     dft = DfTool(dockerfile)
-    keyword = item['old_url']
+    keyword = item['url']
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
+    elif keyword.startswith("git://git"):
+        keyword = keyword[9:]
+
     hits, ct = dft.getLine(keyword)
     # Case Miss
     if len(hits) == 0:
@@ -254,13 +267,6 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         return False
     # Case Hit
     else:
-        if item['old_url']!= item['url']:
-            new_url = item['url']
-            if new_url.startswith("http:"):
-                new_url = new_url[4:]
-            elif new_url.startswith("https:"):
-                new_url = new_url[5:]
-            dft.replace(keyword,new_url)
         line = hits[0]
         if item_type == 'git':
             pat = re.compile(rf"{item_type}\s+clone")
