@@ -11,48 +11,25 @@ from .utils_sql     import *
 from rich.progress import Progress
 from collections.abc import Sized
 
-# Init ARVO Directorys
-def dir_check(path):
-    try:
-        if not path.exists():
-            path.mkdir()
-        return True
-    except:
-        return False
+
 def initARVODir(dirs):
     for i in dirs:
-        if not dir_check(i):
-            PANIC(f"Failed to init {i.name}")
+        if not i.exists():
+            i.mkdir()
 initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
     with open(OSS_DB_MAP,'w') as f:
         f.write(json.dumps(dict(),indent=4))
-# Init Done
 session = requests.Session()
 
+# Init Done
 def eventLog(s,ext=False):
     FAIL(s)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
         f.write(s+"\n")
     if ext:
         exit(1)
-def file_check(path):
-    try:
-        if not path.exists():
-            path.touch()
-        return True
-    except:
-        return False
-def json_file_check(path):
-    try:
-        if not path.exists():
-            path.touch()
-            with open(path,'w') as f:
-                f.write(json.dumps(dict(),indent=4))
-        return True
-    except:
-        return False
 def tmpDir(path=OSS_TMP,pre="ARVO_",dont_mk=False):
     name = pre+b58encode(os.urandom(16)).decode()
     res = Path(path)
