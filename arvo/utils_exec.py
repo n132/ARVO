@@ -1,6 +1,6 @@
 import subprocess
 from pathlib import Path
-from utils_log import *
+from .utils_log     import *
 def execute(cmd,cwd=None,stdin=None,stderr=None,return_code=[0],mute_log=False):
     if not cwd:
         p = subprocess.Popen(cmd,stdin=stdin,stdout=subprocess.PIPE,stderr=stderr)
