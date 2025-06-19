@@ -36,6 +36,8 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.strReplace('RUN wget',"# RUN wget")
         line = 'COPY build.sh $SRC/'
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
+    elif project == 'gdal':
+        dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
     elif project == 'libreoffice':
         dft.strReplace('RUN ./bin/oss-fuzz-setup.sh',\
         "RUN sed -i 's|svn export --force -q https://github.com|#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
