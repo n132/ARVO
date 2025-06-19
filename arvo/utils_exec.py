@@ -1,5 +1,6 @@
 import subprocess
 from pathlib import Path
+from utils_log import *
 def execute(cmd,cwd=None,stdin=None,stderr=None,return_code=[0],mute_log=False):
     if not cwd:
         p = subprocess.Popen(cmd,stdin=stdin,stdout=subprocess.PIPE,stderr=stderr)
@@ -12,7 +13,7 @@ def execute(cmd,cwd=None,stdin=None,stderr=None,return_code=[0],mute_log=False):
         if mute_log:
             return False
         cmd = " ".join(cmd)
-        print(f"[!] Failed to execute the command:\n\t{cmd}\n\tpwd: {cwd}")
+        WARN(f"[!] Failed to execute the command:\n\t{cmd}\n\tpwd: {cwd}")
         return False
 def execute_ret(cmd,cwd=None,stdin=None,stdout=None,stderr=None):
     if not cwd:
@@ -28,7 +29,7 @@ def check_call(cmd,cwd=Path("/tmp"),stdin=None,stdout=None,stderr=None,verbose=T
         if verbose:
             cmd = [str(x) for x in cmd]
             cmd = " ".join(cmd)
-            print(f"[!] Failed to execute the command:\n\t{cmd}\n\tpwd: {cwd}")
+            WARN(f"[!] Failed to execute the command:\n\t{cmd}\n\tpwd: {cwd}")
         return False
     return True
 def run_stderr(cmd,cwd=None,stdin=None,stdout=None,stderr=subprocess.PIPE):
