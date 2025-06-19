@@ -229,18 +229,6 @@ def combineLines(lines):
                 flag=1
     return res
 
-updateRevDir = ARVO / "matches" 
-Match_DIR = updateRevDir / "hit"
-MisMatch_DIR = updateRevDir / "miss"
-
-dir_check(updateRevDir)
-dir_check(Match_DIR)
-dir_check(MisMatch_DIR)
-
-
-
-    
-
 def dockerfileCleaner(dockerfile):
     dft = DfTool(dockerfile)
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
