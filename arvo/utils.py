@@ -72,8 +72,7 @@ def remove_oss_fuzz_img(localId):
 def get_projectInfo(localId,pname=None):
     srcmap = getSrcmaps(localId)
     if(len(srcmap)!=2):
-        eventLog(f"[-] get_projectInfo: Can't find enough srcmaps: {localId}")
-        exit(1)
+        eventLog(f"[-] get_projectInfo: Can't find enough srcmaps: {localId}",True)
     if not pname: pname = getPname(localId)
     with open(srcmap[0]) as f:
         info1 = json.load(f)["/src/"+pname]
@@ -92,6 +91,7 @@ def prepareLatestOssfuzz(pname):
     if tmp_oss_fuzz_dir/ "projects" in tmp_list:
         proj_dir = tmp_oss_fuzz_dir/ "projects" / pname
     elif tmp_oss_fuzz_dir/ "targets" in tmp_list:
+        # support aceint oss-fuzz
         proj_dir = tmp_oss_fuzz_dir/ "targets" / pname
     else:
         return leaveRet(False,tmp_dir)
@@ -181,8 +181,7 @@ def getLanguage(localId):
         return False
     language = str(res[0])
     PLanguage[project_name] = language
-    return language
-        
+    return language     
 def getDate(localId,tag="vul"):
     srcmaps = getSrcmaps(localId)
     if len(srcmaps)!=2:
@@ -193,7 +192,6 @@ def getDate(localId,tag="vul"):
         srcmap_name = srcmaps[1].name
     commit_date = srcmap_name.split(".")[0].split("-")[-1]
     return str2date(commit_date,STAMP_DELAY)
-
 def getDone(avoid=False, avoid_list=['binutils', 'libreoffice']):
     conn = sqlite3.connect(DB_PATH)
     try:
@@ -208,7 +206,6 @@ def getDone(avoid=False, avoid_list=['binutils', 'libreoffice']):
         return False
     finally:
         conn.close()
-
 def getEngine(localId):
     # ['afl', 'libfuzzer', 'honggfuzz']
     issue = getIssue(localId)
