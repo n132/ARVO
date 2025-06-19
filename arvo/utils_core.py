@@ -38,6 +38,9 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
     elif project == 'gdal':
         dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
+    elif project == 'freeradius':
+        dft.strReplace('sha256sum -c','pwd')
+        dft.strReplace("curl -s -O ",'curl -s -O -L ')
     elif project == 'libreoffice':
         dft.strReplace('RUN ./bin/oss-fuzz-setup.sh',\
         "RUN sed -i 's|svn export --force -q https://github.com|#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
