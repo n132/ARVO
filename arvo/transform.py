@@ -51,8 +51,8 @@ KEYChanges = {
 globalStrReplace = {
 'git://git.gnome.org/libxml2': "https://gitlab.gnome.org/GNOME/libxml2.git",
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
-"https://git.savannah.nongnu.org/r/freetype/freetype2.git": "git://git.sv.nongnu.org/freetype/freetype2.git",
-'https://git.savannah.nongnu.org/r/freetype/freetype2':'git://git.sv.nongnu.org/freetype/freetype2.git',
+"https://git.savannah.nongnu.org/r/freetype/freetype2.git": "https://github.com/freetype/freetype.git",
+'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype.git',
 'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
 'https://github.com/01org/libva':'https://github.com/intel/libva.git',
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
