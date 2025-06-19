@@ -32,22 +32,24 @@ def db_init():
         conn.commit()
 def insert_entry(data):
     conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        conn.execute("BEGIN EXCLUSIVE")
-        conn.execute("""
-        INSERT INTO arvo (
-            localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
-            patch_url, verified, fuzz_target, fuzz_engine,
-            sanitizer, crash_type, crash_output, severity, report, fix_commit, language
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """, data)
-        conn.commit()
-        return True
-    except:
-        FAIL("[-] FAILED to INSERT to DB")
-        return False
-    finally:
-        conn.close()
+    for _ in range(10):
+        try:
+            conn.execute("BEGIN EXCLUSIVE")
+            conn.execute("""
+            INSERT INTO arvo (
+                localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
+                patch_url, verified, fuzz_target, fuzz_engine,
+                sanitizer, crash_type, crash_output, severity, report, fix_commit, language
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, data)
+            conn.commit()
+            conn.close()
+            return True
+        except:
+            WARN(f"Failed to update the dataset, retry ({_}/10)")            
+    FAIL("[-] FAILED to INSERT to DB")
+    conn.close()
+    return False
 def delete_entry(localId):
     conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
     try:
