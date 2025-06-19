@@ -6,6 +6,11 @@ from .transform import globalStrReplace
 #########################################
 # Core Area for reproducing
 #########################################
+NoOperation = [
+    "/src",
+    "/src/LPM/external.protobuf/src/external.protobuf",
+    "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
+]
 def fixDockerfile(dockerfile_path,project=None):
     # todo: if you want to make it faster, implement it. And it's a liitle complex
     # DO not want to modify dockerfile
@@ -187,11 +192,6 @@ def fixBuildScript(file,pname):
         dft.replace(r'^make$','make -j`nproc`\n')
     assert(dft.flush()==True)
     return True
-NoOperation = [
-    "/src",
-    "/src/LPM/external.protobuf/src/external.protobuf",
-    "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
-]
 def skipComponent(pname,itemName):
     itemName = itemName.strip(" ")
     # Special for skia, Skip since they are done by submodule init
@@ -228,7 +228,6 @@ def combineLines(lines):
                 buf = line[:-1]
                 flag=1
     return res
-
 def dockerfileCleaner(dockerfile):
     dft = DfTool(dockerfile)
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
@@ -249,60 +248,58 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         keyword = keyword[9:]
 
     hits, ct = dft.getLine(keyword)
-    # Case Miss
     if len(hits) == 0:
         WARN(f"Not Found {item_url=} for {localId=}")
         return False
-    # Case MisMatch
-    elif len(hits) != 1:
+    if len(hits) != 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
         return False
-    # Case Hit
+
+    line = hits[0]
+    if item_type == 'git':
+        pat = re.compile(rf"{item_type}\s+clone")
+    elif item_type == 'hg':
+        pat = re.compile(rf"{item_type}\s+clone")
+    elif item_type == 'svn':
+        pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
     else:
-        line = hits[0]
-        if item_type == 'git':
-            pat = re.compile(rf"{item_type}\s+clone")
-        # Could not be a clone command
-        elif item_type == 'hg':
-            pat = re.compile(rf"{item_type}\s+clone")
-        elif item_type == 'svn':
-            pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
-        else:
-            return False
-        if len(pat.findall(line)) != 1:
-            WARN(f"Mismatch the type of component downloading, where {item_type=} for {localId=}")
-            return False
-        else:
-            if type(commit_date) == type(Path("/tmp")):
-                rep_path = commit_date
-                # Replace mode
-                """
-                Replace the original line with ADD/COPY command
-                Then RUN init/update the submodule
-                """
-                dft.replaceLineat(ct-1,f"ADD {rep_path.name} {src_path}")
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'")
-                dft.flush()
-                return True
+        WARN(f"No support for {item_type=}, {localId=}")
+        return False
+
+    if len(pat.findall(line)) != 1:
+        WARN(f"Mismatch the type of component downloading, where {item_type=} for {localId=}")
+        return False
+    
+    if type(commit_date) == type(Path("/tmp")):
+        rep_path = commit_date
+        # Replace mode
+        """
+        Replace the original line with ADD/COPY command
+        Then RUN init/update the submodule
+        """
+        dft.replaceLineat(ct-1,f"ADD {rep_path.name} {src_path}")
+        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'")
+        dft.flush()
+        return True
+    else:
+        # Insert Mode
+        if item_type == "git":
+            if approximate == '-':
+                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
             else:
-                # Insert Mode
-                if item_type == "git":
-                    if approximate == '-':
-                        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
-                    else:
-                        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
-                    dft.flush()
-                    return True
-                elif item_type == 'hg':
-                    dft.insertLineat(ct,f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"''')
-                    dft.flush()
-                    return True
-                elif item_type == "svn":
-                    dft.replace(pat,f"RUN svn checkout -r {item_rev}")
-                    dft.flush()
-                    return True
-                else:
-                    return False
+                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            dft.flush()
+            return True
+        elif item_type == 'hg':
+            dft.insertLineat(ct,f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"''')
+            dft.flush()
+            return True
+        elif item_type == "svn":
+            dft.replace(pat,f"RUN svn checkout -r {item_rev}")
+            dft.flush()
+            return True
+        else:
+            return False
 
 if __name__ == "__main__":
     pass
