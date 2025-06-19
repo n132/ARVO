@@ -29,7 +29,6 @@ def fixDockerfile(dockerfile_path,project=None):
             ver_us = match.group(1)
             ver_dot = ver_us.replace('_', '.')
             return f'RUN wget https://archives.boost.io/release/{ver_dot}/source/boost_{ver_us}.tar.bz2'
-        
         pattern = r'RUN wget .*?/boost_(\d+_\d+_\d+)\.tar\.bz2'
         replacement = r'RUN wget https://archives.boost.io/release/\1/source/boost_\1.tar.bz2'
         dft.replace(pattern,repl)
