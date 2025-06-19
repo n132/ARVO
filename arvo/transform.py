@@ -1,6 +1,6 @@
 #This file is created to transform the url to some moved repo.
 TRANS_TABLE = {
-'/src/freetype2': 'https://github.com/freetype/freetype.git',
+'/src/freetype2': 'https://github.com/freetype/freetype2',
 '/src/pcre2': "https://github.com/PCRE2Project/pcre2",
 '/src/skia/third_party/externals/libjpeg-turbo': 'https://github.com/libjpeg-turbo/libjpeg-turbo.git',
 '/src/radare2-regressions': 'https://github.com/rlaemmert/radare2-regressions.git',
@@ -51,8 +51,7 @@ KEYChanges = {
 globalStrReplace = {
 'git://git.gnome.org/libxml2': "https://gitlab.gnome.org/GNOME/libxml2.git",
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
-"https://git.savannah.nongnu.org/r/freetype/freetype2.git": "https://github.com/freetype/freetype.git",
-'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype.git',
+'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype2',
 'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L https://github.com/Unidata/netcdf-c/archive/refs/tags/v4.4.1.1.tar.gz',
 'https://github.com/01org/libva':'https://github.com/intel/libva.git',
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
