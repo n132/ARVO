@@ -32,7 +32,7 @@ def db_init():
         conn.commit()
 def insert_entry(data):
     conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    for _ in range(10):
+    for _ in range(5):
         try:
             conn.execute("BEGIN EXCLUSIVE")
             conn.execute("""

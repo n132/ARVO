@@ -780,6 +780,11 @@ def reproduce(localId, dockerize = True, update = False):
     language       = getLanguage(localId)
     # We still have the layers cached so it's not hard to re-run and get some info
 
+    if isinstance(fix_commit,list):
+        tmpstr = ''
+        for x in fix_commit:
+            tmpstr+=x+"\n"
+        fix_commit = tmpstr[:-1]
     # Get fuzz_target
     cmd = f"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
