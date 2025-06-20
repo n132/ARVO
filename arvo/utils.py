@@ -16,7 +16,7 @@ def initARVODir(dirs):
     for i in dirs:
         if not i.exists():
             i.mkdir()
-initARVODir([OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
+initARVODir([DOCKER_PUSH_QUEUE,OSS_LOCK,OSS_IMG,OSS_TMP,OSS_OUT,OSS_WORK,OSS_DB,OSS_ERR,ExeLog,ARVO_ZDC])
 if not OSS_DB_MAP.exists():
     OSS_DB_MAP.touch()
     with open(OSS_DB_MAP,'w') as f:

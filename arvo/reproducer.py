@@ -419,8 +419,10 @@ def pushImgRemote(localId,issue):
         docker_cp(OSS_IMG/f"{localId}"/'arvo',f"{cnf}:/bin/arvo") and \
         docker_commit(cnv,f"n132/arvo:{localId}-vul") and \
         docker_commit(cnf,f"n132/arvo:{localId}-fix") and \
-        docker_push(f"n132/arvo:{localId}-vul") and \
-        docker_push(f"n132/arvo:{localId}-fix"):
+        docker_save(f"n132/arvo:{localId}-vul",DOCKER_PUSH_QUEUE / f"{localId}-vul.tar") and \
+        docker_save(f"n132/arvo:{localId}-fix",DOCKER_PUSH_QUEUE / f"{localId}-fix.tar"):
+        # docker_push(f"n132/arvo:{localId}-vul") and \
+        # docker_push(f"n132/arvo:{localId}-fix"):
 
         docker_rm(cnv)
         docker_rm(cnf)

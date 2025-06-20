@@ -712,13 +712,50 @@ def vZero(localId,retryChance=None):
     log.mkdir(parents=True,exist_ok=True)
     target_commit = dichotomy_search(commits+["ZDV"],localId,pname,poc,'vZero')
     return leaveRet(target_commit,poc.parent)
-def reproduce(localId, dockerize = True, update = True):
+def dockerhubPusher():
+    # The bandwith is usually the limit so we don't do multi-process
+    while True:
+        todo =list(DOCKER_PUSH_QUEUE.iterdir())
+        if len(todo) == 0:
+            SUCCESS("All local images are pushed to remote")
+            break
+        for x in todo:
+            if not x.exists():
+                continue
+            localId,tag = x.name.split("-")
+            tag = tag.split(".")[0]
+            url = f"https://hub.docker.com/v2/repositories/n132/arvo/tags/{localId}-{tag}/"
+            resp = requests.get(url)
+            if resp.status_code == 200:
+                INFO(f"n132/arvo:{localId}-{tag} exists")
+                os.remove(x)
+                continue
+            if not docker_load(open(x)):
+                FAIL(f"FAILED to docker load {str(x)}")
+                continue
+            if not docker_push(f"n132/arvo:{localId}-{tag}"):
+                FAIL(f"FAILED to docker push n132/arvo:{localId}-{tag}")
+                continue
+            os.remove(x)
+
+def dockerImgExist(localId):
+    # check if we have the docker local/remote images 
+    tags = ['vul','fix']
+    for tag in tags:
+        url = f"https://hub.docker.com/v2/repositories/n132/arvo/tags/{localId}-{tag}/"
+        resp = requests.get(url)
+        if resp.status_code != 200 and \
+            (not (DOCKER_PUSH_QUEUE / f"{localId}-{tag}.tar").exists()):
+            return False    
+    return True
+
+def reproduce(localId, dockerize = True, update = False):
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
         INFO("[+] Record Exists")
         return True
-    if (not verify(localId,dockerize)):
+    if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
         eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
         return False
     
