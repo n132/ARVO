@@ -16,7 +16,6 @@ UserName            = 'root'
 
 # Config
 ARVO_DIR            = f'/src/ARVO/arvo' # Path of ARVO
-REPORTS_DIR         = f'/src/ARVO/Reports' #Path of generated reports
 gcloud_key          = f'Path-of-the-gcloud-key' 
 OSS_LOCK_DIR        = f'/data/oss-lock/'
 OSS_SAVED_IMG       = f'/data/oss-img/'
