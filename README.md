@@ -31,7 +31,7 @@ See [GitHub Action Example][4] for an example of the database rebuild. Full func
 
 An example of rebuilding case-42487096:
 ```sh
-git cloned https://github.com/n132/ARVO.git
+git clone https://github.com/n132/ARVO.git
 cd ARVO
 python3 -m venv arvo-run # create the venv
 source ./arvo-run/bin/activate # enable venv
