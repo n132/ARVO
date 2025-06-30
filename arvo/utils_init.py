@@ -21,7 +21,6 @@ AFL_FUZZER_ARGS =   'AFL_FUZZER_ARGS="-m none"'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = gcloud_key
 OSS_TMP     = Path(TMP)
 ARVO        = Path(ARVO_DIR)
-REPORTS_DIR = Path(REPORTS_DIR)
 OSS_OUT     = Path(OSS_OUT_DIR)
 OSS_WORK    = Path(OSS_WORK_DIR)
 OSS_IMG     = Path(OSS_SAVED_IMG)

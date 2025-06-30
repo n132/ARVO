@@ -1,7 +1,6 @@
 from .OpenAI_gpt import GPT4,GPT4_Preview
 from pathlib import Path
 from .utils_diff import getDiff
-REPORTS_DIR = Path("./Reports")
 def oss_fuzz_get_patch(localID):
     diff_file = getDiff(localID)
     if diff_file == False:
