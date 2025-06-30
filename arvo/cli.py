@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 from .reproducer import verify
 from .utils import *
-from .Locator import reproduce
+from .Locator import report
 from .utils_log import *
 
 def cli_reproduce(localId):
@@ -18,9 +18,8 @@ def cli_reproduce(localId):
         return False
 
 def cli_report(localId):
-    pass
-    # TODO
-    # reproduce(localId,False,False)
+    res = report(localId,False)
+    print(res)
 def cli_list(pname):
     res = listProject(pname)
     if not res:

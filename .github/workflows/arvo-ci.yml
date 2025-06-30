@@ -34,14 +34,6 @@ jobs:
         cd /src/ARVO/
         pip3 install -e .
 
-    - name: Git LFS pull and extract metadata
-      run: |
-        cd /src/ARVO
-        git lfs pull
-        cp profile.template arvo/_profile.py
-        cd arvo
-        tar -xvf oss_fuzz_meta.tar
-
     - name: Install docker-cli
       run: |
         curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
@@ -55,7 +47,9 @@ jobs:
     - name: Run ARVO test
       run: |
         source /src/arvo_venv/bin/activate
-        cd /src/ARVO
-        rm -f ./Reports/25402.json
-        arvo report 25402
-        grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
+        arvo report 25402 > /tmp/output
+        if grep -q "https://github.com/beltoforion/muparser/commit/322716256d60e316c9a3b905a387be36d4e47368" /tmp/output; then
+            exit  0
+        else
+            exit -1
+        fi
