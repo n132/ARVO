@@ -1,7 +1,0 @@
-{
-  "/src/dom4j": {
-    "type": "git",
-    "url": "https://github.com/dom4j/dom4j.git",
-    "rev": "41b079a88790b8d5694aa6c9c738dd624a0a667b"
-  }
-}

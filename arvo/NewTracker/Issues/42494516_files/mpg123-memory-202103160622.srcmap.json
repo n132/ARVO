@@ -1,7 +1,0 @@
-{
-  "/src/aflplusplus": {
-    "type": "git",
-    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
-    "rev": "74a6044b3fba496c1255f9aedbf5b7253ae29f0e"
-  }
-}

@@ -1,7 +1,0 @@
-{
-  "/src/nghttp2": {
-    "type": "git",
-    "url": "https://github.com/nghttp2/nghttp2.git",
-    "rev": "422167b88bcb647734579ce88a16cabcdb3f269e"
-  }
-}

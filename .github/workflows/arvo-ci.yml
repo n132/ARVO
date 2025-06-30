@@ -20,32 +20,19 @@ jobs:
         sudo apt-get update --fix-missing
         sudo apt-get install -y sudo vim gdb wget git curl python3 tmux ipython3 python3-pip python3.12-venv lsb-release gnupg git-lfs
 
-    # - name: Install oh-my-zsh
-    #   run: echo Y | sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-
     - name: Setup /src/ARVO
       run: |
         sudo mkdir /src
+        sudo mkdir /data
         sudo cp -a $GITHUB_WORKSPACE /src/ARVO
         sudo chown -R $USER:$USER /src
         sudo chown -R $USER:$USER /data
-    - name: Clone OSS-Fuzz
-      run: |
-        git clone https://github.com/google/oss-fuzz.git /src/oss-fuzz
     - name: Setup Python venv
       run: |
         python3 -m venv /src/arvo_venv
         source /src/arvo_venv/bin/activate
         cd /src/ARVO/
         pip3 install -e .
-
-    - name: Git LFS pull and extract metadata
-      run: |
-        cd /src/ARVO
-        git lfs pull
-        cp profile.template arvo/_profile.py
-        cd arvo
-        tar -xvf oss_fuzz_meta.tar
 
     - name: Install docker-cli
       run: |
@@ -60,7 +47,11 @@ jobs:
     - name: Run ARVO test
       run: |
         source /src/arvo_venv/bin/activate
-        cd /src/ARVO
-        rm -f ./Reports/25402.json
-        arvo report 25402
-        grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
+        cp /src/ARVO/profile.template /src/ARVO/arvo/_profile.py
+        cp /src/ARVO/.github/workflows/base-builder_cache.json /tmp/
+        arvo report 25402 > /tmp/output
+        if grep -q "https://github.com/beltoforion/muparser/commit/322716256d60e316c9a3b905a387be36d4e47368" /tmp/output; then
+            exit  0
+        else
+            exit -1
+        fi

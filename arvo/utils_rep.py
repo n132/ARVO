@@ -11,14 +11,10 @@ from .utils import *
 Explorer = Path(ARVO/ "Explorer")
 if not Explorer.exists():
     Explorer.mkdir()
-def removeSucceed(issues):
-    with open("Results.json") as f:
-        data = f.readlines()
-    done    = [json.loads(x)['localId'] for x in data]
-    return [_  for _ in issues if _ not in done]
-def removeReported(issues):
-    reports = getReports()
-    return [_  for _ in issues if _ not in reports]
+def removeSucceed(localIds):
+    return [_  for _ in localIds if _ not in getDone()]
+def removeReported(localIds):
+    return [_  for _ in localIds if _ not in getReports()]
 def touchLogfile(log_file):
     if not log_file.exists():
         log_file.touch()
@@ -41,15 +37,15 @@ def reportExplore(issues,log_file,remove_reported=True):
     doing = []
     while len(todo)> 0 :
         choice = random.choice(todo)
-        print(f"[+] Locating the patch of {choice}")
-        print(f"[+] {len(todo)} issues left")
+        INFO(f"[+] Locating the patch of {choice}")
+        INFO(f"[+] {len(todo)} issues left")
         lock = FileLock(OSS_LOCK / f"{choice}.lock")
         try:
             with lock.acquire(timeout=.3):
                 res   = report(choice)
         except Timeout:
             doing.append(choice)
-            print(f"[+] Another thead is working on this issue, skip...")
+            INFO(f"[+] Another thead is working on this issue, skip...")
             todo = [x for x in todo if x not in doing]
             continue
         updateLogfile(choice,res,log_file)
@@ -64,15 +60,15 @@ def unitExplore(issues,log_file,remove_result=True):
     doing = []
     while len(todo)> 0 :
         choice = random.choice(todo)
-        print(f"[+] Verfiying {choice}")
-        print(f"[+] {len(todo)} issues left")
+        INFO(f"[+] Verfiying {choice}")
+        INFO(f"[+] {len(todo)} issues left")
         lock = FileLock(OSS_LOCK / f"{choice}.lock")
         try:
             with lock.acquire(timeout=.3):
                 res   = verify(choice)
         except Timeout:
             doing.append(choice)
-            print(f"[+] Another thead is working on this issue, skip...")
+            INFO(f"[+] Another thead is working on this issue, skip...")
             todo = [x for x in todo if x not in doing]
             continue
         updateLogfile(choice,res,log_file)
@@ -85,15 +81,15 @@ def xExplore(issues, log_file, hook):
     doing = []
     while len(todo)> 0 :
         choice = random.choice(todo)
-        print(f"[+] Checking {choice}")
-        print(f"[+] {len(todo)} issues left")
+        INFO(f"[+] Checking {choice}")
+        INFO(f"[+] {len(todo)} issues left")
         lock = FileLock(OSS_LOCK / f"{choice}.lock")
         try:
             with lock.acquire(timeout=.3):
                 res     = hook(choice)
         except Timeout:
             doing.append(choice)
-            print(f"[+] Another thead is working on this issue, skip...")
+            INFO(f"[+] Another thead is working on this issue, skip...")
             todo = [x for x in todo if x not in doing]
             continue
         updateLogfile(choice,res,log_file)
@@ -106,15 +102,15 @@ def archive(issues,log_file):
     doing = []
     while len(todo)> 0 :
         choice = random.choice(todo)
-        print(f"[+] Verfiying {choice}")
-        print(f"[+] {len(todo)} issues left")
+        INFO(f"[+] Verfiying {choice}")
+        INFO(f"[+] {len(todo)} issues left")
         lock = FileLock(OSS_LOCK / f"{choice}.lock")
         try:
             with lock.acquire(timeout=.3):
                 res   = verify(choice,True)
         except Timeout:
             doing.append(choice)
-            print(f"[+] Another thead is working on this issue, skip...")
+            INFO(f"[+] Another thead is working on this issue, skip...")
             todo = [x for x in todo if x not in doing]
             continue
         updateLogfile(choice,res,log_file)
