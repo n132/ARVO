@@ -38,6 +38,7 @@ source ./arvo-run/bin/activate # enable venv
 pip3 install -e . # install arvo
 cp ./profile.template ./arvo/_profile.py
 cp ./.github/workflows/base-builder_cache.json /tmp/
+sed -i "s|/src/ARVO/arvo|$(pwd)/arvo|g" ./arvo/_profile.py
 arvo report 25402 # regenerate the report
 ```
 
