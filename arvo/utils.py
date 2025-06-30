@@ -512,7 +512,6 @@ def getReport(localId):
         return False
     finally:
         conn.close()
-    # fname = REPORTS_DIR/f"{localId}.json"
     # if fname.exists():
     #     return json.loads(open(fname).read())
     # return False
