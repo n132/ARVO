@@ -7,7 +7,7 @@ RM_IMAGES           = False
 HF_TOKEN            = 'hf_fake_token'
 OPENAI_TOKEN        = 'sk-fake_token'
 # DATA_FOLD           = 'Type.Bug-Security_label.Reproducible_status.Verified'
-NEW_ISSUE_TRACKER   = 'LocalIssueTracker'
+NEW_ISSUE_TRACKER   = 'NewTracker'
 # NEW_ISSUE_TRACKER   = False
 TIME_ZONE           = 'Etc/Greenwich'
 
