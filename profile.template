@@ -1,29 +1,34 @@
+DEBUG               = True
+CPU_LIMIT           = False
+CLEAN_TMP           = False
+RM_IMAGES           = False
+
 # You can keep these settings as default
 HF_TOKEN            = 'hf_fake_token'
 OPENAI_TOKEN        = 'sk-fake_token'
-# DATA_FOLD: The name to store meta data of OSS-Fuzz cases.
-DATA_FOLD           = 'Type.Bug-Security_label.Reproducible_status.Verified'
-NEW_ISSUE_TRACKER   = False
-# TIME_ZONE: Your time zone, which is related to reproducing, since it's sensitive to time.
+# DATA_FOLD           = 'Type.Bug-Security_label.Reproducible_status.Verified'
+NEW_ISSUE_TRACKER   = 'LocalIssueTracker'
+# NEW_ISSUE_TRACKER   = False
 TIME_ZONE           = 'Etc/Greenwich'
+
 UserName            = 'root'
 
 
 # Config
 ARVO_DIR            = f'/src/ARVO/arvo' # Path of ARVO
-gcloud_key          = f'/src/cred/oss-pro-key.json' # Path of your gcloud key
+REPORTS_DIR         = f'/src/ARVO/Reports' #Path of generated reports
+gcloud_key          = f'Path-of-the-gcloud-key' 
 OSS_LOCK_DIR        = f'/data/oss-lock/'
 OSS_SAVED_IMG       = f'/data/oss-img/'
 OSS_OUT_DIR         = f'/data/oss-out/'
 OSS_WORK_DIR        = f'/data/oss-work/'
 OSS_DB_DIR          = f'/data/oss-db/'
 TMP                 = f'/data/tmp/'
-
+DOCKER_PUSH_QUEUE   = f'/data/docker-push-queue/'
 XxX                 = f'/data/XxX'
 ZDC                 = f'/data/ZDC'
 
-
 DEBUG               = True
 CPU_LIMIT           = False
-CLEAN_TMP           = False
-RM_IMAGES           = False
+CLEAN_TMP           = True
+RM_IMAGES           = True
