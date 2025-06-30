@@ -1,7 +1,0 @@
-{
-  "/src/woff2": {
-    "type": "git",
-    "url": "https://github.com/google/woff2",
-    "rev": "0f4d304faa1c62994536dc73510305c7357da8d4"
-  }
-}

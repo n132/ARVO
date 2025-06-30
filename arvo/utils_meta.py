@@ -5,14 +5,57 @@ from datetime import datetime
 from .utils_log import *
 from .utils import *
 import json
-from tqdm import tqdm
 from google.cloud import storage
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
-
+import hashlib 
 if NEW_ISSUE_TRACKER:
     META = ARVO / NEW_ISSUE_TRACKER
+def metaFilter():
+    localIds = getAllLocalIds()[::-1]
+    res = []
+    # nonC = []
+    broken_srcmaps = []
+    false_positives = []
+    for localId in localIds:
+        target_dir = Path(DATADIR)/"Issues"/(str(localId)+"_files")
+        if len(list(target_dir.iterdir())) <2:
+            res.append(localId)
+            WARN(f"[!] Have less than 2 srcmaps, deleting issue {localId}...")
+            continue
+        srcmap = getSrcmaps(localId)
+        # Filter out Borken srcmap
+        out = False
+        for x in srcmap:
+            with open(x) as f:
+                data = json.loads(f.read())
+            for key in data.keys():
+                item = data[key]
+                values = list(item.values())
+                if "unknown" in values or "UNKNOWN" in values:
+                    broken_srcmaps.append(localId)
+                    out = True
+                    break
+            if out == True:
+                break
 
+        # Filter out the false positive cases:
+        xxx = []
+        for y in srcmap:
+            file_hash = hashlib.md5()
+            with open(y,'rb') as f:
+                file_hash.update(f.read())
+            xxx.append(file_hash.digest())
+        if len(set(xxx)) != len(xxx):
+            INFO(f"[!] Found false positives: {localId}")
+            false_positives.append(localId)    
+    res.extend(broken_srcmaps)
+    # print(false_positives)
+    # res.extend(false_positives)
+    res = list(set(res))
+    remove_issue_meta(res)
+    remove_issue_data(res)
+    SUCCESS("Done")
 def getIssueIds():
     localIds = []
     session = requests.Session()
@@ -79,7 +122,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "severity": extract(r'Security Severity:\s*(\w+)', 'Medium'),
         "regressed": extract(r'(?:Regressed|Crash Revision):\s*(https?://\S+)',"NO_REGRESS"),
         "reproducer": extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'),
-        "verified_fixed": extract(r'(?:fixed in|Fixed:)\s*(https?://\S+)','NO_FIX'),
+        "verified_fixed": extract(r'(?:fixed in|Fixed:)\s*(https?://\S+revisions\S+)','NO_FIX'),
         "localId": localId
     }
     sanitizer_map = {
@@ -130,25 +173,22 @@ def getIssue(issue_id):
         WARN(f"FAIL on {issue_id}, skip")
         return False
     return res
-    
 def getIssues(issue_ids):
     issues = []
-    fp = META / "metadata.json"
-    if not fp.exists():
-        fp.touch()
+    if not MetaDataFile.exists():
+        MetaDataFile.touch()
     done = []
-    with open(fp,'r') as f:
+    with open(MetaDataFile,'r') as f:
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
-    # print(done)
-    for x in tqdm(issue_ids):
+    for x in bar(issue_ids):
         if x in done:
             continue
         res = getIssue(x)
         if res:
             issues.append(res)
-            with open(fp,'a') as f:
+            with open(MetaDataFile,'a') as f:
                 f.write(json.dumps(res) + '\n') 
         else:
             WARN(f"Failed to fetch the issue for {x}")
@@ -212,7 +252,6 @@ def download_build_artifacts(metadata, url, outdir):
     # These don't have any build artifacts
     if job['untrusted']: return False
     if job['engine'] == 'none': return False
-
     # Prefer the info from the job name, since the metadata
     # format has changed several times.
     if 'project' in metadata:
@@ -266,15 +305,15 @@ def download_build_artifacts(metadata, url, outdir):
         print(f'Downloaded {name}')
         downloaded_files.append(download_path)
     return [str(f) for f in downloaded_files]
-
-def data_download():
-    metadata_file =  META / "metadata.json"
+def data_download(localIds = None):
     metadata = {}
-    for line in open(metadata_file):
+    for line in open(MetaDataFile):
         mdline = json.loads(line)
-        metadata[mdline['localId']] = mdline
+        if localIds == None or mdline['localId'] in localIds:
+            metadata[mdline['localId']] = mdline
+    to_remove = []
     #for localId in metadata:
-    for localId in tqdm(metadata):
+    for localId in bar(metadata):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
         if issue_dir.exists():
@@ -282,7 +321,6 @@ def data_download():
             for x in issue_dir.iterdir():
                 done.append(x)
             if len(done) == 2:
-                INFO(f"Already downloaded {localId}")
                 continue
             elif len(done) != 0:
                 shutil.rmtree(issue_dir)
@@ -290,24 +328,22 @@ def data_download():
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
-
-        silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir)
-        silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir)
-    # issueFilter()
+        if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir): 
+            WARN("[!] Failed to download the srcmap")
+            to_remove.append(localId)
+            continue
+        if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir):
+            WARN("[!] Failed to download the srcmap")
+            to_remove.append(localId)
+            continue
+    remove_issue_meta(to_remove)
+    remove_issue_data(to_remove)
     return True
-def syncMeta(localIds):
-    # load the meta to metadata.jsonl
-    getIssues(localIds)
-    
 def getMeta():
-    if not NEW_ISSUE_TRACKER:
-        WARN("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
-        exit(1)
-    if not META.exists():
-        META.mkdir()
-    localIds = getIssueIds()
-    syncMeta(localIds)
-    
+    if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
+    if not META.exists(): META.mkdir()
+    getIssues(getIssueIds())
+    data_download()
 
 if __name__ == "__main__":
     pass

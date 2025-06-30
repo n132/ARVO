@@ -1,7 +1,0 @@
-{
-  "/src/jflex": {
-    "type": "git",
-    "url": "https://github.com/jflex-de/jflex",
-    "rev": "4c942c5ad702199be7bea2876a01c84ef6c1fd23"
-  }
-}

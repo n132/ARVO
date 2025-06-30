@@ -1,17 +1,5 @@
 from .utils import *
 RESULTS = ARVO / "Results.json"
-
-'''
-        Matric
-        These functions are used to maintain RESULTS file
-'''
-def matric_lookup(localId):
-    with open(RESULTS,'r') as f:
-        data = f.readlines()
-    for x in data:
-        if localId == json.loads(x)['localId']:
-            return True
-    return False
 def matric_ins(localIds,results):
     f = open(RESULTS,'a+')
     assert(len(localIds)==len(results))
@@ -56,20 +44,3 @@ def matric_true():
         if x['pass']:
             res.append(x['localId'])
     return res
-def matric_sort(key="localId"):
-    def _cmp2(x):
-        return json.loads(x)['project']
-    def _cmp1(x):
-        return json.loads(x)['localId']
-    with open(RESULTS,'r') as f:
-        data = f.readlines()
-    data = list(set(data))
-    print(len(data))
-    if key == "project":
-        data.sort(key=_cmp2)
-    else:
-        data.sort(key=_cmp1)
-    with open(RESULTS,'w') as f:
-        f.writelines(data)
-    return
-    

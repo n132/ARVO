@@ -25,3 +25,7 @@ PaperData*
 PatchFiles
 fxTest.py
 *arvo.egg-info*
+FalsePositives.md
+arvo.db
+false_positive.db
+arvo.db

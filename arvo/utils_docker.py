@@ -2,6 +2,7 @@ import re
 import subprocess
 from .utils_exec import *
 from ._profile import CPU_LIMIT, DEBUG
+from .utils_log import *
 class DfTool():
     def __init__(self,path) -> None:
         self.path = path
@@ -12,9 +13,8 @@ class DfTool():
         self.content = self.content.replace("\\\n","")
         blankLine = re.compile(r'\n(\s)*\n',re.MULTILINE)
         self.content = blankLine.sub("\n",self.content)
-        
-    def panic(self,s):
-        print(f"[-] {s}")
+    def PANIC(self,s):
+        FAIL(f"[FAILED] {s}")
         exit(1)
     def flush(self):
         return self.writeDf()
@@ -34,8 +34,8 @@ class DfTool():
         lines = self.content.split("\n")
         lines[pos] = line
         self.content = "\n".join(lines)
-    def replace(self,old,new):
-        self.content = re.sub(old,new,self.content)
+    def replace(self,old,new,flags=0):
+        self.content = re.sub(old,new,self.content,flags=flags)
     def replaceOnce(self,old,new):
         self.content = re.sub(old,new,self.content,count=1)
     def insertLineBefore(self,target,newline):
@@ -57,10 +57,10 @@ class DfTool():
         lines.append(line)
         self.content = "\n".join(lines)
     def dump(self):
-        print("[+] Dumping the Content")
-        print("=="*0x10)
-        print(self.content)#
-        print("=="*0x10)
+        INFO("[+] Dumping the Content")
+        INFO("=="*0x10)
+        INFO(self.content)
+        INFO("=="*0x10)
     def removeRange(self,starts,ends):
         lines = self.content.split("\n")
         new_lines = []
@@ -125,25 +125,22 @@ class DfTool():
 # Docker Options
 def docker_create(name,img):
     cmd = ['docker','create','--name',name,img]
-    if DEBUG:
-        print(f"[+] Docker Create: {name} <- {img}")
+    INFO(f"[+] Docker Create: {name} <- {img}")
     return check_call(cmd)
 
 def docker_tag(src,dst):
     cmd = ['docker','tag',src,dst]
-    if DEBUG:
-        print(f"[+] Docker Tag {src} -> {dst}")
+    INFO(f"[+] Docker Tag {src} -> {dst}")
     return check_call(cmd)
 def docker_push(name):
     cmd = ['docker','push',name]
-    if DEBUG:
-        print(f"[+] Docker Push {name}")
+    INFO(f"[+] Docker Push {name}")
     with open('/dev/null','w') as f:
         return check_call(cmd,stdout=f,stderr=f)
 def docker_login():
     res = subprocess.run(["docker","login"])
     return res.returncode
-def docker_run(args,rm=True,dumpErr=None):
+def docker_run(args,rm=True,logFile=None):
     if rm:
         cmd = ['docker','run','--rm','--privileged']
     else:
@@ -152,10 +149,9 @@ def docker_run(args,rm=True,dumpErr=None):
         cmd += [f'--cpus={CPU_LIMIT}']
 
     cmd.extend(args)
-    if DEBUG:
-        print("[+] Docker Run: \n"+" ".join(cmd))
-    if dumpErr!=None:
-        with open(dumpErr,'w') as f:
+    INFO("[+] Docker Run: \n"+" ".join(cmd))
+    if logFile:
+        with open(logFile,'w') as f:
             res = check_call(cmd,stdout=f,stderr=f)
             f.write("\n"+" ".join(cmd)+"\n")
             return res
@@ -205,27 +201,24 @@ def docker_save(img_name,output_name):
     with open('/dev/null','w') as f:
         cmd = ['docker','save',"-o", output_name , img_name]
         return check_call(cmd,stdout=f,stderr=f)
-def docker_build(args,dumpErr=None):
+def docker_build(args,logFile=None):
     cmd = ['docker','build']
     cmd.extend(args)
-    if DEBUG:
-        print("[+] Docker Build: \n"+" ".join(cmd))
-    if dumpErr!=None:
-        with open(dumpErr,'w') as f:
-            res = check_call(cmd,stderr=f)
+    INFO("[+] Docker Build: \n"+" ".join(cmd))
+    if logFile:
+        with open(logFile,'w') as f:
+            res = check_call(cmd,stderr=f,stdout=f)
             f.write("\n"+" ".join(cmd)+"\n")
             return res
     else:
         return check_call(cmd)
 def docker_load(instream):
     cmd = ['docker','load']
-    if DEBUG:
-        print("[+] Docker Load: \n"+" ".join(cmd))
+    INFO("[+] Docker Load: \n"+" ".join(cmd))
     return check_call(cmd,stdin=instream)
 def docker_exec(container: str,command: list):
     cmd = ['docker','exec',container]+command
-    if DEBUG:
-        print("[+] Docker Exec: \n"+" ".join(cmd))
+    INFO("[+] Docker Exec: \n"+" ".join(cmd))
     with open('/dev/null','w') as f:
         return check_call(cmd,stdout=f,stderr=f)
 

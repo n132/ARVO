@@ -6,7 +6,6 @@ from pathlib        import Path
 #                          Global Settings
 #
 #==================================================================
-DUMPERR = True
 REBUTTAL_EXP = False
 DEBUG = DEBUG
 
@@ -38,7 +37,7 @@ ExeLog      = ARVO  / "Log" / "FuzzerExecution"
 RM_IMAGES   = RM_IMAGES
 SORTED_IMAGES  = False
 MAPPING     = None
-
+DOCKER_PUSH_QUEUE = Path(DOCKER_PUSH_QUEUE)
 with open(ARVO/'PLanguage.json') as f:
     PLanguage = json.loads(f.read())
 
