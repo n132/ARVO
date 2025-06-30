@@ -8,7 +8,7 @@ implementing a reliable re-compilation system, we successfully reproduce more th
 
 # 🚀 Quickstart via Docker (Recommended)
 
-If you only need the metadata (interactive docker images):
+If you need the interactive docker images:
 
 ```shell
 # Reproduce Vul/Fix
@@ -19,7 +19,8 @@ docker run --rm -it n132/arvo:42487096-vul arvo compile
 docker run --rm -it n132/arvo:42487096-fix arvo compile
 ```
 
-More metadata is store in: [ARVO-meta][3]
+ARVO metadata and dataset is store in: [ARVO-meta][3]
+
 # 🛠️ Rebuild the Database (Optional)
 
 See [GitHub Action Example][4] for an example of the database rebuild. Full functionality requires:
@@ -35,77 +36,17 @@ cd ARVO
 python3 -m venv arvo-run # create the venv
 source ./arvo-run/bin/activate # enable venv
 pip3 install -e . # install arvo
-rm -f ./Reports/25402.json # delete existing report
+cp ./profile.template ./arvo/_profile.py
+cp ./.github/workflows/base-builder_cache.json /tmp/
 arvo report 25402 # regenerate the report
-```
-
-
-# 🔧 Example GitHub Action for ARVO
-
-```yaml
-name: ARVO CI
-on:
-  pull_request:
-  workflow_dispatch:
-
-jobs:
-  arvo-reproducer-ci:
-    runs-on: ubuntu-24.04
-    steps:
-    - name: Checkout ARVO
-      uses: actions/checkout@v3
-
-    - name: Install dependencies
-      run: |
-        sudo apt-get update && sudo apt-get install -y \
-          vim gdb wget curl python3 python3-pip python3.12-venv \
-          git-lfs tmux ipython3 lsb-release gnupg
-
-    - name: Setup /src/ARVO
-      run: |
-        sudo mkdir /src
-        sudo cp -a $GITHUB_WORKSPACE /src/ARVO
-        sudo chown -R $USER:$USER /src /data
-
-    - name: Clone OSS-Fuzz
-      run: git clone https://github.com/google/oss-fuzz.git /src/oss-fuzz
-
-    - name: Setup Python venv
-      run: |
-        python3 -m venv /src/arvo_venv
-        source /src/arvo_venv/bin/activate
-        pip install -r /src/ARVO/requirements.txt
-
-    - name: Pull metadata
-      run: |
-        cd /src/ARVO
-        git lfs pull
-        cp profile.template _profile.py
-        tar -xvf oss_fuzz_meta.tar
-
-    - name: Install docker-cli
-      run: |
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
-          gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-        echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] \
-          https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
-          sudo tee /etc/apt/sources.list.d/docker.list
-        sudo apt-get update && sudo apt-get install -y docker-ce-cli
-
-    - name: Run ARVO test
-      run: |
-        source /src/arvo_venv/bin/activate
-        cd /src/ARVO
-        rm -f ./Reports/25402.json
-        python3 ./cli.py report 25402
-        grep "322716256d60e316c9a3b905a387be36d4e47368" ./Reports/25402.json
 ```
 
 # 🐞 Bug Report/Fix
 - Open an issue/pr for this repo
+- MSAN has a bug that makes some bugs not reproducible while ASLR is on.
 
 
 [2]: https://github.com/google/oss-fuzz
 [3]: https://github.com/n132/ARVO-Meta
-[4]: https://github.com/n132/ARVO-Pub/blob/main/.github/workflows/arvo-ci.yml
+[4]: https://github.com/n132/ARVO/blob/main/.github/workflows/arvo-ci.yml
 [5]: https://github.com/google/oss-fuzz/issues/12732
