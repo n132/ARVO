@@ -27,7 +27,7 @@ See [GitHub Action Example][4] for an example of the database rebuild. Full func
 
 - Google Cloud SDK (gcloud)
 - Filling in arvo/_profile.py with credentials
-- OSS-Fuzz metadata (currently blocked by [a recent change][5])
+- OSS-Fuzz metadata (included in this repo but not including recent bugs)
 
 An example of rebuilding case-42487096:
 ```sh
