@@ -48,6 +48,7 @@ jobs:
       run: |
         source /src/arvo_venv/bin/activate
         cp /src/ARVO/profile.template /src/ARVO/arvo/_profile.py
+        cp /src/ARVO/.github/workflows/base-builder_cache.json /tmp/
         arvo report 25402 > /tmp/output
         if grep -q "https://github.com/beltoforion/muparser/commit/322716256d60e316c9a3b905a387be36d4e47368" /tmp/output; then
             exit  0
