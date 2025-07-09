@@ -4,11 +4,11 @@ ARVO: an Atlas of Reproducible Vulnerabilities in
 Open source software.
 
 By sourcing vulnerabilities from C/C++ projects that [Google’s OSS-Fuzz][2] discovered and
-implementing a reliable re-compilation system, we successfully reproduce more than 5,000 memory vulnerabilities across over 250 projects (May 2024), each with a triggering input, the canonical developer-written patch for fixing the vulnerability, and the ability to automatically rebuild the project from source and run it at its vulnerable and patched revisions. Moreover, our dataset can be automatically updated as OSS-Fuzz finds new vulnerabilities, allowing it to grow over time. We provide a thorough characterization of the ARVO dataset, and show that it can locate fixes more accurately than Google’s own OSV reproduction effort.
+Implementing a reliable re-compilation system, we successfully reproduce more than 5,000 memory vulnerabilities across over 250 projects (May 2024), each with a triggering input, the canonical developer-written patch for fixing the vulnerability, and the ability to automatically rebuild the project from source and run it at its vulnerable and patched revisions. Moreover, our dataset can be automatically updated as OSS-Fuzz finds new vulnerabilities, allowing it to grow over time. We provide a thorough characterization of the ARVO dataset and show that it can locate fixes more accurately than Google’s own OSV reproduction effort.
 
 # 🚀 Quickstart via Docker (Recommended)
 
-If you need the interactive docker images:
+If you need the interactive Docker images:
 
 ```shell
 # Reproduce Vul/Fix
@@ -19,7 +19,7 @@ docker run --rm -it n132/arvo:42487096-vul arvo compile
 docker run --rm -it n132/arvo:42487096-fix arvo compile
 ```
 
-ARVO metadata and dataset is store in: [ARVO-meta][3]
+ARVO metadata and dataset are stored in: [ARVO-meta][3]
 
 # 🛠️ Rebuild the Database (Optional)
 
@@ -48,6 +48,6 @@ arvo report 25402 # regenerate the report
 
 
 [2]: https://github.com/google/oss-fuzz
-[3]: https://github.com/n132/ARVO-Meta
+[3]: https://github.com/n132/ARVO-Meta/releases
 [4]: https://github.com/n132/ARVO/blob/main/.github/workflows/arvo-ci.yml
 [5]: https://github.com/google/oss-fuzz/issues/12732
