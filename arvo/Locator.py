@@ -444,7 +444,7 @@ def report(localId,verified=False):
 
             
     # Step2: Find the commit that fixed the bug+
-    fix_commit= vulCommit(localId,0x40)
+    fix_commit= vulCommit(localId,0x10)
     if fix_commit == False or fix_commit=="":
         eventLog(f"[-] Failed to locate the patches for issue {localId}")
         return False
