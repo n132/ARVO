@@ -786,7 +786,7 @@ def reproduce(localId, dockerize = True, update = False):
             tmpstr+=x+"\n"
         fix_commit = tmpstr[:-1]
     # Get fuzz_target
-    cmd = f"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\\K\\S+' /bin/arvo"
+    cmd = rf"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\K\S+' /bin/arvo"
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode == 0:
         fuzz_target = result.stdout.strip()
