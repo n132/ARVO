@@ -77,6 +77,7 @@ def fixDockerfile(dockerfile_path,project=None):
     elif project == 'cryptofuzz':
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
+        dft.replace(r".*https://github.com/guidovranken/cryptofuzz-corpora.*","")
     elif project =='libyang':
         dft.strReplace('RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',"RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
     elif project == "yara":
@@ -191,6 +192,10 @@ def fixBuildScript(file,pname):
             dft.removeRange(starts,ends)        
     elif pname in ['libredwg','duckdb']:
         dft.replace(r'^make$','make -j`nproc`\n')
+    elif pname == "cryptofuzz":
+        # The repo was deleted 
+        dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
+
     assert(dft.flush()==True)
     return True
 def skipComponent(pname,itemName):

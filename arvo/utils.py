@@ -80,6 +80,8 @@ def get_projectInfo(localId,pname=None):
         info2 = json.load(f)["/src/"+pname]
     _,info1['url'],info1['type'] = trans_table("/src/"+pname,info1['url'],info1['type'])
     _,info2['url'],info2['type'] = trans_table("/src/"+pname,info2['url'],info2['type'])
+    if info1['url'] == None or info2['url'] == None:
+        return False
     return info1, info2
 def prepareLatestOssfuzz(pname):
     '''
