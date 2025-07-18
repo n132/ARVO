@@ -250,7 +250,8 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
 
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
-        WARN(f"Not Found {item_url=} for {localId=}")
+        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
+            WARN(f"Not Found {item_url=} for {localId=}")
         return False
     if len(hits) != 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
