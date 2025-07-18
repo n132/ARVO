@@ -400,6 +400,8 @@ def fileReport(localId,fix_commit):
     vulComponentUrl     = info[vulComponentName]['url']
     vulComponentType    = info[vulComponentName]['type']
     _,vulComponentUrl,_   = trans_table(vulComponentName,vulComponentUrl,vulComponentType)
+    if vulComponentUrl == None:
+        return False
     #######################################################
     #               Dump the report
     #######################################################
@@ -558,6 +560,8 @@ def lifeSpan_prepareProject(localId,pname):
         return False
     ti = json.loads(open(srcmap[0]).read())[f"/src/{pname}"]
     _, ti["url"], ti["type"] = trans_table(f"/src/{pname}", ti["url"], ti["type"])
+    if(ti["url"] == None):
+        return False
     gt = GitTool(ti["url"], ti["type"])
     beg_commit = gt.getCommitbyTimestamp(init_timestamp)
     if beg_commit == False:
@@ -786,14 +790,13 @@ def reproduce(localId, dockerize = True, update = False):
             tmpstr+=x+"\n"
         fix_commit = tmpstr[:-1]
     # Get fuzz_target
-    cmd = rf"docker run --rm -it n132/arvo:{localId}-vul grep -oP -m1 '/out/\K\S+' /bin/arvo"
+    cmd = rf"docker run --rm -it n132/arvo:{localId}-fix grep -oP -m1 '/out/\K\S+' /bin/arvo"
     result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
     if result.returncode == 0:
         fuzz_target = result.stdout.strip()
     else:
         FAIL(f"Command failed: {result.stderr.strip()}")
         fuzz_target = "FAILED_TO_GET"
-
     # Get Stdout/Stderr
     tmpfile = tmpFile()
     cmd = f"docker run --rm -it n132/arvo:{localId}-vul arvo".split(" ")
@@ -802,6 +805,9 @@ def reproduce(localId, dockerize = True, update = False):
     with open(tmpfile,'rb') as f:
         crash_output = f.read().decode("utf-8", errors="replace").replace("�", "\x00")
     os.remove(tmpfile)
+    
+    docker_rmi(f"n132/arvo:{localId}-vul")
+    docker_rmi(f"n132/arvo:{localId}-fix")
     
 
     if exist_record:
