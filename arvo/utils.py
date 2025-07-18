@@ -239,11 +239,15 @@ def getPname(localId,srcmapCheck=True):
         return False
     else:
         pname = issue['project']
-    if srcmapCheck == False: return pname # return when no check
-    if pname in pname_table: return pname_table[pname] # handling special cases
-    with open(srcmap[0]) as f: info1 = json.load(f)
-    with open(srcmap[1]) as f: info2 = json.load(f)
-    except_name = "/src/"+pname
+    if srcmapCheck == False: 
+        return pname # return when no check
+    if pname in pname_table: 
+        return pname_table[pname] # handling special cases
+    with open(srcmap[0]) as f: 
+        info1 = json.load(f)
+    with open(srcmap[1]) as f: 
+        info2 = json.load(f)
+    except_name = "/src/" + pname
     if (except_name in info1) and (except_name in info2) and (info1[except_name]!=info2[except_name]):
         return pname
     else:
