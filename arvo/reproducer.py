@@ -163,8 +163,9 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         newD = {}
         newD['rev'] = data[x]['rev']
         newKey, newD['url'], newD['type'] = trans_table(x,data[x]['url'],data[x]['type'])
-        
         del(data[x])
+        if newKey == None:
+            continue
         data[newKey]    = newD
         
         item_name   = newKey
@@ -426,8 +427,8 @@ def pushImgRemote(localId,issue):
 
         docker_rm(cnv)
         docker_rm(cnf)
-        docker_rmi(f"n132/arvo:{localId}-vul")
-        docker_rmi(f"n132/arvo:{localId}-fix")
+        # docker_rmi(f"n132/arvo:{localId}-vul")
+        # docker_rmi(f"n132/arvo:{localId}-fix")
         return True
     else:
         FAIL(f"[-] Failed to dockerize {localId}")
