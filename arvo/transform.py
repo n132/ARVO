@@ -11,7 +11,7 @@ TRANS_TABLE = {
 '/src/opus': 'https://gitlab.xiph.org/xiph/opus.git',
 '/src/ogg': 'https://gitlab.xiph.org/xiph/ogg.git',
 '/src/libxml2': 'https://gitlab.gnome.org/GNOME/libxml2.git',
-'/src/libmicrohttpd': 'https://github.com/Karlson2k/libmicrohttpd.git',
+'/src/libmicrohttpd': 'https://git.gnunet.org/libmicrohttpd.git',
 '/src/wireshark': 'https://github.com/wireshark/wireshark.git',
 '/src/kimageformats': 'https://invent.kde.org/frameworks/kimageformats.git',
 '/src/extra-cmake-modules': 'https://invent.kde.org/frameworks/extra-cmake-modules.git',
@@ -36,7 +36,7 @@ TRANS_TABLE = {
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
 '/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
-'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
+'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git"
 }
 # Only include non git project
 TRANS_TYPE = {
@@ -87,8 +87,7 @@ globalStrReplace = {
 "https://anongit.freedesktop.org/git/poppler/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
 "https://gitlab.freedesktop.org/ceyhunalp/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
 'git.ghostscript.com/ghostpdl.git':'cgit.ghostscript.com/ghostpdl.git',
-"https://github.com/guidovranken/cryptofuzz": "https://github.com/MozillaSecurity/cryptofuzz.git",
-" --depth=1":"",
+"https://github.com/guidovranken/cryptofuzz\n": "https://github.com/MozillaSecurity/cryptofuzz.git\n",
 " --depth 1":"",
 " --depth ":" --jobs ",
 }
@@ -98,7 +97,12 @@ pname_table = {
     'pcapplusplus':"PcapPlusPlus",
     'skia-ftz':'skia',
 }
+removed_repo = [
+    '/src/cryptofuzz-corpora',
+]
 def trans_table(item_name,item_url,item_type):
+    if item_name in removed_repo:
+        return None,None,None
     if item_name in KEYChanges:
         item_name = KEYChanges[item_name]
     if item_name in TRANS_TABLE:
