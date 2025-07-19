@@ -61,6 +61,7 @@ globalStrReplace = {
 'http://www.zlib.net/zlib-1.2.11.tar.gz':'https://www.zlib.net/fossils/zlib-1.2.11.tar.gz',
 'https://jannau.net/dav1d_fuzzer_seed_corpus.zip':'https://download.videolan.org/pub/videolan/testing/contrib/dav1d/dav1d_fuzzer_seed_corpus.zip',
 'git://git.xiph.org/ogg.git':'https://gitlab.xiph.org/xiph/ogg.git',
+'https://github.com/xiph/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git'
 'git://git.xiph.org/opus.git':'https://gitlab.xiph.org/xiph/opus.git',
 'git://git.xiph.org/theora.git':'https://gitlab.xiph.org/xiph/theora.git',
 'git://git.xiph.org/vorbis.git':'https://gitlab.xiph.org/xiph/vorbis.git',
@@ -98,7 +99,7 @@ pname_table = {
     'skia-ftz':'skia',
 }
 removed_repo = [
-    '/src/cryptofuzz-corpora',
+    '/src/cryptofuzz-corpora', "/src/flac-fuzzers"
 ]
 def trans_table(item_name,item_url,item_type):
     if item_name in removed_repo:
