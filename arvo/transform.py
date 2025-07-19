@@ -60,8 +60,8 @@ globalStrReplace = {
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
 'http://www.zlib.net/zlib-1.2.11.tar.gz':'https://www.zlib.net/fossils/zlib-1.2.11.tar.gz',
 'https://jannau.net/dav1d_fuzzer_seed_corpus.zip':'https://download.videolan.org/pub/videolan/testing/contrib/dav1d/dav1d_fuzzer_seed_corpus.zip',
-'git://git.xiph.org/ogg.git':'https://gitlab.xiph.org/xiph/ogg.git',
-'https://github.com/xiph/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git'
+'git://git.xiph.org/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git',
+'https://github.com/xiph/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git',
 'git://git.xiph.org/opus.git':'https://gitlab.xiph.org/xiph/opus.git',
 'git://git.xiph.org/theora.git':'https://gitlab.xiph.org/xiph/theora.git',
 'git://git.xiph.org/vorbis.git':'https://gitlab.xiph.org/xiph/vorbis.git',
