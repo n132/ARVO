@@ -42,7 +42,8 @@ def fixDockerfile(dockerfile_path,project=None):
         line = 'COPY build.sh $SRC/'
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
     elif project == 'gdal':
-        dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
+        pass
+        # dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -76,6 +77,7 @@ def fixDockerfile(dockerfile_path,project=None):
     elif project == 'cryptofuzz':
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
+        dft.replace(r".*https://github.com/guidovranken/cryptofuzz-corpora.*","")
     elif project =='libyang':
         dft.strReplace('RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',"RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
     elif project == "yara":
@@ -190,6 +192,10 @@ def fixBuildScript(file,pname):
             dft.removeRange(starts,ends)        
     elif pname in ['libredwg','duckdb']:
         dft.replace(r'^make$','make -j`nproc`\n')
+    elif pname == "cryptofuzz":
+        # The repo was deleted 
+        dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
+
     assert(dft.flush()==True)
     return True
 def skipComponent(pname,itemName):
@@ -249,7 +255,8 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
 
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
-        WARN(f"Not Found {item_url=} for {localId=}")
+        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
+            WARN(f"Not Found {item_url=} for {localId=}")
         return False
     if len(hits) != 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
