@@ -1202,5 +1202,14 @@
     "open62541": "c++",
     "apache-commons": "jvm",
     "libfmt": "c++",
-    "libevt": "c"
+    "libevt": "c",
+    "libchewing": "rust",
+    "wamr": "c",
+    "llama.cpp": "c++",
+    "mpv": "c",
+    "edk2": "c",
+    "maven-model": "jvm",
+    "commons-validator": "jvm",
+    "commons-net": "jvm",
+    "tinysparql": "c"
 }
