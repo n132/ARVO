@@ -1,6 +1,7 @@
 #This file is created to transform the url to some moved repo.
 TRANS_TABLE = {
 '/src/freetype2': 'https://github.com/freetype/freetype2',
+'/src/freetype': "https://github.com/freetype/freetype2",
 '/src/pcre2': "https://github.com/PCRE2Project/pcre2",
 '/src/skia/third_party/externals/libjpeg-turbo': 'https://github.com/libjpeg-turbo/libjpeg-turbo.git',
 '/src/radare2-regressions': 'https://github.com/rlaemmert/radare2-regressions.git',
