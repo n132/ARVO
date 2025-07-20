@@ -6,7 +6,6 @@ from .utils_tracer import *
 from .reproducer import *
 import json
 import sys
-from .results import addNewcase
 # fmt: off
 import configparser
 
@@ -441,12 +440,8 @@ def report(localId,verified=False):
             return False
         done = getDone()
         if localId not in done:
-            lock = FileLock(ARVO/"Results.json.lock")
-            while(1):
-                print(f"[+] Add {localId} to results")
-                with lock.acquire(timeout=1):
-                    addNewcase([localId])
-                    break
+            print(f"[+] Add {localId} to results")
+
             
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x40)

@@ -10,7 +10,7 @@ from .utils_init    import *
 from .utils_sql     import *
 from rich.progress import Progress
 from collections.abc import Sized
-
+from .avoid         import *
 
 def initARVODir(dirs):
     for i in dirs:
