@@ -10,7 +10,10 @@ from .utils_init    import *
 from .utils_sql     import *
 from rich.progress import Progress
 from collections.abc import Sized
+from .avoid         import avoid_issues
 
+def getAvoid():
+    return avoid_issues
 
 def initARVODir(dirs):
     for i in dirs:
@@ -80,6 +83,8 @@ def get_projectInfo(localId,pname=None):
         info2 = json.load(f)["/src/"+pname]
     _,info1['url'],info1['type'] = trans_table("/src/"+pname,info1['url'],info1['type'])
     _,info2['url'],info2['type'] = trans_table("/src/"+pname,info2['url'],info2['type'])
+    if info1['url'] == None or info2['url'] == None:
+        return False
     return info1, info2
 def prepareLatestOssfuzz(pname):
     '''
@@ -239,11 +244,15 @@ def getPname(localId,srcmapCheck=True):
         return False
     else:
         pname = issue['project']
-    if srcmapCheck == False: return pname # return when no check
-    if pname in pname_table: return pname_table[pname] # handling special cases
-    with open(srcmap[0]) as f: info1 = json.load(f)
-    with open(srcmap[1]) as f: info2 = json.load(f)
-    except_name = "/src/"+pname
+    if srcmapCheck == False: 
+        return pname # return when no check
+    if pname in pname_table: 
+        return pname_table[pname] # handling special cases
+    with open(srcmap[0]) as f: 
+        info1 = json.load(f)
+    with open(srcmap[1]) as f: 
+        info2 = json.load(f)
+    except_name = "/src/" + pname
     if (except_name in info1) and (except_name in info2) and (info1[except_name]!=info2[except_name]):
         return pname
     else:

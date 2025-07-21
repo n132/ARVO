@@ -1,6 +1,7 @@
 #This file is created to transform the url to some moved repo.
 TRANS_TABLE = {
 '/src/freetype2': 'https://github.com/freetype/freetype2',
+'/src/freetype': "https://github.com/freetype/freetype2",
 '/src/pcre2': "https://github.com/PCRE2Project/pcre2",
 '/src/skia/third_party/externals/libjpeg-turbo': 'https://github.com/libjpeg-turbo/libjpeg-turbo.git',
 '/src/radare2-regressions': 'https://github.com/rlaemmert/radare2-regressions.git',
@@ -11,7 +12,7 @@ TRANS_TABLE = {
 '/src/opus': 'https://gitlab.xiph.org/xiph/opus.git',
 '/src/ogg': 'https://gitlab.xiph.org/xiph/ogg.git',
 '/src/libxml2': 'https://gitlab.gnome.org/GNOME/libxml2.git',
-'/src/libmicrohttpd': 'https://github.com/Karlson2k/libmicrohttpd.git',
+'/src/libmicrohttpd': 'https://git.gnunet.org/libmicrohttpd.git',
 '/src/wireshark': 'https://github.com/wireshark/wireshark.git',
 '/src/kimageformats': 'https://invent.kde.org/frameworks/kimageformats.git',
 '/src/extra-cmake-modules': 'https://invent.kde.org/frameworks/extra-cmake-modules.git',
@@ -37,6 +38,7 @@ TRANS_TABLE = {
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
 '/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
 '/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
+'/src/libmicrohttpd':"https://git.gnunet.org/libmicrohttpd.git"
 }
 # Only include non git project
 TRANS_TYPE = {
@@ -49,15 +51,21 @@ KEYChanges = {
 
 # Order matters please don't change it if you are not sure the influence
 globalStrReplace = {
+'http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz': 'https://github.com/unicode-org/icu/releases/download/release-59-1/icu4c-59_1-src.tgz',
 'git://git.gnome.org/libxml2': "https://gitlab.gnome.org/GNOME/libxml2.git",
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
 'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype2',
-'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L https://github.com/Unidata/netcdf-c/archive/refs/tags/v4.4.1.1.tar.gz',
+'https://git.savannah.gnu.org/git/freetype/freetype2.git': "https://github.com/freetype/freetype2",
+'git://git.sv.nongnu.org/freetype/freetype2.git': "https://github.com/freetype/freetype2",
+'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
+'RUN curl http': "RUN curl -L http",
+'&& curl http': "&& curl -L http",
 'https://github.com/01org/libva':'https://github.com/intel/libva.git',
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
 'http://www.zlib.net/zlib-1.2.11.tar.gz':'https://www.zlib.net/fossils/zlib-1.2.11.tar.gz',
 'https://jannau.net/dav1d_fuzzer_seed_corpus.zip':'https://download.videolan.org/pub/videolan/testing/contrib/dav1d/dav1d_fuzzer_seed_corpus.zip',
-'git://git.xiph.org/ogg.git':'https://gitlab.xiph.org/xiph/ogg.git',
+'git://git.xiph.org/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git',
+'https://github.com/xiph/ogg.git': 'https://gitlab.xiph.org/xiph/ogg.git',
 'git://git.xiph.org/opus.git':'https://gitlab.xiph.org/xiph/opus.git',
 'git://git.xiph.org/theora.git':'https://gitlab.xiph.org/xiph/theora.git',
 'git://git.xiph.org/vorbis.git':'https://gitlab.xiph.org/xiph/vorbis.git',
@@ -82,10 +90,12 @@ globalStrReplace = {
 'https://github.com/cmeister2/aspell.git':'https://github.com/gnuaspell/aspell.git',
 'https://github.com/erikd/libsndfile.git':"https://github.com/libsndfile/libsndfile.git",
 "https://anongit.freedesktop.org/git/poppler/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
+"https://gitlab.freedesktop.org/ceyhunalp/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
 'git.ghostscript.com/ghostpdl.git':'cgit.ghostscript.com/ghostpdl.git',
-"https://github.com/guidovranken/cryptofuzz": "https://github.com/MozillaSecurity/cryptofuzz.git",
-" --depth=1":"",
+"https://github.com/guidovranken/cryptofuzz\n": "https://github.com/MozillaSecurity/cryptofuzz.git\n",
+"https://gnunet.org/git": "https://git.gnunet.org",
 " --depth 1":"",
+" --depth=1":"",
 " --depth ":" --jobs ",
 }
 # The las 
@@ -94,7 +104,12 @@ pname_table = {
     'pcapplusplus':"PcapPlusPlus",
     'skia-ftz':'skia',
 }
+removed_repo = [
+    '/src/cryptofuzz-corpora', "/src/flac-fuzzers"
+]
 def trans_table(item_name,item_url,item_type):
+    if item_name in removed_repo:
+        return None,None,None
     if item_name in KEYChanges:
         item_name = KEYChanges[item_name]
     if item_name in TRANS_TABLE:
