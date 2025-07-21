@@ -93,6 +93,10 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.strReplace("https://github.com/radare/radare2-regressions",'https://github.com/rlaemmert/radare2-regressions.git')
     elif project == "wireshark":
         dft.replace(r"RUN git clone .*wireshark.*","")
+    elif project == 'gnutls':
+        dft.strReplace(" libnettle6 "," ")
+        dft.replace(r".*client_corpus_no_fuzzer_mode.*","")
+        dft.replace(r".*server_corpus_no_fuzzer_mode.*","")
     dft.cleanComments()
     assert(dft.flush()==True)
     return True
@@ -198,9 +202,9 @@ def fixBuildScript(file,pname):
     elif pname == "cryptofuzz":
         # The repo was deleted 
         dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
-
-
-
+    elif pname == 'gdal':
+        pass
+        # dft.replace(r'make -j\$\(nproc\) -s','rm -rf /src/gdal/gdal/frmts/jpeg/libjpeg12/*.h && make -j$(nproc) -s')
     assert(dft.flush()==True)
     return True
 def skipComponent(pname,itemName):
