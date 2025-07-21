@@ -37,7 +37,8 @@ TRANS_TABLE = {
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
 '/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
-'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git"
+'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
+'/src/libmicrohttpd':"https://git.gnunet.org/libmicrohttpd.git"
 }
 # Only include non git project
 TRANS_TYPE = {
@@ -57,6 +58,7 @@ globalStrReplace = {
 'https://git.savannah.gnu.org/git/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'git://git.sv.nongnu.org/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
+'RUN curl http': "RUN curl -L http",
 'https://github.com/01org/libva':'https://github.com/intel/libva.git',
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
 'http://www.zlib.net/zlib-1.2.11.tar.gz':'https://www.zlib.net/fossils/zlib-1.2.11.tar.gz',
@@ -90,6 +92,7 @@ globalStrReplace = {
 "https://gitlab.freedesktop.org/ceyhunalp/poppler.git":'https://gitlab.freedesktop.org/poppler/poppler.git',
 'git.ghostscript.com/ghostpdl.git':'cgit.ghostscript.com/ghostpdl.git',
 "https://github.com/guidovranken/cryptofuzz\n": "https://github.com/MozillaSecurity/cryptofuzz.git\n",
+"https://gnunet.org/git": "https://git.gnunet.org",
 " --depth 1":"",
 " --depth ":" --jobs ",
 }

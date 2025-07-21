@@ -78,6 +78,9 @@ def fixDockerfile(dockerfile_path,project=None):
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
         dft.replace(r".*https://github.com/guidovranken/cryptofuzz-corpora.*","")
+    elif project == 'flac':
+        if not dft.locateStr('guidovranken/flac-fuzzers') == False:
+            return False # Not fixable since the repo is removed and there is no mirror
     elif project =='libyang':
         dft.strReplace('RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',"RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
     elif project == "yara":
@@ -195,6 +198,8 @@ def fixBuildScript(file,pname):
     elif pname == "cryptofuzz":
         # The repo was deleted 
         dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
+
+
 
     assert(dft.flush()==True)
     return True
