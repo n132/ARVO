@@ -87,7 +87,7 @@ def customSrcmap(srcmap,pname,commit):
     
     idx = 1 if len(list(sm1.keys())) >= len(list(sm0.keys())) else 0 
     chosen_srcmap = srcmap[idx].name
-    print(chosen_srcmap)
+
     Asrcmap = wd / chosen_srcmap
     if not check_call(['cp',srcmap[0],Asrcmap]):
         return False
@@ -112,9 +112,6 @@ def customSrcmap(srcmap,pname,commit):
     ts = commitDate(data[vk]['url'],commit,data[vk]['type'])
     if not ts:
         return False
-    ori = srcmap[idx].name.split("-")
-    ori[2] = ts
-    Bsrcmap = wd / "-".join(ori)
 
     for key in data:
         if (key != vk) and key not in ["/src",'/src/aflplusplus','/src/libfuzzer','/src/afl']:
@@ -122,6 +119,10 @@ def customSrcmap(srcmap,pname,commit):
             # since we implemented that in util_core
             if data[key]['type'] == 'git':
                 data[key]['rev'] = "xXxXx"
+    ori = srcmap[0].name.split("-")
+    ori[-1] = ts
+    Bsrcmap = wd / ("-".join(ori)+".scrmap.json")
+
     with open(Bsrcmap,'w') as f:
         f.write(json.dumps(data))
     if DEBUG:
