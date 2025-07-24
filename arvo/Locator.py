@@ -254,7 +254,7 @@ def vulCommit(localId,retryChance=None):
             return None
         for x in submodules:
             # docker run .... ""
-            # TODO bisect
+            # TODO bisect, current one searchs one-by-one so it's slow.
             
             execute(['git','submodule','init'],gt.repo)
             # sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
