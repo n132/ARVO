@@ -199,7 +199,6 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         if replace_dep and newKey == "/src/"+replace_dep[0]:
             # modify the dockerfile
             rep_path = replace_dep[1]
-            # Tell updateRevisionInfo the path
             rep_dest = dockerfile.parent / rep_path.name
             shutil.copytree(rep_path,rep_dest,symlinks=True,dirs_exist_ok=True)
             if updateRevisionInfo(dockerfile,localId,newKey,data[newKey],rep_dest,approximate):
@@ -209,18 +208,21 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         else:
             if updateRevisionInfo(dockerfile,localId,newKey,data[newKey],commit_date,approximate):
                 continue
+        
         if item_rev == 'xXxXx': # Branch For patch locating
             with open(getSrcmaps(localId)[0]) as f:
                 meta= json.loads(f.read())
             if x in meta:
                 item_rev = meta[x]['rev']
             else:
-                with open(getSrcmaps()[1]) as f:
+                with open(getSrcmaps(localId)[1]) as f:
                     meta= json.loads(f.read())
-                if x in meta: item_rev = meta[x]['rev']
-                else: PANIC(f"[x] Weird Key Found {localId}: {x}")
+                if x in meta: 
+                    item_rev = meta[x]['rev']
+                else: 
+                    PANIC(f"[x] Weird Key Found {localId}: {x}")
         # Prepare the dependencies and record them. We'll use -v to mount them to the docker container
-        if(item_type=='git'):
+        if item_type=='git':
             clone_res = clone(item_url,item_rev,src,item_name,commit_date=commit_date)
             if clone_res == False:
                 eventLog(f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
@@ -235,12 +237,12 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                     issue_record(project_name,localId,f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
                     return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
-        elif(item_type=='svn'):
+        elif item_type=='svn':
             if not svn_clone(item_url,item_rev,src,item_name):
                 eventLog(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
                 return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
-        elif(item_type=='hg'):
+        elif item_type=='hg':
             if not hg_clone(item_url,item_rev,src,item_name):
                 eventLog(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
                 return leaveRet(False,[tmp_dir,source_dir])
@@ -263,7 +265,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 engine=build_data.engine,
                                 sanitizer=build_data.sanitizer,
                                 architecture=build_data.architecture,
-                                source_path= source_dir/"src",
+                                source_path= src,
                                 mount_path=Path("/src"),
                                 save_img=save_img,noDump=ForceNoErrDump,
                                 custom_script=custom_script)
