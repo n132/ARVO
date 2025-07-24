@@ -87,9 +87,8 @@ def customSrcmap(srcmap,pname,commit):
     
     idx = 1 if len(list(sm1.keys())) >= len(list(sm0.keys())) else 0 
     chosen_srcmap = srcmap[idx].name
-
     Asrcmap = wd / chosen_srcmap
-    if not check_call(['cp',srcmap[0],Asrcmap]):
+    if not check_call(['cp',srcmap[idx],Asrcmap]):
         return False
     with open(Asrcmap) as f:
         data = json.load(f)
