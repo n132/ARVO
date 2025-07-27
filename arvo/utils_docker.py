@@ -164,10 +164,7 @@ def docker_images(name):
     cmd = ["docker","images","-aq",name]
     return execute(cmd).decode()
 def docker_rmi(img_name):
-    target_hash = docker_images(img_name)
-    if target_hash== "":
-        return True
-    cmd = ['docker','rmi',target_hash]
+    cmd = ['docker','rmi',img_name]
     return check_call(cmd)
 def docker_ps(container_name):
     cmd = ["docker", "ps", "-aq", "-f", f"name={container_name}"]
