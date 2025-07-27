@@ -44,11 +44,15 @@ def cli_check_localId(localId):
         possible_image_err   = ARVO / "CrashLog" / f"{localId}_Image.log"
         possible_compile_err = ARVO / "CrashLog" / f"{localId}_Compile.log"
         log_file = ARVO / "Log" / "_Event.log"
+        crash_file = ARVO / "_CrashLOGs"
         if possible_image_err.exists():
             os.system(f"tail -n 100 {possible_image_err}")
         if possible_compile_err.exists():
             os.system(f"tail -n 100 {possible_compile_err}")
+        INFO("[Event Log]")
         os.system(f"grep -r {localId} {log_file}")
+        INFO("[Crash Log]")
+        os.system(f"grep -r {localId} {crash_file}")
         
 def cli_check(localId_project):
     if localId_project.isdigit():
