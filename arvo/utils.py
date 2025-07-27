@@ -33,6 +33,8 @@ def eventLog(s,ext=False):
         f.write(s+"\n")
     if ext:
         exit(1)
+    else:
+        return False
 def tmpDir(path=OSS_TMP,pre="ARVO_",dont_mk=False):
     name = pre+b58encode(os.urandom(16)).decode()
     res = Path(path)
