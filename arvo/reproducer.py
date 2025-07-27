@@ -448,6 +448,7 @@ def verify(localId,save_img=False):
         if CLEAN_TMP and case_dir: clean_dir(case_dir)
         if RM_IMAGES: remove_oss_fuzz_img(localId)
         return result
+    
     def saveImg_LoadCommit(tag):
         if not save_img:
             return True
@@ -455,7 +456,9 @@ def verify(localId,save_img=False):
             return False
         return False if not doCommitClean(localId,tag) else True
     
-    def pushImg(): return pushImgRemote(localId,issue) if save_img else True
+    def pushImg(): 
+        return pushImgRemote(localId,issue) if save_img else True
+
     localId = localIdMapping(localId)
     INFO(f"[+] Working on {localId}")
     if save_img:
@@ -465,13 +468,15 @@ def verify(localId,save_img=False):
     # 1. Fetch the basic info for the vul
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
-        eventLog(f"Failed to get the srcmap or issue for {localId}")
-        return False
-    # Set project for early issues
-    if 'project' not in issue.keys(): issue['project'] = issue['fuzzer'].split("_")[1]
+        return eventLog(f"Failed to get the srcmap or issue for {localId}")
+    # Set project for early issues that doesn't have this feild
+    if 'project' not in issue.keys(): 
+        issue['project'] = issue['fuzzer'].split("_")[1]
+
     if(len(srcmap)!=2):
         issue_record(issue['project'],localId,f"Have more/less than 2 Scrmap")
         return leave(False)
+    
     old_srcmap =  srcmap[0]
     new_srcmap =  srcmap[1]
 
