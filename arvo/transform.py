@@ -97,6 +97,7 @@ globalStrReplace = {
 " --depth 1":"",
 " --depth=1":"",
 " --depth ":" --jobs ",
+" --recursive ": " ",
 }
 # The las 
 pname_table = {
