@@ -2,6 +2,8 @@ import sqlite3
 from .utils import *
 from .dev import *
 from .reproducer import verify
+import zipfile
+
 FalsePositiveDB_PATH = ARVO / "false_positive.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
