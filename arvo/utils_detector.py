@@ -4,15 +4,16 @@ from .dev import *
 from .reproducer import verify
 import zipfile
 
-FalsePositiveDB_PATH = ARVO / "false_positive.db"
+FalsePositiveDB_PATH = ARVO / "upstream_false_positives.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
 def fp_init():
     with sqlite3.connect(FalsePositiveDB_PATH) as conn:
         conn.execute("""
-        CREATE TABLE IF NOT EXISTS false_positive (
+        CREATE TABLE IF NOT EXISTS upstream_false_positives (
             localId INTEGER PRIMARY KEY,
-            reason TEXT
+            reason TEXT,
+            log    TEXT
         )
         """)
         conn.commit()
@@ -21,8 +22,8 @@ def fp_insert(data):
     try:
         conn.execute("BEGIN EXCLUSIVE")
         conn.execute("""
-        INSERT INTO false_positive (
-            localId, reason
+        INSERT INTO upstream_false_positives (
+            localId, reason, log
         ) VALUES (?, ?)
         """, data)
         conn.commit()
@@ -37,7 +38,7 @@ def getFalsePositives():
     cursor = conn.cursor()
     try:
         cursor.execute("""
-        SELECT * FROM false_positive
+        SELECT * FROM upstream_false_positives
         """)
         rows = cursor.fetchall()
         res = []
@@ -81,13 +82,16 @@ def false_positive(localId,focec_retest = False):
     for target in store.iterdir():
         if "zip" not in target.name:
             todo.append(target)
-    if(len(todo) !=2): return _leaveRet(None,"[FAILED] to get the fuzz target")
+    if(len(todo) !=2): 
+        return _leaveRet(None,"[FAILED] to get the fuzz target")
     todo.sort(key=lambda x: x.name)
     # 
-    LogDir = ARVO/"Log"/"false_positive"
-    if not LogDir.exists(): LogDir.mkdir()
+    LogDir = ARVO/"Log"/"upstream_false_positives"
+    if not LogDir.exists(): 
+        LogDir.mkdir()
     poc = getPoc(localId)
-    if not poc:  return _leaveRet(None,"[FAILED] to download the poc")
+    if not poc:  
+        return _leaveRet(None,"[FAILED] to download the poc")
 
     
     res = []
@@ -140,3 +144,4 @@ def false_positives(localIds,failed_on_verify=True):
             confirmed.append(localId)
     return confirmed
 fp_init()
+
