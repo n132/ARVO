@@ -254,7 +254,7 @@ def vulCommit(localId,retryChance=None):
             return None
         for x in submodules:
             # docker run .... ""
-            # TODO bisect
+            # TODO bisect, current one searchs one-by-one so it's slow.
             
             execute(['git','submodule','init'],gt.repo)
             # sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
@@ -436,7 +436,7 @@ def report(localId,verified=False):
     if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
+            eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
             return False
         done = getDone()
         if localId not in done:
@@ -444,7 +444,7 @@ def report(localId,verified=False):
 
             
     # Step2: Find the commit that fixed the bug+
-    fix_commit= vulCommit(localId,0x40)
+    fix_commit= vulCommit(localId,0x10)
     if fix_commit == False or fix_commit=="":
         eventLog(f"[-] Failed to locate the patches for issue {localId}")
         return False
