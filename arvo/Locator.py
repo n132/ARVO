@@ -436,7 +436,7 @@ def report(localId,verified=False):
     if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
+            eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
             return False
         done = getDone()
         if localId not in done:
