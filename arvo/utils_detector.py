@@ -132,7 +132,7 @@ def false_positive(localId,focec_retest = False):
     tag = "vul"
     for x in todo:
         fuzz_target = getFuzzer(localId,x)
-        if fuzz_target == None: return _leaveRet(None,"[FAILED] {localId=} {x} can't find the fuzz target")
+        if fuzz_target == None: return _leaveRet(None,f"[FAILED] {localId=} {x} can't find the fuzz target")
         cmd = ['docker','run','--rm','--privileged']
         args = ['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
                 "-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
@@ -184,7 +184,7 @@ def check_the_left():
     todo = [x for x in todo if x not in done]
     done_check = getFalsePositives()+getNotFalsePositives()
     todo = [x for x in todo if x not in done_check]
-    for localId in bar(todo[:2]):
+    for localId in bar(todo):
         res = false_positive(localId)
         if res != True:
             vul_result = LogDir/f"{localId}_vul.log"
