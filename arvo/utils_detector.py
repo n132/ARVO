@@ -4,11 +4,11 @@ from .dev import *
 from .reproducer import verify
 import zipfile
 
-FalsePositiveDB_PATH = ARVO / "upstream_false_positives.db"
+Database_PATH = ARVO / "upstream_false_positives.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
 def fp_init():
-    with sqlite3.connect(FalsePositiveDB_PATH) as conn:
+    with sqlite3.connect(Database_PATH) as conn:
         conn.execute("""
         CREATE TABLE IF NOT EXISTS upstream_false_positives (
             localId INTEGER PRIMARY KEY,
@@ -17,24 +17,42 @@ def fp_init():
         )
         """)
         conn.commit()
-def fp_insert(data):
-    conn = sqlite3.connect(FalsePositiveDB_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        conn.execute("BEGIN EXCLUSIVE")
+    with sqlite3.connect(Database_PATH) as conn:
         conn.execute("""
-        INSERT INTO upstream_false_positives (
-            localId, reason, log
-        ) VALUES (?, ?)
-        """, data)
+        CREATE TABLE IF NOT EXISTS upstream_true_positives (
+            localId INTEGER PRIMARY KEY,
+            reason TEXT,
+            log    TEXT
+        )
+        """)
         conn.commit()
-        return True
-    except:
-        FAIL("[-] FAILED to INSERT to FalsePositiveDB")
-        return False
-    finally:
-        conn.close()
+def fp_insert(data):
+    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    conn.execute("BEGIN EXCLUSIVE")
+    conn.execute("""
+    INSERT INTO upstream_false_positives (
+        localId, reason, log
+    ) VALUES (?, ?, ?)
+    """, data)
+    conn.commit()
+    conn.close()
+    return True
+
+def tp_insert(data):
+    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    conn.execute("BEGIN EXCLUSIVE")
+    conn.execute("""
+    INSERT INTO upstream_true_positives (
+        localId, reason, log
+    ) VALUES (?, ?, ?)
+    """, data)
+    conn.commit()
+    conn.close()
+    return True
+
+        
 def getFalsePositives():
-    conn = sqlite3.connect(FalsePositiveDB_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
     cursor = conn.cursor()
     try:
         cursor.execute("""
@@ -46,7 +64,24 @@ def getFalsePositives():
             res.append(x[0])
         return res
     except:
-        FAIL("[-] FAILED to get data from FalsePositiveDB")
+        FAIL("[-] FAILED to get data from Database")
+        return False
+    finally:
+        conn.close()
+def getNotFalsePositives():
+    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+        SELECT * FROM upstream_true_positives
+        """)
+        rows = cursor.fetchall()
+        res = []
+        for x in rows:
+            res.append(x[0])
+        return res
+    except:
+        FAIL("[-] FAILED to get data from Database")
         return False
     finally:
         conn.close()
@@ -54,7 +89,7 @@ def false_positive(localId,focec_retest = False):
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
     # return false when it's not a false positive
-    # return none  when we can't decide
+    # return none  when we can't tell
     store = OSS_Fuzz_Arch / str(localId)
     def _leaveRet(res,msg=None):
         if msg: WARN(msg)
@@ -62,6 +97,8 @@ def false_positive(localId,focec_retest = False):
         return res
     if not focec_retest and localId in getFalsePositives():
         return True
+    if localId in getNotFalsePositives():
+        return False
     if store.exists():
         shutil.rmtree(store)
 
@@ -85,15 +122,12 @@ def false_positive(localId,focec_retest = False):
     if(len(todo) !=2): 
         return _leaveRet(None,"[FAILED] to get the fuzz target")
     todo.sort(key=lambda x: x.name)
-    # 
     LogDir = ARVO/"Log"/"upstream_false_positives"
     if not LogDir.exists(): 
         LogDir.mkdir()
     poc = getPoc(localId)
     if not poc:  
         return _leaveRet(None,"[FAILED] to download the poc")
-
-    
     res = []
     tag = "vul"
     for x in todo:
