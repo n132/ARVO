@@ -219,7 +219,5 @@ def check_the_left():
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
             fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
             SUCCESS(f"Add new upstream false positive: {localId=}")
-
-
 fp_init()
 
