@@ -109,7 +109,7 @@ def false_positive(localId,focec_retest = False):
     for target in store.iterdir():
         with zipfile.ZipFile(target, "r") as zf:
             file_list = zf.namelist()
-        subprocess.run(["unar",str(target)],cwd=store)
+        subprocess.run(["unar",str(target)],stdout=open('/dev/null','w'),cwd=store)
         if len(file_list)==1:
             new_dir = store / target.name.split(".")[0]
             new_dir.mkdir()
@@ -139,7 +139,6 @@ def false_positive(localId,focec_retest = False):
             f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
             f'/out/{fuzz_target.name}','/tmp/poc']
         cmd.extend(args)
-        INFO(" ".join(cmd))
         with open(LogDir/f"{localId}_{tag}.log",'wb') as f:
             returnCode = execute_ret(cmd,stdout=f,stderr=f)
             f.write(f"\nReturn Code: {returnCode}\n".encode())
@@ -153,7 +152,6 @@ def false_positive(localId,focec_retest = False):
                         f"gcr.io/oss-fuzz-base/base-runner", "timeout", "180",
                         f'/tmp/{fuzz_target.name}','/tmp/poc']
                     cmd.extend(args)
-                    INFO(" ".join(cmd))
                     with open(LogDir/f"{localId}_{tag}.log",'wb') as f:
                         returnCode = execute_ret(cmd,stdout=f,stderr=f)
                         f.write(f"\nReturn Code: {returnCode}\n".encode())
@@ -177,5 +175,51 @@ def false_positives(localIds,failed_on_verify=True):
         if false_positive(localId)==True:
             confirmed.append(localId)
     return confirmed
+
+# False positives
+def check_the_left():
+    LogDir = ARVO/"Log"/"upstream_false_positives"
+    done = getReports()
+    todo = getAllLocalIds()
+    todo = [x for x in todo if x not in done]
+    done_check = getFalsePositives()+getNotFalsePositives()
+    todo = [x for x in todo if x not in done_check]
+    for localId in bar(todo[:2]):
+        res = false_positive(localId)
+        if res != True:
+            vul_result = LogDir/f"{localId}_vul.log"
+            fix_result = LogDir/f"{localId}_fix.log"
+            log = "=== vulnerable version ===:\n\n"
+            if vul_result.exists():
+                with open(vul_result,'rb') as f:
+                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+            else:
+                log += "None\n"
+            log+= "\n=== fixed version ===:\n\n"
+            if fix_result.exists():
+                with open(fix_result,'rb') as f:
+                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+            else:
+                log += "None\n"
+            if res == False:
+                tp_insert((localId,f"The check result seems good",log))
+            else:
+                tp_insert((localId,f"The check result can't rell if it's a false positive",log))
+            SUCCESS(f"Add new upstream true positive: {localId=}")
+        else:
+            vul_result = LogDir/f"{localId}_vul.log"
+            fix_result = LogDir/f"{localId}_fix.log"
+            if not vul_result.exists() or not fix_result.exists():
+                continue
+            log = "=== vulnerable version ===:\n\n"
+            with open(vul_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+            log+= "\n=== fixed version ===:\n\n"
+            with open(fix_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+            fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
+            SUCCESS(f"Add new upstream false positive: {localId=}")
+
+
 fp_init()
 
