@@ -57,6 +57,7 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
         if int(out.strip().split()[0]) > limit:
             return False
     except:
+        WARN("Failed to parse the du results for gsutil")
         return False
 
     if storage== None:
