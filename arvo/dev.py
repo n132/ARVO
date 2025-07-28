@@ -60,7 +60,7 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
         target_dir = tmpDir()
     else:
         target_dir = storage
-    if check_call(['gcloud','storage','cp', url, str(target_dir)]):
+    if check_call(['gcloud','storage','cp', url, str(target_dir)],stdout=open("/dev/null",'w'),stderr=open("/dev/null",'w')):
         return target_dir
     else:
         cmd = ['gcloud','storage','cp', url, str(target_dir)]
