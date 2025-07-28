@@ -53,7 +53,10 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
 
     #    gcloud storage du  gs://clusterfuzz-builds/suricata/suricata-undefined-202109100611.zip
     out = subprocess.check_output(['gsutil', 'du', url]).decode()
-    if int(out.strip().split()[0]) > limit:
+    try:
+        if int(out.strip().split()[0]) > limit:
+            return False
+    except:
         return False
 
     if storage== None:
