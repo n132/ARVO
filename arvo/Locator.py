@@ -7,8 +7,8 @@ from .reproducer import *
 import json
 import sys
 # fmt: off
-import configparser
-
+import urllib.parse
+import ipdb
 
 #==================================================================
 #
@@ -84,7 +84,6 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
             PANIC("[!] Log file is locked")
 
         remove_oss_fuzz_img(localId)
-        print(f"Result: {commit}:{res}")
         return leaveRet(res,cts.parent)
     elif build_res == False:
         eventLog(f"[-] checkBuild {localId}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
@@ -114,7 +113,6 @@ def dichotomy_search(commits_list,localId,pname,poc,tag):
     if(list_len == 1):
         dichotomy_log(localId,f"[+] Final Result:\n\tCommit: {commits_list[-1]}\n"+"=="*0x20, tag)
         return commits_list[-1]
-    
     if not TURBO:
         mid = int(list_len//2)-1
     else:
@@ -186,7 +184,7 @@ def list_commits(localId,pname):
                 return leaveRet(False,gt.repo.parent)
     recentCommit = gt.getRecentCommit(res)
     return leaveRet((res,recentCommit,inclusive),gt.repo.parent)
-def vulCommit(localId,retryChance=None):
+def vulCommit(localId,retryChance=None,hint=None):
     global CHANCE, TURBO, CHANCE_VAL
     CHANCE = CHANCE_VAL if not retryChance else retryChance
     # 0 - Sanity Check, don't remove it even it's not used in this function
@@ -223,7 +221,10 @@ def vulCommit(localId,retryChance=None):
     if log.exists():
         shutil.rmtree(log)
     log.mkdir(parents=True,exist_ok=True)
-    target_commit = dichotomy_search(commits,localId,pname,poc,'bisect')
+    if hint:
+        target_commit = hint
+    else:
+        target_commit = dichotomy_search(commits,localId,pname,poc,'bisect')
     # Get the gt
     
     if isinstance(target_commit,list):
@@ -244,26 +245,44 @@ def vulCommit(localId,retryChance=None):
         pass
     else:
         submodules = parseSubmoduleUpdate(ifsub)
-        def get_submodule_url(path, gitmodules_path=".gitmodules"):
-            parser = configparser.ConfigParser()
-            parser.read(gitmodules_path)
+        def get_submodule_url(path, repo):
+            # Get submodule relative or absolute URL from .gitmodules
+            sub_url = subprocess.check_output([
+                "git", "config", "-f", ".gitmodules", "--get", f"submodule.{path}.url"
+            ], text=True,cwd = repo).strip()
+            scheme = urllib.parse.urlparse(sub_url).scheme
             
-            for section in parser.sections():
-                if section.startswith('submodule "') and parser[section].get("path") == path:
-                    return parser[section].get("url")
-            return None
+            if scheme and scheme!='':
+                return sub_url
+            if sub_url.startswith("../"):
+                ct = 0
+                while sub_url.startswith("../"):
+                    ct+=1
+                    sub_url = sub_url[3:]
+            else:
+                PANIC(f"Failed to handle {sub_url=}")
+            super_url = subprocess.check_output([
+                "git", "remote", "get-url", "origin"
+            ], text=True,cwd = repo).strip()
+            if super_url.endswith("/"):
+                super_url = super_url[:-1]
+
+            super_url = "/".join(super_url.split("/")[:-ct])
+            res = super_url+"/"+sub_url
+            return res
         for x in submodules:
             # docker run .... ""
             # TODO bisect, current one searchs one-by-one so it's slow.
             
             execute(['git','submodule','init'],gt.repo)
-            # sub_path = execute(['git','config','--file','.gitmodules',f'submodule.{x[0]}.path'],gt.repo)
-            # if not sub_path:
-            #     PANIC("Failed to get the submodule path")
             sub_path = str(Path(pname)/x[0])
-            sub_url = get_submodule_url(sub_path)
+            sub_url = get_submodule_url(x[0],gt.repo)
 
-            appendix = ["bash",'-c',f'rm -rf {sub_path} && git clone {sub_url} {sub_path} && pushd {sub_path} && git checkout {x[1]} && popd && compile']
+            if not sub_url:
+                leaveRet(False, poc.parent)
+                return False
+            
+            appendix = ["bash",'-c',f'rm -rf /src/{sub_path} && git clone {sub_url} /src/{sub_path} && pushd /src/{sub_path} && git reset --hard {x[1]} && popd && compile']
             INFO(f"Trying {sub_path}...")
             res = checkBuild(target_commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
             if res == None:
@@ -277,31 +296,27 @@ def vulCommit(localId,retryChance=None):
             elif res == False:
                 # Crash
                 INFO(f"Found the submodule matters: {x[0]}")
-                found = checkSubmodulePatch(localId,pname,target_commit,x,poc,sub_path,gt)
+                found = checkSubmodulePatch(localId,pname,target_commit,x,poc,sub_path,gt,sub_url)
                 if not found:
-                    return leaveRet(target_commit,poc.parent)
+                    return leaveRet(target_commit, poc.parent)
                 else:
-                    return leaveRet(found,poc.parent)
+                    return leaveRet(found, poc.parent)
             else:
                 PANIC(f"Impossible to reach here")
         # Can't work it out, still return the submodule update commit 
         WARN("Failed to locate the specific submodule matters")
     return leaveRet(target_commit,poc.parent)
-def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main):
+def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main,sub_url):
     # git config --file .git/config submodule.qtbase.url
-    cmd = ['git','config','--file','.git/config',f'submodule.{submodule_info[0]}.url']
-    sub_url = execute(cmd,gt_main.repo)
-    if not sub_url:
-        return leaveRet(False,[gt_main.repo])
-    sub_url = sub_url.decode()
     gt_subm = GitTool(sub_url)
     sub_commits = gt_subm.listCommits(submodule_info[1],submodule_info[2])
     if not sub_commits:
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
+    print(sub_commits)
     # TODO bisect
     found = False
     for sub_commit in sub_commits[1:]:
-        appendix = ["bash",'-c',f'pushd {sub_path} && git checkout {sub_commit} && popd && compile']
+        appendix = ["bash",'-c',f'rm -rf /src/{sub_path} && git clone {sub_url} /src/{sub_path} && pushd /src/{sub_path} && git reset --hard  {sub_commit} && popd && compile']
         res = checkBuild(commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
         if res == None:
             # Failed to Compile/Build: combine it and its next commit
