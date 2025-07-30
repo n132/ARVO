@@ -52,7 +52,8 @@ class ArvoReproducingTest(unittest.TestCase):
       crash_info = f.read()
 
     self.assertEqual(
-        b"SUMMARY: AddressSanitizer: heap-buffer-overflow /src/muparser/src/muParserBase.cpp"
+        b"SUMMARY: AddressSanitizer: heap-buffer-overflow "
+        b"/src/muparser/src/muParserBase.cpp"
         in crash_info, True)
 
     shutil.rmtree(case_dir)
@@ -77,11 +78,13 @@ class ArvoUnitTests(unittest.TestCase):
         'severity':
             'High',
         'regressed':
-            'https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_qt&range=202106240616:202106250624',
+            'https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_qt&'
+            'range=202106240616:202106250624',
         'reproducer':
             'https://oss-fuzz.com/download?testcase_id=6379642528333824',
         'verified_fixed':
-            'https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_qt&range=202107280604:202107290609',
+            'https://oss-fuzz.com/revisions?job=libfuzzer_asan_i386_qt&'
+            'range=202107280604:202107290609',
         'localId':
             42498388,
         'sanitizer':
@@ -104,7 +107,7 @@ class ArvoUnitTests(unittest.TestCase):
     shutil.rmtree(case_dir)
 
   def test_rebase_dockerfile(self) -> None:
-    """Test if we can get the historical dockerfile and rebase the dockerfile."""
+    """Test if we can get the historical dockerfile and rebase it."""
     commit_date = datetime.strptime("202409200607" + " +0000", '%Y%m%d%H%M %z')
     result = prepare_ossfuzz("libxml2", commit_date)
 
