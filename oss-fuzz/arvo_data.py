@@ -44,6 +44,7 @@ PNAME_TABLE = {
     'skia-ftz': 'skia',
 }
 
+
 def update_resource_info(item_name: str, item_url: str,
                          item_type: str) -> Tuple[str, str, str]:
   """Update resource information based on configuration tables.
@@ -99,8 +100,7 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
         "RUN git clone "
         "https://bitbucket.org/multicoreware/x265_git.git x265\n")
     dft.replace(
-        r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',
-        "RUN git clone "
+        r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*', "RUN git clone "
         "https://bitbucket.org/multicoreware/x265_git.git x265\n")
 
   dockerfile_cleaner(dockerfile_path)
@@ -111,8 +111,7 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
   # certificates issues
   # TODO: improve regex
   dft.replace_once(
-      r'RUN apt',
-      "RUN apt update -y && apt install git ca-certificates -y && "
+      r'RUN apt', "RUN apt update -y && apt install git ca-certificates -y && "
       "git config --global http.sslVerify false && "
       "git config --global --add safe.directory '*'\nRUN apt")
   dft.str_replace_all(GLOBAL_STR_REPLACE)
@@ -126,8 +125,7 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
         'RUN gsutil cp '
         'gs://wolfssl-backup.clusterfuzz-external.appspot.com/'
         'corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip '
-        '$SRC/corpus_wolfssl_disable-fastmath.zip',
-        "RUN touch 0xdeadbeef && "
+        '$SRC/corpus_wolfssl_disable-fastmath.zip', "RUN touch 0xdeadbeef && "
         "zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef")
   elif project == 'skia':
     dft.str_replace('RUN wget', "# RUN wget")
@@ -148,8 +146,7 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
         "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related
   elif project == 'graphicsmagick':
     dft.replace(
-        r'RUN hg clone .* graphicsmagick',
-        'RUN (CMD="hg clone --insecure '
+        r'RUN hg clone .* graphicsmagick', 'RUN (CMD="hg clone --insecure '
         'https://foss.heptapod.net/graphicsmagick/graphicsmagick '
         'graphicsmagick" && '
         'for x in `seq 1 100`; do $($CMD); '
@@ -160,9 +157,8 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
   elif project == 'ffmpeg':
     _x265_fix(dft)
   elif project == 'imagemagick':
-    dft.replace(
-        r'RUN svn .*heic_corpus.*',
-        "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
+    dft.replace(r'RUN svn .*heic_corpus.*',
+                "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
   elif project == "jbig2dec":
     dft.replace(r'RUN cd tests .*', "")
   elif project == 'dlplibs':
@@ -189,9 +185,8 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
     dft.str_replace('git://github.com/lpereira/lwan',
                     'https://github.com/lpereira/lwan.git')
   elif project == "radare2":
-    dft.str_replace(
-        "https://github.com/radare/radare2-regressions",
-        'https://github.com/rlaemmert/radare2-regressions.git')
+    dft.str_replace("https://github.com/radare/radare2-regressions",
+                    'https://github.com/rlaemmert/radare2-regressions.git')
   elif project == "wireshark":
     dft.replace(r"RUN git clone .*wireshark.*", "")
 
@@ -224,20 +219,16 @@ def fix_build_script(file_path: Path, project_name: str) -> bool:
     # takes several hours
     line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
     dft.insert_line_before(
-        line,
-        "sed -i 's/make fuzzers/make fuzzers -i/g' "
+        line, "sed -i 's/make fuzzers/make fuzzers -i/g' "
         "$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
-        line,
-        "sed -n -i '/#starting corpuses/q;p' "
+        line, "sed -n -i '/#starting corpuses/q;p' "
         "$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
-        line,
-        r"sed -n -i '/pushd instdir\/program/q;p' "
+        line, r"sed -n -i '/pushd instdir\/program/q;p' "
         r"$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
-        line,
-        'echo "pushd instdir/program && mv *fuzzer $OUT" >> '
+        line, 'echo "pushd instdir/program && mv *fuzzer $OUT" >> '
         '$SRC/libreoffice/bin/oss-fuzz-build.sh')
   elif project_name == 'jbig2dec':
     dft.replace('unzip.*', 'exit 0')
@@ -279,8 +270,8 @@ def extra_scripts(project_name: str, source_dir: Path) -> bool:
     """
   if project_name == 'imagemagick':
     # TODO: Improve this hack
-    target = (source_dir / "src" / project_name / "Magick++" /
-              "fuzz" / "build.sh")
+    target = (source_dir / "src" / project_name / "Magick++" / "fuzz" /
+              "build.sh")
     if target.exists():
       with open(target, encoding='utf-8') as f:
         lines = f.readlines()

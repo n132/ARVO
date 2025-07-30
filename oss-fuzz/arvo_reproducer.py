@@ -92,10 +92,8 @@ def parse_oss_fuzz_report(report_text: bytes,
           extract(r'(?:Regressed|Crash Revision):\s*(https?://\S+)',
                   "NO_REGRESS"),
       "reproducer":
-          extract(
-              r'(?:Minimized Testcase|Reproducer Testcase|Download).*:'
-              r'\s*(https?://\S+)'
-          ),
+          extract(r'(?:Minimized Testcase|Reproducer Testcase|Download).*:'
+                  r'\s*(https?://\S+)'),
       "verified_fixed":
           extract(r'(?:fixed in|Fixed:)\s*(https?://\S+revisions\S+)',
                   'NO_FIX'),
@@ -622,10 +620,8 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
     # Then RUN init/update the submodule
     dft.replace_line_at(line_count - 1, f"ADD {rep_path.name} {src_path}")
     dft.insert_line_at(
-        line_count,
-        f"RUN bash -cx 'pushd {src_path} ;(git submodule init && "
-        f"git submodule update --force) ;popd'"
-    )
+        line_count, f"RUN bash -cx 'pushd {src_path} ;(git submodule init && "
+        f"git submodule update --force) ;popd'")
     dft.flush()
     return True
   else:
@@ -633,32 +629,26 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
     if item_type == "git":
       if approximate == '-':
         dft.insert_line_at(
-            line_count,
-            f"RUN bash -cx 'pushd {src_path} ; "
+            line_count, f"RUN bash -cx 'pushd {src_path} ; "
             f"(git reset --hard {item_rev}) || "
             f"(commit=$(git log --before='{commit_date.isoformat()}' "
             f"--format='%H' -n1) && "
             f"git reset --hard $commit || exit 99) ; "
-            f"(git submodule init && git submodule update --force) ;popd'"
-        )
+            f"(git submodule init && git submodule update --force) ;popd'")
       else:
         dft.insert_line_at(
-            line_count,
-            f"RUN bash -cx 'pushd {src_path} ; "
+            line_count, f"RUN bash -cx 'pushd {src_path} ; "
             f"(git reset --hard {item_rev}) || "
             f"(commit=$(git log --since='{commit_date.isoformat()}' "
             f"--format='%H' --reverse | head -n1) && "
             f"git reset --hard $commit || exit 99) ; "
-            f"(git submodule init && git submodule update --force) ;popd'"
-        )
+            f"(git submodule init && git submodule update --force) ;popd'")
     elif item_type == 'hg':
       # TODO: support approximate
       dft.insert_line_at(
-          line_count,
-          f'RUN bash -cx "pushd {src_path} ; '
+          line_count, f'RUN bash -cx "pushd {src_path} ; '
           f'(hg update --clean -r {item_rev} && '
-          f'hg purge --config extensions.purge=)|| exit 99 ; popd"'
-      )
+          f'hg purge --config extensions.purge=)|| exit 99 ; popd"')
     elif item_type == "svn":
       # TODO: support approximate
       dft.replace(pattern, f"RUN svn checkout -r {item_rev}")
@@ -904,10 +894,8 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
                            commit_date=commit_date)
 
       if clone_result is False:
-        fail(
-            f"[!] build_from_srcmap: Failed to clone & checkout "
-            f"[{local_id}]: {item_name}"
-        )
+        fail(f"[!] build_from_srcmap: Failed to clone & checkout "
+             f"[{local_id}]: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       elif clone_result is None:
         command = (f'git log --before="{commit_date.isoformat()}" '
@@ -920,10 +908,8 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
         commit_hash = result.stdout.strip()
         if not check_call(['git', "reset", '--hard', commit_hash],
                           cwd=src / item_name):
-          fail(
-              f"[!] build_from_srcmap: Failed to clone & checkout "
-            f"[{local_id}]: {item_name}"
-          )
+          fail(f"[!] build_from_srcmap: Failed to clone & checkout "
+               f"[{local_id}]: {item_name}")
           return leave_ret(False, [tmp_dir, source_dir])
 
       docker_volume.append(new_key)
@@ -1059,11 +1045,10 @@ def arvo_reproducer(local_id: Union[int, str], tag: str) -> bool:
 def main() -> None:
   """Main function."""
   parser = argparse.ArgumentParser(description='Reproduce ')
-  parser.add_argument(
-      '--issueId',
-      help='The issueId of the found vulnerability '
-           'https://issues.oss-fuzz.com/',
-      required=True)
+  parser.add_argument('--issueId',
+                      help='The issueId of the found vulnerability '
+                      'https://issues.oss-fuzz.com/',
+                      required=True)
   parser.add_argument('--version',
                       default='fix',
                       help="The fixed version or vulnerable version")

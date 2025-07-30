@@ -53,8 +53,7 @@ class ArvoReproducingTest(unittest.TestCase):
 
     self.assertEqual(
         b"SUMMARY: AddressSanitizer: heap-buffer-overflow "
-        b"/src/muparser/src/muParserBase.cpp"
-        in crash_info, True)
+        b"/src/muparser/src/muParserBase.cpp" in crash_info, True)
 
     shutil.rmtree(case_dir)
 
