@@ -2,19 +2,19 @@ from arvo_utils import *
 import json
 import os
 
+
 def load_repo_map(file_name):
-    json_path = os.path.join(os.path.dirname(__file__), file_name)
-    with open(json_path) as f:
-        return json.load(f)
+  json_path = os.path.join(os.path.dirname(__file__), file_name)
+  with open(json_path) as f:
+    return json.load(f)
+
 
 # Order matters
-global_str_replace  = load_repo_map("string_replacement.json")
-update_table        = load_repo_map("component_fixes.json")
+global_str_replace = load_repo_map("string_replacement.json")
+update_table = load_repo_map("component_fixes.json")
 
 # Only include non git project
-changed_type = {
-    '/src/graphicsmagick': 'hg'
-}
+changed_type = {'/src/graphicsmagick': 'hg'}
 changed_key = {
     '/src/mdbtools/test': '/src/mdbtools',
 }
@@ -61,13 +61,16 @@ def fix_dockerfile(dockerfile_path, project=None):
 
   dockerfile_cleaner(dockerfile_path)
   dft = DockerfileModifier(dockerfile_path)
-  # Some dockerfile forgets to apt update before apt install
-  # and we have to install/set ca-certificate/git sslVerify to avoid certificates issues
   # TODO: improve regex
   dft.replace_once(
-      r'RUN apt',
-      "RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt"
+    r'RUN apt',
+    (
+      "RUN apt update -y && apt install git ca-certificates -y && "
+      "git config --global http.sslVerify false && "
+      "git config --global --add safe.directory '*'\nRUN apt"
+    )
   )
+
   dft.str_replace_all(global_str_replace)
 
   # The following are project hacks that solve building/compiling problems
@@ -77,7 +80,7 @@ def fix_dockerfile(dockerfile_path, project=None):
   elif project == 'wolfssl':
     dft.str_replace(
         'RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip $SRC/corpus_wolfssl_disable-fastmath.zip',
-        "RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef"
+        "RUN touch arvo && zip $SRC/corpus_wolfssl_disable-fastmath.zip arvo"
     )
   elif project == 'skia':
     dft.str_replace('RUN wget', "# RUN wget")
@@ -154,10 +157,6 @@ def fix_build_script(file, pname):
     script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
     dft.insert_line_at(0, script)
   elif pname == 'libreoffice':
-    '''
-        If you don't want to destroy your life. 
-        Please leave this project alone. too hard to fix and the compiling takes several hours
-        '''
     line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
     dft.insert_line_before(
         line,
@@ -201,9 +200,6 @@ def fix_build_script(file, pname):
 
 def extra_scritps(pname, source_dir):
   # TODO: migrate these hacks to fix_dockerfile
-  """
-    This function allows us to modify build.sh scripts and other stuff to modify the compiling setting
-    """
   if pname == 'imagemagick':
     # TODO: Improve this hack
     target = source_dir / "src" / pname / "Magick++" / "fuzz" / "build.sh"
@@ -219,7 +215,7 @@ def extra_scritps(pname, source_dir):
 
 
 def special_component(pname, itemKey, item, dockerfile):
-  # TODO: Theoritically, we can remove this func since other parts gonna handle the submodule, but not tested
+  # TODO: Remove this func since other parts gonna handle the submodule
   # These components are submodules, but their info are in srcmap
   if pname == 'libressl' and itemKey == '/src/libressl/openbsd':
     return False
