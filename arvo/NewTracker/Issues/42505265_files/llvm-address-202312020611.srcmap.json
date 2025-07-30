@@ -1,7 +1,0 @@
-{
-  "/src/llvm-project": {
-    "type": "git",
-    "url": "https://github.com/llvm/llvm-project.git",
-    "rev": "19e068b048591feb8fa66b164669c753090dfd3a"
-  }
-}

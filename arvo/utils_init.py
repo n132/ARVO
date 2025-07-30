@@ -6,7 +6,6 @@ from pathlib        import Path
 #                          Global Settings
 #
 #==================================================================
-DUMPERR = True
 REBUTTAL_EXP = False
 DEBUG = DEBUG
 
@@ -22,7 +21,6 @@ AFL_FUZZER_ARGS =   'AFL_FUZZER_ARGS="-m none"'
 os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = gcloud_key
 OSS_TMP     = Path(TMP)
 ARVO        = Path(ARVO_DIR)
-REPORTS_DIR = Path(REPORTS_DIR)
 OSS_OUT     = Path(OSS_OUT_DIR)
 OSS_WORK    = Path(OSS_WORK_DIR)
 OSS_IMG     = Path(OSS_SAVED_IMG)
@@ -32,13 +30,13 @@ ARVO_ZDC    = Path(ZDC)
 UserName    = UserName
 CLEAN_TMP   = CLEAN_TMP
 TIME_ZONE   = TIME_ZONE
-DATADIR     = ARVO / NEW_ISSUE_TRACKER if NEW_ISSUE_TRACKER else ARVO / DATA_FOLD
+DATADIR     = ARVO / NEW_ISSUE_TRACKER
 MetaDataFile= DATADIR / "metadata.jsonl"
 ExeLog      = ARVO  / "Log" / "FuzzerExecution"
 RM_IMAGES   = RM_IMAGES
 SORTED_IMAGES  = False
 MAPPING     = None
-
+DOCKER_PUSH_QUEUE = Path(DOCKER_PUSH_QUEUE)
 with open(ARVO/'PLanguage.json') as f:
     PLanguage = json.loads(f.read())
 

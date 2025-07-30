@@ -1,7 +1,0 @@
-{
-  "/src/fuzzywuzzy": {
-    "type": "git",
-    "url": "https://github.com/xdrop/fuzzywuzzy",
-    "rev": "e8376dfdc1c0cb72f7924f3a347bfcd39855dbeb"
-  }
-}
