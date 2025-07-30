@@ -12,7 +12,8 @@ Classes:
     BuildData: Named tuple for build configuration data.
     
 Functions:
-    Main reproducing functions and utilities for OSS-Fuzz vulnerability reproduction.
+    Main reproducing functions and utilities for OSS-Fuzz
+    vulnerability reproduction.
 """
 
 import argparse
@@ -27,7 +28,7 @@ import time
 from bisect import bisect_right
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import parse_qs, urlparse
 
 import requests
@@ -92,7 +93,8 @@ def parse_oss_fuzz_report(report_text: bytes,
                   "NO_REGRESS"),
       "reproducer":
           extract(
-              r'(?:Minimized Testcase|Reproducer Testcase|Download).*:\s*(https?://\S+)'
+              r'(?:Minimized Testcase|Reproducer Testcase|Download).*:'
+              r'\s*(https?://\S+)'
           ),
       "verified_fixed":
           extract(r'(?:fixed in|Fixed:)\s*(https?://\S+revisions\S+)',
@@ -136,7 +138,8 @@ def fetch_issue(local_id: Union[int, str]) -> Union[Dict[str, Any], bool]:
         Dictionary containing issue information, or False if fetch fails.
     """
   # TODO: Replace this with proper issue tracker API calls
-  url = f'https://issues.oss-fuzz.com/action/issues/{local_id}/events?currentTrackerId=391'
+  url = (f'https://issues.oss-fuzz.com/action/issues/{local_id}/'
+         f'events?currentTrackerId=391')
   session = requests.Session()
 
   # Step 1: Get the token from the cookie
@@ -165,7 +168,8 @@ def fetch_issue(local_id: Union[int, str]) -> Union[Dict[str, Any], bool]:
       'sec-fetch-site':
           'same-origin',
       'user-agent':
-          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+          '(KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36',
       'X-XSRF-Token':
           xsrf_token
   }
@@ -619,7 +623,8 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
     dft.replace_line_at(line_count - 1, f"ADD {rep_path.name} {src_path}")
     dft.insert_line_at(
         line_count,
-        f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'"
+        f"RUN bash -cx 'pushd {src_path} ;(git submodule init && "
+        f"git submodule update --force) ;popd'"
     )
     dft.flush()
     return True
@@ -629,22 +634,30 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
       if approximate == '-':
         dft.insert_line_at(
             line_count,
-            f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || "
-            f"(commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && "
-            f"git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
+            f"RUN bash -cx 'pushd {src_path} ; "
+            f"(git reset --hard {item_rev}) || "
+            f"(commit=$(git log --before='{commit_date.isoformat()}' "
+            f"--format='%H' -n1) && "
+            f"git reset --hard $commit || exit 99) ; "
+            f"(git submodule init && git submodule update --force) ;popd'"
         )
       else:
         dft.insert_line_at(
             line_count,
-            f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || "
-            f"(commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && "
-            f"git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'"
+            f"RUN bash -cx 'pushd {src_path} ; "
+            f"(git reset --hard {item_rev}) || "
+            f"(commit=$(git log --since='{commit_date.isoformat()}' "
+            f"--format='%H' --reverse | head -n1) && "
+            f"git reset --hard $commit || exit 99) ; "
+            f"(git submodule init && git submodule update --force) ;popd'"
         )
     elif item_type == 'hg':
       # TODO: support approximate
       dft.insert_line_at(
           line_count,
-          f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"'''
+          f'RUN bash -cx "pushd {src_path} ; '
+          f'(hg update --clean -r {item_rev} && '
+          f'hg purge --config extensions.purge=)|| exit 99 ; popd"'
       )
     elif item_type == "svn":
       # TODO: support approximate
@@ -722,7 +735,8 @@ def build_fuzzers_impl(local_id: Union[int, str],
 
   command = sum([['-e', x] for x in env], [])
 
-  # Mount the Source/Dependencies (we try to replace this with modifying dockerfile)
+  # Mount the Source/Dependencies (we try to replace this with
+  # modifying dockerfile)
   if source_path and mount_path:
     for item in source_path.iterdir():
       command += ['-v', f'{item}:{mount_path / item.name}']
@@ -880,7 +894,8 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
                             approximate):
       continue
 
-    # Prepare the dependencies and record them. We'll use -v to mount them to the docker container
+    # Prepare the dependencies and record them. We'll use -v to mount them
+    # to the docker container
     if item_type == 'git':
       clone_result = clone(item_url,
                            item_rev,
@@ -890,11 +905,13 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
 
       if clone_result is False:
         fail(
-            f"[!] build_from_srcmap: Failed to clone & checkout [{local_id}]: {item_name}"
+            f"[!] build_from_srcmap: Failed to clone & checkout "
+            f"[{local_id}]: {item_name}"
         )
         return leave_ret(False, [tmp_dir, source_dir])
       elif clone_result is None:
-        command = f'git log --before="{commit_date.isoformat()}" -n 1 --format="%H"'
+        command = (f'git log --before="{commit_date.isoformat()}" '
+                   f'-n 1 --format="%H"')
         result = subprocess.run(command,
                                 stdout=subprocess.PIPE,
                                 text=True,
@@ -904,7 +921,8 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
         if not check_call(['git', "reset", '--hard', commit_hash],
                           cwd=src / item_name):
           fail(
-              f"[!] build_from_srcmap: Failed to clone & checkout [{local_id}]: {item_name}"
+              f"[!] build_from_srcmap: Failed to clone & checkout "
+            f"[{local_id}]: {item_name}"
           )
           return leave_ret(False, [tmp_dir, source_dir])
 
@@ -1010,7 +1028,8 @@ def arvo_reproducer(local_id: Union[int, str], tag: str) -> bool:
 
   srcmap = Path(srcmap_files[0])
 
-  # Early issues don't have 'project' field. Set project for issues that didn't have it.
+  # Early issues don't have 'project' field. Set project for issues that
+  # didn't have it.
   if 'project' not in issue:
     issue['project'] = issue['fuzzer'].split("_")[1]
 
@@ -1042,7 +1061,8 @@ def main() -> None:
   parser = argparse.ArgumentParser(description='Reproduce ')
   parser.add_argument(
       '--issueId',
-      help='The issueId of the found vulnerability https://issues.oss-fuzz.com/',
+      help='The issueId of the found vulnerability '
+           'https://issues.oss-fuzz.com/',
       required=True)
   parser.add_argument('--version',
                       default='fix',

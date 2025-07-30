@@ -8,7 +8,7 @@ import json
 import os
 import re
 from pathlib import Path
-from typing import Dict, Optional, Union, Any
+from typing import Any, Dict, Optional, Tuple, Union
 
 from arvo_utils import DockerfileModifier
 
@@ -44,9 +44,8 @@ PNAME_TABLE = {
     'skia-ftz': 'skia',
 }
 
-
 def update_resource_info(item_name: str, item_url: str,
-                         item_type: str) -> tuple[str, str, str]:
+                         item_type: str) -> Tuple[str, str, str]:
   """Update resource information based on configuration tables.
     
     Args:
@@ -97,19 +96,23 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
     # The order of following two lines matters
     dft.replace(
         r'RUN\shg\sclone\s.*bitbucket.org/multicoreware/x265\s*(x265)*',
-        "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
+        "RUN git clone "
+        "https://bitbucket.org/multicoreware/x265_git.git x265\n")
     dft.replace(
         r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',
-        "RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
+        "RUN git clone "
+        "https://bitbucket.org/multicoreware/x265_git.git x265\n")
 
   dockerfile_cleaner(dockerfile_path)
   dft = DockerfileModifier(dockerfile_path)
 
   # Some dockerfile forgets to apt update before apt install
-  # and we have to install/set ca-certificate/git sslVerify to avoid certificates issues
+  # and we have to install/set ca-certificate/git sslVerify to avoid
+  # certificates issues
   # TODO: improve regex
   dft.replace_once(
-      r'RUN apt', "RUN apt update -y && apt install git ca-certificates -y && "
+      r'RUN apt',
+      "RUN apt update -y && apt install git ca-certificates -y && "
       "git config --global http.sslVerify false && "
       "git config --global --add safe.directory '*'\nRUN apt")
   dft.str_replace_all(GLOBAL_STR_REPLACE)
@@ -120,11 +123,12 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
     dft.replace(r'#add more seeds from the testbed dir.*\n', "")
   elif project == 'wolfssl':
     dft.str_replace(
-        'RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/'
+        'RUN gsutil cp '
+        'gs://wolfssl-backup.clusterfuzz-external.appspot.com/'
         'corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip '
         '$SRC/corpus_wolfssl_disable-fastmath.zip',
-        "RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef"
-    )
+        "RUN touch 0xdeadbeef && "
+        "zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef")
   elif project == 'skia':
     dft.str_replace('RUN wget', "# RUN wget")
     dft.insert_line_after('COPY build.sh $SRC/',
@@ -133,28 +137,32 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
     dft.str_replace(
         'RUN ./bin/oss-fuzz-setup.sh',
         "RUN sed -i 's|svn export --force -q https://github.com|"
-        "#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
+        "#svn export --force -q https://github.com|g' "
+        "./bin/oss-fuzz-setup.sh")
     dft.str_replace('RUN svn export', '# RUN svn export')
     dft.str_replace('ADD ', '# ADD ')
     dft.str_replace('RUN zip', '# RUN zip')
     dft.str_replace('RUN mkdir afl-testcases', "# RUN mkdir afl-testcases")
     dft.str_replace(
         'RUN ./bin/oss-fuzz-setup.sh',
-        "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related stuff
+        "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related
   elif project == 'graphicsmagick':
     dft.replace(
-        r'RUN hg clone .* graphicsmagick', 'RUN (CMD="hg clone --insecure '
-        'https://foss.heptapod.net/graphicsmagick/graphicsmagick graphicsmagick" && '
-        'for x in `seq 1 100`; do $($CMD); if [ $? -eq 0 ]; then break; fi; done)'
-    )
+        r'RUN hg clone .* graphicsmagick',
+        'RUN (CMD="hg clone --insecure '
+        'https://foss.heptapod.net/graphicsmagick/graphicsmagick '
+        'graphicsmagick" && '
+        'for x in `seq 1 100`; do $($CMD); '
+        'if [ $? -eq 0 ]; then break; fi; done)')
     _x265_fix(dft)
   elif project == 'libheif':
     _x265_fix(dft)
   elif project == 'ffmpeg':
     _x265_fix(dft)
   elif project == 'imagemagick':
-    dft.replace(r'RUN svn .*heic_corpus.*',
-                "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
+    dft.replace(
+        r'RUN svn .*heic_corpus.*',
+        "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
   elif project == "jbig2dec":
     dft.replace(r'RUN cd tests .*', "")
   elif project == 'dlplibs':
@@ -170,7 +178,8 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
   elif project == 'libyang':
     dft.str_replace(
         'RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',
-        "RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
+        "RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\n"
+        "RUN ")
   elif project == "yara":
     if 'bison' not in dft.content:
       dft.insert_line_before(
@@ -180,8 +189,9 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
     dft.str_replace('git://github.com/lpereira/lwan',
                     'https://github.com/lpereira/lwan.git')
   elif project == "radare2":
-    dft.str_replace("https://github.com/radare/radare2-regressions",
-                    'https://github.com/rlaemmert/radare2-regressions.git')
+    dft.str_replace(
+        "https://github.com/radare/radare2-regressions",
+        'https://github.com/rlaemmert/radare2-regressions.git')
   elif project == "wireshark":
     dft.replace(r"RUN git clone .*wireshark.*", "")
 
@@ -210,24 +220,25 @@ def fix_build_script(file_path: Path, project_name: str) -> bool:
     dft.insert_line_at(0, script)
   elif project_name == 'libreoffice':
     # If you don't want to destroy your life.
-    # Please leave this project alone. too hard to fix and the compiling takes several hours
+    # Please leave this project alone. too hard to fix and the compiling
+    # takes several hours
     line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
     dft.insert_line_before(
         line,
-        "sed -i 's/make fuzzers/make fuzzers -i/g' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
+        "sed -i 's/make fuzzers/make fuzzers -i/g' "
+        "$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
         line,
-        "sed -n -i '/#starting corpuses/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
+        "sed -n -i '/#starting corpuses/q;p' "
+        "$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
         line,
-        r"sed -n -i '/pushd instdir\/program/q;p' $SRC/libreoffice/bin/oss-fuzz-build.sh"
-    )
+        r"sed -n -i '/pushd instdir\/program/q;p' "
+        r"$SRC/libreoffice/bin/oss-fuzz-build.sh")
     dft.insert_line_before(
         line,
-        'echo "pushd instdir/program && mv *fuzzer $OUT" >> $SRC/libreoffice/bin/oss-fuzz-build.sh'
-    )
+        'echo "pushd instdir/program && mv *fuzzer $OUT" >> '
+        '$SRC/libreoffice/bin/oss-fuzz-build.sh')
   elif project_name == 'jbig2dec':
     dft.replace('unzip.*', 'exit 0')
   elif project_name == "ghostscript":
@@ -256,7 +267,7 @@ def extra_scripts(project_name: str, source_dir: Path) -> bool:
   """Execute extra scripts for specific projects.
     
     TODO: migrate these hacks to fix_dockerfile
-    This function allows us to modify build.sh scripts and other stuff 
+    This function allows us to modify build.sh scripts and other stuff
     to modify the compiling setting.
     
     Args:
@@ -268,7 +279,8 @@ def extra_scripts(project_name: str, source_dir: Path) -> bool:
     """
   if project_name == 'imagemagick':
     # TODO: Improve this hack
-    target = source_dir / "src" / project_name / "Magick++" / "fuzz" / "build.sh"
+    target = (source_dir / "src" / project_name / "Magick++" /
+              "fuzz" / "build.sh")
     if target.exists():
       with open(target, encoding='utf-8') as f:
         lines = f.readlines()
@@ -284,8 +296,8 @@ def special_component(project_name: str, item_key: str, item: Dict[str, Any],
                       dockerfile: Union[str, Path]) -> bool:
   """Check if a component requires special handling.
     
-    TODO: Theoretically, we can remove this func since other parts gonna handle 
-    the submodule, but not tested.
+    TODO: Theoretically, we can remove this func since other parts gonna
+    handle the submodule, but not tested.
     These components are submodules, but their info are in srcmap.
     
     Args:
