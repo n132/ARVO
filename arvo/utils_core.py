@@ -1,10 +1,16 @@
 from .utils import *
-from glob import glob
+from dateutil.parser import parse
+from bisect import bisect_right
+import time
 from .transform import globalStrReplace
-from dateutil import parser
 #########################################
 # Core Area for reproducing
 #########################################
+NoOperation = [
+    "/src",
+    "/src/LPM/external.protobuf/src/external.protobuf",
+    "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
+]
 def fixDockerfile(dockerfile_path,project=None):
     # todo: if you want to make it faster, implement it. And it's a liitle complex
     # DO not want to modify dockerfile
@@ -15,17 +21,32 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.replace(r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*',"RUN git clone https://bitbucket.org/multicoreware/x265_git.git x265\n")
         
     dft = DfTool(dockerfile_path)
-    dft.replaceOnce(r'RUN apt',"RUN apt update -y && apt install git -y && apt upgrade ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt")
+    dft.replaceOnce(r'RUN apt',"RUN apt update -y && apt install git ca-certificates -y && git config --global http.sslVerify false && git config --global --add safe.directory '*'\nRUN apt")
     dft.strReplaceAll(globalStrReplace)
-
+    def repl(match):
+        ver_us = match.group(1)
+        ver_dot = ver_us.replace('_', '.')
+        return f'RUN wget https://archives.boost.io/release/{ver_dot}/source/boost_{ver_us}.tar.bz2'
+    pattern = r'RUN wget .*?/boost_(\d+_\d+_\d+)\.tar\.bz2'
+    replacement = r'RUN wget https://archives.boost.io/release/\1/source/boost_\1.tar.bz2'
+    dft.replace(pattern,repl)
     if project == "lcms":
         dft.replace(r'#add more seeds from the testbed dir.*\n',"")
     elif project =='wolfssl':
-        dft.strReplace('RUN gsutil cp gs://wolfssl-backup.clusterfuzz-external.appspot.com/corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip $SRC/corpus_wolfssl_disable-fastmath.zip',"RUN touch 0xdeadbeef && zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef")
+        pattern = r'RUN gsutil cp .*? (\$SRC/[^ ]+\.zip)'
+        replacement = r'RUN touch dummy && zip -j \1 dummy'
+        dft.replace(pattern,replacement)
+        
     elif project == 'skia':
         dft.strReplace('RUN wget',"# RUN wget")
         line = 'COPY build.sh $SRC/'
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
+    elif project == 'gdal':
+        pass
+        # dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
+    elif project == 'freeradius':
+        dft.strReplace('sha256sum -c','pwd')
+        dft.strReplace("curl -s -O ",'curl -s -O -L ')
     elif project == 'libreoffice':
         dft.strReplace('RUN ./bin/oss-fuzz-setup.sh',\
         "RUN sed -i 's|svn export --force -q https://github.com|#svn export --force -q https://github.com|g' ./bin/oss-fuzz-setup.sh")
@@ -56,6 +77,10 @@ def fixDockerfile(dockerfile_path,project=None):
     elif project == 'cryptofuzz':
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
+        dft.replace(r".*https://github.com/guidovranken/cryptofuzz-corpora.*","")
+    elif project == 'flac':
+        if not dft.locateStr('guidovranken/flac-fuzzers') == False:
+            return False # Not fixable since the repo is removed and there is no mirror
     elif project =='libyang':
         dft.strReplace('RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',"RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\nRUN ")
     elif project == "yara":
@@ -68,81 +93,50 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.strReplace("https://github.com/radare/radare2-regressions",'https://github.com/rlaemmert/radare2-regressions.git')
     elif project == "wireshark":
         dft.replace(r"RUN git clone .*wireshark.*","")
+    elif project == 'gnutls':
+        dft.strReplace(" libnettle6 "," ")
+        dft.replace(r".*client_corpus_no_fuzzer_mode.*","")
+        dft.replace(r".*server_corpus_no_fuzzer_mode.*","")
     dft.cleanComments()
     assert(dft.flush()==True)
-    if DEBUG:
-        print("[+] Dockerfile: Fixed")
     return True
 def rebaseDockerfile(dockerfile_path,commit_date):
-    def _listOssBaseImagebyTime(date,repo="gcr.io/oss-fuzz-base/base-builder"):
-        cmd =f"gcloud container images list-tags {repo}"
-        cmd+=f''' --format="table(digest.slice(7:).join(''))"'''
-        cmd+=f' --filter="timestamp.datetime <= {date} "'
-        cmd+=f' --limit 1'
-        if DEBUG:
-            print(f"[+] Locating a proper base Image:\n{cmd}")
-        try:
-            res = os.popen(cmd).read() 
-            match = re.search(r"[a-f0-9]{64}",res)
-            if DEBUG:
-                print(match.group(0))
-            return match.group(0)
-        except:
-            return False
+    def _getBase(date,repo="gcr.io/oss-fuzz-base/base-builder"):
+        cache_name = repo.split("/")[-1]
+        CACHE_FILE = f"/tmp/{cache_name}_cache.json"
+        CACHE_TTL = 86400  # 24 hours
+        if os.path.exists(CACHE_FILE) and (time.time() - os.path.getmtime(CACHE_FILE)) < CACHE_TTL:
+            with open(CACHE_FILE, 'r') as f: res = json.load(f)
+        else:
+            cmd = [
+                "gcloud", "container", "images", "list-tags",
+                repo, "--format=json", "--sort-by=timestamp"
+            ]
+            res = execute(cmd).decode()
+            res = json.loads(res)
+            with open(CACHE_FILE, 'w') as f: f.write(json.dumps(res,indent=4))
+        ts = []
+        for x in res: ts.append(int(parse(x['timestamp']['datetime']).timestamp()))
+        target_ts = int(parse(date).timestamp())
+        return res[bisect_right(ts, target_ts - 1) - 1]['digest'].split(":")[1]
+    # Load the Dockerfile
     try:
-        with open(dockerfile_path) as f:
-            data = f.read()
+        with open(dockerfile_path) as f: data = f.read()
     except:
         eventLog(f"[-] rebaseDockerfile: No such a dockerfile: {dockerfile_path}")
         return False
-    def _listOssBaseImagebyTime_local(date):
-        global SORTED_IMAGES
-        if not SORTED_IMAGES:
-            # Get the path to the current file
-            current_file = Path(__file__).resolve()
-            module_root = current_file.parent
-            # Reference a data file next to this script
-            data_file = module_root / "images.json"
-            with open(data_file, 'r') as file:
-                data = json.load(file)
-            SORTED_IMAGES = data['versions']
-        pre = SORTED_IMAGES[0]
-        date = parser.parse(date)
-        for x in range(1,len(SORTED_IMAGES)):
-            # print(type(date),date,SORTED_IMAGES[x]['createTime'])
-            if(date <= parser.parse(SORTED_IMAGES[x]['createTime'])):
-                return pre['name'].split("sha256:")[-1]
-            pre = SORTED_IMAGES[x]
-        return SORTED_IMAGES[-1]['name'].split("sha256:")[-1]
+    # Locate the Repo
     res = re.search(r'FROM .*',data)
     if(res == None):
         eventLog(f"[-] rebaseDockerfile: Failed to get the base-image: {dockerfile_path}")
         return False
-    repo = res[0][5:]
-    if "@sha256" in repo:
-        repo = repo.split("@sha256")[0]
-    if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer':
-        repo = "gcr.io/oss-fuzz-base/base-builder"
-    if repo=='gcr.io/oss-fuzz-base/base-builder':
-        image_hash = _listOssBaseImagebyTime_local(commit_date)
-    else:
-        image_hash = _listOssBaseImagebyTime(commit_date,repo)
-    if image_hash == False :
-        # Use the latest image
-        eventLog(f"[-] rebaseDockerfile: Failed to find a valid base-builder for {repo}")
-        repo = "gcr.io/oss-fuzz-base/base-builder"
-        image_hash = _listOssBaseImagebyTime_local(commit_date)
-        if image_hash==False :
-            eventLog(f"[-] rebaseDockerfile: Failed twice to find a correct base image. Using Latest base-builder")
-            data = re.sub(r"FROM .*",f"FROM gcr.io/oss-fuzz-base/base-builder",data)
-            with open(dockerfile_path,'w') as f:
-                f.write(data)
-            return True
-    image_name = repo
-    # SUCCESS(image_hash)
-    data = re.sub(r"FROM .*",f"FROM {image_name}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
-    with open(dockerfile_path,'w') as f:
-        f.write(data)
+    else: repo = res[0][5:]
+    if "@sha256" in repo: repo = repo.split("@sha256")[0]
+    if repo == 'ossfuzz/base-builder' or repo == 'ossfuzz/base-libfuzzer': repo = "gcr.io/oss-fuzz-base/base-builder"
+    if ":" in repo: repo = repo.split(":")[0]
+    image_hash = _getBase(commit_date,repo)
+    data = re.sub(r"FROM .*",f"FROM {repo}@sha256:"+image_hash+"\nRUN apt-get update -y\n",data)
+    with open(dockerfile_path,'w') as f: f.write(data)
     return True
 def extraScritps(pname,oss_dir,source_dir):
     """
@@ -205,14 +199,14 @@ def fixBuildScript(file,pname):
             dft.removeRange(starts,ends)        
     elif pname in ['libredwg','duckdb']:
         dft.replace(r'^make$','make -j`nproc`\n')
+    elif pname == "cryptofuzz":
+        # The repo was deleted 
+        dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
+    elif pname == 'gdal':
+        pass
+        # dft.replace(r'make -j\$\(nproc\) -s','rm -rf /src/gdal/gdal/frmts/jpeg/libjpeg12/*.h && make -j$(nproc) -s')
     assert(dft.flush()==True)
     return True
-NoOperation = [
-    "/src",
-    "/src/LPM/external.protobuf/src/external.protobuf",
-    "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
-
-]
 def skipComponent(pname,itemName):
     itemName = itemName.strip(" ")
     # Special for skia, Skip since they are done by submodule init
@@ -227,16 +221,10 @@ def specialComponent(pname,itemKey,item,dockerfile,commit_date):
         return False
     if pname == 'gnutls' and itemKey == '/src/gnutls/nettle' :
         # Just Ignore since we have submodule update --init
-        with open(dockerfile) as f:
-            dt = f.read()
-        if item['rev'] not in dt: 
-            return True
-        else:
-            return False
+        with open(dockerfile) as f: dt = f.read()
+        if item['rev'] not in dt:  return True
+        else: return False
     return False
-def additional_script(project,source_path=None):
-    return True
-
 def combineLines(lines):
     res = []
     flag = 0
@@ -255,25 +243,6 @@ def combineLines(lines):
                 buf = line[:-1]
                 flag=1
     return res
-
-updateRevDir = ARVO / "matches" 
-Match_DIR = updateRevDir / "hit"
-MisMatch_DIR = updateRevDir / "miss"
-
-dir_check(updateRevDir)
-dir_check(Match_DIR)
-dir_check(MisMatch_DIR)
-
-
-def reportMiss(localId,s):
-    with open(MisMatch_DIR / f"{localId}.json", 'a+') as f:
-        f.write(s+"\n")
-    return False
-    
-def reportHit(localId,s):
-    with open(Match_DIR / f"{localId}.json", 'a+') as f:
-        f.write(s+"\n")
-    return True
 def dockerfileCleaner(dockerfile):
     dft = DfTool(dockerfile)
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
@@ -283,71 +252,70 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
+
     dft = DfTool(dockerfile)
-    keyword = item_url
+    keyword = item['url']
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
+    elif keyword.startswith("git://git"):
+        keyword = keyword[9:]
+
     hits, ct = dft.getLine(keyword)
-    d = dict()
-    d['localId'] = localId
-    d['url'] = item_url
-    d['type'] = item_type
-    # Case Miss
     if len(hits) == 0:
-        d['reason'] = "Not Found"
-        return reportMiss(localId,json.dumps(d,indent=4))
-    # Case MisMatch
-    elif len(hits) != 1:
-        d['reason'] = "More then one results"
-        return reportMiss(localId,json.dumps(d,indent=4))
-    # Case Hit
+        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
+            WARN(f"Not Found {item_url=} for {localId=}")
+        return False
+    if len(hits) != 1:
+        WARN(f"Found more than one lines containing {item_url=} for {localId=}")
+        return False
+
+    line = hits[0]
+    if item_type == 'git':
+        pat = re.compile(rf"{item_type}\s+clone")
+    elif item_type == 'hg':
+        pat = re.compile(rf"{item_type}\s+clone")
+    elif item_type == 'svn':
+        pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
     else:
-        line = hits[0]
-        if item_type == 'git':
-            pat = re.compile(rf"{item_type}\s+clone")
-        # Could not be a clone command
+        WARN(f"No support for {item_type=}, {localId=}")
+        return False
+
+    if len(pat.findall(line)) != 1:
+        WARN(f"Mismatch the type of component downloading, where {item_type=} for {localId=}")
+        return False
+    
+    if type(commit_date) == type(Path("/tmp")):
+        rep_path = commit_date
+        # Replace mode
+        """
+        Replace the original line with ADD/COPY command
+        Then RUN init/update the submodule
+        """
+        dft.replaceLineat(ct-1,f"ADD {rep_path.name} {src_path}")
+        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'")
+        dft.flush()
+        return True
+    else:
+        # Insert Mode
+        if item_type == "git":
+            if approximate == '-':
+                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            else:
+                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            dft.flush()
+            return True
         elif item_type == 'hg':
-            pat = re.compile(rf"{item_type}\s+clone")
-        elif item_type == 'svn':
-            pat = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
+            dft.insertLineat(ct,f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"''')
+            dft.flush()
+            return True
+        elif item_type == "svn":
+            dft.replace(pat,f"RUN svn checkout -r {item_rev}")
+            dft.flush()
+            return True
         else:
             return False
-        if len(pat.findall(line)) != 1:
-            d['reason'] = f"Missing type: {item_type}, {line}"
-            return reportMiss(localId,json.dumps(d,indent=4))
-        else:
-            if type(commit_date) == type(Path("/tmp")):
-                rep_path = commit_date
-                # Replace mode
-                """
-                Replace the original line with ADD/COPY command
-                Then RUN init/update the submodule
-                """
-                dft.replaceLineat(ct-1,f"ADD {rep_path.name} {src_path}")
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ;(git submodule init && git submodule update --force) ;popd'")
-                dft.flush()
-                return reportHit(localId,json.dumps(d,indent=4))
-            else:
-                # Insert Mode
-                if item_type == "git":
-                    if approximate == '-':
-                        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
-                    else:
-                        dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
-                    dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
-                elif item_type == 'hg':
-                    dft.insertLineat(ct,f'''RUN bash -cx "pushd {src_path} ; (hg update --clean -r {item_rev} && hg purge --config extensions.purge=)|| exit 99 ; popd"''')
-                    dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
-                elif item_type == "svn":
-                    dft.replace(pat,f"RUN svn checkout -r {item_rev}")
-                    dft.flush()
-                    return reportHit(localId,json.dumps(d,indent=4))
-                else:
-                    return False
 
 if __name__ == "__main__":
     pass

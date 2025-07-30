@@ -1,7 +1,0 @@
-{
-  "/src/valijson": {
-    "type": "git",
-    "url": "https://github.com/tristanpenman/valijson",
-    "rev": "c1dde4e27090fb01c3ba5fdfc1f7890015bb256b"
-  }
-}

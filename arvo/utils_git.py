@@ -316,7 +316,7 @@ class GitTool():
             # -W to show the whole function
             # -m for merged commits
             # add timeout to avoid spending too much time on merging diff
-            cmd = ['timeout','30','git','show','--diff-merges=first-parent','-W',commit]
+            cmd = ['timeout','30','git','show','-m','--diff-merges=first-parent','-W',commit]
             cmd += ["-R"] if rev else []
             # cmd = ['timeout','30','git','show','-W',commit]
         elif self.type == 'hg':
@@ -479,8 +479,7 @@ def _TEST():
         elif vtype == 'svn':
             URL = 'https://svn.code.sf.net/p/freeimage/svn'
         else:
-            print("Unknown TYPE")
-            exit(1)
+            PANIC("Unknown TYPE")
         repo = GitTool(URL,vtype,latest=True)
         assert(repo)
         SUCCESS("T: [GitTools][Clone][Pass]")

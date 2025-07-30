@@ -46,6 +46,8 @@ def customSrcmap_PM(srcmap):
     ## Update srcmap
     for key in data:
         nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
+        if data[key]['url'] == None:
+            del(data[key]) 
         if nk != key:
             data[nk] = data[key]
             del(data[key])
@@ -55,7 +57,7 @@ def customSrcmap_PM(srcmap):
     #     data[vk]['rev']=commit
     # else:
     #     leaveRet(0xdeadbeef,wd)
-    #     panic(f"[!] Can't find the key({vk}) in json data")
+    #     PANIC(f"[!] Can't find the key({vk}) in json data")
     
     # readstat-address-201901210219.srcmap.json
     Bsrcmap = wd / srcmap[idx].name
@@ -86,7 +88,7 @@ def customSrcmap(srcmap,pname,commit):
     idx = 1 if len(list(sm1.keys())) >= len(list(sm0.keys())) else 0 
     chosen_srcmap = srcmap[idx].name
     Asrcmap = wd / chosen_srcmap
-    if not check_call(['cp',srcmap[0],Asrcmap]):
+    if not check_call(['cp',srcmap[idx],Asrcmap]):
         return False
     with open(Asrcmap) as f:
         data = json.load(f)
@@ -94,6 +96,8 @@ def customSrcmap(srcmap,pname,commit):
     ## Update srcmap
     for key in list(data.keys()):
         nk, data[key]['url'], data[key]['type'] = trans_table(key,data[key]['url'],data[key]['type'])
+        if data[key]['url'] == None:
+            del(data[key]) 
         if nk != key:
             data[nk] = data.pop(key)
     vk = "/src/"+pname
@@ -101,15 +105,12 @@ def customSrcmap(srcmap,pname,commit):
         data[vk]['rev']=commit
     else:
         leaveRet(0xdeadbeef,wd)
-        panic(f"[!] Can't find the key({vk}) in json data")
+        PANIC(f"[!] Can't find the key({vk}) in json data")
     
     # readstat-address-201901210219.srcmap.json
     ts = commitDate(data[vk]['url'],commit,data[vk]['type'])
     if not ts:
         return False
-    ori = srcmap[0].name.split("-")
-    ori[2] = ts
-    Bsrcmap = wd / "-".join(ori)
 
     for key in data:
         if (key != vk) and key not in ["/src",'/src/aflplusplus','/src/libfuzzer','/src/afl']:
@@ -117,6 +118,10 @@ def customSrcmap(srcmap,pname,commit):
             # since we implemented that in util_core
             if data[key]['type'] == 'git':
                 data[key]['rev'] = "xXxXx"
+    ori = srcmap[0].name.split("-")
+    ori[-1] = ts
+    Bsrcmap = wd / ("-".join(ori)+".scrmap.json")
+
     with open(Bsrcmap,'w') as f:
         f.write(json.dumps(data))
     if DEBUG:

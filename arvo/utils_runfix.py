@@ -94,7 +94,7 @@ def runFixCheckModule(module):
         return "code-davinci-edit-001"
     if module not in ['gpt-4-turbo',"gpt-3.5-turbo-16k","Starcoder","gpt-3.5-turbo-instruct","code-davinci-edit-001","gpt-3.5-turbo","gpt-4","gpt-4-1106-preview"] and \
         'Wizard' not in module:
-        panic(f"[X] Invalid Model {module}")
+        PANIC(f"[X] Invalid Model {module}")
     return module
 def runFixGetVulCode(diff_file,repo):
     # Get code info, maker sure there should be only one case
