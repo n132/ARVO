@@ -37,8 +37,7 @@ TRANS_TABLE = {
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
 '/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
-'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
-'/src/libmicrohttpd':"https://git.gnunet.org/libmicrohttpd.git"
+'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git"
 }
 # Only include non git project
 TRANS_TYPE = {
