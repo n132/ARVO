@@ -779,7 +779,9 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
         True if build succeeded, False otherwise.
     """
   # Build source_dir
-  srcmap_items = json.loads(open(srcmap, encoding='utf-8').read())
+
+  with open(srcmap, encoding='utf-8') as f:
+    srcmap_items = json.loads(f.read())
 
   if ("/src" in srcmap_items and
       srcmap_items['/src']['url'] == 'https://github.com/google/oss-fuzz.git'):
