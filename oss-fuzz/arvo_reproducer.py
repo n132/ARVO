@@ -2,6 +2,7 @@
 # Paper: https://arxiv.org/abs/2408.02153
 # ARVO Implementation: https://github.com/n132/ARVO
 # Neil — May 5, 2025 — Seattle, USA
+# Jordi — July 30, 2025
 """ARVO reproducer module.
 
 This module reproduces a vulnerability and its fix on OSS-Fuzz.
