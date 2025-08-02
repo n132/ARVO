@@ -50,6 +50,7 @@ KEYChanges = {
 
 # Order matters please don't change it if you are not sure the influence
 globalStrReplace = {
+'https://bitbucket.org/multicoreware/x265_git/src/stable/': 'https://bitbucket.org/multicoreware/x265_git.git',
 'http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz': 'https://github.com/unicode-org/icu/releases/download/release-59-1/icu4c-59_1-src.tgz',
 'git://git.gnome.org/libxml2': "https://gitlab.gnome.org/GNOME/libxml2.git",
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
