@@ -11,7 +11,7 @@ NoOperation = [
     "/src/LPM/external.protobuf/src/external.protobuf",
     "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
 ]
-def fixDockerfile(dockerfile_path,project=None):
+def fixDockerfile(dockerfile_path,project,commit_date):
     # todo: if you want to make it faster, implement it. And it's a liitle complex
     # DO not want to modify dockerfile
     # It comsumes TIME! 
@@ -42,8 +42,22 @@ def fixDockerfile(dockerfile_path,project=None):
         line = 'COPY build.sh $SRC/'
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
     elif project == 'gdal':
-        pass
-        # dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
+        dft.appendLine(f'ARG ARVO_TS="{commit_date.isoformat()}"')
+        build_clone_fix = r'''RUN awk -v ts="$ARVO_TS" '\
+    /git clone/ { \
+        if (NF == 3) dir = $3; \
+        else { \
+            repo = $NF; \
+            gsub(/.*\//, "", repo); \
+            gsub(/\.git$/, "", repo); \
+            dir = repo; \
+        } \
+        print $0 " && (pushd " dir " && commit=$(git log --before=\"" ts "\" --format=\"%H\" -n1) && git reset --hard $commit || exit 99 && popd) && (pushd " dir " && git submodule init && git submodule update --force && popd)"; \
+        next \
+    } \
+    { print }' $SRC/build.sh > $SRC/build.sh.tmp && mv $SRC/build.sh.tmp $SRC/build.sh
+    '''
+        dft.appendLine(build_clone_fix)
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -202,9 +216,7 @@ def fixBuildScript(file,pname):
     elif pname == "cryptofuzz":
         # The repo was deleted 
         dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
-    elif pname == 'gdal':
-        pass
-        # dft.replace(r'make -j\$\(nproc\) -s','rm -rf /src/gdal/gdal/frmts/jpeg/libjpeg12/*.h && make -j$(nproc) -s')
+
     assert(dft.flush()==True)
     return True
 def skipComponent(pname,itemName):

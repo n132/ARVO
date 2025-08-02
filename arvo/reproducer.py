@@ -128,7 +128,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         return leaveRet(False,tmp_dir)
     # Step ONE: Fix Dockerfiles 
     dockerfileCleaner(dockerfile)
-    if not fixDockerfile(dockerfile,project_name):
+    if not fixDockerfile(dockerfile,project_name,commit_date):
         eventLog(f"[-] build_fuzzer_with_source: Fail to Fix Dockerfile / Not Fixable, {localId}")
         return leaveRet(False,tmp_dir)
     

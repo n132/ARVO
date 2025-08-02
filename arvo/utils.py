@@ -28,6 +28,11 @@ session = requests.Session()
 
 # Init Done
 def eventLog(s,ext=False):
+    """
+        1. Print out the message passed
+        2. Document the mssage in log file
+        3. return False if exit is not set
+    """
     FAIL(s)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
         f.write(s+"\n")

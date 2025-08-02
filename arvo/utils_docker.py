@@ -121,7 +121,7 @@ class DfTool():
                 res.append(line)
                 linenum = ct
         return res, linenum
-            
+
 # Docker Options
 def docker_create(name,img):
     cmd = ['docker','create','--name',name,img]
