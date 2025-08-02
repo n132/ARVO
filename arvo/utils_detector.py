@@ -3,7 +3,8 @@ from .utils import *
 from .dev import *
 from .reproducer import verify
 import zipfile
-
+from datetime import datetime
+import random
 Database_PATH = ARVO / "upstream_false_positives.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
@@ -28,33 +29,43 @@ def fp_init():
         conn.commit()
 def fp_insert(data):
     conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    conn.execute("BEGIN EXCLUSIVE")
-    conn.execute("""
-    INSERT INTO upstream_false_positives (
-        localId, reason, log
-    ) VALUES (?, ?, ?)
-    """, data)
-    conn.commit()
-    conn.close()
-    return True
+    try:
+        conn.execute("BEGIN EXCLUSIVE")
+        conn.execute("""
+        INSERT INTO upstream_false_positives (
+            localId, reason, log
+        ) VALUES (?, ?, ?)
+        """, data)
+        conn.commit()
+        return True
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
 def tp_insert(data):
     conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    conn.execute("BEGIN EXCLUSIVE")
-    conn.execute("""
-    INSERT INTO upstream_true_positives (
-        localId, reason, log
-    ) VALUES (?, ?, ?)
-    """, data)
-    conn.commit()
-    conn.close()
-    return True
+    try:
+        conn.execute("BEGIN EXCLUSIVE")
+        conn.execute("""
+        INSERT INTO upstream_true_positives (
+            localId, reason, log
+        ) VALUES (?, ?, ?)
+        """, data)
+        conn.commit()
+        return True
+    except Exception:
+        conn.rollback()
+        raise
+    finally:
+        conn.close()
 
         
 def getFalsePositives():
     conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    cursor = conn.cursor()
     try:
+        cursor = conn.cursor()
         cursor.execute("""
         SELECT * FROM upstream_false_positives
         """)
@@ -63,15 +74,15 @@ def getFalsePositives():
         for x in rows:
             res.append(x[0])
         return res
-    except:
+    except Exception:
         FAIL("[-] FAILED to get data from Database")
         return False
     finally:
         conn.close()
 def getNotFalsePositives():
     conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    cursor = conn.cursor()
     try:
+        cursor = conn.cursor()
         cursor.execute("""
         SELECT * FROM upstream_true_positives
         """)
@@ -80,7 +91,7 @@ def getNotFalsePositives():
         for x in rows:
             res.append(x[0])
         return res
-    except:
+    except Exception:
         FAIL("[-] FAILED to get data from Database")
         return False
     finally:
@@ -184,7 +195,9 @@ def check_the_left():
     todo = [x for x in todo if x not in done]
     done_check = getFalsePositives()+getNotFalsePositives()
     todo = [x for x in todo if x not in done_check]
+    random.shuffle(todo)
     for localId in bar(todo):
+        INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
         res = false_positive(localId)
         if res != True:
             vul_result = LogDir/f"{localId}_vul.log"
