@@ -56,6 +56,7 @@ globalStrReplace = {
 'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype2',
 'https://git.savannah.gnu.org/git/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'git://git.sv.nongnu.org/freetype/freetype2.git': "https://github.com/freetype/freetype2",
+'https://gitlab.freedesktop.org/freetype/freetype.git': 'https://github.com/freetype/freetype',
 'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
 'RUN curl http': "RUN curl -L http",
 '&& curl http': "&& curl -L http",
