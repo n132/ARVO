@@ -5,31 +5,40 @@ import sqlite3
 from .utils_init    import *
 from .utils_log     import *
 from .utils         import *
+import fcntl  # Only works on Unix
+
 DB_PATH = ARVO / "arvo.db"
+
+LOCK_PATH = ARVO / "arvo.db.lock"
+
 def db_init():
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute("""
-        CREATE TABLE IF NOT EXISTS arvo (
-            localId INTEGER PRIMARY KEY,
-            project TEXT NOT NULL,
-            reproduced BOOLEAN NOT NULL,
-            reproducer_vul TEXT,
-            reproducer_fix TEXT,
-            patch_located BOOLEAN,
-            patch_url TEXT,
-            verified BOOLEAN,
-            fuzz_target TEXT,
-            fuzz_engine TEXT,
-            sanitizer TEXT,
-            crash_type TEXT,
-            crash_output TEXT,
-            severity TEXT,
-            report TEXT,
-            fix_commit TEXT,
-            language TEXT
-        )
-        """)
-        conn.commit()
+    with open(LOCK_PATH, 'w') as lock_file:
+        fcntl.flock(lock_file, fcntl.LOCK_EX)  # block until lock acquired
+        with sqlite3.connect(DB_PATH) as conn:
+            conn.execute("PRAGMA journal_mode=WAL")  # better for concurrency
+            conn.execute("""
+            CREATE TABLE IF NOT EXISTS arvo (
+                localId INTEGER PRIMARY KEY,
+                project TEXT NOT NULL,
+                reproduced BOOLEAN NOT NULL,
+                reproducer_vul TEXT,
+                reproducer_fix TEXT,
+                patch_located BOOLEAN,
+                patch_url TEXT,
+                verified BOOLEAN,
+                fuzz_target TEXT,
+                fuzz_engine TEXT,
+                sanitizer TEXT,
+                crash_type TEXT,
+                crash_output TEXT,
+                severity TEXT,
+                report TEXT,
+                fix_commit TEXT,
+                language TEXT
+            )
+            """)
+            conn.commit()
+
 def insert_entry(data):
     conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
     for _ in range(5):
