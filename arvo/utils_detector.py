@@ -1,4 +1,5 @@
 import sqlite3
+import time
 from .utils import *
 from .dev import *
 from .reproducer import verify
@@ -10,6 +11,7 @@ OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
 def fp_init():
     with sqlite3.connect(Database_PATH) as conn:
+        conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("""
         CREATE TABLE IF NOT EXISTS upstream_false_positives (
             localId INTEGER PRIMARY KEY,
@@ -27,75 +29,115 @@ def fp_init():
         )
         """)
         conn.commit()
-def fp_insert(data):
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        conn.execute("BEGIN EXCLUSIVE")
-        conn.execute("""
-        INSERT INTO upstream_false_positives (
-            localId, reason, log
-        ) VALUES (?, ?, ?)
-        """, data)
-        conn.commit()
-        return True
-    except Exception:
-        conn.rollback()
-        raise
-    finally:
-        conn.close()
+def fp_insert(data, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("""
+            INSERT INTO upstream_false_positives (
+                localId, reason, log
+            ) VALUES (?, ?, ?)
+            """, data)
+            conn.commit()
+            return True
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            raise
+        except Exception:
+            if conn:
+                conn.rollback()
+            raise
+        finally:
+            if conn:
+                conn.close()
 
-def tp_insert(data):
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        conn.execute("BEGIN EXCLUSIVE")
-        conn.execute("""
-        INSERT INTO upstream_true_positives (
-            localId, reason, log
-        ) VALUES (?, ?, ?)
-        """, data)
-        conn.commit()
-        return True
-    except Exception:
-        conn.rollback()
-        raise
-    finally:
-        conn.close()
+def tp_insert(data, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("""
+            INSERT INTO upstream_true_positives (
+                localId, reason, log
+            ) VALUES (?, ?, ?)
+            """, data)
+            conn.commit()
+            return True
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            raise
+        except Exception:
+            if conn:
+                conn.rollback()
+            raise
+        finally:
+            if conn:
+                conn.close()
 
         
-def getFalsePositives():
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        cursor = conn.cursor()
-        cursor.execute("""
-        SELECT * FROM upstream_false_positives
-        """)
-        rows = cursor.fetchall()
-        res = []
-        for x in rows:
-            res.append(x[0])
-        return res
-    except Exception:
-        FAIL("[-] FAILED to get data from Database")
-        return False
-    finally:
-        conn.close()
-def getNotFalsePositives():
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        cursor = conn.cursor()
-        cursor.execute("""
-        SELECT * FROM upstream_true_positives
-        """)
-        rows = cursor.fetchall()
-        res = []
-        for x in rows:
-            res.append(x[0])
-        return res
-    except Exception:
-        FAIL("[-] FAILED to get data from Database")
-        return False
-    finally:
-        conn.close()
+def getFalsePositives(max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT * FROM upstream_false_positives
+            """)
+            rows = cursor.fetchall()
+            res = []
+            for x in rows:
+                res.append(x[0])
+            return res
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        except Exception:
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        finally:
+            if conn:
+                conn.close()
+def getNotFalsePositives(max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT * FROM upstream_true_positives
+            """)
+            rows = cursor.fetchall()
+            res = []
+            for x in rows:
+                res.append(x[0])
+            return res
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        except Exception:
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        finally:
+            if conn:
+                conn.close()
 def false_positive(localId,focec_retest = False):
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
