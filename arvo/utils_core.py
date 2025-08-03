@@ -88,8 +88,6 @@ def fixDockerfile(dockerfile_path,project,commit_date):
         dft.replace(r"RUN wget",'#RUN wget')
     elif project == 'quickjs':
         dft.strReplace('https://github.com/horhof/quickjs','https://github.com/bellard/quickjs')
-    elif project =="dav1d":
-        pass
     elif project == 'cryptofuzz':
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
@@ -182,10 +180,6 @@ def fixBuildScript(file,pname):
         '''
         script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
         dft.insertLineat(0,script)     
-    elif pname == 'serenity':
-        # script = "sed -i 's/UCD_VERSION 15.0.0/UCD_VERSION 15.1.0/g' /src/serenity/Meta/CMake/unicode_data.cmake"
-        # dft.insertLineat(0,script)    
-        pass
     elif pname == 'libreoffice':
         '''
         If you don't want to destroy your life. 
