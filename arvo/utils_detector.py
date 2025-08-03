@@ -2,7 +2,6 @@ import sqlite3
 import time
 from .utils import *
 from .dev import *
-from .reproducer import verify
 import zipfile
 from datetime import datetime
 import random
@@ -222,7 +221,7 @@ def false_positive(localId,focec_retest = False):
 
 # False positives
 def check_the_left():
-    LogDir = ARVO/"Log"/"upstream_false_positives"
+    LogDir = ARVO / "Log" / "upstream_false_positives"
     done = getReports()
     todo = getAllLocalIds()
     todo = [x for x in todo if x not in done]
