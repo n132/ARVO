@@ -156,8 +156,16 @@ def false_positive(localId,focec_retest = False):
 
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
-    if not getOSSFuzzer(localId, store,limit=(1<<30)):
-        return _leaveRet(None,"[FAILED] too much to download, do it later")
+    while True:
+        res = getOSSFuzzer(localId, store,limit=(1<<30))
+        if res == False:
+            return _leaveRet(None,"[FAILED] Failed to get necessary metadate to locate the resource")
+        elif res == None:
+            WARN("[FAILED] too much to download, do it later")
+            sleep(30)
+        else:
+            break
+
     for target in store.iterdir():
         with zipfile.ZipFile(target, "r") as zf:
             file_list = zf.namelist()
@@ -184,7 +192,8 @@ def false_positive(localId,focec_retest = False):
     tag = "vul"
     for x in todo:
         fuzz_target = getFuzzer(localId,x)
-        if fuzz_target == None: return _leaveRet(None,f"[FAILED] {localId=} {x} can't find the fuzz target")
+        if fuzz_target == None: 
+            return _leaveRet(None,f"[FAILED] {localId=} {x} can't find the fuzz target")
         cmd = ['docker','run','--rm','--privileged']
         args = ['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
                 "-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
@@ -214,10 +223,10 @@ def false_positive(localId,focec_retest = False):
     # clean poc and downloaded binary
     shutil.rmtree(poc.parent)
     shutil.rmtree(store)
-    if res != [False,True]:
-        return True # False positive
+    if res == [False,True]:
+        return False # Not False Positives
     else:
-        return False
+        return True  # False Positives
 
 # False positives
 def check_the_left():
@@ -248,8 +257,8 @@ def check_the_left():
                 log += "None\n"
             if res == False:
                 tp_insert((localId,f"The check result seems good",log))
-            else:
-                tp_insert((localId,f"The check result can't rell if it's a false positive",log))
+            else: # Infra issue so we can't decide
+                tp_insert((localId,f"The check result can't tell if it's a false positive",log))
             SUCCESS(f"Add new upstream true positive: {localId=}")
         else:
             vul_result = LogDir/f"{localId}_vul.log"
@@ -263,6 +272,6 @@ def check_the_left():
             with open(fix_result,'rb') as f:
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
             fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
-            SUCCESS(f"Add new upstream false positive: {localId=}")
+            WARN(f"Add new upstream false positive: {localId=}")
 fp_init()
 
