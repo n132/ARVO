@@ -219,15 +219,6 @@ def false_positive(localId,focec_retest = False):
         return True # False positive
     else:
         return False
-def false_positives(localIds,failed_on_verify=True):
-    # The passed localIds must return 
-    confirmed = []
-    for localId in localIds:
-        if failed_on_verify != True and verify(localId):
-            continue
-        if false_positive(localId)==True:
-            confirmed.append(localId)
-    return confirmed
 
 # False positives
 def check_the_left():
