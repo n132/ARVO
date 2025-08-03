@@ -229,49 +229,43 @@ def false_positive(localId,focec_retest = False):
         return True  # False Positives
 
 # False positives
-def check_the_left():
+def check_false_positive(localId):
     LogDir = ARVO / "Log" / "upstream_false_positives"
-    done = getReports()
-    todo = getAllLocalIds()
-    todo = [x for x in todo if x not in done]
-    done_check = getFalsePositives()+getNotFalsePositives()
-    todo = [x for x in todo if x not in done_check]
-    random.shuffle(todo)
-    for localId in bar(todo):
-        INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
-        res = false_positive(localId)
-        if res != True:
-            vul_result = LogDir/f"{localId}_vul.log"
-            fix_result = LogDir/f"{localId}_fix.log"
-            log = "=== vulnerable version ===:\n\n"
-            if vul_result.exists():
-                with open(vul_result,'rb') as f:
-                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            else:
-                log += "None\n"
-            log+= "\n=== fixed version ===:\n\n"
-            if fix_result.exists():
-                with open(fix_result,'rb') as f:
-                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            else:
-                log += "None\n"
-            if res == False:
-                tp_insert((localId,f"The check result seems good",log))
-            else: # Infra issue so we can't decide
-                tp_insert((localId,f"The check result can't tell if it's a false positive",log))
-            SUCCESS(f"Add new upstream true positive: {localId=}")
-        else:
-            vul_result = LogDir/f"{localId}_vul.log"
-            fix_result = LogDir/f"{localId}_fix.log"
-            if not vul_result.exists() or not fix_result.exists():
-                continue
-            log = "=== vulnerable version ===:\n\n"
+    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
+    res = false_positive(localId)
+    vul_result = LogDir/f"{localId}_vul.log"
+    fix_result = LogDir/f"{localId}_fix.log"
+
+    if res != True:
+        log = "=== vulnerable version ===:\n\n"
+        if vul_result.exists():
             with open(vul_result,'rb') as f:
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            log+= "\n=== fixed version ===:\n\n"
+        else:
+            log += "None\n"
+        log+= "\n=== fixed version ===:\n\n"
+        if fix_result.exists():
             with open(fix_result,'rb') as f:
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
-            WARN(f"Add new upstream false positive: {localId=}")
+        else:
+            log += "None\n"
+        if res == False:
+            tp_insert((localId,f"The check result seems good",log))
+        else: # Infra issue so we can't decide
+            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
+        SUCCESS(f"Add new upstream true positive: {localId=}")
+        return "Not False Posiitve"
+    else:
+        if not vul_result.exists() or not fix_result.exists():
+            PANIC("Internal Error in false_positive")
+        log = "=== vulnerable version ===:\n\n"
+        with open(vul_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        log+= "\n=== fixed version ===:\n\n"
+        with open(fix_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
+        WARN(f"Add new upstream false positive: {localId=}")
+        return "False Posiitve"
 fp_init()
 
