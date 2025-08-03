@@ -58,6 +58,8 @@ def fixDockerfile(dockerfile_path,project,commit_date):
     { print }' $SRC/build.sh > $SRC/build.sh.tmp && mv $SRC/build.sh.tmp $SRC/build.sh
     '''
         dft.appendLine(build_clone_fix)
+        line = '''RUN sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile'''
+        dft.appendLine(line)
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -166,6 +168,7 @@ def extraScritps(pname,oss_dir,source_dir):
                     del(lines[-x])
             with open(target,'w') as f:
                 f.write("\n".join(lines))
+        
     return True
 def fixBuildScript(file,pname):
     if not file.exists():
