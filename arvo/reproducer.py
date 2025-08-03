@@ -444,6 +444,7 @@ def verify(localId,save_img=False):
     if localId in known_false_positives:
         INFO(f"{localId=} is a known false positive on oss-fuzz")
         return False
+        
     def leave(result):
         if save_img:
             docker_rm(f"reproducer_{localId}")

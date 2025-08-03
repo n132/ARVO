@@ -257,7 +257,36 @@ def dockerfileCleaner(dockerfile):
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
     dft.replace(r'(--branch\s+\S+\s+|-b\s\S+\s+|--branch=\S+\s+)',"") # remove --branch or -b
     dft.flush()
+def parse_git_clone(dockerfile_line):
+    # Comprehensive git clone pattern
+    pattern = r'RUN\s+git\s+clone\s+(?P<flags>(?:(?:--?\w+(?:[=\s]\S+)?)\s+)*)?(?P<url>\S+?)(?:\s+(?P<dest>\S+))?\s*$'
+
+    
+    match = re.search(pattern, dockerfile_line.strip())
+    if not match:
+        return None
+    
+    url = match.group('url')
+    explicit_dest = match.group('dest')
+    
+    # Get default repo name from URL
+    if explicit_dest:
+        repo_dir = explicit_dest
+    else:
+        # Extract repo name from various URL formats
+        if url.endswith('.git'):
+            repo_name = url.split('/')[-1][:-4]  # Remove .git
+        else:
+            repo_name = url.split('/')[-1]
+        repo_dir = repo_name
+    
+    return repo_dir
 def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate):
+    """
+    ins the dockerfile to perform minial changes while reproducing
+    """
+
+        
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
@@ -309,10 +338,23 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     else:
         # Insert Mode
         if item_type == "git":
-            if approximate == '-':
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            repo_dir = parse_git_clone(dft.content.split("\n")[ct-1])
+            if ARVO_Turbo and repo_dir!=None:
+                clone_res = clone(item_url,None,dockerfile.parent,repo_dir,commit_date=commit_date)
             else:
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                clone_res = False
+            if approximate == '-':
+                if  clone_res not in [None, False]: # Cache Path
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {repo_dir}")
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {repo_dir} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                else:
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            else:
+                if  clone_res not in [None, False]: # Cache Path
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {repo_dir}")
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                else:
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
             dft.flush()
             return True
         elif item_type == 'hg':
