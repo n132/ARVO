@@ -132,19 +132,5 @@ def getOSSFuzzer(localId,storage,limit=107374182400):
     return True
     
 
-def getOSSFuzzers():
-    issues = getAllLocalIds()
-    storage = Path("/data/n132/oss-fuzz")
-    ct =  0
-    for x in issues:
-        if ct % 30 == 29:
-            sleep(30)
-        try:
-            tmp = storage / str(x)
-            tmp.mkdir(exist_ok=True)
-            res = getOSSFuzzer(x,tmp)
-        except:
-            pass
-
 if __name__ == "__main__":
     pass
