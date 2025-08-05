@@ -673,7 +673,7 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def pocResultChecker(returnCode,logfile, args, recursive_call=False):
+def pocResultChecker(returnCode, logfile, args, recursive_call=False):
     with open(logfile,'rb') as f:
         log_ctx = f.read()
     if b"error while loading shared libraries" in log_ctx:
