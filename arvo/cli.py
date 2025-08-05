@@ -26,7 +26,7 @@ def cli_list(pname):
         WARN(f"Not found, check the provided project name {pname=}")
     else:
         print(res)
-def cli_check_localId(localId):
+def cli_check_localId(localId,verbose=False):
     reproduciable = True if localId in getDone() else False
     patch_located = True if localId in getReports() else False
     pname = getPname(localId)
@@ -39,7 +39,7 @@ def cli_check_localId(localId):
         SUCCESS("Patch Located: \tTrue")
     else:
         WARN("Patch Located: \tFalse")
-    if not reproduciable or not patch_located:
+    if verbose and (not reproduciable or not patch_located):
         INFO("Reasons:")
         possible_image_err   = ARVO / "CrashLog" / f"{localId}_Image.log"
         possible_compile_err = ARVO / "CrashLog" / f"{localId}_Compile.log"
@@ -57,7 +57,7 @@ def cli_check_localId(localId):
 def cli_check(localId_project):
     if localId_project.isdigit():
         localId = int(localId_project)
-        cli_check_localId(localId)
+        cli_check_localId(localId,True)
     else:
         pname = localId_project
         for x in listProject(pname):

@@ -191,11 +191,9 @@ def vulCommit(localId,retryChance=None,hint=None):
     # the tuple will be used in other functions that this function will call
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to get srcmap/issue")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Failed to get srcmap/issue")
     elif len(srcmap)!=2:
-        eventLog(f"\t[-] vulCommit {localId}: Len(srcmap)!=2")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Len(srcmap)!=2")
     # 1 - Do the work
     pname   = getPname(localId)
     if pname == False:
@@ -203,19 +201,16 @@ def vulCommit(localId,retryChance=None,hint=None):
     commits = list_commits(localId,pname)
     
     if commits == False:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to list commits")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Failed to list commits")
     commits, TURBO, inclusive = commits
     
     if len(commits)<=1:
-        eventLog(f"\t[-] vulCommit {localId}: Found {len(commits)} commit, which is abnormal")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Found {len(commits)} commit, which is abnormal")
     
     commits = commits[1:] if inclusive else commits
     poc = getPoc(localId,issue)
     if not poc:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to download the PoC")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Failed to download the PoC")
     # 2 - Prepare for log
     log = ARVO /"Log"/"bisect"/f"{localId}"
     if log.exists():
@@ -451,8 +446,7 @@ def report(localId,verified=False):
     if not verified:
         print(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
-            return False
+            return eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
         done = getDone()
         if localId not in done:
             print(f"[+] Add {localId} to results")
@@ -461,8 +455,7 @@ def report(localId,verified=False):
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x10)
     if fix_commit == False or fix_commit=="":
-        eventLog(f"[-] Failed to locate the patches for issue {localId}")
-        return False
+        return eventLog(f"[-] Failed to locate the patches for issue {localId}")
     # return fix_commit
     # Step3: File the report 
     return fileReport(localId,fix_commit)
@@ -566,8 +559,7 @@ def lifeSpan_prepareProject(localId,pname):
     srcmap = getSrcmaps(localId)
     init_timestamp = lifeSpan_getInitTimeStamp(localId)
     if not init_timestamp:
-        eventLog(f"[lifeSpan]: Failed to get the init_timestamp for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get the init_timestamp for {localId}")
     ti = json.loads(open(srcmap[0]).read())[f"/src/{pname}"]
     _, ti["url"], ti["type"] = trans_table(f"/src/{pname}", ti["url"], ti["type"])
     if(ti["url"] == None):
@@ -585,14 +577,12 @@ def lifeSpan(localId):
     CHANCE  = 0x10
     pname = getPname(localId)
     if not pname:
-        eventLog(f"[lifeSpan]: Failed to get basices for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get basices for {localId}")
 
     # 2. Prepare Commits
     tmp_res = lifeSpan_prepareProject(localId,pname)
     if not tmp_res:
-        eventLog(f"[lifeSpan]: Failed to get the commit information for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get the commit information for {localId}")
     gt, beg_commit, vulnerable_commit  = tmp_res
     beg_ts = gt.timestamp(beg_commit) 
     vul_ts = gt.timestamp(vulnerable_commit)
@@ -610,7 +600,7 @@ def lifeSpan(localId):
         return leaveRet(False, gt.repo)
     elif len(commits) < 2:
         eventLog(f"[lifeSpan]: Less than two commits to check for {localId}")
-        return False
+        return leaveRet(False, gt.repo)
     TURBO = gt.getRecentCommit(commits)
     commits = (commits[:-1])[::-1] # Remove info[0][/src/pname][rev] and rev the list
     shutil.rmtree(gt.repo)
@@ -623,14 +613,12 @@ def lifeSpan(localId):
     # 4. Get the target Crash
     targetCrash = getCrashSummary(ARVO / "Log" / "Round1" / f"{localId}_vul.log")
     if not targetCrash:
-        eventLog(f"Failed to get crashSummary for {localId}")
-        return False
+        return eventLog(f"Failed to get crashSummary for {localId}")
     
     # 5. Get PoC
     poc = getPoc(localId, getIssue(localId))
     if not poc:
-        eventLog(f"Failed to get the poc getPoc({localId})")
-        return False
+        return eventLog(f"Failed to get the poc getPoc({localId})")
     
     # 6. Do search
     found   = dichotomy_search_TC(commits, localId, pname, poc, 'lifeSpan',targetCrash, oss_fuzz_commit)
@@ -763,15 +751,14 @@ def dockerImgExist(localId):
             return False    
     return True
 
-def reproduce(localId, dockerize = True, update = False):
+def reproduce(localId, dockerize = True, update = True):
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
         INFO("[+] Record Exists")
         return True
     if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
-        eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
-        return False
+        return eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
     
     reproduced      = True
 

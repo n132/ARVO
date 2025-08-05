@@ -7,7 +7,7 @@ BuildData = collections.namedtuple(
     'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
 from .transform import trans_table
 from . import utils_ctx 
-
+from .utils_detector import getFalsePositives
 # Global
 CONTAINER_ENV = []
 def permissionResolve(target_path):
@@ -440,6 +440,11 @@ def pushImgRemote(localId,issue):
 def verify(localId,save_img=False):
     # if Save_img == True, we should make sure there is no two workers working
     # on the same localId or confliction may happen
+    known_false_positives = getFalsePositives()
+    if localId in known_false_positives:
+        INFO(f"{localId=} is a known false positive on oss-fuzz")
+        return False
+        
     def leave(result):
         if save_img:
             docker_rm(f"reproducer_{localId}")

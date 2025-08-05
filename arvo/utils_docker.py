@@ -164,6 +164,8 @@ def docker_images(name):
     cmd = ["docker","images","-aq",name]
     return execute(cmd).decode()
 def docker_rmi(img_name):
+    if docker_images(img_name) == '':
+        return True
     cmd = ['docker','rmi',img_name]
     return check_call(cmd)
 def docker_ps(container_name):

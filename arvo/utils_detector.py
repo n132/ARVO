@@ -1,14 +1,16 @@
 import sqlite3
+import time
 from .utils import *
 from .dev import *
-from .reproducer import verify
 import zipfile
-
+from datetime import datetime
+import random
 Database_PATH = ARVO / "upstream_false_positives.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
 def fp_init():
     with sqlite3.connect(Database_PATH) as conn:
+        conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("""
         CREATE TABLE IF NOT EXISTS upstream_false_positives (
             localId INTEGER PRIMARY KEY,
@@ -26,65 +28,115 @@ def fp_init():
         )
         """)
         conn.commit()
-def fp_insert(data):
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    conn.execute("BEGIN EXCLUSIVE")
-    conn.execute("""
-    INSERT INTO upstream_false_positives (
-        localId, reason, log
-    ) VALUES (?, ?, ?)
-    """, data)
-    conn.commit()
-    conn.close()
-    return True
+def fp_insert(data, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("""
+            INSERT INTO upstream_false_positives (
+                localId, reason, log
+            ) VALUES (?, ?, ?)
+            """, data)
+            conn.commit()
+            return True
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            raise
+        except Exception:
+            if conn:
+                conn.rollback()
+            raise
+        finally:
+            if conn:
+                conn.close()
 
-def tp_insert(data):
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    conn.execute("BEGIN EXCLUSIVE")
-    conn.execute("""
-    INSERT INTO upstream_true_positives (
-        localId, reason, log
-    ) VALUES (?, ?, ?)
-    """, data)
-    conn.commit()
-    conn.close()
-    return True
+def tp_insert(data, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("""
+            INSERT INTO upstream_true_positives (
+                localId, reason, log
+            ) VALUES (?, ?, ?)
+            """, data)
+            conn.commit()
+            return True
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            raise
+        except Exception:
+            if conn:
+                conn.rollback()
+            raise
+        finally:
+            if conn:
+                conn.close()
 
         
-def getFalsePositives():
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-        SELECT * FROM upstream_false_positives
-        """)
-        rows = cursor.fetchall()
-        res = []
-        for x in rows:
-            res.append(x[0])
-        return res
-    except:
-        FAIL("[-] FAILED to get data from Database")
-        return False
-    finally:
-        conn.close()
-def getNotFalsePositives():
-    conn = sqlite3.connect(Database_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-        SELECT * FROM upstream_true_positives
-        """)
-        rows = cursor.fetchall()
-        res = []
-        for x in rows:
-            res.append(x[0])
-        return res
-    except:
-        FAIL("[-] FAILED to get data from Database")
-        return False
-    finally:
-        conn.close()
+def getFalsePositives(max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT * FROM upstream_false_positives
+            """)
+            rows = cursor.fetchall()
+            res = []
+            for x in rows:
+                res.append(x[0])
+            return res
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        except Exception:
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        finally:
+            if conn:
+                conn.close()
+def getNotFalsePositives(max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(Database_PATH, timeout=30)
+            cursor = conn.cursor()
+            cursor.execute("""
+            SELECT * FROM upstream_true_positives
+            """)
+            rows = cursor.fetchall()
+            res = []
+            for x in rows:
+                res.append(x[0])
+            return res
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        except Exception:
+            FAIL("[-] FAILED to get data from Database")
+            return False
+        finally:
+            if conn:
+                conn.close()
 def false_positive(localId,focec_retest = False):
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
@@ -104,8 +156,16 @@ def false_positive(localId,focec_retest = False):
 
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
-    if not getOSSFuzzer(localId, store,limit=(1<<30)):
-        return _leaveRet(None,"[FAILED] too much to download, do it later")
+    while True:
+        res = getOSSFuzzer(localId, store,limit=(1<<30))
+        if res == False:
+            return _leaveRet(None,"[FAILED] Failed to get necessary metadate to locate the resource")
+        elif res == None:
+            WARN("[FAILED] too much to download, do it later")
+            sleep(30)
+        else:
+            break
+
     for target in store.iterdir():
         with zipfile.ZipFile(target, "r") as zf:
             file_list = zf.namelist()
@@ -132,7 +192,8 @@ def false_positive(localId,focec_retest = False):
     tag = "vul"
     for x in todo:
         fuzz_target = getFuzzer(localId,x)
-        if fuzz_target == None: return _leaveRet(None,f"[FAILED] {localId=} {x} can't find the fuzz target")
+        if fuzz_target == None: 
+            return _leaveRet(None,f"[FAILED] {localId=} {x} can't find the fuzz target")
         cmd = ['docker','run','--rm','--privileged']
         args = ['-e', ASAN_OPTIONS, '-e',UBSAN_OPTIONS, '-e', MSAN_OPTIONS,
                 "-v",f"{poc}:/tmp/poc", '-v',f"{str(fuzz_target.parent)}:/out",
@@ -162,62 +223,49 @@ def false_positive(localId,focec_retest = False):
     # clean poc and downloaded binary
     shutil.rmtree(poc.parent)
     shutil.rmtree(store)
-    if res != [False,True]:
-        return True # False positive
+    if res == [False,True]:
+        return False # Not False Positives
     else:
-        return False
-def false_positives(localIds,failed_on_verify=True):
-    # The passed localIds must return 
-    confirmed = []
-    for localId in localIds:
-        if failed_on_verify != True and verify(localId):
-            continue
-        if false_positive(localId)==True:
-            confirmed.append(localId)
-    return confirmed
+        return True  # False Positives
 
 # False positives
-def check_the_left():
-    LogDir = ARVO/"Log"/"upstream_false_positives"
-    done = getReports()
-    todo = getAllLocalIds()
-    todo = [x for x in todo if x not in done]
-    done_check = getFalsePositives()+getNotFalsePositives()
-    todo = [x for x in todo if x not in done_check]
-    for localId in bar(todo):
-        res = false_positive(localId)
-        if res != True:
-            vul_result = LogDir/f"{localId}_vul.log"
-            fix_result = LogDir/f"{localId}_fix.log"
-            log = "=== vulnerable version ===:\n\n"
-            if vul_result.exists():
-                with open(vul_result,'rb') as f:
-                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            else:
-                log += "None\n"
-            log+= "\n=== fixed version ===:\n\n"
-            if fix_result.exists():
-                with open(fix_result,'rb') as f:
-                    log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            else:
-                log += "None\n"
-            if res == False:
-                tp_insert((localId,f"The check result seems good",log))
-            else:
-                tp_insert((localId,f"The check result can't rell if it's a false positive",log))
-            SUCCESS(f"Add new upstream true positive: {localId=}")
-        else:
-            vul_result = LogDir/f"{localId}_vul.log"
-            fix_result = LogDir/f"{localId}_fix.log"
-            if not vul_result.exists() or not fix_result.exists():
-                continue
-            log = "=== vulnerable version ===:\n\n"
+def check_false_positive(localId):
+    LogDir = ARVO / "Log" / "upstream_false_positives"
+    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
+    res = false_positive(localId)
+    vul_result = LogDir/f"{localId}_vul.log"
+    fix_result = LogDir/f"{localId}_fix.log"
+
+    if res != True:
+        log = "=== vulnerable version ===:\n\n"
+        if vul_result.exists():
             with open(vul_result,'rb') as f:
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            log+= "\n=== fixed version ===:\n\n"
+        else:
+            log += "None\n"
+        log+= "\n=== fixed version ===:\n\n"
+        if fix_result.exists():
             with open(fix_result,'rb') as f:
                 log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-            fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
-            SUCCESS(f"Add new upstream false positive: {localId=}")
+        else:
+            log += "None\n"
+        if res == False:
+            tp_insert((localId,f"The check result seems good",log))
+        else: # Infra issue so we can't decide
+            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
+        SUCCESS(f"Add new upstream true positive: {localId=}")
+        return "Not False Posiitve"
+    else:
+        if not vul_result.exists() or not fix_result.exists():
+            PANIC("Internal Error in false_positive")
+        log = "=== vulnerable version ===:\n\n"
+        with open(vul_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        log+= "\n=== fixed version ===:\n\n"
+        with open(fix_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
+        WARN(f"Add new upstream false positive: {localId=}")
+        return "False Posiitve"
 fp_init()
 
