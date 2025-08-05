@@ -219,10 +219,13 @@ def false_positive(localId,focec_retest = False):
             res.append(pocResultChecker(returnCode,LogDir/f"{localId}_{tag}.log",args,True))
         else:
             res.append(pocResultChecker(returnCode,LogDir/f"{localId}_{tag}.log",args,False))
+        if None in res:
+            return _leaveRet(None,f"[FAILED] {localId=} {x} running enviroment is needed")
         tag = 'fix'
     # clean poc and downloaded binary
     shutil.rmtree(poc.parent)
     shutil.rmtree(store)
+        
     if res == [False,True]:
         return False # Not False Positives
     else:
