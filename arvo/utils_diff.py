@@ -66,7 +66,14 @@ def _getGtforReport(localId):
     return gt
 def getFixCommit(localId):
     report = getReport(localId)
-    return False if report == False else report['fix_commit']
+    if report == False:
+        return False
+    else:
+        commits = report['fix_commit'].split("\n")
+        if len(commits)==1:
+            return commits[0]
+        else:
+            return commits
 
 def getVulCommit(localId):
     # Get the commit just before the fix commit
@@ -114,7 +121,9 @@ def getDiff(localId,multi_commits=False):
     localDp = ARVO/"Patches"/f"{localId}.diff"
 
     commit    = getReport(localId)['fix_commit']
-
+    commit = commit.split("\n")
+    if len(commit) == 1:
+        commit = commit[0]
     if localDp.exists():
         if not isinstance(commit,list) or multi_commits==False:
             return localDp
