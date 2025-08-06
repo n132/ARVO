@@ -232,7 +232,8 @@ class GitTool():
             cmd = ['git','merge-base','--is-ancestor',commit1,commit2]
             
             if isinstance(commit1,str) and isinstance(commit2,str) and execute_ret(cmd, cwd = self.repo)==0:
-                cmd = ['git','log','--format=%H',f'{commit1}..{commit2}','--no-merges']
+                # cmd = ['git','log','--format=%H',f'{commit1}..{commit2}','--no-merges']
+                cmd = ['git','log','--format=%H',f'{commit1}..{commit2}']
                 res = execute(cmd,self.repo)
                 if not res:
                     return False
@@ -250,7 +251,8 @@ class GitTool():
                 # cmd = ['git','log', "--ancestry-path",f"{commit1}..{commit2}",'--pretty=format:%H']
                 dt1 = datetime.fromtimestamp(t1).strftime("%Y-%m-%d %H:%M:%S")
                 dt2 = datetime.fromtimestamp(t2).strftime("%Y-%m-%d %H:%M:%S")
-                cmd = ['git','log','--no-merges', f'--since="{dt1}"',f'--until="{dt2}"','--format=%H']
+                # cmd = ['git','log','--no-merges', f'--since="{dt1}"',f'--until="{dt2}"','--format=%H']
+                cmd = ['git','log', f'--since="{dt1}"',f'--until="{dt2}"','--format=%H']
                 res = execute(cmd,self.repo)
                 if not res:
                     return False
@@ -267,9 +269,8 @@ class GitTool():
         elif self.type == 'hg':
             # TODO: Support CommitList Overbranch
             # hg log -r '123::456'
-            cmd = ['hg','log','-r', f'{commit1}::{commit2}', "--no-merges",'--template', '{node}\\n']
-            # cmd = ['hg', 'log', '-r', f'"ancestor({commit1},{commit2})::{commit2}"', "--no-merges", "--template", '{node}\\n']
-            # cmd = ['hg', 'log', '--rev', f'"ancestors({commit1}) - ancestors({commit2}) - merge()"', '--template', '{node}\n']
+            # cmd = ['hg','log','-r', f'{commit1}::{commit2}', "--no-merges",'--template', '{node}\\n']
+            cmd = ['hg','log','-r', f'{commit1}::{commit2}', '--template', '{node}\\n']
             res = execute(cmd,self.repo)
             res = res.decode().split('\n') if res else res
             return res
@@ -301,11 +302,11 @@ class GitTool():
         if not prev:
             return False
         if self.type == 'git':
-            cmd = ['timeout','30','git','diff',f'{prev}..{commits[-1]}','-W']
+            cmd = ['timeout','60','git','diff',f'{prev}..{commits[-1]}','-W']
         elif self.type == 'svn':
-            cmd = ['timeout','30','svn','diff','-r',f'{prev}:{commits[-1]}']
+            cmd = ['timeout','60','svn','diff','-r',f'{prev}:{commits[-1]}']
         elif self.type == 'hg': 
-            cmd = ['timeout','30','hg','diff',"-r", f'{prev}', '-r', f'{commits[-1]}']
+            cmd = ['timeout','60','hg','diff',"-r", f'{prev}', '-r', f'{commits[-1]}']
         if check_call(cmd,self.repo,stdout=open(tmp_file,'w'),stderr=open("/dev/null",'w')):
             return tmp_file
         return False
@@ -316,9 +317,8 @@ class GitTool():
             # -W to show the whole function
             # -m for merged commits
             # add timeout to avoid spending too much time on merging diff
-            cmd = ['timeout','30','git','show','-m','--diff-merges=first-parent','-W',commit]
+            cmd = ['timeout','30','git','show','-m','--diff-merges=first-parent','--binary','-W',commit]
             cmd += ["-R"] if rev else []
-            # cmd = ['timeout','30','git','show','-W',commit]
         elif self.type == 'hg':
             cmd = ['timeout','30','hg', 'diff','-c', commit, '--show-function']
             cmd += ['--reverse'] if rev else []
@@ -334,13 +334,18 @@ class GitTool():
         if check_call(cmd,self.repo,stdout=open(tmp_file,'a'),stderr=open("/dev/null",'w')):
             return tmp_file
         return False
-    def patch(self,diff_file):
+    def patch(self, diff_file):
         if not diff_file.exists():
+            WARN(f"FILE ({diff_file=}) not exists")
             return False
+
         cmd = ['git','apply','--whitespace=nowarn',diff_file.absolute()]
         with open("/dev/null",'wb') as f:
-            if not check_call(cmd,self.repo,stderr=f,verbose=False):
+            if not check_call(cmd+['--check'],self.repo,stderr=f,verbose=True):
                 return False
+            else:
+                return check_call(cmd,self.repo,stderr=f,verbose=False)
+                
         return True
     def prevCommit(self,commit=None):
         # reutrn the previous commit hash
