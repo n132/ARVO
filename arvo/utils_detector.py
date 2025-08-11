@@ -4,7 +4,7 @@ from .utils import *
 from .dev import *
 import zipfile
 from datetime import datetime
-import random
+
 Database_PATH = ARVO / "upstream_false_positives.db"
 OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
 
@@ -84,7 +84,6 @@ def tp_insert(data, max_retries=3, retry_delay=0.1):
             if conn:
                 conn.close()
 
-        
 def getFalsePositives(max_retries=3, retry_delay=0.1):
     for attempt in range(max_retries):
         conn = None
@@ -139,8 +138,6 @@ def getNotFalsePositives(max_retries=3, retry_delay=0.1):
             if conn:
                 conn.close()
 
-
-
 # False positives
 def check_false_positive(localId):
     LogDir = ARVO / "Log" / "upstream_false_positives"
@@ -180,6 +177,7 @@ def check_false_positive(localId):
         fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
         WARN(f"Add new upstream false positive: {localId=}")
         return "False Posiitve"
+
 def false_positive(localId,focec_retest = False):
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
