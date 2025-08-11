@@ -466,28 +466,24 @@ def check_false_positive(localId):
         WARN(f"Add new upstream false positive: {localId=}")
         return "False Posiitve"
 
-def false_positive(localId,focec_retest = False):
+def false_positive(localId,force_reset = False):
     """
     Test if a vulnerability report is a false positive by running POC against compiled binaries.
     Downloads OSS-Fuzz binaries, runs proof-of-concept against vulnerable and fixed versions.
     
     Args:
         localId: The vulnerability ID to test
-        focec_retest: Force retest even if already cached
+        force_reset: Force retest even if already cached
     
     Returns:
         bool or None: True if false positive, False if true positive, None if indeterminate
     """
-    # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
-    # return true  when it's likely a false positive
-    # return false when it's not a false positive
-    # return none  when we can't tell
     store = OSS_Fuzz_Data / str(localId)
     def _leaveRet(res,msg=None):
         if msg: WARN(msg)
         shutil.rmtree(store)
         return res
-    if not focec_retest and localId in getFalsePositives():
+    if not force_reset and localId in getFalsePositives():
         return True
     if localId in getNotFalsePositives():
         return False
