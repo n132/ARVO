@@ -111,6 +111,7 @@ def getFalsePositives(max_retries=3, retry_delay=0.1):
         finally:
             if conn:
                 conn.close()
+    
 def getNotFalsePositives(max_retries=3, retry_delay=0.1):
     for attempt in range(max_retries):
         conn = None
@@ -137,6 +138,48 @@ def getNotFalsePositives(max_retries=3, retry_delay=0.1):
         finally:
             if conn:
                 conn.close()
+
+
+
+# False positives
+def check_false_positive(localId):
+    LogDir = ARVO / "Log" / "upstream_false_positives"
+    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
+    res = false_positive(localId)
+    vul_result = LogDir/f"{localId}_vul.log"
+    fix_result = LogDir/f"{localId}_fix.log"
+
+    if res != True:
+        log = "=== vulnerable version ===:\n\n"
+        if vul_result.exists():
+            with open(vul_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        else:
+            log += "None\n"
+        log+= "\n=== fixed version ===:\n\n"
+        if fix_result.exists():
+            with open(fix_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        else:
+            log += "None\n"
+        if res == False:
+            tp_insert((localId,f"The check result seems good",log))
+        else: # Infra issue so we can't decide
+            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
+        SUCCESS(f"Add new upstream true positive: {localId=}")
+        return "Not False Posiitve"
+    else:
+        if not vul_result.exists() or not fix_result.exists():
+            PANIC("Internal Error in false_positive")
+        log = "=== vulnerable version ===:\n\n"
+        with open(vul_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        log+= "\n=== fixed version ===:\n\n"
+        with open(fix_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
+        WARN(f"Add new upstream false positive: {localId=}")
+        return "False Posiitve"
 def false_positive(localId,focec_retest = False):
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
@@ -230,45 +273,5 @@ def false_positive(localId,focec_retest = False):
         return False # Not False Positives
     else:
         return True  # False Positives
-
-# False positives
-def check_false_positive(localId):
-    LogDir = ARVO / "Log" / "upstream_false_positives"
-    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
-    res = false_positive(localId)
-    vul_result = LogDir/f"{localId}_vul.log"
-    fix_result = LogDir/f"{localId}_fix.log"
-
-    if res != True:
-        log = "=== vulnerable version ===:\n\n"
-        if vul_result.exists():
-            with open(vul_result,'rb') as f:
-                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        else:
-            log += "None\n"
-        log+= "\n=== fixed version ===:\n\n"
-        if fix_result.exists():
-            with open(fix_result,'rb') as f:
-                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        else:
-            log += "None\n"
-        if res == False:
-            tp_insert((localId,f"The check result seems good",log))
-        else: # Infra issue so we can't decide
-            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
-        SUCCESS(f"Add new upstream true positive: {localId=}")
-        return "Not False Posiitve"
-    else:
-        if not vul_result.exists() or not fix_result.exists():
-            PANIC("Internal Error in false_positive")
-        log = "=== vulnerable version ===:\n\n"
-        with open(vul_result,'rb') as f:
-            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        log+= "\n=== fixed version ===:\n\n"
-        with open(fix_result,'rb') as f:
-            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
-        WARN(f"Add new upstream false positive: {localId=}")
-        return "False Posiitve"
 fp_init()
 
