@@ -435,7 +435,7 @@ def getFuzzer(localId,wkdir):
         if _checkexist(name):
             return wkdir / name
         else:
-            if name.startswith("afl") or name.startswith("libfuzzer") or name.startswith("honggfuzz"):
+            if name.startswith("libFuzzer"):
                 name = "_".join(name.split("_")[off+1:])
                 if _checkexist(name):
                     return wkdir / name

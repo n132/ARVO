@@ -133,7 +133,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "msan": "memory",
         "ubsan": "undefined",
     }
-    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','NOTFOUND')
+    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target|Fuzz target binary|Fuzzer):\s*(\S+)','NOTFOUND')
     if len(res['job_type'].split("_"))==2:
         WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
         return False
@@ -145,7 +145,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
     if res['project'] == "NOTFOUND":
         res['project'] = res['job_type'].split("_")[-1]
     return res
-def getIssue(issue_id):
+def meta_getIssue(issue_id):
     url = f'https://issues.oss-fuzz.com/action/issues/{issue_id}/events?currentTrackerId=391'
     session = requests.Session()
     # Step 1: Get the token from the cookie
@@ -173,7 +173,7 @@ def getIssue(issue_id):
         WARN(f"FAIL on {issue_id}, skip")
         return False
     return res
-def getIssues(issue_ids):
+def meta_getIssues(issue_ids):
     issues = []
     if not MetaDataFile.exists():
         MetaDataFile.touch()
@@ -185,7 +185,7 @@ def getIssues(issue_ids):
     for x in bar(issue_ids):
         if x in done:
             continue
-        res = getIssue(x)
+        res = meta_getIssue(x)
         if res:
             issues.append(res)
             with open(MetaDataFile,'a') as f:
@@ -342,7 +342,7 @@ def data_download(localIds = None):
 def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
     if not META.exists(): META.mkdir()
-    getIssues(getIssueIds())
+    meta_getIssues(getIssueIds())
     data_download()
 
 if __name__ == "__main__":

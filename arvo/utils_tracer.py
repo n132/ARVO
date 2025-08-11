@@ -124,6 +124,6 @@ def customSrcmap(srcmap,pname,commit):
 
     with open(Bsrcmap,'w') as f:
         f.write(json.dumps(data))
-    if DEBUG:
-        print(json.dumps(data,indent=4))
+    # if DEBUG:
+        # print(json.dumps(data,indent=4))
     return Bsrcmap

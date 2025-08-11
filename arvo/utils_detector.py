@@ -202,7 +202,220 @@ def getNotFalsePositives(max_retries=3, retry_delay=0.1):
         finally:
             if conn:
                 conn.close()
+def upstream_state_reason(localId):
+    """
+    Get the reason for a localId being classified as false positive or true positive.
+    
+    Args:
+        localId: The ID to get the reason for
+        
+    Returns:
+        str: The reason string from the database, or error message if not found
+    """
+    dataset1 = getFalsePositives()
+    dataset2 = getNotFalsePositives()
+    if localId not in dataset1 and localId not in dataset2:
+        # not in the dataset
+        return False
+    
+    max_retries = 3
+    retry_delay = 0.1
+    
+    if localId in dataset1:
+        # Get reason from false positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                cursor = conn.cursor()
+                cursor.execute("SELECT reason FROM upstream_false_positives WHERE localId = ?", (localId,))
+                row = cursor.fetchone()
+                if row:
+                    return f"{row[0]}"
+                else:
+                    return "No reason found"
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return None
+            except Exception:
+                return None
+            finally:
+                if conn:
+                    conn.close()
+    else:
+        # Get reason from true positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                cursor = conn.cursor()
+                cursor.execute("SELECT reason FROM upstream_true_positives WHERE localId = ?", (localId,))
+                row = cursor.fetchone()
+                if row:
+                    return f"{row[0]}"
+                else:
+                    return "No reason found"
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return None
+            except Exception:
+                return None
+            finally:
+                if conn:
+                    conn.close()
 
+def upstream_state_log(localId):
+    """
+    Get the log for a localId being classified as false positive or true positive.
+    
+    Args:
+        localId: The ID to get the log for
+        
+    Returns:
+        str: The log string from the database, or error message if not found
+    """
+    dataset1 = getFalsePositives()
+    dataset2 = getNotFalsePositives()
+    if localId not in dataset1 and localId not in dataset2:
+        # not in the dataset
+        return False
+    
+    max_retries = 3
+    retry_delay = 0.1
+    
+    if localId in dataset1:
+        # Get log from false positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                cursor = conn.cursor()
+                cursor.execute("SELECT log FROM upstream_false_positives WHERE localId = ?", (localId,))
+                row = cursor.fetchone()
+                if row:
+                    return f"{row[0]}"
+                else:
+                    return "No log found"
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return None
+            except Exception:
+                return None
+            finally:
+                if conn:
+                    conn.close()
+    else:
+        # Get log from true positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                cursor = conn.cursor()
+                cursor.execute("SELECT log FROM upstream_true_positives WHERE localId = ?", (localId,))
+                row = cursor.fetchone()
+                if row:
+                    return f"{row[0]}"
+                else:
+                    return "No log found"
+            except sqlite3.OperationalError as e:
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return None
+            except Exception:
+                return None
+            finally:
+                if conn:
+                    conn.close()
+
+def upstream_state_delete(localId):
+    """
+    Delete a localId from either false positives or true positives table.
+    Automatically detects which table contains the localId and removes it.
+    
+    Args:
+        localId: The ID to delete from the database
+        
+    Returns:
+        str: Success message or error message
+    """
+    dataset1 = getFalsePositives()
+    dataset2 = getNotFalsePositives()
+    
+    if localId not in dataset1 and localId not in dataset2:
+        return False
+    
+    max_retries = 3
+    retry_delay = 0.1
+    
+    if localId in dataset1:
+        # Delete from false positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                conn.execute("BEGIN IMMEDIATE")
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM upstream_false_positives WHERE localId = ?", (localId,))
+                if cursor.rowcount > 0:
+                    conn.commit()
+                    return True
+                else:
+                    conn.rollback()
+                    return False
+            except sqlite3.OperationalError as e:
+                if conn:
+                    conn.rollback()
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return False
+            except Exception as e:
+                if conn:
+                    conn.rollback()
+                return False
+            finally:
+                if conn:
+                    conn.close()
+    
+    if localId in dataset2:
+        # Delete from true positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                conn.execute("BEGIN IMMEDIATE")
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM upstream_true_positives WHERE localId = ?", (localId,))
+                if cursor.rowcount > 0:
+                    conn.commit()
+                    return True
+                else:
+                    conn.rollback()
+                    return False
+            except sqlite3.OperationalError as e:
+                if conn:
+                    conn.rollback()
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return False
+            except Exception as e:
+                if conn:
+                    conn.rollback()
+                return False
+            finally:
+                if conn:
+                    conn.close()
+    
+    return False
+            
 # False positives
 def check_false_positive(localId):
     """
@@ -253,28 +466,24 @@ def check_false_positive(localId):
         WARN(f"Add new upstream false positive: {localId=}")
         return "False Posiitve"
 
-def false_positive(localId,focec_retest = False):
+def false_positive(localId,force_reset = False):
     """
     Test if a vulnerability report is a false positive by running POC against compiled binaries.
     Downloads OSS-Fuzz binaries, runs proof-of-concept against vulnerable and fixed versions.
     
     Args:
         localId: The vulnerability ID to test
-        focec_retest: Force retest even if already cached
+        force_reset: Force retest even if already cached
     
     Returns:
         bool or None: True if false positive, False if true positive, None if indeterminate
     """
-    # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
-    # return true  when it's likely a false positive
-    # return false when it's not a false positive
-    # return none  when we can't tell
     store = OSS_Fuzz_Data / str(localId)
     def _leaveRet(res,msg=None):
         if msg: WARN(msg)
         shutil.rmtree(store)
         return res
-    if not focec_retest and localId in getFalsePositives():
+    if not force_reset and localId in getFalsePositives():
         return True
     if localId in getNotFalsePositives():
         return False
@@ -284,7 +493,7 @@ def false_positive(localId,focec_retest = False):
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
     while True:
-        res = getOSSFuzzer(localId, store,limit=(1<<30))
+        res = getOSSFuzzer(localId, store,limit=(1<<30)*10) # Limit 10 GB
         if res == False:
             return _leaveRet(None,"[FAILED] Failed to get necessary metadate to locate the resource")
         elif res == None:
