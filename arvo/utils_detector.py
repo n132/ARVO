@@ -25,7 +25,7 @@ import zipfile
 from datetime import datetime
 
 Database_PATH = ARVO / "upstream_false_positives.db"
-OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
+OSS_Fuzz_Data = OSS_TMP / "OSS_Fuzz_Data"
 
 def fp_init():
     """
@@ -269,7 +269,7 @@ def false_positive(localId,focec_retest = False):
     # return true  when it's likely a false positive
     # return false when it's not a false positive
     # return none  when we can't tell
-    store = OSS_Fuzz_Arch / str(localId)
+    store = OSS_Fuzz_Data / str(localId)
     def _leaveRet(res,msg=None):
         if msg: WARN(msg)
         shutil.rmtree(store)
