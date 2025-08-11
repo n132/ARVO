@@ -133,7 +133,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "msan": "memory",
         "ubsan": "undefined",
     }
-    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary|Fuzzer):\s*(\S+)','NOTFOUND')
+    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target|Fuzz target binary|Fuzzer):\s*(\S+)','NOTFOUND')
     if len(res['job_type'].split("_"))==2:
         WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
         return False
