@@ -1,14 +1,37 @@
+"""
+ARVO False Positive Detection Module
+
+This module provides functionality for detecting and managing false positives in OSS-Fuzz
+vulnerability reports. It maintains a database of known false positives and true positives,
+and provides testing capabilities to verify if a vulnerability report is legitimate.
+
+Key Features:
+- Database management for false/true positive tracking
+- Automated testing against OSS-Fuzz compiled binaries
+- POC (Proof of Concept) validation against vulnerable and fixed versions
+- Retry logic for database operations to handle concurrency
+- Comprehensive logging of test results
+
+The module downloads OSS-Fuzz artifacts, runs proof-of-concept exploits against both
+vulnerable and patched versions, and determines if the vulnerability report is accurate
+based on the execution results.
+"""
+
 import sqlite3
 import time
 from .utils import *
 from .dev import *
 import zipfile
 from datetime import datetime
-import random
+
 Database_PATH = ARVO / "upstream_false_positives.db"
-OSS_Fuzz_Arch = OSS_TMP / "OSS_Fuzz_Arch"
+OSS_Fuzz_Data = OSS_TMP / "OSS_Fuzz_Data"
 
 def fp_init():
+    """
+    Initialize the database for false positives detection.
+    Creates tables for upstream_false_positives and upstream_true_positives if they don't exist.
+    """
     with sqlite3.connect(Database_PATH) as conn:
         conn.execute("PRAGMA journal_mode=WAL")
         conn.execute("""
@@ -29,6 +52,17 @@ def fp_init():
         """)
         conn.commit()
 def fp_insert(data, max_retries=3, retry_delay=0.1):
+    """
+    Insert data into the upstream_false_positives table with retry logic.
+    
+    Args:
+        data: Tuple containing (localId, reason, log) to insert
+        max_retries: Maximum number of retry attempts
+        retry_delay: Base delay between retries
+    
+    Returns:
+        bool: True if successful, raises exception otherwise
+    """
     for attempt in range(max_retries):
         conn = None
         try:
@@ -57,6 +91,17 @@ def fp_insert(data, max_retries=3, retry_delay=0.1):
                 conn.close()
 
 def tp_insert(data, max_retries=3, retry_delay=0.1):
+    """
+    Insert data into the upstream_true_positives table with retry logic.
+    
+    Args:
+        data: Tuple containing (localId, reason, log) to insert
+        max_retries: Maximum number of retry attempts
+        retry_delay: Base delay between retries
+    
+    Returns:
+        bool: True if successful, raises exception otherwise
+    """
     for attempt in range(max_retries):
         conn = None
         try:
@@ -84,8 +129,17 @@ def tp_insert(data, max_retries=3, retry_delay=0.1):
             if conn:
                 conn.close()
 
-        
 def getFalsePositives(max_retries=3, retry_delay=0.1):
+    """
+    Retrieve all false positive localIds from the database.
+    
+    Args:
+        max_retries: Maximum number of retry attempts
+        retry_delay: Base delay between retries
+    
+    Returns:
+        list: List of localIds marked as false positives, False on error
+    """
     for attempt in range(max_retries):
         conn = None
         try:
@@ -111,7 +165,18 @@ def getFalsePositives(max_retries=3, retry_delay=0.1):
         finally:
             if conn:
                 conn.close()
+    
 def getNotFalsePositives(max_retries=3, retry_delay=0.1):
+    """
+    Retrieve all true positive localIds from the database.
+    
+    Args:
+        max_retries: Maximum number of retry attempts
+        retry_delay: Base delay between retries
+    
+    Returns:
+        list: List of localIds marked as true positives, False on error
+    """
     for attempt in range(max_retries):
         conn = None
         try:
@@ -137,12 +202,74 @@ def getNotFalsePositives(max_retries=3, retry_delay=0.1):
         finally:
             if conn:
                 conn.close()
+
+# False positives
+def check_false_positive(localId):
+    """
+    Check if a given localId is a false positive by running the false_positive test.
+    Logs results and stores them in appropriate database tables.
+    
+    Args:
+        localId: The ID to check for false positive status
+    
+    Returns:
+        str: "False Positive" if it's a false positive, "Not False Positive" otherwise
+    """
+    LogDir = ARVO / "Log" / "upstream_false_positives"
+    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
+    res = false_positive(localId)
+    vul_result = LogDir/f"{localId}_vul.log"
+    fix_result = LogDir/f"{localId}_fix.log"
+
+    if res != True:
+        log = "=== vulnerable version ===:\n\n"
+        if vul_result.exists():
+            with open(vul_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        else:
+            log += "None\n"
+        log+= "\n=== fixed version ===:\n\n"
+        if fix_result.exists():
+            with open(fix_result,'rb') as f:
+                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        else:
+            log += "None\n"
+        if res == False:
+            tp_insert((localId,f"The check result seems good",log))
+        else: # Infra issue so we can't decide
+            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
+        SUCCESS(f"Add new upstream true positive: {localId=}")
+        return "Not False Posiitve"
+    else:
+        if not vul_result.exists() or not fix_result.exists():
+            PANIC("Internal Error in false_positive")
+        log = "=== vulnerable version ===:\n\n"
+        with open(vul_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        log+= "\n=== fixed version ===:\n\n"
+        with open(fix_result,'rb') as f:
+            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
+        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
+        WARN(f"Add new upstream false positive: {localId=}")
+        return "False Posiitve"
+
 def false_positive(localId,focec_retest = False):
+    """
+    Test if a vulnerability report is a false positive by running POC against compiled binaries.
+    Downloads OSS-Fuzz binaries, runs proof-of-concept against vulnerable and fixed versions.
+    
+    Args:
+        localId: The vulnerability ID to test
+        focec_retest: Force retest even if already cached
+    
+    Returns:
+        bool or None: True if false positive, False if true positive, None if indeterminate
+    """
     # Check OSS-Fuzz's Compiled Binary to see if the poc can crash the target or not.
     # return true  when it's likely a false positive
     # return false when it's not a false positive
     # return none  when we can't tell
-    store = OSS_Fuzz_Arch / str(localId)
+    store = OSS_Fuzz_Data / str(localId)
     def _leaveRet(res,msg=None):
         if msg: WARN(msg)
         shutil.rmtree(store)
@@ -230,45 +357,5 @@ def false_positive(localId,focec_retest = False):
         return False # Not False Positives
     else:
         return True  # False Positives
-
-# False positives
-def check_false_positive(localId):
-    LogDir = ARVO / "Log" / "upstream_false_positives"
-    INFO(f"[ARVO] [{datetime.now()}]working on {localId=}")
-    res = false_positive(localId)
-    vul_result = LogDir/f"{localId}_vul.log"
-    fix_result = LogDir/f"{localId}_fix.log"
-
-    if res != True:
-        log = "=== vulnerable version ===:\n\n"
-        if vul_result.exists():
-            with open(vul_result,'rb') as f:
-                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        else:
-            log += "None\n"
-        log+= "\n=== fixed version ===:\n\n"
-        if fix_result.exists():
-            with open(fix_result,'rb') as f:
-                log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        else:
-            log += "None\n"
-        if res == False:
-            tp_insert((localId,f"The check result seems good",log))
-        else: # Infra issue so we can't decide
-            tp_insert((localId,f"The check result can't tell if it's a false positive",log))
-        SUCCESS(f"Add new upstream true positive: {localId=}")
-        return "Not False Posiitve"
-    else:
-        if not vul_result.exists() or not fix_result.exists():
-            PANIC("Internal Error in false_positive")
-        log = "=== vulnerable version ===:\n\n"
-        with open(vul_result,'rb') as f:
-            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        log+= "\n=== fixed version ===:\n\n"
-        with open(fix_result,'rb') as f:
-            log += f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-        fp_insert((localId,"The OSS-Fuzz compiled binary doesn't pass the crash/fix test",log))
-        WARN(f"Add new upstream false positive: {localId=}")
-        return "False Posiitve"
 fp_init()
 

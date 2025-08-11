@@ -6,6 +6,7 @@ from .utils_init    import *
 from .utils_log     import *
 from .utils         import *
 import fcntl  # Only works on Unix
+import time
 
 DB_PATH = ARVO / "arvo.db"
 
@@ -39,11 +40,12 @@ def db_init():
             """)
             conn.commit()
 
-def insert_entry(data):
-    conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    for _ in range(5):
+def insert_entry(data, max_retries=5, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
         try:
-            conn.execute("BEGIN EXCLUSIVE")
+            conn = sqlite3.connect(DB_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
             conn.execute("""
             INSERT INTO arvo (
                 localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
@@ -52,35 +54,70 @@ def insert_entry(data):
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, data)
             conn.commit()
-            conn.close()
             return True
-        except:
-            WARN(f"Failed to update the dataset, retry ({_}/10)")            
-    FAIL("[-] FAILED to INSERT to DB")
-    conn.close()
-    return False
-def delete_entry(localId):
-    conn = sqlite3.connect(DB_PATH, timeout=30, isolation_level="EXCLUSIVE")
-    try:
-        conn.execute("BEGIN EXCLUSIVE")
-        conn.execute("DELETE FROM arvo WHERE localId = ?", (localId,))
-        conn.commit()
-        return True
-    except:
-        FAIL("[-] FAILED to DELETE from DB")
-        return False
-    finally:
-        conn.close()
-def arvoRecorded(local_id):
-    conn = sqlite3.connect(DB_PATH)
-    try:
-        cursor = conn.execute("""
-            SELECT reproduced, patch_located 
-            FROM arvo WHERE localId = ?
-        """, (local_id,))
-        return cursor.fetchone()
-    except:
-        FAIL("[-] Failed to access DB")
-        return False
-    finally:
-        conn.close()
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                WARN(f"Database locked, retrying ({attempt + 1}/{max_retries})")
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL(f"[-] FAILED to INSERT to DB: {e}")
+            return False
+        except Exception as e:
+            if conn:
+                conn.rollback()
+            FAIL(f"[-] FAILED to INSERT to DB: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+def delete_entry(localId, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(DB_PATH, timeout=30)
+            conn.execute("BEGIN IMMEDIATE")
+            conn.execute("DELETE FROM arvo WHERE localId = ?", (localId,))
+            conn.commit()
+            return True
+        except sqlite3.OperationalError as e:
+            if conn:
+                conn.rollback()
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                WARN(f"Database locked, retrying delete ({attempt + 1}/{max_retries})")
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL(f"[-] FAILED to DELETE from DB: {e}")
+            return False
+        except Exception as e:
+            if conn:
+                conn.rollback()
+            FAIL(f"[-] FAILED to DELETE from DB: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
+def arvoRecorded(local_id, max_retries=3, retry_delay=0.1):
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = sqlite3.connect(DB_PATH, timeout=30)
+            cursor = conn.execute("""
+                SELECT reproduced, patch_located 
+                FROM arvo WHERE localId = ?
+            """, (local_id,))
+            return cursor.fetchone()
+        except sqlite3.OperationalError as e:
+            if "database is locked" in str(e) and attempt < max_retries - 1:
+                WARN(f"Database locked, retrying read ({attempt + 1}/{max_retries})")
+                time.sleep(retry_delay * (2 ** attempt))
+                continue
+            FAIL(f"[-] Failed to access DB: {e}")
+            return False
+        except Exception as e:
+            FAIL(f"[-] Failed to access DB: {e}")
+            return False
+        finally:
+            if conn:
+                conn.close()
