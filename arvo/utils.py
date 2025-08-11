@@ -432,7 +432,6 @@ def getFuzzer(localId,wkdir):
         return True if (wkdir / name).exists() else False
     def _findFuzzer(key,off):
         name = "_".join(issue[key].split("_")[off:])
-        print(name)
         if _checkexist(name):
             return wkdir / name
         else:
