@@ -292,14 +292,17 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     item_type   = item['type']
 
     dft = DfTool(dockerfile)
-    keyword = item['url']
+
+    keyword = item['url'].strip()
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
     elif keyword.startswith("git://git"):
         keyword = keyword[9:]
-
+    if keyword.endswith(".git"):
+        keyword = keyword[:-4]
+    
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
         if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
