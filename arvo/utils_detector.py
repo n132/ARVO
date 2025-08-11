@@ -1,3 +1,22 @@
+"""
+ARVO False Positive Detection Module
+
+This module provides functionality for detecting and managing false positives in OSS-Fuzz
+vulnerability reports. It maintains a database of known false positives and true positives,
+and provides testing capabilities to verify if a vulnerability report is legitimate.
+
+Key Features:
+- Database management for false/true positive tracking
+- Automated testing against OSS-Fuzz compiled binaries
+- POC (Proof of Concept) validation against vulnerable and fixed versions
+- Retry logic for database operations to handle concurrency
+- Comprehensive logging of test results
+
+The module downloads OSS-Fuzz artifacts, runs proof-of-concept exploits against both
+vulnerable and patched versions, and determines if the vulnerability report is accurate
+based on the execution results.
+"""
+
 import sqlite3
 import time
 from .utils import *
