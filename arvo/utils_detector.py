@@ -333,6 +333,88 @@ def upstream_state_log(localId):
             finally:
                 if conn:
                     conn.close()
+
+def upstream_state_delete(localId):
+    """
+    Delete a localId from either false positives or true positives table.
+    Automatically detects which table contains the localId and removes it.
+    
+    Args:
+        localId: The ID to delete from the database
+        
+    Returns:
+        str: Success message or error message
+    """
+    dataset1 = getFalsePositives()
+    dataset2 = getNotFalsePositives()
+    
+    if localId not in dataset1 and localId not in dataset2:
+        return False
+    
+    max_retries = 3
+    retry_delay = 0.1
+    
+    if localId in dataset1:
+        # Delete from false positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                conn.execute("BEGIN IMMEDIATE")
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM upstream_false_positives WHERE localId = ?", (localId,))
+                if cursor.rowcount > 0:
+                    conn.commit()
+                    return True
+                else:
+                    conn.rollback()
+                    return False
+            except sqlite3.OperationalError as e:
+                if conn:
+                    conn.rollback()
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return False
+            except Exception as e:
+                if conn:
+                    conn.rollback()
+                return False
+            finally:
+                if conn:
+                    conn.close()
+    
+    if localId in dataset2:
+        # Delete from true positives table
+        for attempt in range(max_retries):
+            conn = None
+            try:
+                conn = sqlite3.connect(Database_PATH, timeout=30)
+                conn.execute("BEGIN IMMEDIATE")
+                cursor = conn.cursor()
+                cursor.execute("DELETE FROM upstream_true_positives WHERE localId = ?", (localId,))
+                if cursor.rowcount > 0:
+                    conn.commit()
+                    return True
+                else:
+                    conn.rollback()
+                    return False
+            except sqlite3.OperationalError as e:
+                if conn:
+                    conn.rollback()
+                if "database is locked" in str(e) and attempt < max_retries - 1:
+                    time.sleep(retry_delay * (2 ** attempt))
+                    continue
+                return False
+            except Exception as e:
+                if conn:
+                    conn.rollback()
+                return False
+            finally:
+                if conn:
+                    conn.close()
+    
+    return False
             
 # False positives
 def check_false_positive(localId):
