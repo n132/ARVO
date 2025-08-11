@@ -673,11 +673,12 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def pocResultChecker(returnCode,logfile, args, recursive_call=False):
+def pocResultChecker(returnCode, logfile, args, recursive_call=False):
     with open(logfile,'rb') as f:
         log_ctx = f.read()
     if b"error while loading shared libraries" in log_ctx:
-        PANIC("[PANIC] RUNNING ENV WAS BROKEN")
+        WARN("[PANIC] RUNNING ENV WAS BROKEN")
+        return None
     if returnCode == 0: # not crash
         return True
     elif ("timeout" in args) and returnCode == 124: # timeout

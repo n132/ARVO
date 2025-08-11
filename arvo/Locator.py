@@ -8,7 +8,6 @@ import json
 import sys
 # fmt: off
 import urllib.parse
-import ipdb
 
 #==================================================================
 #
@@ -757,6 +756,11 @@ def reproduce(localId, dockerize = True, update = True):
     if exist_record and not update:
         INFO("[+] Record Exists")
         return True
+    known_false_positives = getFalsePositives()
+    if localId in known_false_positives:
+        WARN(f"{localId=} is a known false positive from upstream")
+        return False
+
     if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
         return eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
     
