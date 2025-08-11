@@ -497,7 +497,7 @@ def false_positive(localId,focec_retest = False):
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
     while True:
-        res = getOSSFuzzer(localId, store,limit=(1<<30))
+        res = getOSSFuzzer(localId, store,limit=(1<<30)*10) # Limit 10 GB
         if res == False:
             return _leaveRet(None,"[FAILED] Failed to get necessary metadate to locate the resource")
         elif res == None:
