@@ -99,8 +99,9 @@ def dichotomy_search(commits_list,localId,pname,poc,tag):
     global CHANCE, TURBO
     # The first commit is not tested
     # the last commit is fixed!
-    print(commits_list)
-    print(f"[+] {len(commits_list)} commits Left")
+    if len(commits_list) < 32:
+        print(commits_list)
+    INFO(f"[+] {len(commits_list)} commits Left")
     log = ARVO /"Log"/tag/f"{localId}"/f"{localId}.log"
     if not log.exists():
         with open(log,'w') as f:
@@ -306,7 +307,6 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
     sub_commits = gt_subm.listCommits(submodule_info[1],submodule_info[2])
     if not sub_commits:
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
-    print(sub_commits)
     # TODO bisect
     found = False
     for sub_commit in sub_commits[1:]:
@@ -443,12 +443,12 @@ def report(localId,verified=False):
     localId = localIdMapping(localId)
     
     if not verified:
-        print(f"[+] Verifying {localId}")
+        INFO(f"[+] Verifying {localId}")
         if (not verify(localId)):
             return eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
         done = getDone()
         if localId not in done:
-            print(f"[+] Add {localId} to results")
+            INFO(f"[+] Add {localId} to results")
 
             
     # Step2: Find the commit that fixed the bug+
@@ -472,9 +472,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
     # only use this function when commits_list is reversed
     # The first commit is not tested
     # the last commit is fixed!
-    # print(commits_list)
-    print(f"[+] {len(commits_list)} commits Left")
-    print(tag,localId)
+    INFO(f"[+] Working on {localId=}, {len(commits_list)} commits Left")
     log = ARVO /"Log" /tag/f"{localId}"/f"{localId}.log"
     if not log.exists():
         with open(log,'w') as f:
@@ -572,7 +570,7 @@ def lifeSpan_prepareProject(localId,pname):
 def lifeSpan(localId):
     global CHANCE, TURBO
     # 1. Get Pname
-    print(f"[+] Working on {localId}")
+    INFO(f"[+] Working on {localId}")
     CHANCE  = 0x10
     pname = getPname(localId)
     if not pname:
