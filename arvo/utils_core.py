@@ -45,6 +45,7 @@ def fixDockerfile(dockerfile_path,project,commit_date):
         dft.appendLine(f'ARG ARVO_TS="{commit_date.isoformat()}"')
         build_clone_fix = r'''RUN awk -v ts="$ARVO_TS" '\
     /git clone/ { \
+        gsub(/--depth[= ][0-9]+/, "", $0); \
         if (NF == 3) dir = $3; \
         else { \
             repo = $NF; \
