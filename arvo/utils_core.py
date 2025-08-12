@@ -45,6 +45,7 @@ def fixDockerfile(dockerfile_path,project,commit_date):
         dft.appendLine(f'ARG ARVO_TS="{commit_date.isoformat()}"')
         build_clone_fix = r'''RUN awk -v ts="$ARVO_TS" '\
     /git clone/ { \
+        gsub(/--depth[= ][0-9]+/, "", $0); \
         if (NF == 3) dir = $3; \
         else { \
             repo = $NF; \
@@ -292,14 +293,17 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     item_type   = item['type']
 
     dft = DfTool(dockerfile)
-    keyword = item['url']
+
+    keyword = item['url'].strip()
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
     elif keyword.startswith("git://git"):
         keyword = keyword[9:]
-
+    if keyword.endswith(".git"):
+        keyword = keyword[:-4]
+    
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
         if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:

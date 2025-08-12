@@ -180,7 +180,6 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
             continue
         if item_name == 'libfuzzer' and 'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url:
             continue
-        
         # Broken Revision
         if item_rev=="" or item_rev == "UNKNOWN":
             issue_record(project_name,localId,f"Broken Meta: No Revision Provided")
@@ -232,10 +231,11 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                 command = f'git log --before="{commit_date.isoformat()}" -n 1 --format="%H"'
                 res = subprocess.run(command, stdout=subprocess.PIPE, text=True, shell=True,cwd=src/item_name)
                 res = res.stdout.strip()
-                if check_call(['git',"reset",'--hard', res], cwd=src/item_name) == False:
-                    eventLog(f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
-                    issue_record(project_name,localId,f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
-                    return leaveRet(False,[tmp_dir,source_dir])
+                with open('/dev/null','w') as f:
+                    if check_call(['git',"reset",'--hard', res], cwd=src/item_name,stdout=f,stderr=f) == False:
+                        eventLog(f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
+                        issue_record(project_name,localId,f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
+                        return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
         elif item_type=='svn':
             if not svn_clone(item_url,item_rev,src,item_name):

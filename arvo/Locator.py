@@ -50,11 +50,9 @@ def dichotomy_log(localId,s,tag):
     with open(log,'a') as f:
         f.write(f'{s}\n')
 def _check_buid_prompt(s):
-    print("\n\n")
-    print("*"*0x20)
-    print(f"commit: {s}")
-    print("*"*0x20)
-    print("\n\n")
+    INFO("*"*0x20)
+    SUCCESS(f"commit: {s}")
+    INFO("*"*0x20)
 def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule_tracker=[]):
     if type(commit) != str:
         commit = commit[-1]
