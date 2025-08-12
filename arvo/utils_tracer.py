@@ -29,7 +29,6 @@ def commitDate(url,commit,protocol):
     shutil.rmtree(gt.repo)
     return res
 def customSrcmap_PM(srcmap):
-    # For patch minimization
     """
     Take original srcmaps and create a customSrcmap based on the given commit
     Mark other component.rev as xXxXx

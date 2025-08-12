@@ -336,7 +336,6 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     
     if type(commit_date) == type(Path("/tmp")):
         rep_path = commit_date
-        # Replace mode
         """
         Replace the original line with ADD/COPY command
         Then RUN init/update the submodule
