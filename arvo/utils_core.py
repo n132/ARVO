@@ -291,9 +291,7 @@ def parse_git_clone(dockerfile_line):
 def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate):
     """
     ins the dockerfile to perform minial changes while reproducing
-    """
-
-        
+    """ 
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
