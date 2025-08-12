@@ -439,12 +439,15 @@ def getFuzzer(localId,wkdir):
                 name = "_".join(name.split("_")[off+1:])
                 if _checkexist(name):
                     return wkdir / name
+                name = "_".join(name.split("_")[1:])
+                if _checkexist(name):
+                    return wkdir / name
                 else:
                     return issue_record(issue['project'],localId,f"Failed to get the fuzzer",retv=None)
     if "fuzz_target" in issue:
         return _findFuzzer("fuzz_target",0)
-    elif "fuzzer" in issue:
-        return _findFuzzer("fuzzer",1)
+    # elif "fuzzer" in issue:
+    #     return _findFuzzer("fuzzer",1)
     elif 'issue' in issue and 'summary' in issue['issue']:
         name = issue['issue']['summary'].split(":")[1]
         if _checkexist(name):
