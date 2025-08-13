@@ -79,7 +79,7 @@ def reproducerPrepareOssFuzz(project_name,commit_date):
         eventLog(f"[-] reproducerPrepareOssFuzz {project_name}: Fail to locate the project")
         return leaveRet(False,tmp_dir)
     return (tmp_dir, proj_dir)
-def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=False,ForceNoErrDump=False,patches=None,oss_fuzz_commit=False,custom_script=[],log_tag=None):
+def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=False,ForceNoErrDump=False,patches=None,oss_fuzz_commit=False,custom_script=[]):
     # Get Basic Information
     fuzzer_info = issue['job_type'].split("_")
     engine      = fuzzer_info[0]
@@ -97,9 +97,9 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
     return build_fuzzer_with_source(issue['issue']['localId'],issue['project'],
             srcmap,sanitizer,engine,arch,commit_date,replace_dep=replace_dep,
             save_img=save_img,verifyFix=verifyFix, 
-            ForceNoErrDump = ForceNoErrDump,patches=patches,oss_fuzz_commit=oss_fuzz_commit,custom_script=custom_script,log_tag=log_tag)
+            ForceNoErrDump = ForceNoErrDump,patches=patches,oss_fuzz_commit=oss_fuzz_commit,custom_script=custom_script)
 def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,commit_date,replace_dep=None,\
-    save_img=False,verifyFix=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[],log_tag = None):
+    save_img=False,verifyFix=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[]):
     global REBUTTAL_EXP
     # Build source_dir
         
@@ -270,19 +270,16 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 source_path= src,
                                 mount_path=Path("/src"),
                                 save_img=save_img,noDump=ForceNoErrDump,
-                                custom_script=custom_script,log_tag=log_tag)
+                                custom_script=custom_script)
     # we need sudo since the docker container root touched the folder
     if not CLEAN_TMP: check_call(["sudo","rm","-rf",source_dir])
     return leaveRet(result,tmp_dir)
 def build_fuzzers_impl(localId,project,project_dir,engine,
     sanitizer,architecture,source_path,
-    mount_path=None,save_img=False,noDump=False,custom_script=[],log_tag=None):
+    mount_path=None,save_img=False,noDump=False,custom_script=[]):
     global CONTAINER_ENV
     # Set the LogFile
-    if log_tag == None:
-        logFile = OSS_ERR / f"{localId}_Image.log"
-    else:
-        logFile = OSS_ERR / f"{localId}_Image_{log_tag}.log"
+    logFile = OSS_ERR / f"{localId}_Image.log"
     INFO(f"[+] Check the output in file: {logFile}")
 
     # Clean The WORK/OUT DIR
@@ -321,10 +318,7 @@ def build_fuzzers_impl(localId,project,project_dir,engine,
     if noDump == '/dev/null':
         logFile = Path('/dev/null')
     elif noDump == False:
-        if log_tag == None:
-            logFile = OSS_ERR / f"{localId}_Compile.log"
-        else:
-            logFile = OSS_ERR / f"{localId}_Compile_{log_tag}.log"
+        logFile = OSS_ERR / f"{localId}_Compile.log"
         INFO(f"[+] Check the output in file: {str(logFile)}")
     else:
         logFile = None
