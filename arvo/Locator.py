@@ -67,7 +67,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         return None
     # Step3: Try to build/compile the fuzz target
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
-    build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
+    build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker,log_tag=commit)
     if not poc: # Build only mode
         return build_res
     if build_res == True:
