@@ -326,6 +326,10 @@ def data_download(localIds = None):
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
+        if getLanguage(str(localId)) not in ['c','c++']:
+            WARN(f"[!] Not C/C++ Issue: {localId=}")
+            to_remove.append(x)
+            continue
         if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir): 
             WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
@@ -334,9 +338,8 @@ def data_download(localIds = None):
             WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
             continue
-        if getLanguage(str(localId)) not in ['c','c++']:
-            to_remove.append(x)
-            continue
+
+
     remove_issue_meta(to_remove)
     remove_issue_data(to_remove)
     return True
@@ -344,6 +347,7 @@ def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
     if not META.exists(): META.mkdir()
     todo = meta_getIssues(getIssueIds())
+    print(todo)
     data_download(todo)
 
 if __name__ == "__main__":
