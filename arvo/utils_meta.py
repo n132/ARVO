@@ -55,7 +55,6 @@ def metaFilter():
     res = list(set(res))
     remove_issue_meta(res)
     remove_issue_data(res)
-    SUCCESS("Done")
 def getIssueIds():
     localIds = []
     session = requests.Session()
@@ -97,7 +96,7 @@ def getIssueIds():
                 WARN("Out of Limit. Not Supported yet. (You may split it by month instead of year)")
                 exit(1)
         added_num = len(localIds) - init_num
-        INFO(f"Add {added_num} issues in year {start_year}")
+        SUCCESS(f"[+] Added {added_num:,} issues from {start_year} ({len(localIds):,} total)")
         start_year+=1
     
     return [int(x) for x in localIds]
@@ -182,9 +181,9 @@ def meta_getIssues(issue_ids):
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
-    for x in bar(issue_ids):
-        if x in done:
-            continue
+    todo = [x for x in issue_ids if x not in done]
+    INFO(f"Added {len(todo)} new issues")
+    for x in bar(todo):
         res = meta_getIssue(x)
         if res:
             issues.append(res)
@@ -192,7 +191,7 @@ def meta_getIssues(issue_ids):
                 f.write(json.dumps(res) + '\n') 
         else:
             WARN(f"Failed to fetch the issue for {x}")
-    return issues
+    return todo
 # Parse the job type into parts
 def parse_job_type(job_type):
     parts = job_type.split('_')
@@ -308,11 +307,10 @@ def download_build_artifacts(metadata, url, outdir):
 def data_download(localIds = None):
     metadata = {}
     for line in open(MetaDataFile):
-        mdline = json.loads(line)
-        if localIds == None or mdline['localId'] in localIds:
-            metadata[mdline['localId']] = mdline
+        line = json.loads(line)
+        if localIds == None or line['localId'] in localIds:
+            metadata[line['localId']] = line
     to_remove = []
-    #for localId in metadata:
     for localId in bar(metadata):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
@@ -342,8 +340,8 @@ def data_download(localIds = None):
 def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
     if not META.exists(): META.mkdir()
-    meta_getIssues(getIssueIds())
-    data_download()
+    todo = meta_getIssues(getIssueIds())
+    data_download(todo)
 
 if __name__ == "__main__":
     pass
