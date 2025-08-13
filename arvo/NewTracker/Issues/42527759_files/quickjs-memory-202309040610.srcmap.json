@@ -1,0 +1,7 @@
+{
+  "/src/quickjs": {
+    "type": "git",
+    "url": "https://github.com/bellard/quickjs",
+    "rev": "2788d71e823b522b178db3b3660ce93689534e6d"
+  }
+}

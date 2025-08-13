@@ -1,0 +1,7 @@
+{
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "af3bb18749db3559dc4968dd85319d05168d4b5e"
+  }
+}

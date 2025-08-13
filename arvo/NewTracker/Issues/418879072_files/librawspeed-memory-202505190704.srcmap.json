@@ -1,0 +1,7 @@
+{
+  "/src/librawspeed": {
+    "type": "git",
+    "url": "https://github.com/darktable-org/rawspeed.git",
+    "rev": "ed5aaa7f8e42f1adefda8832351fc58b44774771"
+  }
+}

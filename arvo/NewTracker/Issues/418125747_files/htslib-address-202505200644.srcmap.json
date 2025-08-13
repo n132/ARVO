@@ -1,0 +1,7 @@
+{
+  "/src/htslib": {
+    "type": "git",
+    "url": "https://github.com/samtools/htslib.git",
+    "rev": "b8dfa3ad7f1ac6a165f01625fe1f3f6cb60a417c"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/opusfile": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/opusfile",
+    "rev": "56728646d626791b08d2b15af0147fb9d0d27bf7"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

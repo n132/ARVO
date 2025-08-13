@@ -1,0 +1,17 @@
+{
+  "/src/libxslt": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxslt.git",
+    "rev": "c8b1ea4b89a9b81fa611f32c80f47df0c3b3b004"
+  },
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "30665ae4d1a7de6e2f7db7c23042aedf4a9657c0"
+  },
+  "/src/xmlsec": {
+    "type": "git",
+    "url": "https://github.com/lsh123/xmlsec",
+    "rev": "94654ff9fb11bd376874eefead7f190efd0bc056"
+  }
+}

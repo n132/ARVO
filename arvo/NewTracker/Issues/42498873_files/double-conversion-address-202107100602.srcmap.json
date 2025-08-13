@@ -1,0 +1,12 @@
+{
+  "/src/double-conversion": {
+    "type": "git",
+    "url": "https://github.com/google/double-conversion.git",
+    "rev": "32bc443c60c860eb6b4843533a614766d611172e"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

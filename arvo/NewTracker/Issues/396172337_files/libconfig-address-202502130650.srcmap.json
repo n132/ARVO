@@ -1,0 +1,7 @@
+{
+  "/src/libconfig": {
+    "type": "git",
+    "url": "https://github.com/hyperrealm/libconfig.git",
+    "rev": "81fe4632f01cbf24bf7efcd7ce1913f441c5ea96"
+  }
+}

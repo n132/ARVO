@@ -1,0 +1,7 @@
+{
+  "/src/selinux": {
+    "type": "git",
+    "url": "https://github.com/SELinuxProject/selinux",
+    "rev": "023abcab42aaaa8ffa5de5d09c46db21355388c9"
+  }
+}
