@@ -179,6 +179,8 @@ def fixBuildScript(file,pname):
     if not file.exists():
         return True
     dft = DfTool(file)
+    # Experimental Feat
+    dft.strReplaceAll(globalStrReplace)
     if   pname == "uwebsockets":
         '''
         https://github.com/alexhultman/zlib

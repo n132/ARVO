@@ -65,6 +65,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
     if not cts:
         eventLog(f"[-] checkBuild {localId}: Failed to create customSrcmap, where commit=={commit}&&pname=={pname}")
         return None
+        
     # Step3: Try to build/compile the fuzz target
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
     build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker,log_tag=commit)
