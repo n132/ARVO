@@ -459,7 +459,10 @@ def verify(localId,save_img=False):
             return True
         if not docker_cp(case_path.absolute(),f"reproducer_{localId}:"+"/tmp/poc"):
             return False
-        return False if not doCommitClean(localId,tag) else True
+        if not doCommitClean(localId,tag):
+            return False
+        else:
+            return True
     
     def pushImg(): 
         return pushImgRemote(localId,issue) if save_img else True
@@ -504,16 +507,21 @@ def verify(localId,save_img=False):
     save_img_tag = "Vul" if save_img else False
     old_res = build_from_srcmap(old_srcmap,issue,save_img=save_img_tag)
     if not old_res:
-        issue_record(issue['project'],localId,f"Fail to build old fuzzers from srcmap")
+        issue_record(issue['project'],localId, f"Fail to build old fuzzers from srcmap")
         return leave(False)
-    ret_code = crashVerify(issue,case_path,'vul')
+    ret_code = crashVerify(issue, case_path, 'vul')
     if ret_code == None: 
-        issue_record(issue['project'],localId,f"Fail to get the fuzzer")
+        issue_record(issue['project'],localId, f"Fail to get the fuzzer")
         return leave(False)
     if ret_code == True:
-        issue_record(issue['project'],localId,f"Fail to reproduce the crash")
+        issue_record(issue['project'],localId, f"Fail to reproduce the crash")
         return leave(False)
-    if not saveImg_LoadCommit('vul'): return leave(False)
+    
+    SUCCESS("[+] Vulnerable version behaves as expected")
+
+    if not saveImg_LoadCommit('vul'): 
+        issue_record(issue['project'],localId, f"Fail to commit the vul docker image")
+        return leave(False)
     remove_oss_fuzz_img(localId) # Remove docker image
 
     # 4. Build the Fixed Software
@@ -527,11 +535,18 @@ def verify(localId,save_img=False):
     if not ret_code:
         issue_record(issue['project'],localId,f"Fail to reproduce the fix")
         return leave(False)
-    if not saveImg_LoadCommit('fix'): return leave(False)
+    SUCCESS("[+] Fixed version behaves as expected")
+    if not saveImg_LoadCommit('fix'): 
+        issue_record(issue['project'],localId, f"Fail to commit the fixed docker image")
+        return leave(False)
     remove_oss_fuzz_img(localId) # Remove docker image
 
     # 5. Push the local DockerImg to dockerhub
-    return leave(False) if not pushImg() else leave(True)
+    if not pushImg():
+        issue_record(issue['project'],localId, f"Fail to push the docker image")
+        return leave(False) 
+    else:
+        return leave(True)
 
 if __name__ == "__main__":
     pass

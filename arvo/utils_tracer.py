@@ -29,7 +29,6 @@ def commitDate(url,commit,protocol):
     shutil.rmtree(gt.repo)
     return res
 def customSrcmap_PM(srcmap):
-    # For patch minimization
     """
     Take original srcmaps and create a customSrcmap based on the given commit
     Mark other component.rev as xXxXx
@@ -124,6 +123,4 @@ def customSrcmap(srcmap,pname,commit):
 
     with open(Bsrcmap,'w') as f:
         f.write(json.dumps(data))
-    # if DEBUG:
-        # print(json.dumps(data,indent=4))
     return Bsrcmap

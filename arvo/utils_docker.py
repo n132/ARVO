@@ -172,8 +172,7 @@ def docker_rmi(img_name):
         return check_call(cmd,stdout=f,stderr=f,verbose=False)
 def docker_ps(container_name):
     cmd = ["docker", "ps", "-aq", "-f", f"name={container_name}"]
-    with open('/dev/null','w') as f:
-        return check_call(cmd,stdout=f,stderr=f,verbose=False)
+    return execute(cmd).decode()
 def docker_commit(container_name,image_name):
     cmd = ['docker','commit',container_name,image_name]
     with open('/dev/null','w') as f:

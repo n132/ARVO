@@ -43,6 +43,10 @@ def fixDockerfile(dockerfile_path,project,commit_date):
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
     elif project == 'gdal':
         dft.appendLine(f'ARG ARVO_TS="{commit_date.isoformat()}"')
+        """
+        1. remove all --depth
+        2. checkout the cloned repo in build.sh
+        """
         build_clone_fix = r'''RUN awk -v ts="$ARVO_TS" '\
     /git clone/ { \
         gsub(/--depth[= ][0-9]+/, "", $0); \
@@ -59,8 +63,10 @@ def fixDockerfile(dockerfile_path,project,commit_date):
     { print }' $SRC/build.sh > $SRC/build.sh.tmp && mv $SRC/build.sh.tmp $SRC/build.sh
     '''
         dft.appendLine(build_clone_fix)
-        line = '''RUN sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile'''
+        line = '''RUN [ -f /src/gdal/gdal/GNUmakefile ] && sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile || true'''
         dft.appendLine(line)
+        dft.appendLine('''RUN sed -i 's|BUILD_SH_FROM_REPO="$SRC/gdal/fuzzers/build.sh"|BUILD_SH_FROM_REPO=$0|g' $SRC/build.sh''')
+        
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -285,9 +291,7 @@ def parse_git_clone(dockerfile_line):
 def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate):
     """
     ins the dockerfile to perform minial changes while reproducing
-    """
-
-        
+    """ 
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
@@ -330,7 +334,6 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     
     if type(commit_date) == type(Path("/tmp")):
         rep_path = commit_date
-        # Replace mode
         """
         Replace the original line with ADD/COPY command
         Then RUN init/update the submodule
