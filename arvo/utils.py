@@ -1,4 +1,4 @@
-import re, shutil, requests, sys, math, tiktoken
+import re, shutil, requests, sys, math, tiktoken, inspect
 from datetime       import datetime
 from base58         import b58encode
 from .utils_exec    import *
@@ -33,9 +33,11 @@ def eventLog(s,ext=False):
         2. Document the mssage in log file
         3. return False if exit is not set
     """
-    FAIL(s)
+    caller_name = inspect.stack()[1].function
+    formatted_msg = f"[{caller_name}] {s}"
+    FAIL("[-] " + formatted_msg)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
-        f.write(s+"\n")
+        f.write(formatted_msg+"\n")
     if ext:
         exit(1)
     else:
@@ -82,7 +84,7 @@ def remove_oss_fuzz_img(localId):
 def get_projectInfo(localId,pname=None):
     srcmap = getSrcmaps(localId)
     if(len(srcmap)!=2):
-        eventLog(f"[-] get_projectInfo: Can't find enough srcmaps: {localId}",True)
+        eventLog(f"Can't find enough srcmaps: {localId}",True)
     if not pname: pname = getPname(localId)
     with open(srcmap[0]) as f:
         info1 = json.load(f)["/src/"+pname]
@@ -185,11 +187,11 @@ def getLanguage(localId):
     # Slow Path
     porjymal = getProjectYaml(localId)
     if porjymal== False:
-        eventLog(f"[!] getLanguage: Failed to get project.yaml file, {localId}")
+        eventLog(f"Failed to get project.yaml file, {localId}")
         return False
     res = re.findall(r'language\s*:\s*([^\s]+)',porjymal)
     if len(res) != 1:
-        eventLog(f"[!] getLanguage: Get more than one languages, {localId}")
+        eventLog(f"Get more than one languages, {localId}")
         return False
     language = str(res[0])
     PLanguage[project_name] = language
@@ -269,7 +271,7 @@ def getPname(localId,srcmapCheck=True):
             if x in list(info1.keys()):
                 candidates.append(x)
         if len(candidates)==0:
-            eventLog(f"[Pname]: {localId} could be a false positive since vulsrcmap~=fixedsrcmap")
+            eventLog(f"{localId} could be a false positive since vulsrcmap~=fixedsrcmap")
             return False
 
         first_item = "/"
@@ -310,7 +312,7 @@ def getPoc(localId,issue=None, outPath = None):
     except:
         pocPath = False
     if not pocPath or not pocPath.exists():
-        eventLog(f"[-] getPoc {localId}: Failed to download PoC")
+        eventLog(f"Failed to download PoC for {localId}")
         return leaveRet(None,case_dir)
     return pocPath
 def mapMapping():
@@ -337,7 +339,7 @@ def getSrcmaps(localId):
         return str(a)
     issue_dir = DATADIR / "Issues" / (str(localId) + "_files")
     if not issue_dir.exists():
-        eventLog(f"[-] no such issue_dir for {localId}")
+        eventLog(f"No such issue_dir for {localId}")
         return False
     srcmap = list(issue_dir.glob('*.srcmap.json'))
     srcmap.sort(key=_cmp)
@@ -405,7 +407,7 @@ def getIssue(localId):
         issue = json.loads(_)
         if(issue['localId']==localId):
             return issue
-    eventLog(f"[-] no such issue, {localId}")
+    eventLog(f"No such issue: {localId}")
     return False
 def getDepNum(localId):
     srcmaps = getSrcmaps(localId)
@@ -570,7 +572,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         dest = tmpDir()
 
     if not _git_clone(url,dest,name):
-        return eventLog(f"[!] - clone: Failed to clone {url}")
+        return eventLog(f"Failed to clone {url}")
     if commit:
         if name==None:
             name = list(dest.iterdir())[0]
@@ -578,10 +580,10 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
             return dest
         else:
             if main_repo == True:
-                return eventLog(f"[!] - clone: Failed to checkout {name}")
+                return eventLog(f"Failed to checkout {name}")
             else:
                 if commit_date==None:
-                    eventLog(f"[!] - clone: Failed to checkout {name} but it's not the main component, using the latest version")
+                    eventLog(f"Failed to checkout {name} but it's not the main component, using the latest version")
                     return dest
                 WARN("[!] Failed to checkout, try a version before required commit")
                 cmd = ["git", "log", f"--before='{commit_date.isoformat()}'", "--format='%H'", "-n1"]
@@ -590,7 +592,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
                 if _check_out(commit, dest / name):
                     return dest
                 else:
-                    return eventLog(f"[!] - clone: Failed to checkout {name}")
+                    return eventLog(f"Failed to checkout {name}")
     return dest
 def svn_clone(url,commit=None,dest=None,rename=None):
     def _svn_clone(url,dest,name=None):
@@ -610,7 +612,7 @@ def svn_clone(url,commit=None,dest=None,rename=None):
     else:
         tmp = tmpDir()
     if not _svn_clone(url,tmp,rename):
-        eventLog(f"[!] - svn_clone: Failed to clone {url}")
+        eventLog(f"Failed to clone {url}")
         return False
     if commit:
         name = rename if rename else list(tmp.iterdir)[0]
@@ -635,7 +637,7 @@ def hg_clone(url,commit=None,dest=None,rename=None):
     else:
         tmp = tmpDir()
     if not _hg_clone(url,tmp,rename):
-        eventLog(f"[!] - hg_clone: Failed to clone {url}")
+        eventLog(f"Failed to clone {url}")
         return False
     if commit:
         if rename:

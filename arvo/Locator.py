@@ -63,7 +63,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
 
     cts = customSrcmap(srcmap,pname,commit)
     if not cts:
-        eventLog(f"[-] checkBuild {localId}: Failed to create customSrcmap, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to create customSrcmap, where {commit=} && {pname=}")
         return None
 
     # Step3: Try to build/compile the fuzz target
@@ -84,11 +84,11 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         remove_oss_fuzz_img(localId)
         return leaveRet(res,cts.parent)
     elif build_res == False:
-        eventLog(f"[-] checkBuild {localId}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
         remove_oss_fuzz_img(localId)
         return leaveRet(None,cts.parent)
     else:
-        eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"Weird return value from build_from_srcmap: {build_res}",True)
 #==================================================================
 #
 #                  Report Generator
@@ -190,9 +190,9 @@ def vulCommit(localId,retryChance=None,hint=None):
     # the tuple will be used in other functions that this function will call
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
-        return eventLog(f"\t[-] vulCommit {localId}: Failed to get srcmap/issue")
+        return eventLog(f"{localId=}: Failed to get srcmap/issue")
     elif len(srcmap)!=2:
-        return eventLog(f"\t[-] vulCommit {localId}: Len(srcmap)!=2")
+        return eventLog(f"{localId=}: Len(srcmap)!=2")
     # 1 - Do the work
     pname   = getPname(localId)
     if pname == False:

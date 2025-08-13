@@ -16,21 +16,6 @@ LOG = Path(ARVO_DIR) / "Log"
 if not LOG.exists():
     LOG.mkdir(exist_ok=True)
 
-def eventLog(s: str) -> bool:
-    """Log an event message to the event log file with file locking."""
-    if not s:
-        return False
-    try:
-        logFilelock = LOG/"_Event.log.lock"
-        logFile = LOG/"_Event.log"
-        lock = FileLock(logFilelock)
-        with lock:
-            with open(logFile, 'a', encoding='utf-8') as f:
-                f.write(s + "\n")
-        return True
-    except Exception as e:
-        FAIL(f"Failed to write to event log: {e}")
-        return False
 def updateCrashLog(result: str, log_file: str, perm: str = 'a') -> bool:
     """Update crash log file with result message using file locking."""
     if not result or not log_file:
@@ -91,7 +76,6 @@ def DB_INSERT(url: str, orig: Path) -> bool:
         rec[url] = str(dest / orig.name)
         
         if not DB_DUMP(rec):
-            eventLog("[!] DB_INSERT: OSS_DB is polluted")
             PANIC("DB_INSERT: Failed to update database")
         
         INFO(f"DB_INSERT: Successfully inserted {url}")
@@ -142,7 +126,6 @@ def DB_MAP() -> Dict[str, str]:
             sleep(0.3)
             ct += 1
     
-    eventLog("[!] DB_MAP: Failed to get DB MAP")
     PANIC("DB_MAP: All retry attempts failed")
 def DB_remove(url: str, path: Path) -> bool:
     """Remove entry from database and delete associated files."""

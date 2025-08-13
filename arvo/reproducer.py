@@ -124,12 +124,12 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     
     # Step ZERO: Rebase Dockerfiles
     if not rebaseDockerfile(dockerfile,str(commit_date).replace(" ","-")):
-        eventLog(f"[-] build_fuzzer_with_source: Fail to Rebase Dockerfile, {localId}")
+        eventLog(f"Failed to rebase Dockerfile, {localId}")
         return leaveRet(False,tmp_dir)
     # Step ONE: Fix Dockerfiles 
     dockerfileCleaner(dockerfile)
     if not fixDockerfile(dockerfile,project_name,commit_date):
-        eventLog(f"[-] build_fuzzer_with_source: Fail to Fix Dockerfile / Not Fixable, {localId}")
+        eventLog(f"Failed to fix Dockerfile / Not Fixable, {localId}")
         return leaveRet(False,tmp_dir)
     
     # Step TWO: Prepare Dependencies
