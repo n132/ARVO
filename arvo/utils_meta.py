@@ -299,7 +299,7 @@ def download_build_artifacts(metadata, url, outdir):
             print(f'Skipping {name} (not found)')
             continue
         print(download_path)
-        ret = blob.download_to_filename(str(download_path))
+        blob.download_to_filename(str(download_path))
         
         print(f'Downloaded {name}')
         downloaded_files.append(download_path)
@@ -327,12 +327,15 @@ def data_download(localIds = None):
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
         if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir): 
-            WARN("[!] Failed to download the srcmap")
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
             continue
         if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir):
-            WARN("[!] Failed to download the srcmap")
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
+            continue
+        if getLanguage(str(localId)) not in ['c','c++']:
+            to_remove.append(x)
             continue
     remove_issue_meta(to_remove)
     remove_issue_data(to_remove)
