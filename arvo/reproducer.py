@@ -321,7 +321,10 @@ def build_fuzzers_impl(localId,project,project_dir,engine,
     if noDump == '/dev/null':
         logFile = Path('/dev/null')
     elif noDump == False:
-        logFile = OSS_ERR / f"{localId}_Compile.log"
+        if log_tag == None:
+            logFile = OSS_ERR / f"{localId}_Compile.log"
+        else:
+            logFile = OSS_ERR / f"{localId}_Compile_{log_tag}.log"
         INFO(f"[+] Check the output in file: {str(logFile)}")
     else:
         logFile = None
