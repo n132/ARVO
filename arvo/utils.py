@@ -563,15 +563,14 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         return DB_INSERT(url,dest/name)
     def _check_out(commit,path):
         with open('/dev/null','w') as f:
-            return check_call(['git',"reset",'--hard', commit], cwd=path, stdout=f)
+            return check_call(['git',"reset",'--hard', commit], cwd=path, stdout=f,stderr=f)
     if(dest):
         dest = Path(dest)
     else:
         dest = tmpDir()
 
     if not _git_clone(url,dest,name):
-        eventLog(f"[!] - clone: Failed to clone {url}")
-        return False
+        return eventLog(f"[!] - clone: Failed to clone {url}")
     if commit:
         if name==None:
             name = list(dest.iterdir())[0]
@@ -579,8 +578,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
             return dest
         else:
             if main_repo == True:
-                eventLog(f"[!] - clone: Failed to checkout {name}")
-                return False
+                return eventLog(f"[!] - clone: Failed to checkout {name}")
             else:
                 if commit_date==None:
                     eventLog(f"[!] - clone: Failed to checkout {name} but it's not the main component, using the latest version")
@@ -592,8 +590,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
                 if _check_out(commit, dest / name):
                     return dest
                 else:
-                    eventLog(f"[!] - clone: Failed to checkout {name}")
-                    return False
+                    return eventLog(f"[!] - clone: Failed to checkout {name}")
     return dest
 def svn_clone(url,commit=None,dest=None,rename=None):
     def _svn_clone(url,dest,name=None):
