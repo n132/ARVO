@@ -566,18 +566,7 @@ def false_positive(localId,force_reset = False):
         return False # Not False Positives
     else:
         return True  # False Positives
-def check_false_positives():
-    """
-    This function checks all the not done issues and check if they are false
-    positives
-    """
-    done = getReports()
-    todo = getAllLocalIds()
-    todo = [x for x in todo if x not in done]
-    done_check = getFalsePositives()+getNotFalsePositives()
-    todo = [x for x in todo if x not in done_check]
-    print(len(todo))
-    xExplore(todo, "false_positives.log", check_false_positive)
+
 
 fp_init()
 
