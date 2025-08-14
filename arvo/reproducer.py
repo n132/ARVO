@@ -226,8 +226,8 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         if item_type=='git':
             clone_res = clone(item_url,item_rev,src,item_name,commit_date=commit_date)
             if clone_res == False:
-                eventLog(f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
-                issue_record(project_name,localId,f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
+                eventLog(f"Failed to clone & checkout [{localId}]: {item_name}")
+                issue_record(project_name,localId,f"Failed to clone & checkout [{localId}]: {item_name}")
                 return leaveRet(False,[tmp_dir,source_dir])
             elif clone_res == None:
                 command = f'git log --before="{commit_date.isoformat()}" -n 1 --format="%H"'
@@ -235,28 +235,28 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                 res = res.stdout.strip()
                 with open('/dev/null','w') as f:
                     if check_call(['git',"reset",'--hard', res], cwd=src/item_name,stdout=f,stderr=f) == False:
-                        eventLog(f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
-                        issue_record(project_name,localId,f"[!] build_from_srcmap: Failed to clone & checkout [{localId}]: {item_name}")
+                        eventLog(f"Failed to clone & checkout [{localId}]: {item_name}")
+                        issue_record(project_name,localId,f"Failed to clone & checkout [{localId}]: {item_name}")
                         return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
         elif item_type=='svn':
             if not svn_clone(item_url,item_rev,src,item_name):
-                eventLog(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
+                eventLog(f"svn: Failed clone & checkout: {item_name}")
                 return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
         elif item_type=='hg':
             if not hg_clone(item_url,item_rev,src,item_name):
-                eventLog(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
+                eventLog(f"hg: Failed clone & checkout: {item_name}")
                 return leaveRet(False,[tmp_dir,source_dir])
             docker_volume.append(newKey)
         else:
             PANIC("[Failed] Impossible")
     # Step Three: Extra Scripts
     if not extraScritps(project_name,project_dir,source_dir):
-        eventLog(f"[-] build_fuzzer_with_source: Fail to Run ExtraScripts, {localId}")
+        eventLog(f"Fail to Run ExtraScripts, {localId}")
         return leaveRet(False,[tmp_dir,source_dir])    
     if not fixBuildScript(project_dir/"build.sh",project_name):
-        eventLog(f"[-] build_fuzzer_with_source: Fail to Fix Build.sh, {localId}")
+        eventLog(f"Fail to Fix Build.sh, {localId}")
         return leaveRet(False,[tmp_dir,source_dir])
     if patches: doPatchMain(localId,dockerfile,patches) # Only used in special mode
     # Used for AIxCC Target Gen
@@ -279,7 +279,10 @@ def build_fuzzers_impl(localId,project,project_dir,engine,
     mount_path=None,save_img=False,noDump=False,custom_script=[]):
     global CONTAINER_ENV
     # Set the LogFile
-    logFile = OSS_ERR / f"{localId}_Image.log"
+    if isinstance(noDump,Path):
+        logFile = noDump
+    else:
+        logFile = OSS_ERR / f"{localId}_Image.log"
     INFO(f"[+] Check the output in file: {logFile}")
 
     # Clean The WORK/OUT DIR
@@ -315,11 +318,12 @@ def build_fuzzers_impl(localId,project,project_dir,engine,
     command += custom_script
 
     
-    if noDump == '/dev/null':
-        logFile = Path('/dev/null')
+    if isinstance(noDump,Path):
+        logFile = noDump
+        INFO(f"[+] Check the output in file: {logFile}")
     elif noDump == False:
         logFile = OSS_ERR / f"{localId}_Compile.log"
-        INFO(f"[+] Check the output in file: {str(logFile)}")
+        INFO(f"[+] Check the output in file: {logFile}")
     else:
         logFile = None
     result = docker_run(command,logFile=logFile)

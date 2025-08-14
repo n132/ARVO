@@ -169,7 +169,7 @@ def ccBuild(localId,poc,tag,patches):
         remove_oss_fuzz_img(localId)
         return leaveRet("Failed to Compile",cts.parent)
     else:
-        eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"[-] Weird return value: {build_res}",True)
 def patchVerification(localId):
     if getVulComponentProtocol(localId) != 'git':
         return False

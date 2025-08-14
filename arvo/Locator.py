@@ -68,7 +68,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
 
     # Step3: Try to build/compile the fuzz target
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
-    build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
+    build_res = build_from_srcmap(cts,issue,ForceNoErrDump=OSS_ERR / f"{localId}_Compile_{commit}.log",oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
     if not poc: # Build only mode
         return build_res
     if build_res == True:
@@ -88,7 +88,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         remove_oss_fuzz_img(localId)
         return leaveRet(None,cts.parent)
     else:
-        eventLog(f"Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"Unintended return value: {build_res=}",True)
 #==================================================================
 #
 #                  Report Generator
