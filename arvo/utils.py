@@ -553,6 +553,8 @@ def svn_pull(cwd):
         return check_call(['svn','update'],cwd=cwd,stderr=f,stdout=f)
 def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
     def _git_clone(url,dest,name):
+        if name!=None and (dest/name).exists():
+            shutil.rmtree(dest/name)
         if dbCOPY(url,dest,name):
             return True
         cmd = ['git','clone',url]
