@@ -19,6 +19,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 import pytz
+from dataclasses import dataclass
 
 # Global constants
 OSS_OUT = OSS_WORK = OSS_ERR = Path("/tmp")
@@ -32,68 +33,41 @@ warnings.filterwarnings("ignore",
                         category=UserWarning,
                         module="google.auth._default")
 
-
-def info(message: str) -> None:
-  """Log an info message.
-    
-    Args:
-        message: The message to log.
-    """
-  logging.info(message)
-
-
-def warn(message: str) -> None:
-  """Log a warning message.
-    
-    Args:
-        message: The message to log.
-    """
-  logging.warning(message)
-
-
-def fail(message: str, result: Any = False) -> Any:
-  """Log an error message and return a result.
-    
-    Args:
-        message: The error message to log.
-        result: The result to return (default: False).
-        
-    Returns:
-        The specified result value.
-    """
-  logging.error(message)
-  return result
+@dataclass
+class CommandResult:
+    success: bool
+    output: bytes | None
+    returncode: int
 
 
 def execute(cmd: List[str],
             cwd: Path = Path("/tmp"),
             stdout: int = subprocess.PIPE,
-            stderr: int = subprocess.PIPE) -> Union[bytes, bool]:
-  """Execute a command and return its output or status.
-    
+            stderr: int = subprocess.PIPE) -> CommandResult:
+    """
+    Execute a command and return its result.
+
     Args:
         cmd: Command to execute as a list of strings.
         cwd: Working directory for the command.
         stdout: Stdout redirection target.
         stderr: Stderr redirection target.
-        
+
     Returns:
-        Command output as bytes if successful and non-empty, True if successful
-        but empty output, False if failed.
+        CommandResult: with success, output, and returncode.
+        success is True if returncode==0, regardless of output.
+        output is the stdout bytes if present, else None.
     """
-  try:
-    result = subprocess.run(cmd,
-                            cwd=cwd,
-                            stderr=stderr,
-                            stdout=stdout,
-                            check=False)
-    if result.returncode == 0:
-      if result.stdout and result.stdout.strip() != b'':
-        return result.stdout.strip()
-      return True
-    return False
-  except (subprocess.SubprocessError, OSError):
-    return False
+    try:
+        result = subprocess.run(cmd,
+                               cwd=cwd,
+                               stderr=stderr,
+                               stdout=stdout,
+                               check=False)
+        output = result.stdout if result.stdout and result.stdout.strip() != b'' else None
+        return CommandResult(success=(result.returncode == 0), output=output, returncode=result.returncode)
+    except (subprocess.SubprocessError, OSError):
+        return CommandResult(success=False, output=None, returncode=-1)
 
 
 def check_call(cmd: List[str],
@@ -122,7 +96,7 @@ def check_call(cmd: List[str],
     return False
 
 
-def git_pull(cwd: Path) -> bool:
+def _git_pull(cwd: Path) -> bool:
   """Pull latest changes from git repository.
     
     Args:
@@ -135,7 +109,7 @@ def git_pull(cwd: Path) -> bool:
     return check_call(['git', 'pull'], cwd=cwd, stderr=f, stdout=f)
 
 
-def hg_pull(cwd: Path) -> bool:
+def _hg_pull(cwd: Path) -> bool:
   """Pull latest changes from mercurial repository.
     
     Args:
@@ -148,7 +122,7 @@ def hg_pull(cwd: Path) -> bool:
     return check_call(['hg', 'pull'], cwd=cwd, stderr=f, stdout=f)
 
 
-def svn_pull(cwd: Path) -> bool:
+def _svn_pull(cwd: Path) -> bool:
   """Update SVN repository to latest revision.
     
     Args:
@@ -162,11 +136,11 @@ def svn_pull(cwd: Path) -> bool:
 
 
 def clone(url: str,
-          commit: Optional[str] = None,
-          dest: Optional[Union[str, Path]] = None,
-          name: Optional[str] = None,
+          commit: str | None = None,
+          dest: str | Path | None = None,
+          name: str | None = None,
           main_repo: bool = False,
-          commit_date: Optional[datetime] = None) -> Union[Path, bool]:
+          commit_date: datetime | None = None) -> Path | bool:
   """Clone a git repository and optionally checkout a specific commit.
     
     Args:
@@ -198,10 +172,11 @@ def clone(url: str,
   dest_path = Path(dest) if dest else Path(tempfile.mkdtemp())
 
   if not _git_clone(url, dest_path, name):
-    return fail(f"[!] - clone: Failed to clone {url}")
+    logging.error(f"[!] - clone: Failed to clone {url}")
+    return False
 
   if commit:
-    info(f"Checkout to commit {commit}")
+    logging.info(f"Checkout to commit {commit}")
     repo_name = list(dest_path.iterdir())[0] if name is None else name
     repo_path = dest_path / repo_name
 
@@ -209,34 +184,33 @@ def clone(url: str,
       return dest_path
     else:
       if main_repo:
-        return fail(f"[!] - clone: Failed to checkout {repo_name}")
+        logging.error(f"[!] - clone: Failed to checkout {repo_name}")
+        return False
       else:
         if commit_date is None:
-          warn(f"[!] - clone: Failed to checkout {repo_name} but it's not "
-               "the main component, using the latest version")
+          logging.warning(f"[!] - clone: Failed to checkout {repo_name} but it's not the main component, using the latest version")
           return dest_path
-
-        warn("[!] Failed to checkout, try a version before required commit")
+        logging.warning("[!] Failed to checkout, try a version before required commit")
         cmd = [
             "git", "log", f"--before='{commit_date.isoformat()}'",
             "--format='%H'", "-n1"
         ]
-        fallback_commit = execute(cmd, repo_path)
-        if isinstance(fallback_commit, bytes):
-          fallback_commit = fallback_commit.decode().strip("'")
-          info(f"Checkout to {fallback_commit}")
-          if _check_out(fallback_commit, repo_path):
-            return dest_path
-
-        return fail(f"[!] - clone: Failed to checkout {repo_name}")
+        fallback_result = execute(cmd, repo_path)
+        if fallback_result.success and fallback_result.output:
+            fallback_commit = fallback_result.output.decode().strip("'")
+            logging.info(f"Checkout to {fallback_commit}")
+            if _check_out(fallback_commit, repo_path):
+                return dest_path
+        logging.error(f"[!] - clone: Failed to checkout {repo_name}")
+        return False
 
   return dest_path
 
 
 def svn_clone(url: str,
-              commit: Optional[str] = None,
-              dest: Optional[Union[str, Path]] = None,
-              rename: Optional[str] = None) -> Union[Path, bool]:
+              commit: str | None = None,
+              dest: str | Path | None = None,
+              rename: str | None = None) -> Path | bool:
   """Clone an SVN repository and optionally checkout a specific revision.
     
     Args:
@@ -261,7 +235,8 @@ def svn_clone(url: str,
   tmp_path = Path(dest) if dest else Path(tempfile.mkdtemp())
 
   if not _svn_clone(url, tmp_path, rename):
-    return fail(f"[!] - svn_clone: Failed to clone {url}")
+    logging.error(f"[!] - svn_clone: Failed to clone {url}")
+    return False
 
   if commit:
     repo_name = rename if rename else list(tmp_path.iterdir())[0]
@@ -273,9 +248,9 @@ def svn_clone(url: str,
 
 
 def hg_clone(url: str,
-             commit: Optional[str] = None,
-             dest: Optional[Union[str, Path]] = None,
-             rename: Optional[str] = None) -> Union[Path, bool]:
+             commit: str | None = None,
+             dest: str | Path | None = None,
+             rename: str | None = None) -> Path | bool:
   """Clone a Mercurial repository and optionally checkout a specific commit.
     
     Args:
@@ -300,7 +275,7 @@ def hg_clone(url: str,
   tmp_path = Path(dest) if dest else Path(tempfile.mkdtemp())
 
   if not _hg_clone(url, tmp_path, rename):
-    fail(f"[!] - hg_clone: Failed to clone {url}")
+    logging.error(f"[!] - hg_clone: Failed to clone {url}")
     return False
 
   if commit:
@@ -396,7 +371,7 @@ class DockerfileModifier:
         """
     self.content = re.sub(old, new, self.content, count=1)
 
-  def insert_line_before(self, target: str, newline: str) -> Optional[bool]:
+  def insert_line_before(self, target: str, newline: str) -> bool | None:
     """Insert a new line before the target line.
         
         Args:
@@ -412,7 +387,7 @@ class DockerfileModifier:
     self.insert_line_at(line_num, newline)
     return None
 
-  def insert_line_after(self, target: str, newline: str) -> Optional[bool]:
+  def insert_line_after(self, target: str, newline: str) -> bool | None:
     """Insert a new line after the target line.
         
         Args:
@@ -460,7 +435,7 @@ class DockerfileModifier:
     newline_pattern = re.compile(r'^\n', re.MULTILINE)
     self.content = newline_pattern.sub('', self.content)
 
-  def locate_str(self, keyword: str) -> Union[int, bool]:
+  def locate_str(self, keyword: str) -> int | bool:
     """Find the line number containing the keyword.
         
         Args:
@@ -552,15 +527,15 @@ class VersionControlTool:
             True if pull succeeded, False otherwise.
         """
     if self.type == 'git':
-      return git_pull(self.repo)
+      return _git_pull(self.repo)
     elif self.type == 'hg':
-      return hg_pull(self.repo)
+      return _hg_pull(self.repo)
     else:
-      return svn_pull(self.repo)
+      return _svn_pull(self.repo)
 
   def clone(self,
             url: str,
-            revision: Optional[str] = None) -> Union[Path, bool]:
+            revision: Optional[str] = None) -> Path | bool:
     """Clone the repository.
         
         Args:
@@ -588,7 +563,7 @@ class VersionControlTool:
 
     return False
 
-  def commit_date(self, commit: str) -> Union[str, bool]:
+  def commit_date(self, commit: str) -> str | bool:
     """Get the date of a specific commit.
         
         Args:
@@ -605,23 +580,21 @@ class VersionControlTool:
       return utc_dt.strftime("%Y%m%d%H%M")
 
     if self.type == 'git':
-      result = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
-      if result is not False and isinstance(result, bytes):
-        return time_reformat(result.decode())
+        result = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
+        if result.success and result.output:
+            return time_reformat(result.output.decode())
     elif self.type == 'hg':
-      result = execute(['hg', 'log', '-r', commit, '--template', '{date}'],
-                       self.repo)
-      if result is not False and isinstance(result, bytes):
-        timestamp = int(result.decode().split(".")[0])
-        return datetime.utcfromtimestamp(timestamp).strftime('%Y%m%d%H%M')
+        result = execute(['hg', 'log', '-r', commit, '--template', '{date}'], self.repo)
+        if result.success and result.output:
+            timestamp = int(result.output.decode().split(".")[0])
+            return datetime.utcfromtimestamp(timestamp).strftime('%Y%m%d%H%M')
     else:
-      result = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
-      if result is not False and isinstance(result, bytes):
-        lines = result.decode().split('\n')
-        if len(lines) > 1:
-          date_part = lines[1].split(' | ')[2].split(' (')[0]
-          return time_reformat(date_part)
-
+        result = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
+        if result.success and result.output:
+            lines = result.output.decode().split('\n')
+            if len(lines) > 1:
+                date_part = lines[1].split(' | ')[2].split(' (')[0]
+                return time_reformat(date_part)
     return False
 
   def reset(self, commit: str) -> bool:
@@ -659,7 +632,7 @@ def docker_build(args: List[str], log_file: Optional[Path] = None) -> bool:
     """
   cmd = ['docker', 'build']
   cmd.extend(args)
-  info("Docker Build: \n" + " ".join(cmd))
+  logging.info("Docker Build: \n" + " ".join(cmd))
 
   if log_file:
     with open(log_file, 'w', encoding='utf-8') as f:
@@ -689,7 +662,7 @@ def docker_run(args: List[str],
     cmd = ['docker', 'run', '--privileged']
 
   cmd.extend(args)
-  info("Docker Run: \n" + " ".join(cmd))
+  logging.info("Docker Run: \n" + " ".join(cmd))
 
   if log_file:
     with open(log_file, 'w', encoding='utf-8') as f:
@@ -716,20 +689,27 @@ def clean_dir(directory: Path) -> bool:
     shutil.rmtree(directory)
     return True
   except OSError:
-    warn(f"[FAILED] to remove tmp file {directory}")
+    logging.warning(f"[FAILED] to remove tmp file {directory}")
     return False
 
 
-def leave_ret(return_val: Any, tmp_dirs: Union[Path, List[Path]]) -> Any:
-  """Clean up temporary directories and return a value.
-    
-    Args:
-        return_val: Value to return.
-        tmp_dirs: Temporary directory or list of directories to clean up.
-        
-    Returns:
-        The return_val parameter.
-    """
+def leave_ret(return_val: Any, tmp_dirs: Path | list[Path]) -> Any:
+  """
+  Clean up temporary directories and return a value.
+
+  This function is used to ensure that any temporary directories created during
+  the execution of a process are properly removed before returning a result.
+  It accepts either a single Path or a list of Paths, and attempts to remove
+  each directory (and its contents) using clean_dir. This helps prevent
+  resource leaks and keeps the filesystem clean after temporary work is done.
+
+  Args:
+      return_val: Value to return after cleanup.
+      tmp_dirs: Temporary directory or list of directories to clean up.
+
+  Returns:
+      The return_val parameter, after cleanup is performed.
+  """
   if isinstance(tmp_dirs, list):
     for tmp_dir in tmp_dirs:
       clean_dir(tmp_dir)
