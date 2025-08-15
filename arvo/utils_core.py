@@ -67,6 +67,9 @@ def fixDockerfile(dockerfile_path,project,commit_date):
         dft.appendLine(line)
         dft.appendLine('''RUN sed -i 's|BUILD_SH_FROM_REPO="$SRC/gdal/fuzzers/build.sh"|BUILD_SH_FROM_REPO=$0|g' $SRC/build.sh''')
         
+    elif project == 'curl':
+        # Check if download_zlib.sh exists and replace zlib URL
+        dft.appendLine('RUN [ -f "/src/curl_fuzzer/scripts/download_zlib.sh" ] && sed -i \'s|https://www.zlib.net/zlib-1.2.11.tar.gz|https://www.zlib.net/fossils/zlib-1.2.11.tar.gz|g\' /src/curl_fuzzer/scripts/download_zlib.sh || true')
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -313,7 +316,7 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
         if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
-            WARN(f"Not Found {item_url=} for {localId=}")
+            WARN(f"Not Found {item_url=} for {localId=}  ({keyword=})")
         return False
     if len(hits) != 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
@@ -348,19 +351,21 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         # Insert Mode
         if item_type == "git":
             repo_dir = parse_git_clone(dft.content.split("\n")[ct-1])
+            if "/" in repo_dir:
+                repo_dir = repo_dir.split("/")[-1]
             if ARVO_Turbo and repo_dir!=None:
                 clone_res = clone(item_url,None,dockerfile.parent,repo_dir,commit_date=commit_date)
             else:
                 clone_res = False
             if approximate == '-':
                 if  clone_res not in [None, False]: # Cache Path
-                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {repo_dir}")
-                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {repo_dir} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {src_path}")
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
                 else:
                     dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
             else:
                 if  clone_res not in [None, False]: # Cache Path
-                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {repo_dir}")
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {src_path}")
                     dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
                 else:
                     dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
