@@ -180,19 +180,22 @@ def patchVerification(localId):
     print(hks)
     
     poc     = getPoc(localId,getIssue(localId))
+    if not poc:
+        return "Failed to get PoC"
+    
     wkdir.mkdir(parents=True,exist_ok=True)
     res = ccBuild(localId,poc,"diff",hks)
     
     if res  not in [True,False]:
-        return res
+        return leaveRet(res, poc.parent)
     if res == False:
-        return "The Fix Version Still Crashes"
+        return leaveRet("The Fix Version Still Crashes", poc.parent)
     if not (OSS_OUT/f"{localId}"/"arvo_pv").exists():
-        return "Miss"
+        return leaveRet("Miss", poc.parent)
     if check_call(['sudo','cp',str(OSS_OUT/f"{localId}"/"arvo_pv"), str(wkdir)]) and check_call(['sudo','chmod',"777", str(wkdir/"arvo_pv")]):
-        return True
+        return leaveRet(True, poc.parent)
     else:
-        return "ARVO Failed to COPY RESULT OUT"
+        return leaveRet("ARVO Failed to COPY RESULT OUT", poc.parent)
 def getAllPatches(targetdir):
     if not targetdir.exists():
         return False
