@@ -1,0 +1,7 @@
+{
+  "/src/fluent-bit": {
+    "type": "git",
+    "url": "https://github.com/fluent/fluent-bit/",
+    "rev": "7ab07aa93a88e5878afa25d033ff1b6528a39454"
+  }
+}

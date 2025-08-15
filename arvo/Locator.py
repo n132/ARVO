@@ -63,11 +63,12 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
 
     cts = customSrcmap(srcmap,pname,commit)
     if not cts:
-        eventLog(f"[-] checkBuild {localId}: Failed to create customSrcmap, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to create customSrcmap, where {commit=} && {pname=}")
         return None
+
     # Step3: Try to build/compile the fuzz target
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
-    build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
+    build_res = build_from_srcmap(cts,issue,ForceNoErrDump=OSS_ERR / f"{localId}_Compile_{commit}.log",oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
     if not poc: # Build only mode
         return build_res
     if build_res == True:
@@ -83,11 +84,11 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         remove_oss_fuzz_img(localId)
         return leaveRet(res,cts.parent)
     elif build_res == False:
-        eventLog(f"[-] checkBuild {localId}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
         remove_oss_fuzz_img(localId)
         return leaveRet(None,cts.parent)
     else:
-        eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"Unintended return value: {build_res=}",True)
 #==================================================================
 #
 #                  Report Generator
@@ -189,9 +190,9 @@ def vulCommit(localId,retryChance=None,hint=None):
     # the tuple will be used in other functions that this function will call
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
-        return eventLog(f"\t[-] vulCommit {localId}: Failed to get srcmap/issue")
+        return eventLog(f"{localId=}: Failed to get srcmap/issue")
     elif len(srcmap)!=2:
-        return eventLog(f"\t[-] vulCommit {localId}: Len(srcmap)!=2")
+        return eventLog(f"{localId=}: Len(srcmap)!=2")
     # 1 - Do the work
     pname   = getPname(localId)
     if pname == False:
@@ -746,7 +747,7 @@ def dockerImgExist(localId):
             return False    
     return True
 
-def reproduce(localId, dockerize = True, update = True):
+def reproduce(localId, dockerize = True, update = False):
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
@@ -758,6 +759,7 @@ def reproduce(localId, dockerize = True, update = True):
         return False
 
     if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
+        buildClean(localId)
         return eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
     
     reproduced      = True
@@ -766,7 +768,9 @@ def reproduce(localId, dockerize = True, update = True):
     reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
-    if not res: return False
+    if not res: 
+        buildClean(localId)
+        return False
     patch_located  = True
     patch_located  = True
     patch_url      = res['fix']
@@ -809,8 +813,9 @@ def reproduce(localId, dockerize = True, update = True):
 
     if exist_record:
         if not delete_entry(localId):
+            buildClean(localId)
             return False
-    
+    buildClean(localId)
     return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
         sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language))

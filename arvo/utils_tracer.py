@@ -84,6 +84,13 @@ def customSrcmap(srcmap,pname,commit):
     with open(srcmap[1]) as f:
         sm1 = json.load(f)
     
+    # This should be solved if we can solve the branch issue
+    # Ghost script is an example could get benefit from not_changed_components 
+    not_changed_components = []
+    for x in sm0:
+        if x in sm1:
+            if sm0[x] == sm0[x]:
+                not_changed_components.append(x)
     idx = 1 if len(list(sm1.keys())) >= len(list(sm0.keys())) else 0 
     chosen_srcmap = srcmap[idx].name
     Asrcmap = wd / chosen_srcmap
@@ -115,6 +122,8 @@ def customSrcmap(srcmap,pname,commit):
         if (key != vk) and key not in ["/src",'/src/aflplusplus','/src/libfuzzer','/src/afl']:
             # Mess the revision so we'll use the a commit that is close to the datetime.
             # since we implemented that in util_core
+            if key in not_changed_components:
+                continue
             if data[key]['type'] == 'git':
                 data[key]['rev'] = "xXxXx"
     ori = srcmap[0].name.split("-")

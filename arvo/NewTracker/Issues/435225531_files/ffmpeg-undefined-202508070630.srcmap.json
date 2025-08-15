@@ -1,0 +1,77 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "f1e1f13b766eb580a8dcc0c4e7a447346dfd862e"
+  },
+  "/src/vorbis": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/vorbis.git",
+    "rev": "43bbff0141028e58d476c1d5fd45dd5573db576d"
+  },
+  "/src/theora": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/theora.git",
+    "rev": "23161c4a63fd9f9d09b9e972f95def2d56c777af"
+  },
+  "/src/opus": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/opus.git",
+    "rev": "f92fdda4f9b75ecb5f0f38b86c991195585579ea"
+  },
+  "/src/ogg": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/ogg.git",
+    "rev": "0288fadac3ac62d453409dfc83e9c4ab617d2472"
+  },
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "fdf1db62ef7ffe0f0dc77eac18c814a883fd55a0"
+  },
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2",
+    "rev": "bf905ea2251191ff9911ae7ec0cfc35d41f9f7f6"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  },
+  "/src/libass": {
+    "type": "git",
+    "url": "https://github.com/libass/libass",
+    "rev": "338fd2cea8ac156a910b04838b5f40b868e41160"
+  },
+  "/src/harfbuzz": {
+    "type": "git",
+    "url": "https://github.com/harfbuzz/harfbuzz",
+    "rev": "dbbf6def3b4b33965febd301bb7f7f00ad0856cf"
+  },
+  "/src/fribidi": {
+    "type": "git",
+    "url": "https://github.com/fribidi/fribidi",
+    "rev": "b28f43bd3e8e31a5967830f721bab218c1aa114c"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/freetype/freetype.git",
+    "rev": "aa2ee67b3d95585a0bfc56a834544a502853f584"
+  },
+  "/src/fontconfig": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+    "rev": "22cbfff10da57dc56a497387d16478db064eb210"
+  },
+  "/src/fdk-aac": {
+    "type": "git",
+    "url": "https://github.com/mstorsjo/fdk-aac.git",
+    "rev": "2ef9a141c40bf254bde7d22c197c615db5b265ed"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "c64cff64a22a59c0c02281ee9fd9d89963d14d16"
+  }
+}

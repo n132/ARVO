@@ -1,0 +1,7 @@
+{
+  "/src/readstat": {
+    "type": "git",
+    "url": "https://github.com/WizardMac/ReadStat",
+    "rev": "24de678e9439fff01b27c0bc8e8b745369888664"
+  }
+}

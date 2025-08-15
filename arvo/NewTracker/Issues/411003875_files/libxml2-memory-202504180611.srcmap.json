@@ -1,0 +1,7 @@
+{
+  "/src/libxml2": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/libxml2.git",
+    "rev": "aa4ef7737bf6cab3914792526a9b9eec782603de"
+  }
+}

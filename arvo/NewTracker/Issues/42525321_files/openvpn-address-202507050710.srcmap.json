@@ -1,0 +1,12 @@
+{
+  "/src/openvpn": {
+    "type": "git",
+    "url": "https://github.com/OpenVPN/openvpn",
+    "rev": "c18a995d0e6752575299a750539acd5e35115846"
+  },
+  "/src/boringssl": {
+    "type": "git",
+    "url": "https://github.com/google/boringssl.git",
+    "rev": "913c14be725d9c9081b24ba1a2b81d14a3e8a179"
+  }
+}

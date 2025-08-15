@@ -1,0 +1,7 @@
+{
+  "/src/poco": {
+    "type": "git",
+    "url": "https://github.com/pocoproject/poco",
+    "rev": "11619a9e95c2ce14a0edfeddb8c1a0a1c926ba7f"
+  }
+}

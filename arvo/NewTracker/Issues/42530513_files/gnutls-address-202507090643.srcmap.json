@@ -1,0 +1,17 @@
+{
+  "/src/gnutls": {
+    "type": "git",
+    "url": "https://gitlab.com/gnutls/gnutls.git",
+    "rev": "8a36455fd75ce76391cfc00c53213d8b0e1648da"
+  },
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle.git",
+    "rev": "ef717fe1c6dba4e964474aca92ea8e3e94b524c6"
+  },
+  "/src/gnulib": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gnulib.git",
+    "rev": "6164b4cb0887b5331a4e64449107decd37d32735"
+  }
+}

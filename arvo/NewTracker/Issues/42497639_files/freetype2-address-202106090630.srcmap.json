@@ -1,0 +1,17 @@
+{
+  "/src/freetype2-testing": {
+    "type": "git",
+    "url": "https://github.com/freetype/freetype2-testing.git",
+    "rev": "ca6201f250316e6efd445a7fd92c4d82950e4cb0"
+  },
+  "/src/text-rendering-tests": {
+    "type": "git",
+    "url": "https://github.com/unicode-org/text-rendering-tests.git",
+    "rev": "01070a584486ab4fc07269dfefa7ea31f689d28b"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5997a4fc09163c1baa186f5a9d00c4c8668a72b1"
+  }
+}

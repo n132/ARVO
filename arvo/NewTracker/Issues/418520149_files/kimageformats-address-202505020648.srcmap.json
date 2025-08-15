@@ -1,0 +1,92 @@
+{
+  "/src/openh264": {
+    "type": "git",
+    "url": "https://github.com/cisco/openh264.git",
+    "rev": "652bdb7719f30b52b08e506645a7322ff1b2cc6f"
+  },
+  "/src/jxrlib": {
+    "type": "git",
+    "url": "https://github.com/mircomir/jxrlib.git",
+    "rev": "41eac79dca514bcdd139a2089c97242b2f9ca186"
+  },
+  "/src/LibRaw": {
+    "type": "git",
+    "url": "https://github.com/LibRaw/LibRaw",
+    "rev": "ad067c510bacea51755711c1b624da78b1812fba"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "794a5dcf0d54f9f0b20d288a12e87afb91d20dfc"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "339d252c527c5906d95de6eada3dcc06cf310e7f"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg.git",
+    "rev": "210a8a5690d0da66f02d49420d7176a21ef409dc"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "87585e0c2b1641df86ca4b95aac1bbf8651f11f3"
+  },
+  "/src/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "fcb084c9387e367750f5375e462005ce298f57cc"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "3b624af45b86646a20b11a9ff803aeae588cdee6"
+  },
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kimageformats.git",
+    "rev": "850068c1dc81c2ae0867cf395ae488f6d6c33781"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "e4dd2566e999aaa6ffc811dc59343458e5137da4"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "aed4307a1f3e0bea9aac6013e3ba6ef32a47a989"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "a5f0366eb92baa2a31b24e65f754fe4bc48ca28e"
+  },
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+    "rev": "da760aa4b6bee4b9d74b8c6a151221b035fc47b7"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "7c12726c51b2b7d77329dd72a29ecb1ec262b918"
+  },
+  "/src/libzip": {
+    "type": "git",
+    "url": "https://github.com/nih-at/libzip.git",
+    "rev": "91d6843217e5db3e0e913bd31011752263092a73"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "f8745da6ff1ad1e7bab384bd1f9d742439278e99"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  }
+}

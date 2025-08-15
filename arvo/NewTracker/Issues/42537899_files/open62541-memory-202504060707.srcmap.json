@@ -1,0 +1,7 @@
+{
+  "/src/open62541": {
+    "type": "git",
+    "url": "https://github.com/open62541/open62541.git",
+    "rev": "6ecfa9500761c681adb8cff9c5b92f5c76a38723"
+  }
+}

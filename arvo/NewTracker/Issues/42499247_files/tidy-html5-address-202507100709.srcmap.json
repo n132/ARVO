@@ -1,0 +1,7 @@
+{
+  "/src/tidy-html5": {
+    "type": "git",
+    "url": "https://github.com/htacg/tidy-html5.git",
+    "rev": "d08ddc2860aa95ba8e301343a30837f157977cba"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/glaze": {
+    "type": "git",
+    "url": "https://github.com/stephenberry/glaze",
+    "rev": "17d81a64b4f8c6824ff119f82cce8419b35791f4"
+  }
+}
