@@ -759,6 +759,7 @@ def reproduce(localId, dockerize = True, update = False):
         return False
 
     if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
+        buildClean(localId)
         return eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
     
     reproduced      = True
@@ -767,7 +768,9 @@ def reproduce(localId, dockerize = True, update = False):
     reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
-    if not res: return False
+    if not res: 
+        buildClean(localId)
+        return False
     patch_located  = True
     patch_located  = True
     patch_url      = res['fix']
@@ -810,8 +813,9 @@ def reproduce(localId, dockerize = True, update = False):
 
     if exist_record:
         if not delete_entry(localId):
+            buildClean(localId)
             return False
-    
+    buildClean(localId)
     return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
         sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language))
