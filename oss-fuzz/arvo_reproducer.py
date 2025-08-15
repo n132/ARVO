@@ -35,24 +35,29 @@ from urllib.parse import parse_qs, urlparse
 import requests
 from dateutil.parser import parse
 from google.cloud import storage
+from dataclasses import dataclass
 
 from arvo_data import (PNAME_TABLE, extra_scripts, fix_build_script,
                        fix_dockerfile, skip_component, special_component,
                        update_resource_info)
 from arvo_utils import (DockerfileModifier, VersionControlTool, check_call,
                         clean_dir, clone, docker_build, docker_run, execute,
-                        fail, hg_clone, info, leave_ret, svn_clone, warn,
+                        hg_clone, leave_ret, svn_clone,
                         OSS_ERR, OSS_OUT, OSS_WORK)
 
 # Global storage client
 storage_client: Optional[storage.Client] = None
 
-BuildData = collections.namedtuple(
-    'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
+@dataclass
+class BuildData:
+    project_name: str
+    engine: str
+    sanitizer: str
+    architecture: str
 
 
 def parse_oss_fuzz_report(report_text: bytes,
-                          local_id: int) -> Union[Dict[str, Any], bool]:
+                          local_id: int) -> dict[str, Any] | bool:
   """Parse OSS-Fuzz report text and extract relevant information.
     
     Args:
@@ -127,7 +132,7 @@ def parse_oss_fuzz_report(report_text: bytes,
   return result
 
 
-def fetch_issue(local_id: Union[int, str]) -> Union[Dict[str, Any], bool]:
+def fetch_issue(local_id: int | str) -> dict[str, Any] | bool:
   """Fetch issue information from OSS-Fuzz tracker.
     
     Args:
@@ -185,7 +190,7 @@ def fetch_issue(local_id: Union[int, str]) -> Union[Dict[str, Any], bool]:
   return result
 
 
-def parse_job_type(job_type: str) -> Dict[str, Any]:
+def parse_job_type(job_type: str) -> dict[str, Any]:
   """Parse job type string into components.
     
     Args:
@@ -223,8 +228,8 @@ def parse_job_type(job_type: str) -> Dict[str, Any]:
   return parsed
 
 
-def download_build_artifacts(metadata: Dict[str, Any], url: str,
-                             outdir: Path) -> Union[List[str], bool]:
+def download_build_artifacts(metadata: dict[str, Any], url: str,
+                             outdir: Path) -> list[str] | bool:
   """Download build artifacts from Google Cloud Storage.
     
     Args:
@@ -328,8 +333,8 @@ def download_build_artifacts(metadata: Dict[str, Any], url: str,
   return [str(f) for f in downloaded_files]
 
 
-def get_project_name(issue: Dict[str, Any],
-                     srcmap: Union[str, Path]) -> Union[str, bool]:
+def get_project_name(issue: dict[str, Any],
+                     srcmap: str | Path) -> str | bool:
   """Get project name from issue and srcmap data.
     
     Args:
@@ -340,7 +345,7 @@ def get_project_name(issue: Dict[str, Any],
         Project name on success, False on failure.
     """
   if 'project' not in issue:
-    fail("[FAILED] to get project field in issue")
+    logging.error("[FAILED] to get project field in issue")
     return False
   else:
     project_name = issue['project']
@@ -355,11 +360,12 @@ def get_project_name(issue: Dict[str, Any],
   if expected_name in info1:
     return project_name
   else:
-    return fail(
+    logging.error(
         f"Failed to locate the main component, plz add that to pname_table")
+    return False
 
 
-def get_language(project_dir: Path) -> Union[str, bool]:
+def get_language(project_dir: Path) -> str | bool:
   """Get programming language from project.yaml file.
     
     Args:
@@ -377,13 +383,13 @@ def get_language(project_dir: Path) -> Union[str, bool]:
 
   matches = re.findall(r'language\s*:\s*([^\s]+)', content)
   if len(matches) != 1:
-    fail(f"[!] Get more than one languages")
+    logging.error(f"[!] Get more than one languages")
     return False
 
   return str(matches[0])
 
 
-def get_sanitizer(fuzzer_sanitizer: str) -> Union[str, bool]:
+def get_sanitizer(fuzzer_sanitizer: str) -> str | bool:
   """Convert fuzzer sanitizer short name to full name.
     
     Args:
@@ -397,8 +403,8 @@ def get_sanitizer(fuzzer_sanitizer: str) -> Union[str, bool]:
   return sanitizer_map.get(fuzzer_sanitizer, False)
 
 
-def download_poc(issue: Dict[str, Any], path: Path,
-                 name: str) -> Union[Path, bool]:
+def download_poc(issue: dict[str, Any], path: Path,
+                 name: str) -> Path | bool:
   """Download proof-of-concept file from issue.
     
     Args:
@@ -428,7 +434,7 @@ def download_poc(issue: Dict[str, Any], path: Path,
 
 def prepare_ossfuzz(
     project_name: str,
-    commit_date: Union[str, datetime]) -> Union[Tuple[Path, Path], bool]:
+    commit_date: str | datetime) -> tuple[Path, Path] | bool:
   """Prepare OSS-Fuzz repository for the specified project and date.
     
     Args:
@@ -449,32 +455,32 @@ def prepare_ossfuzz(
   if isinstance(commit_date, str):
     oss_fuzz_commit = commit_date
   else:
-    cmd = [
+    # Remove the cmd variable and use the list directly
+    result = execute([
         'git', 'log', '--before=' + commit_date.isoformat(), '-n1',
         '--format=%H'
-    ]
-    result = execute(cmd, tmp_oss_fuzz_dir)
-    if isinstance(result, bytes):
-      oss_fuzz_commit = result.strip()
+    ], tmp_oss_fuzz_dir)
+    if result.success and result.output:
+      oss_fuzz_commit = result.output.strip()
     else:
       oss_fuzz_commit = False
 
     if oss_fuzz_commit is False:
       cmd = ['git', 'log', '--reverse', '--format=%H']
       result = execute(cmd, tmp_oss_fuzz_dir)
-      if isinstance(result, bytes):
-        oss_fuzz_commit = result.splitlines()[0].strip()
+      if result.success and result.output:
+        oss_fuzz_commit = result.output.splitlines()[0].strip()
       else:
         oss_fuzz_commit = False
 
       if oss_fuzz_commit is False:
-        fail('Failed to get oldest oss-fuzz commit')
+        logging.error('Failed to get oldest oss-fuzz commit')
         return leave_ret(False, tmp_dir)
 
   # 3. Reset OSS Fuzz
   gt = VersionControlTool(tmp_oss_fuzz_dir)
   if not gt.reset(oss_fuzz_commit):
-    fail("Failed to Reset OSS-Fuzz")
+    logging.error("Failed to Reset OSS-Fuzz")
     return leave_ret(False, tmp_dir)
 
   # 4. Locate Project Dir
@@ -484,13 +490,13 @@ def prepare_ossfuzz(
   elif tmp_oss_fuzz_dir / "targets" in tmp_list:
     proj_dir = tmp_oss_fuzz_dir / "targets" / project_name
   else:
-    fail(f"Failed to locate the project({project_name}) in oss-fuzz")
+    logging.error(f"Failed to locate the project({project_name}) in oss-fuzz")
     return leave_ret(False, tmp_dir)
 
   return (tmp_dir, proj_dir)
 
 
-def rebase_dockerfile(dockerfile_path: Union[str, Path],
+def rebase_dockerfile(dockerfile_path: str | Path,
                       commit_date: str) -> bool:
   """Rebase dockerfile to use historical base image.
     
@@ -508,30 +514,31 @@ def rebase_dockerfile(dockerfile_path: Union[str, Path],
     cache_name = repo.split("/")[-1]
     cache_file = f"/tmp/{cache_name}_cache.json"
     cache_ttl = 86400  # 24 hours
+    result_json = []
 
     if os.path.exists(cache_file) and (
         time.time() - os.path.getmtime(cache_file)) < cache_ttl:
       with open(cache_file, 'r', encoding='utf-8') as f:
-        result = json.load(f)
+        result_json = json.load(f)
     else:
       cmd = [
           "gcloud", "container", "images", "list-tags", repo, "--format=json",
           "--sort-by=timestamp"
       ]
       result = execute(cmd)
-      if isinstance(result, bytes):
-        result = json.loads(result)
+      if result.success and result.output:
+        result_json = json.loads(result.output)
         with open(cache_file, 'w', encoding='utf-8') as f:
-          f.write(json.dumps(result, indent=4))
+          f.write(json.dumps(result_json, indent=4))
       else:
         return ""
 
     timestamps = []
-    for item in result:
+    for item in result_json:
       timestamps.append(int(parse(item['timestamp']['datetime']).timestamp()))
 
     target_ts = int(parse(date).timestamp())
-    return result[bisect_right(timestamps, target_ts - 1) -
+    return result_json[bisect_right(timestamps, target_ts - 1) -
                   1]['digest'].split(":")[1]
 
   # Load the Dockerfile
@@ -539,12 +546,14 @@ def rebase_dockerfile(dockerfile_path: Union[str, Path],
     with open(dockerfile_path, encoding='utf-8') as f:
       data = f.read()
   except IOError:
-    return fail(f"No such a dockerfile: {dockerfile_path}")
+    logging.error(f"No such a dockerfile: {dockerfile_path}")
+    return False
 
   # Locate the Repo
   match = re.search(r'FROM .*', data)
   if match is None:
-    return fail("Failed to get the base-image: {dockerfile_path}")
+    logging.error("Failed to get the base-image: {dockerfile_path}")
+    return False
   else:
     repo = match[0][5:]
 
@@ -568,9 +577,8 @@ def rebase_dockerfile(dockerfile_path: Union[str, Path],
   return True
 
 
-def update_revision_info(dockerfile: Union[str, Path], src_path: str,
-                         item: Dict[str, Any], commit_date: Union[datetime,
-                                                                  Path],
+def update_revision_info(dockerfile: str | Path, src_path: str,
+                         item: dict[str, Any], commit_date: datetime | Path,
                          approximate: str) -> bool:
   """Update revision information in dockerfile.
     
@@ -609,7 +617,8 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
   elif item_type == 'svn':
     pattern = re.compile(rf"RUN\s+svn\s+(co|checkout)+")
   else:
-    return fail("NOT supported protocol")
+    logging.error("NOT supported protocol")
+    return False
 
   if len(pattern.findall(line)) != 1:  # mismatch
     return False
@@ -654,21 +663,22 @@ def update_revision_info(dockerfile: Union[str, Path], src_path: str,
       # TODO: support approximate
       dft.replace(pattern, f"RUN svn checkout -r {item_rev}")
     else:
+      logging.error("Failed to support {item_type}")
       return False
 
     dft.flush()
     return True
 
 
-def build_fuzzers_impl(local_id: Union[int, str],
+def build_fuzzers_impl(local_id: int | str,
                        project_dir: Path,
                        engine: str,
                        sanitizer: str,
                        architecture: str,
-                       source_path: Optional[Path],
-                       mount_path: Optional[Path] = None,
+                       source_path: Path | None,
+                       mount_path: Path | None = None,
                        no_dump: bool = False,
-                       custom_script: List[str] = None) -> bool:
+                       custom_script: list[str] | None = None) -> bool:
   """Build fuzzers using Docker.
     
     Args:
@@ -690,7 +700,7 @@ def build_fuzzers_impl(local_id: Union[int, str],
 
   # Set the LogFile
   log_file = OSS_ERR / f"{local_id}_Image.log"
-  info(f"Check the output in file: {log_file}")
+  logging.info(f"Check the output in file: {log_file}")
 
   # Clean The WORK/OUT DIR
   project_out = OSS_OUT / f"{local_id}_OUT"
@@ -711,7 +721,8 @@ def build_fuzzers_impl(local_id: Union[int, str],
   ]
 
   if not docker_build(args, log_file=log_file):
-    return fail(f"Failed to build DockerImage")
+    logging.error(f"Failed to build DockerImage")
+    return False
 
   # Build Succeed, Try Compiling
   if log_file and log_file.exists():
@@ -743,26 +754,26 @@ def build_fuzzers_impl(local_id: Union[int, str],
 
   if not no_dump:
     log_file = OSS_ERR / f"{local_id}_Compile.log"
-    info(f"Check the output in file: {str(log_file)}")
+    logging.info(f"Check the output in file: {str(log_file)}")
   else:
     log_file = None
 
   result = docker_run(command, log_file=log_file)
   if not result:
-    fail('Failed to Build Targets')
+    logging.error('Failed to Build Targets')
     return False
   else:
     if log_file and log_file.exists() and str(log_file) != "/dev/null":
       os.remove(str(log_file))
 
-  info(f"OUT: {project_out}")
+  logging.info(f"OUT: {project_out}")
   return True
 
 
-def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
-                             srcmap: Union[str, Path], sanitizer: str,
+def build_fuzzer_with_source(local_id: int | str, project_name: str,
+                             srcmap: str | Path, sanitizer: str,
                              engine: str, arch: str, commit_date: datetime,
-                             issue: Dict[str, Any], tag: str) -> bool:
+                             issue: dict[str, Any], tag: str) -> bool:
   """Build fuzzer with source code from srcmap.
     
     Args:
@@ -796,7 +807,7 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
     tmp_dir, project_dir = result
 
   dockerfile = project_dir / 'Dockerfile'
-  info(f"dockerfile: {dockerfile}")
+  logging.info(f"dockerfile: {dockerfile}")
 
   build_data = BuildData(sanitizer=sanitizer,
                          architecture=arch,
@@ -805,12 +816,12 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
 
   # Step ZERO: Rebase Dockerfiles
   if not rebase_dockerfile(dockerfile, str(commit_date).replace(" ", "-")):
-    fail(f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {local_id}")
+    logging.error(f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {local_id}")
     return leave_ret(False, tmp_dir)
 
   # Step ONE: Fix Dockerfiles
   if not fix_dockerfile(dockerfile, project_name):
-    fail(f"build_fuzzer_with_source: Failed to Fix Dockerfile, {local_id}")
+    logging.error(f"build_fuzzer_with_source: Failed to Fix Dockerfile, {local_id}")
     return leave_ret(False, tmp_dir)
 
   # Step TWO: Prepare Dependencies
@@ -832,7 +843,7 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
 
   # Handle Srcmap Info
   for item_key in sorted_keys:
-    # info(f"Prepare Dependency: {x}")
+    # logging.info(f"Prepare Dependency: {x}")
     if skip_component(project_name, item_key):
       continue
 
@@ -868,17 +879,17 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
 
     # Broken Revision
     if item_rev == "" or item_rev == "UNKNOWN":
-      fail(f"Broken Meta: No Revision Provided")
+      logging.error(f"Broken Meta: No Revision Provided")
       return leave_ret(False, [tmp_dir, source_dir])
 
     # Ignore not named dependencies if it's not main
     if item_name.strip(" ") == "" and len(data.keys()) == 1:
-      fail(f"Broken Meta: Found Not Named Dep")
+      logging.error(f"Broken Meta: Found Not Named Dep")
       return leave_ret(False, [tmp_dir, source_dir])
 
     # Broken type
     if item_type not in ['git', 'svn', 'hg']:
-      fail(f"Broken Meta: No support for {item_type}")
+      logging.error(f"Broken Meta: No support for {item_type}")
       return leave_ret(False, [tmp_dir, source_dir])
 
     # Try to perform checkout in dockerfile,
@@ -897,7 +908,7 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
                            commit_date=commit_date)
 
       if clone_result is False:
-        fail(f"[!] build_from_srcmap: Failed to clone & checkout "
+        logging.error(f"[!] build_from_srcmap: Failed to clone & checkout "
              f"[{local_id}]: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       elif clone_result is None:
@@ -911,7 +922,7 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
         commit_hash = result.stdout.strip()
         if not check_call(['git', "reset", '--hard', commit_hash],
                           cwd=src / item_name):
-          fail(f"[!] build_from_srcmap: Failed to clone & checkout "
+          logging.error(f"[!] build_from_srcmap: Failed to clone & checkout "
                f"[{local_id}]: {item_name}")
           return leave_ret(False, [tmp_dir, source_dir])
 
@@ -919,26 +930,26 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
 
     elif item_type == 'svn':
       if not svn_clone(item_url, item_rev, src, item_name):
-        fail(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
+        logging.error(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(new_key)
 
     elif item_type == 'hg':
       if not hg_clone(item_url, item_rev, src, item_name):
-        fail(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
+        logging.error(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(new_key)
     else:
-      fail(f"Failed to support {item_type}")
+      logging.error(f"Failed to support {item_type}")
       exit(1)
 
   # Step Three: Extra Scripts
   if not extra_scripts(project_name, source_dir):
-    fail(f"Failed to Run ExtraScripts, {local_id}")
+    logging.error(f"Failed to Run ExtraScripts, {local_id}")
     return leave_ret(False, [tmp_dir, source_dir])
 
   if not fix_build_script(project_dir / "build.sh", project_name):
-    fail(f"Failed to Fix Build.sh, {local_id}")
+    logging.error(f"Failed to Fix Build.sh, {local_id}")
     return leave_ret(False, [tmp_dir, source_dir])
 
   # Let's Build It
@@ -956,7 +967,7 @@ def build_fuzzer_with_source(local_id: Union[int, str], project_name: str,
   return leave_ret(result, tmp_dir)
 
 
-def build_from_srcmap(srcmap: Path, issue: Dict[str, Any], tag: str) -> bool:
+def build_from_srcmap(srcmap: Path, issue: dict[str, Any], tag: str) -> bool:
   """Build fuzzer from srcmap file.
     
     Args:
@@ -981,17 +992,19 @@ def build_from_srcmap(srcmap: Path, issue: Dict[str, Any], tag: str) -> bool:
     issue['issue'] = {'localId': issue['localId']}
 
   if engine not in ['libfuzzer', 'afl', 'honggfuzz', 'centipede']:
-    return fail("Failed to get engine")
+    logging.error("Failed to get engine")
+    return False
 
   if sanitizer is False:
-    return fail("Failed to get Sanitizer")
+    logging.error("Failed to get Sanitizer")
+    return False
 
   return build_fuzzer_with_source(issue['issue']['localId'], issue['project'],
                                   srcmap, sanitizer, engine, arch, commit_date,
                                   issue, tag)
 
 
-def arvo_reproducer(local_id: Union[int, str], tag: str) -> bool:
+def arvo_reproducer(local_id: int | str, tag: str) -> bool:
   """Main ARVO reproducer function.
     
     Args:
@@ -1001,19 +1014,21 @@ def arvo_reproducer(local_id: Union[int, str], tag: str) -> bool:
     Returns:
         True if reproduction succeeded, False otherwise.
     """
-  info(f"Working on {local_id}")
+  logging.info(f"Working on {local_id}")
 
   # 1. Fetch the basic info for the vulnerability
   issue = fetch_issue(local_id)  # TODO, refactor a fast way
   if not issue:
-    return fail(f"Failed to get the srcmap or issue for {local_id}")
+    logging.error(f"Failed to get the srcmap or issue for {local_id}")
+    return False
 
   tmpdir = Path(tempfile.mkdtemp())
   srcmap_url = issue['regressed'] if tag == 'vul' else issue['verified_fixed']
   srcmap_files = download_build_artifacts(issue, srcmap_url, tmpdir)
 
   if not srcmap_files:
-    return fail(f"Failed to get the srcmap for {local_id}")
+    logging.error(f"Failed to get the srcmap for {local_id}")
+    return False
 
   srcmap = Path(srcmap_files[0])
 
@@ -1023,24 +1038,27 @@ def arvo_reproducer(local_id: Union[int, str], tag: str) -> bool:
     issue['project'] = issue['fuzzer'].split("_")[1]
 
   # 2. Download the PoC
-  info("Downloading PoC")
+  logging.info("Downloading PoC")
   case_dir = Path(tempfile.mkdtemp())
 
   try:
     case_path = download_poc(issue, case_dir, "crash_case")
   except Exception:
-    return fail(f"Failed to Download the Reproducer")
+    logging.error(f"Failed to Download the Reproducer")
+    return False
 
-  info(f"POC: {case_path}")
+  logging.info(f"POC: {case_path}")
   if not case_path or not case_path.exists():
-    return fail(f"Failed to Download the Reproducer")
+    logging.error(f"Failed to Download the Reproducer")
+    return False
 
   # 3. Build the Vulnerable Software
-  info("Building the Binary")
+  logging.info("Building the Binary")
   result = build_from_srcmap(srcmap, issue, tag)
 
   if not result:
-    return fail(f"Failed to build old fuzzers from srcmap")
+    logging.error(f"Failed to build old fuzzers from srcmap")
+    return False
 
   return True
 
