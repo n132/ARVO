@@ -64,6 +64,13 @@ def clean_dir(victim):
     except:
         WARN(f"[FAILED] to remove tmp file {victim}")
         return False
+def buildClean(localId):
+    if CLEAN_OUT_BUILD:
+        INFO(f"[Cleaning] OUT for {localId}")
+        clean_dir(OSS_OUT / str(localId))
+        INFO(f"[Cleaning] WORK for {localId}")
+        clean_dir(OSS_WORK / str(localId))
+
 def leaveRet(return_val,tmp_dir):
     if not CLEAN_TMP: return return_val
     if type(tmp_dir) != list:
@@ -314,6 +321,8 @@ def getPoc(localId,issue=None, outPath = None):
     if not pocPath or not pocPath.exists():
         eventLog(f"Failed to download PoC for {localId}")
         return leaveRet(None,case_dir)
+    # If outPath was provided, return just the path (caller manages cleanup)
+    # If we created a tmpDir, caller needs to clean up pocPath.parent
     return pocPath
 def mapMapping():
     global MAPPING
