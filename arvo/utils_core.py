@@ -63,8 +63,8 @@ def fixDockerfile(dockerfile_path,project,commit_date):
     { print }' $SRC/build.sh > $SRC/build.sh.tmp && mv $SRC/build.sh.tmp $SRC/build.sh
     '''
         dft.appendLine(build_clone_fix)
-        # line = '''RUN [ -f /src/gdal/gdal/GNUmakefile ] && sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile || true'''
-        # dft.appendLine(line)
+        line = '''RUN [ -f /src/gdal/gdal/GNUmakefile ] && sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile || true'''
+        dft.appendLine(line)
         dft.appendLine('''RUN sed -i 's|BUILD_SH_FROM_REPO="$SRC/gdal/fuzzers/build.sh"|BUILD_SH_FROM_REPO=$0|g' $SRC/build.sh''')
         
     elif project == 'freeradius':
