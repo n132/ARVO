@@ -33,18 +33,19 @@ warnings.filterwarnings("ignore",
                         category=UserWarning,
                         module="google.auth._default")
 
+
 @dataclass
 class CommandResult:
-    success: bool
-    output: bytes | None
-    returncode: int
+  success: bool
+  output: bytes | None
+  returncode: int
 
 
 def execute(cmd: List[str],
             cwd: Path = Path("/tmp"),
             stdout: int = subprocess.PIPE,
             stderr: int = subprocess.PIPE) -> CommandResult:
-    """
+  """
     Execute a command and return its result.
 
     Args:
@@ -58,16 +59,19 @@ def execute(cmd: List[str],
         success is True if returncode==0, regardless of output.
         output is the stdout bytes if present, else None.
     """
-    try:
-        result = subprocess.run(cmd,
-                               cwd=cwd,
-                               stderr=stderr,
-                               stdout=stdout,
-                               check=False)
-        output = result.stdout if result.stdout and result.stdout.strip() != b'' else None
-        return CommandResult(success=(result.returncode == 0), output=output, returncode=result.returncode)
-    except (subprocess.SubprocessError, OSError):
-        return CommandResult(success=False, output=None, returncode=-1)
+  try:
+    result = subprocess.run(cmd,
+                            cwd=cwd,
+                            stderr=stderr,
+                            stdout=stdout,
+                            check=False)
+    output = result.stdout if result.stdout and result.stdout.strip(
+    ) != b'' else None
+    return CommandResult(success=(result.returncode == 0),
+                         output=output,
+                         returncode=result.returncode)
+  except (subprocess.SubprocessError, OSError):
+    return CommandResult(success=False, output=None, returncode=-1)
 
 
 def check_call(cmd: List[str],
@@ -188,19 +192,22 @@ def clone(url: str,
         return False
       else:
         if commit_date is None:
-          logging.warning(f"[!] - clone: Failed to checkout {repo_name} but it's not the main component, using the latest version")
+          logging.warning(
+              f"[!] - clone: Failed to checkout {repo_name} but it's not the main component, using the latest version"
+          )
           return dest_path
-        logging.warning("[!] Failed to checkout, try a version before required commit")
+        logging.warning(
+            "[!] Failed to checkout, try a version before required commit")
         cmd = [
             "git", "log", f"--before='{commit_date.isoformat()}'",
             "--format='%H'", "-n1"
         ]
         fallback_result = execute(cmd, repo_path)
         if fallback_result.success and fallback_result.output:
-            fallback_commit = fallback_result.output.decode().strip("'")
-            logging.info(f"Checkout to {fallback_commit}")
-            if _check_out(fallback_commit, repo_path):
-                return dest_path
+          fallback_commit = fallback_result.output.decode().strip("'")
+          logging.info(f"Checkout to {fallback_commit}")
+          if _check_out(fallback_commit, repo_path):
+            return dest_path
         logging.error(f"[!] - clone: Failed to checkout {repo_name}")
         return False
 
@@ -533,9 +540,7 @@ class VersionControlTool:
     else:
       return _svn_pull(self.repo)
 
-  def clone(self,
-            url: str,
-            revision: Optional[str] = None) -> Path | bool:
+  def clone(self, url: str, revision: Optional[str] = None) -> Path | bool:
     """Clone the repository.
         
         Args:
@@ -580,21 +585,22 @@ class VersionControlTool:
       return utc_dt.strftime("%Y%m%d%H%M")
 
     if self.type == 'git':
-        result = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
-        if result.success and result.output:
-            return time_reformat(result.output.decode())
+      result = execute(['git', 'show', '-s', '--format=%ci', commit], self.repo)
+      if result.success and result.output:
+        return time_reformat(result.output.decode())
     elif self.type == 'hg':
-        result = execute(['hg', 'log', '-r', commit, '--template', '{date}'], self.repo)
-        if result.success and result.output:
-            timestamp = int(result.output.decode().split(".")[0])
-            return datetime.utcfromtimestamp(timestamp).strftime('%Y%m%d%H%M')
+      result = execute(['hg', 'log', '-r', commit, '--template', '{date}'],
+                       self.repo)
+      if result.success and result.output:
+        timestamp = int(result.output.decode().split(".")[0])
+        return datetime.utcfromtimestamp(timestamp).strftime('%Y%m%d%H%M')
     else:
-        result = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
-        if result.success and result.output:
-            lines = result.output.decode().split('\n')
-            if len(lines) > 1:
-                date_part = lines[1].split(' | ')[2].split(' (')[0]
-                return time_reformat(date_part)
+      result = execute(['svn', 'log', '-r', commit, '-q'], self.repo)
+      if result.success and result.output:
+        lines = result.output.decode().split('\n')
+        if len(lines) > 1:
+          date_part = lines[1].split(' | ')[2].split(' (')[0]
+          return time_reformat(date_part)
     return False
 
   def reset(self, commit: str) -> bool:

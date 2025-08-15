@@ -42,18 +42,19 @@ from arvo_data import (PNAME_TABLE, extra_scripts, fix_build_script,
                        update_resource_info)
 from arvo_utils import (DockerfileModifier, VersionControlTool, check_call,
                         clean_dir, clone, docker_build, docker_run, execute,
-                        hg_clone, leave_ret, svn_clone,
-                        OSS_ERR, OSS_OUT, OSS_WORK)
+                        hg_clone, leave_ret, svn_clone, OSS_ERR, OSS_OUT,
+                        OSS_WORK)
 
 # Global storage client
 storage_client: Optional[storage.Client] = None
 
+
 @dataclass
 class BuildData:
-    project_name: str
-    engine: str
-    sanitizer: str
-    architecture: str
+  project_name: str
+  engine: str
+  sanitizer: str
+  architecture: str
 
 
 def parse_oss_fuzz_report(report_text: bytes,
@@ -333,8 +334,7 @@ def download_build_artifacts(metadata: dict[str, Any], url: str,
   return [str(f) for f in downloaded_files]
 
 
-def get_project_name(issue: dict[str, Any],
-                     srcmap: str | Path) -> str | bool:
+def get_project_name(issue: dict[str, Any], srcmap: str | Path) -> str | bool:
   """Get project name from issue and srcmap data.
     
     Args:
@@ -403,8 +403,7 @@ def get_sanitizer(fuzzer_sanitizer: str) -> str | bool:
   return sanitizer_map.get(fuzzer_sanitizer, False)
 
 
-def download_poc(issue: dict[str, Any], path: Path,
-                 name: str) -> Path | bool:
+def download_poc(issue: dict[str, Any], path: Path, name: str) -> Path | bool:
   """Download proof-of-concept file from issue.
     
     Args:
@@ -432,9 +431,8 @@ def download_poc(issue: dict[str, Any], path: Path,
   return reproducer_path
 
 
-def prepare_ossfuzz(
-    project_name: str,
-    commit_date: str | datetime) -> tuple[Path, Path] | bool:
+def prepare_ossfuzz(project_name: str,
+                    commit_date: str | datetime) -> tuple[Path, Path] | bool:
   """Prepare OSS-Fuzz repository for the specified project and date.
     
     Args:
@@ -496,8 +494,7 @@ def prepare_ossfuzz(
   return (tmp_dir, proj_dir)
 
 
-def rebase_dockerfile(dockerfile_path: str | Path,
-                      commit_date: str) -> bool:
+def rebase_dockerfile(dockerfile_path: str | Path, commit_date: str) -> bool:
   """Rebase dockerfile to use historical base image.
     
     Args:
@@ -539,7 +536,7 @@ def rebase_dockerfile(dockerfile_path: str | Path,
 
     target_ts = int(parse(date).timestamp())
     return result_json[bisect_right(timestamps, target_ts - 1) -
-                  1]['digest'].split(":")[1]
+                       1]['digest'].split(":")[1]
 
   # Load the Dockerfile
   try:
@@ -771,8 +768,8 @@ def build_fuzzers_impl(local_id: int | str,
 
 
 def build_fuzzer_with_source(local_id: int | str, project_name: str,
-                             srcmap: str | Path, sanitizer: str,
-                             engine: str, arch: str, commit_date: datetime,
+                             srcmap: str | Path, sanitizer: str, engine: str,
+                             arch: str, commit_date: datetime,
                              issue: dict[str, Any], tag: str) -> bool:
   """Build fuzzer with source code from srcmap.
     
@@ -816,12 +813,14 @@ def build_fuzzer_with_source(local_id: int | str, project_name: str,
 
   # Step ZERO: Rebase Dockerfiles
   if not rebase_dockerfile(dockerfile, str(commit_date).replace(" ", "-")):
-    logging.error(f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {local_id}")
+    logging.error(
+        f"build_fuzzer_with_source: Failed to Rebase Dockerfile, {local_id}")
     return leave_ret(False, tmp_dir)
 
   # Step ONE: Fix Dockerfiles
   if not fix_dockerfile(dockerfile, project_name):
-    logging.error(f"build_fuzzer_with_source: Failed to Fix Dockerfile, {local_id}")
+    logging.error(
+        f"build_fuzzer_with_source: Failed to Fix Dockerfile, {local_id}")
     return leave_ret(False, tmp_dir)
 
   # Step TWO: Prepare Dependencies
@@ -909,7 +908,7 @@ def build_fuzzer_with_source(local_id: int | str, project_name: str,
 
       if clone_result is False:
         logging.error(f"[!] build_from_srcmap: Failed to clone & checkout "
-             f"[{local_id}]: {item_name}")
+                      f"[{local_id}]: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       elif clone_result is None:
         command = (f'git log --before="{commit_date.isoformat()}" '
@@ -923,20 +922,22 @@ def build_fuzzer_with_source(local_id: int | str, project_name: str,
         if not check_call(['git', "reset", '--hard', commit_hash],
                           cwd=src / item_name):
           logging.error(f"[!] build_from_srcmap: Failed to clone & checkout "
-               f"[{local_id}]: {item_name}")
+                        f"[{local_id}]: {item_name}")
           return leave_ret(False, [tmp_dir, source_dir])
 
       docker_volume.append(new_key)
 
     elif item_type == 'svn':
       if not svn_clone(item_url, item_rev, src, item_name):
-        logging.error(f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
+        logging.error(
+            f"[!] build_from_srcmap/svn: Failed clone & checkout: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(new_key)
 
     elif item_type == 'hg':
       if not hg_clone(item_url, item_rev, src, item_name):
-        logging.error(f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
+        logging.error(
+            f"[!] build_from_srcmap/hg: Failed clone & checkout: {item_name}")
         return leave_ret(False, [tmp_dir, source_dir])
       docker_volume.append(new_key)
     else:
