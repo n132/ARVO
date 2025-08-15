@@ -300,11 +300,18 @@ class DockerfileModifier:
   """A class for modifying Dockerfile content with various text operations."""
 
   def __init__(self, path: Union[str, Path]) -> None:
-    """Initialize the DockerfileModifier.
-        
-        Args:
-            path: Path to the Dockerfile to modify.
-        """
+    """
+    Initialize the DockerfileModifier.
+
+    This constructor loads the Dockerfile content and performs a clean up:
+    - Removes all comment lines (lines starting with #)
+    - Removes line continuations (backslash-newline)
+    - Collapses multiple blank lines into a single blank line
+    This normalization makes further text processing and modifications more robust and predictable.
+
+    Args:
+        path: Path to the Dockerfile to modify.
+    """
     self.path = Path(path)
     with open(self.path, encoding='utf-8') as f:
       self.content = f.read()
