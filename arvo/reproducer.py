@@ -143,7 +143,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     unsorted = list(data.keys())
     sortedKey = sorted(unsorted, key=len)
     mainCompoinent = getPname(localId)
-    if mainCompoinent == False: return leaveRet(False,tmp_dir)
+    if mainCompoinent == False: return leaveRet(False,[tmp_dir,source_dir])
 
     if "/src/xz" in sortedKey: # Edge case
         ForceNoErrDump = True
@@ -272,7 +272,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 save_img=save_img,noDump=ForceNoErrDump,
                                 custom_script=custom_script)
     # we need sudo since the docker container root touched the folder
-    if not CLEAN_TMP: check_call(["sudo","rm","-rf",source_dir])
+    if CLEAN_TMP: check_call(["sudo","rm","-rf",source_dir])
     return leaveRet(result,tmp_dir)
 def build_fuzzers_impl(localId,project,project_dir,engine,
     sanitizer,architecture,source_path,
