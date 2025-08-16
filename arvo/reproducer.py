@@ -62,12 +62,12 @@ def reproducerPrepareOssFuzz(project_name,commit_date):
             cmd = ['git','log','--reverse', '--format=%H']
             oss_fuzz_commit = execute(cmd,tmp_oss_fuzz_dir).splitlines()[0].strip()
             if not oss_fuzz_commit:
-                eventLog('Failed to get oldest oss-fuzz commit')
+                eventLog('[-] reproducerPrepareOssFuzz: Failed to get oldest oss-fuzz commit')
                 return leaveRet(False,tmp_dir)
     # 3. Reset OSS Fuzz
     gt = GitTool(tmp_oss_fuzz_dir)
     if not gt.reset(oss_fuzz_commit):
-        eventLog("Fail to Reset OSS-Fuzz")
+        eventLog("[-] reproducerPrepareOssFuzz: Fail to Reset OSS-Fuzz")
         return leaveRet(False,tmp_dir)
     # 4. Locate Project Dir
     tmp_list = [x for x in tmp_oss_fuzz_dir.iterdir() if x.is_dir()]
@@ -76,7 +76,7 @@ def reproducerPrepareOssFuzz(project_name,commit_date):
     elif tmp_oss_fuzz_dir/ "targets" in tmp_list:
         proj_dir = tmp_oss_fuzz_dir/ "targets" / project_name
     else:
-        eventLog(f"{project_name=}: Fail to locate the project")
+        eventLog(f"[-] reproducerPrepareOssFuzz {project_name}: Fail to locate the project")
         return leaveRet(False,tmp_dir)
     return (tmp_dir, proj_dir)
 def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=False,ForceNoErrDump=False,patches=None,oss_fuzz_commit=False,custom_script=[]):

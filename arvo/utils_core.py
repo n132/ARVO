@@ -280,7 +280,7 @@ def parse_git_clone(dockerfile_line):
     
     url = match.group('url')
     explicit_dest = match.group('dest')
-    
+
     # Get default repo name from URL
     if explicit_dest:
         repo_dir = explicit_dest
@@ -289,6 +289,8 @@ def parse_git_clone(dockerfile_line):
         if url.endswith('.git'):
             repo_name = url.split('/')[-1][:-4]  # Remove .git
         else:
+            if url.endswith("/"):
+                url = url[:-1]
             repo_name = url.split('/')[-1]
         repo_dir = repo_name
     
@@ -315,7 +317,7 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
-        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
+        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer','https://github.com/ossf/fuzz-introspector.git']:
             WARN(f"Not Found {item_url=} for {localId=}  ({keyword=})")
         return False
     if len(hits) != 1:
@@ -351,6 +353,7 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         # Insert Mode
         if item_type == "git":
             repo_dir = parse_git_clone(dft.content.split("\n")[ct-1])
+            
             if "/" in repo_dir:
                 repo_dir = repo_dir.split("/")[-1]
             if ARVO_Turbo and repo_dir!=None:
