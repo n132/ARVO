@@ -219,7 +219,8 @@ def fixBuildScript(file,pname):
                 ends = num
                 break
         if starts != -1 and ends != -1:
-            dft.removeRange(starts,ends)        
+            dft.removeRange(starts,ends)
+        dft.strReplace("svn export https://github.com/mozillasecurity/fuzzdata.git/trunk/samples/h264 corpus/","mkdir corpus")
     elif pname in ['libredwg','duckdb']:
         dft.replace(r'^make$','make -j`nproc`\n')
     elif pname == "cryptofuzz":
