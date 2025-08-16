@@ -355,7 +355,7 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         if item_type == "git":
             repo_dir = parse_git_clone(dft.content.split("\n")[ct-1])
             
-            if "/" in repo_dir:
+            if repo_dir!=None and "/" in repo_dir:
                 repo_dir = repo_dir.split("/")[-1]
             if ARVO_Turbo and repo_dir!=None:
                 clone_res = clone(item_url,None,dockerfile.parent,repo_dir,commit_date=commit_date)
