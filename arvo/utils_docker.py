@@ -111,7 +111,7 @@ class DfTool():
                 linenum = ct
         if len(res)<2:
             return res, linenum
-        pat = re.compile(rf"{keyword}(.git\s.*$|\s.*$|$)")
+        pat = re.compile(rf"{re.escape(keyword)}(\.git(?:\s.*)?|(?:\s.*)?)?$")
         res = []
         ct =  0 
         linenum = 0
