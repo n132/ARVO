@@ -35,7 +35,9 @@ def db_init():
                 severity TEXT,
                 report TEXT,
                 fix_commit TEXT,
-                language TEXT
+                language TEXT,
+                repo_addr TEXT,
+                submodule_bug BOOLEAN
             )
             """)
             conn.commit()
@@ -50,8 +52,8 @@ def insert_entry(data, max_retries=5, retry_delay=0.1):
             INSERT INTO arvo (
                 localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
                 patch_url, verified, fuzz_target, fuzz_engine,
-                sanitizer, crash_type, crash_output, severity, report, fix_commit, language
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                sanitizer, crash_type, crash_output, severity, report, fix_commit, language, repo_addr, submodule_bug
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """, data)
             conn.commit()
             return True
