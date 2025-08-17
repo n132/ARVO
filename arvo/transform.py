@@ -56,6 +56,7 @@ globalStrReplace = {
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
 'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype2',
 'https://git.savannah.gnu.org/git/freetype/freetype2.git': "https://github.com/freetype/freetype2",
+'https://git.sv.nongnu.org/r/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'git://git.sv.nongnu.org/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'https://gitlab.freedesktop.org/freetype/freetype.git': 'https://github.com/freetype/freetype',
 'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',

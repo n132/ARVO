@@ -717,6 +717,7 @@ def dockerhubPusher():
         if len(todo) == 0:
             SUCCESS("All local images are pushed to remote")
             break
+        
         for x in todo:
             if not x.exists():
                 continue
