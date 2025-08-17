@@ -56,7 +56,7 @@ class DiffTool():
         return res
 
 
-def _getGtforReport(localId):
+def getGtforReport(localId):
     pname   = getPname(localId)
     if not pname:
         return False
@@ -74,18 +74,20 @@ def getFixCommit(localId):
             return commits[0]
         else:
             return commits
-
+def getFixUrl(localId):
+    report = getReport(localId)
+    return report['patch_url']
 def getVulCommit(localId):
     # Get the commit just before the fix commit
     commit    = getReport(localId)['fix_commit']
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     res = gt.prevCommit(commit) if not isinstance(commit,list) else gt.prevCommit(commit[-1])
     return leaveRet(res,gt.repo.parent)
 def getFixTs(localId):
     commit    = getReport(localId)['fix_commit']
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     
@@ -103,7 +105,7 @@ def getRevDiff(localId,multi_commits=False):
         if not isinstance(commit,list) or multi_commits==False:
             return localDp
 
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     
@@ -128,7 +130,7 @@ def getDiff(localId,multi_commits=False):
         if not isinstance(commit,list) or multi_commits==False:
             return localDp
 
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     if not isinstance(commit,list):
