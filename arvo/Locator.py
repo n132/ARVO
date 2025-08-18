@@ -318,7 +318,7 @@ def vulCommit(localId,retryChance=None,hint=None):
             else:
                 PANIC(f"Impossible to reach here")
         # The main commit includes the fix
-        INFO("Submodule doesn't matter, the fix is in the main repo")
+        SUCCESS("Submodule doesn't matter, the fix is in the main repo")
     return leaveRet(target_commit,poc.parent)
 def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main,sub_url):
     # git config --file .git/config submodule.qtbase.url
@@ -326,25 +326,36 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
     sub_commits = gt_subm.listCommits(submodule_info[1],submodule_info[2])
     if not sub_commits:
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
-    # TODO bisect
+    # Bisect search for the fix commit
+    commits_to_check = sub_commits[1:]  # Skip the first commit
+    left, right = 0, len(commits_to_check) - 1
     found = False
-    for sub_commit in sub_commits[1:]:
+    
+    while left <= right:
+        INFO(f"Submodule Search: {right-left} Commits Left ")
+        mid = (left + right) // 2
+        sub_commit = commits_to_check[mid]
+        
         appendix = ["bash",'-c',f'rm -rf /src/{sub_path} && git clone {sub_url} /src/{sub_path} && pushd /src/{sub_path} && git reset --hard  {sub_commit} && popd && compile']
         res = checkBuild(commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
+        
         if res == None:
-            # Failed to Compile/Build: combine it and its next commit
+            # Failed to Compile/Build: remove this commit and update bounds
             WARN(f"Failed to build: submodule -> {submodule_info[0]} {sub_commit}")
-            continue
+            commits_to_check.pop(mid)
+            right = len(commits_to_check) - 1
         elif res == True:
+            # Bug Fixed: this could be our target, but check if there's an earlier fix
             SUCCESS(f"Bug Fixed: {submodule_info[0]} {sub_commit}")
             found = sub_commit
-            break
+            right = mid - 1  # Look for earlier fix
         elif res == False:
-            # Crash
+            # Still Vulnerable: the fix is after this commit
             WARN(f"Still Vulnerable: {submodule_info[0]} {sub_commit}")
-            continue
+            left = mid + 1
         else:
             PANIC(f"Impossible to reach here")
+    
     if not found:
         # Failed to locate
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
