@@ -62,13 +62,13 @@ def clean_dir(victim):
         shutil.rmtree(victim)
         return True
     except:
-        WARN(f"[FAILED] to remove tmp file {victim}")
+        WARN(f"[Permission] Failed to remove tmp file {victim}")
         return False
 def buildClean(localId):
     if CLEAN_OUT_BUILD:
-        INFO(f"[Cleaning] OUT for {localId}")
+        # INFO(f"[Cleaning] OUT for {localId}")
         clean_dir(OSS_OUT / str(localId))
-        INFO(f"[Cleaning] WORK for {localId}")
+        # INFO(f"[Cleaning] WORK for {localId}")
         clean_dir(OSS_WORK / str(localId))
 
 def leaveRet(return_val,tmp_dir):
