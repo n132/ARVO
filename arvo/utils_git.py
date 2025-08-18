@@ -317,7 +317,7 @@ class GitTool():
             # -W to show the whole function
             # -m for merged commits
             # add timeout to avoid spending too much time on merging diff
-            cmd = ['timeout','30','git','show','-m','--binary','-W',commit]
+            cmd = ['timeout','30','git','show','-m','--no-textconv','-W',commit]
             cmd += ["-R"] if rev else []
         elif self.type == 'hg':
             cmd = ['timeout','30','hg', 'diff','-c', commit, '--show-function']

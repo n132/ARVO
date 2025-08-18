@@ -361,7 +361,7 @@ def reportFix(repo,commit):
         repo += "/commit/"
     elif ".googlesource.com" in repo:
         repo += "/+/"
-    elif repo.startswith("https://gitlab.com/") or repo.startswith("http://gitlab.com/"):
+    elif repo.startswith("https://gitlab.") or repo.startswith("http://gitlab."):
         repo = repo[:-4] if repo.endswith(".git") else repo
         repo += "/-/commit/"
     elif "git://code.qt.io/qt/qtbase.git" in repo:
@@ -394,6 +394,14 @@ def reportFix(repo,commit):
         repo = 'https://git.osgeo.org/gitea/geos/geos/commit/'
     elif repo == "https://git.gnu.org.ua/gdbm.git":  
         repo = 'https://git.gnu.org.ua/gdbm.git/commit/?id='
+    elif repo == 'https://invent.kde.org/frameworks/kimageformats.git':
+        repo = "https://invent.kde.org/frameworks/kimageformats/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/karchive.git':
+        repo = "https://invent.kde.org/frameworks/karchive/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/extra-cmake-modules.git':
+        repo = 'https://invent.kde.org/frameworks/extra-cmake-modules/-/commit/'
+    elif repo == 'git://git.ghostscript.com/jbig2dec.git':
+        repo = 'https://github.com/ArtifexSoftware/jbig2dec/commit/'
     res = repo + commit
     if ".googlesource.com" in res:
         res+="%5E%21/"
@@ -414,12 +422,13 @@ def fileReport(localId,fix_commit):
     #######################################################
     fix_commits = fix_commit
     fix_commit = fix_commit[-1] if type(fix_commit) != str else fix_commit
-
+    res = dict()
+    res['submodule_bug'] = False
     if "submodule" in fix_commit:
         vulComponentUrl,fix_commit = fix_commit.split(" ")[1:]
         fix_commits  = fix_commit
+        res['submodule_bug'] = True
     fix = reportFix(vulComponentUrl,fix_commit)
-    res = dict()
     res['fix']      = fix
     res['verify']   = False
     res['localId']  = localId
@@ -432,7 +441,7 @@ def fileReport(localId,fix_commit):
     try:
         res['severity'] = issue['severity']
     except:
-        pass
+        res['severity'] = "UNKNOWN"
     res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
@@ -452,8 +461,10 @@ def report(localId,verified=False):
             
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x10)
+
     if fix_commit == False or fix_commit=="":
         return eventLog(f"[-] Failed to locate the patches for issue {localId}")
+
     # return fix_commit
     # Step3: File the report 
     return fileReport(localId,fix_commit)
@@ -717,7 +728,7 @@ def dockerhubPusher():
         if len(todo) == 0:
             SUCCESS("All local images are pushed to remote")
             break
-        
+
         for x in todo:
             if not x.exists():
                 continue
@@ -784,6 +795,8 @@ def reproduce(localId, dockerize = True, update = False):
     severity       = res['severity'] if 'severity' in res else "UNK"
     fix_commit     = res['fix_commit']
     language       = getLanguage(localId)
+    repo_addr      = res['repo_addr']
+    submodule_bug  = res['submodule_bug']
     # We still have the layers cached so it's not hard to re-run and get some info
 
     if isinstance(fix_commit,list):
@@ -817,9 +830,10 @@ def reproduce(localId, dockerize = True, update = False):
             buildClean(localId)
             return False
     buildClean(localId)
+
     return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
-        sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language))
+        sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language, repo_addr, submodule_bug))
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:
