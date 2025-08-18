@@ -76,6 +76,8 @@ def getFixCommit(localId):
             return commits
 def getFixUrl(localId):
     report = getReport(localId)
+    if not report:
+        return False
     return report['patch_url']
 def getVulCommit(localId):
     # Get the commit just before the fix commit
