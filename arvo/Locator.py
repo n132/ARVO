@@ -361,7 +361,7 @@ def reportFix(repo,commit):
         repo += "/commit/"
     elif ".googlesource.com" in repo:
         repo += "/+/"
-    elif repo.startswith("https://gitlab.com/") or repo.startswith("http://gitlab.com/"):
+    elif repo.startswith("https://gitlab.") or repo.startswith("http://gitlab."):
         repo = repo[:-4] if repo.endswith(".git") else repo
         repo += "/-/commit/"
     elif "git://code.qt.io/qt/qtbase.git" in repo:
@@ -394,6 +394,14 @@ def reportFix(repo,commit):
         repo = 'https://git.osgeo.org/gitea/geos/geos/commit/'
     elif repo == "https://git.gnu.org.ua/gdbm.git":  
         repo = 'https://git.gnu.org.ua/gdbm.git/commit/?id='
+    elif repo == 'https://invent.kde.org/frameworks/kimageformats.git':
+        repo = "https://invent.kde.org/frameworks/kimageformats/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/karchive.git':
+        repo = "https://invent.kde.org/frameworks/karchive/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/extra-cmake-modules.git':
+        repo = 'https://invent.kde.org/frameworks/extra-cmake-modules/-/commit/'
+    elif repo == 'git://git.ghostscript.com/jbig2dec.git':
+        repo = 'https://github.com/ArtifexSoftware/jbig2dec/commit/'
     res = repo + commit
     if ".googlesource.com" in res:
         res+="%5E%21/"
