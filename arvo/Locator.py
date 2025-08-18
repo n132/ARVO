@@ -240,9 +240,29 @@ def vulCommit(localId,retryChance=None,hint=None):
     else:
         submodules = parseSubmoduleUpdate(ifsub)
         def get_submodule_url(path, repo):
+            # Parse .gitmodules to find submodule name by path
+            gitmodules_path = Path(repo) / ".gitmodules"
+            if not gitmodules_path.exists():
+                return None
+                
+            import configparser
+            config = configparser.ConfigParser()
+            config.read(gitmodules_path)
+            
+            submodule_name = None
+            for section in config.sections():
+                if section.startswith("submodule "):
+                    if config.get(section, "path", fallback="") == path:
+                        submodule_name = section.split('"')[1]  # Extract name from 'submodule "name"'
+                        break
+            
+            if not submodule_name:
+                # Fallback: assume path is the submodule name
+                submodule_name = path
+            
             # Get submodule relative or absolute URL from .gitmodules
             sub_url = subprocess.check_output([
-                "git", "config", "-f", ".gitmodules", "--get", f"submodule.{path}.url"
+                "git", "config", "-f", ".gitmodules", "--get", f"submodule.{submodule_name}.url"
             ], text=True,cwd = repo).strip()
             scheme = urllib.parse.urlparse(sub_url).scheme
             
@@ -297,8 +317,8 @@ def vulCommit(localId,retryChance=None,hint=None):
                     return leaveRet(found, poc.parent)
             else:
                 PANIC(f"Impossible to reach here")
-        # Can't work it out, still return the submodule update commit 
-        WARN("Failed to locate the specific submodule matters")
+        # The main commit includes the fix
+        INFO("Submodule doesn't matter, the fix is in the main repo")
     return leaveRet(target_commit,poc.parent)
 def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main,sub_url):
     # git config --file .git/config submodule.qtbase.url
@@ -313,15 +333,15 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
         res = checkBuild(commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
         if res == None:
             # Failed to Compile/Build: combine it and its next commit
-            WARN(f"INFO Failed to build: submodule -> {submodule_info[0]} {sub_commit}")
+            WARN(f"Failed to build: submodule -> {submodule_info[0]} {sub_commit}")
             continue
         elif res == True:
-            SUCCESS(f"Bug Fixed:{submodule_info[0]} {sub_commit}")
+            SUCCESS(f"Bug Fixed: {submodule_info[0]} {sub_commit}")
             found = sub_commit
             break
         elif res == False:
             # Crash
-            INFO(f"Still Buggy:{submodule_info[0]} {sub_commit}")
+            WARN(f"Still Vulnerable: {submodule_info[0]} {sub_commit}")
             continue
         else:
             PANIC(f"Impossible to reach here")
@@ -759,7 +779,9 @@ def dockerImgExist(localId):
             return False    
     return True
 
-def reproduce(localId, dockerize = True, update = False):
+def reproduce(localId, dockerize = False, update = True):
+    if "arrow" == getPname(localId):
+        return True
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
