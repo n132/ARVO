@@ -44,10 +44,6 @@ TRANS_TYPE = {
     '/src/graphicsmagick': "hg"
 }
 
-KEYChanges = {
-    '/src/mdbtools/test': '/src/mdbtools',
-}
-
 # Order matters please don't change it if you are not sure the influence
 globalStrReplace = {
 'https://bitbucket.org/multicoreware/x265_git/src/stable/': 'https://bitbucket.org/multicoreware/x265_git.git',
@@ -116,8 +112,6 @@ removed_repo = [
 def trans_table(item_name,item_url,item_type):
     if item_name in removed_repo:
         return None,None,None
-    if item_name in KEYChanges:
-        item_name = KEYChanges[item_name]
     if item_name in TRANS_TABLE:
         if item_name in TRANS_TYPE:
             type = TRANS_TYPE[item_name]
