@@ -5,12 +5,18 @@ from .utils_exec    import *
 from .utils_docker  import *
 from .DB_Manager    import *
 from .utils_log     import *
-from .transform     import pname_table, trans_table
+from .transform     import pname_table, check_trans_table
 from .utils_init    import *
 from .utils_sql     import *
-from rich.progress import Progress
+from rich.progress  import Progress
 from collections.abc import Sized
 from .avoid         import avoid_issues
+from . import _profile
+
+def trans_table(item_name,item_url,item_type):
+    if _profile.EVAL_NOURLFIX:
+        return item_name,item_url,item_type
+    return check_trans_table(item_name,item_url,item_type)
 
 def getAvoid():
     return avoid_issues
@@ -27,6 +33,7 @@ if not OSS_DB_MAP.exists():
 session = requests.Session()
 
 # Init Done
+
 def eventLog(s,ext=False):
     """
         1. Print out the message passed
@@ -840,8 +847,23 @@ def localIdMapping(localId):
             localId = mapping[localId]
     return localId
 
+
 # Init sql db
 db_init() 
+
+def evalSet_NOSRCMAP(val):
+    _profile.EVAL_NOSRCMAP = val
+def evalSet_NOREBASE(val):
+    _profile.EVAL_NOREBASE = val
+def evalSet_NOURLFIX(val):
+    _profile.EVAL_NOURLFIX = val
+def evalSet_NOCOMPONENT(val):
+    _profile.EVAL_NOCOMPONENT = val
+def evalSet_ResetEvalFeature():
+    evalSet_NOSRCMAP(False)
+    evalSet_NOREBASE(False)
+    evalSet_NOURLFIX(False)
+    evalSet_NOCOMPONENT(False)
 
 if __name__ == "__main__":
     pass

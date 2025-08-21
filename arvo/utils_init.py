@@ -6,7 +6,6 @@ from pathlib        import Path
 #                          Global Settings
 #
 #==================================================================
-REBUTTAL_EXP = False
 DEBUG = DEBUG
 
 

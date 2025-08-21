@@ -109,7 +109,7 @@ pname_table = {
 removed_repo = [
     '/src/cryptofuzz-corpora', "/src/flac-fuzzers"
 ]
-def trans_table(item_name,item_url,item_type):
+def check_trans_table(item_name,item_url,item_type):
     if item_name in removed_repo:
         return None,None,None
     if item_name in TRANS_TABLE:

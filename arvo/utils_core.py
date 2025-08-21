@@ -2,6 +2,7 @@ from .utils import *
 from dateutil.parser import parse
 from bisect import bisect_right
 import time
+from . import _profile
 from .transform import globalStrReplace
 #########################################
 # Core Area for reproducing
@@ -12,6 +13,8 @@ NoOperation = [
     "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
 ]
 def fixDockerfile(dockerfile_path,project,commit_date):
+    if _profile.EVAL_NOURLFIX:
+        return True
     # todo: if you want to make it faster, implement it. And it's a liitle complex
     # DO not want to modify dockerfile
     # It comsumes TIME! 
@@ -125,6 +128,8 @@ def fixDockerfile(dockerfile_path,project,commit_date):
     assert(dft.flush()==True)
     return True
 def rebaseDockerfile(dockerfile_path,commit_date):
+    if _profile.EVAL_NOREBASE:
+        return True
     def _getBase(date,repo="gcr.io/oss-fuzz-base/base-builder"):
         cache_name = repo.split("/")[-1]
         CACHE_FILE = f"/tmp/{cache_name}_cache.json"
@@ -179,6 +184,8 @@ def extraScritps(pname,oss_dir,source_dir):
         
     return True
 def fixBuildScript(file,pname):
+    if _profile.EVAL_NOURLFIX:
+        return True
     if not file.exists():
         return True
     dft = DfTool(file)
