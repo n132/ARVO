@@ -183,10 +183,9 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
 
         if specialComponent(project_name,newKey,data[newKey],dockerfile,commit_date):
             continue
-        if item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git':
+        if item_name in [ 'aflplusplus', 'libfuzzer', 'afl']:
             continue
-        if item_name == 'libfuzzer' and 'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url:
-            continue
+
         # Broken Revision
         if item_rev=="" or item_rev == "UNKNOWN":
             issue_record(project_name,localId,f"Broken Meta: No Revision Provided")
