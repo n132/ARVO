@@ -1,0 +1,7 @@
+{
+  "/src/haproxy": {
+    "type": "git",
+    "url": "https://github.com/haproxy/haproxy",
+    "rev": "9a05c1f57490ba3adb378ad8e6e26830425514e7"
+  }
+}

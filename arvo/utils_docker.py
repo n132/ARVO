@@ -111,7 +111,7 @@ class DfTool():
                 linenum = ct
         if len(res)<2:
             return res, linenum
-        pat = re.compile(rf"{keyword}(\s.*$|$)")
+        pat = re.compile(rf"{re.escape(keyword)}(\.git(?:\s.*)?|(?:\s.*)?)?$")
         res = []
         ct =  0 
         linenum = 0
@@ -121,7 +121,7 @@ class DfTool():
                 res.append(line)
                 linenum = ct
         return res, linenum
-            
+
 # Docker Options
 def docker_create(name,img):
     cmd = ['docker','create','--name',name,img]
@@ -159,19 +159,24 @@ def docker_run(args,rm=True,logFile=None):
         return check_call(cmd)
 def docker_cp(arg1,arg2):
     cmd = ['docker','cp',arg1,arg2]
-    return check_call(cmd)
+    with open('/dev/null','w') as f:
+        return check_call(cmd,stdout=f,stderr=f,verbose=False)
 def docker_images(name):
     cmd = ["docker","images","-aq",name]
     return execute(cmd).decode()
 def docker_rmi(img_name):
+    if docker_images(img_name) == '':
+        return True
     cmd = ['docker','rmi',img_name]
-    return check_call(cmd)
+    with open('/dev/null','w') as f:
+        return check_call(cmd,stdout=f,stderr=f,verbose=False)
 def docker_ps(container_name):
     cmd = ["docker", "ps", "-aq", "-f", f"name={container_name}"]
     return execute(cmd).decode()
 def docker_commit(container_name,image_name):
     cmd = ['docker','commit',container_name,image_name]
-    return check_call(cmd)
+    with open('/dev/null','w') as f:
+        return check_call(cmd,stdout=f,stderr=f,verbose=False)
 def docker_rm(container_name):
     target_hash = docker_ps(container_name)
     if target_hash == "":

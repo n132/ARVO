@@ -56,7 +56,7 @@ class DiffTool():
         return res
 
 
-def _getGtforReport(localId):
+def getGtforReport(localId):
     pname   = getPname(localId)
     if not pname:
         return False
@@ -66,19 +66,30 @@ def _getGtforReport(localId):
     return gt
 def getFixCommit(localId):
     report = getReport(localId)
-    return False if report == False else report['fix_commit']
-
+    if report == False:
+        return False
+    else:
+        commits = report['fix_commit'].split("\n")
+        if len(commits)==1:
+            return commits[0]
+        else:
+            return commits
+def getFixUrl(localId):
+    report = getReport(localId)
+    if not report:
+        return False
+    return report['patch_url']
 def getVulCommit(localId):
     # Get the commit just before the fix commit
     commit    = getReport(localId)['fix_commit']
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     res = gt.prevCommit(commit) if not isinstance(commit,list) else gt.prevCommit(commit[-1])
     return leaveRet(res,gt.repo.parent)
 def getFixTs(localId):
     commit    = getReport(localId)['fix_commit']
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     
@@ -96,7 +107,7 @@ def getRevDiff(localId,multi_commits=False):
         if not isinstance(commit,list) or multi_commits==False:
             return localDp
 
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     
@@ -114,12 +125,14 @@ def getDiff(localId,multi_commits=False):
     localDp = ARVO/"Patches"/f"{localId}.diff"
 
     commit    = getReport(localId)['fix_commit']
-
+    commit = commit.split("\n")
+    if len(commit) == 1:
+        commit = commit[0]
     if localDp.exists():
         if not isinstance(commit,list) or multi_commits==False:
             return localDp
 
-    gt = _getGtforReport(localId)
+    gt = getGtforReport(localId)
     if not gt:
         return False
     if not isinstance(commit,list):
@@ -160,7 +173,7 @@ def ccBuild(localId,poc,tag,patches):
         remove_oss_fuzz_img(localId)
         return leaveRet("Failed to Compile",cts.parent)
     else:
-        eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"[-] Weird return value: {build_res}",True)
 def patchVerification(localId):
     if getVulComponentProtocol(localId) != 'git':
         return False
@@ -171,19 +184,22 @@ def patchVerification(localId):
     print(hks)
     
     poc     = getPoc(localId,getIssue(localId))
+    if not poc:
+        return "Failed to get PoC"
+    
     wkdir.mkdir(parents=True,exist_ok=True)
     res = ccBuild(localId,poc,"diff",hks)
     
     if res  not in [True,False]:
-        return res
+        return leaveRet(res, poc.parent)
     if res == False:
-        return "The Fix Version Still Crashes"
+        return leaveRet("The Fix Version Still Crashes", poc.parent)
     if not (OSS_OUT/f"{localId}"/"arvo_pv").exists():
-        return "Miss"
+        return leaveRet("Miss", poc.parent)
     if check_call(['sudo','cp',str(OSS_OUT/f"{localId}"/"arvo_pv"), str(wkdir)]) and check_call(['sudo','chmod',"777", str(wkdir/"arvo_pv")]):
-        return True
+        return leaveRet(True, poc.parent)
     else:
-        return "ARVO Failed to COPY RESULT OUT"
+        return leaveRet("ARVO Failed to COPY RESULT OUT", poc.parent)
 def getAllPatches(targetdir):
     if not targetdir.exists():
         return False

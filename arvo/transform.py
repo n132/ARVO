@@ -37,29 +37,25 @@ TRANS_TABLE = {
 '/src/gdal/curl': 'https://github.com/curl/curl.git',
 '/src/ghostpdl': 'https://cgit.ghostscript.com/ghostpdl.git',
 '/src/cryptofuzz': 'https://github.com/MozillaSecurity/cryptofuzz.git',
-'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git",
-'/src/libmicrohttpd':"https://git.gnunet.org/libmicrohttpd.git"
+'/src/python-library-fuzzers': "https://github.com/hugovk/python-library-fuzzers.git"
 }
 # Only include non git project
 TRANS_TYPE = {
     '/src/graphicsmagick': "hg"
 }
 
-KEYChanges = {
-    '/src/mdbtools/test': '/src/mdbtools',
-}
-
 # Order matters please don't change it if you are not sure the influence
 globalStrReplace = {
+'https://bitbucket.org/multicoreware/x265_git/src/stable/': 'https://bitbucket.org/multicoreware/x265_git.git',
 'http://download.icu-project.org/files/icu4c/59.1/icu4c-59_1-src.tgz': 'https://github.com/unicode-org/icu/releases/download/release-59-1/icu4c-59_1-src.tgz',
 'git://git.gnome.org/libxml2': "https://gitlab.gnome.org/GNOME/libxml2.git",
 'svn co svn://vcs.exim.org/pcre2/code/trunk pcre2': 'git clone https://github.com/PCRE2Project/pcre2 pcre2',
 'https://git.savannah.nongnu.org/r/freetype/freetype2':'https://github.com/freetype/freetype2',
 'https://git.savannah.gnu.org/git/freetype/freetype2.git': "https://github.com/freetype/freetype2",
+'https://git.sv.nongnu.org/r/freetype/freetype2.git': "https://github.com/freetype/freetype2",
 'git://git.sv.nongnu.org/freetype/freetype2.git': "https://github.com/freetype/freetype2",
-'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'-L http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
-'RUN curl http': "RUN curl -L http",
-'&& curl http': "&& curl -L http",
+'https://gitlab.freedesktop.org/freetype/freetype.git': 'https://github.com/freetype/freetype',
+'ftp://ftp.unidata.ucar.edu/pub/netcdf/netcdf-4.4.1.1.tar.gz':'http://ppmcore.mpi-cbg.de/upload/netcdf-4.4.1.1.tar.gz',
 'https://github.com/01org/libva':'https://github.com/intel/libva.git',
 'https://github.com/intel/libva\n':'https://github.com/intel/libva.git\n',
 'http://www.zlib.net/zlib-1.2.11.tar.gz':'https://www.zlib.net/fossils/zlib-1.2.11.tar.gz',
@@ -94,6 +90,11 @@ globalStrReplace = {
 'git.ghostscript.com/ghostpdl.git':'cgit.ghostscript.com/ghostpdl.git',
 "https://github.com/guidovranken/cryptofuzz\n": "https://github.com/MozillaSecurity/cryptofuzz.git\n",
 "https://gnunet.org/git": "https://git.gnunet.org",
+'curl http://': "curl -L http://",
+'curl https://': "curl -L https://",
+'curl ftp://': "curl -L ftp://",
+'&& curl http': "&& curl -L http",
+'&& curl ftp': "&& curl -L ftp",
 " --depth 1":"",
 " --depth=1":"",
 " --depth ":" --jobs ",
@@ -111,8 +112,6 @@ removed_repo = [
 def trans_table(item_name,item_url,item_type):
     if item_name in removed_repo:
         return None,None,None
-    if item_name in KEYChanges:
-        item_name = KEYChanges[item_name]
     if item_name in TRANS_TABLE:
         if item_name in TRANS_TYPE:
             type = TRANS_TYPE[item_name]

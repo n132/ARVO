@@ -1,0 +1,12 @@
+{
+  "/src/aac": {
+    "type": "git",
+    "url": "https://android.googlesource.com/platform/external/aac/",
+    "rev": "6d10f91a77002b6371ebada491f507ef974ca572"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "405382cbddea8b99543c3fddcaa5738b1ed3ade3"
+  }
+}

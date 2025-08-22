@@ -1,0 +1,42 @@
+{
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "281cf70c3c79cd1e62bdfb2b81e82177e1306853"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "b0fc3f13039792e50be52d6d527c2d4f0a44da70"
+  },
+  "/src/qttools": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qttools.git",
+    "rev": "d5b63167b558b8b96d1d5f3b585ef02d78c96a45"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "1b66b6533e110e718979a8d3f703d95d1b3cc022"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "dbfb925c8198087afb3527e6c57b66fae1a980bb"
+  },
+  "/src/openssl": {
+    "type": "git",
+    "url": "https://github.com/openssl/openssl.git",
+    "rev": "a198caa5e34a2003f83b5cd4419f864da55eb0a5"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "f9938c217da17ec3e9dcd2a2d99c5cf39536aeb9"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  }
+}

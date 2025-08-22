@@ -1,0 +1,67 @@
+{
+  "/src/highway": {
+    "type": "git",
+    "url": "https://github.com/google/highway.git",
+    "rev": "c02c0e318b22b1e456601ec392d80e679ef6bc1e"
+  },
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "2bcdaea1b134ff31acc893d2e5920e68c411d59b"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "4e82d9492db228a7a2057c442f7a6eb40508a0eb"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "339d252c527c5906d95de6eada3dcc06cf310e7f"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "a1f78554be373dcb47fb2b9a61372965f7536d74"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff.git",
+    "rev": "ffad0bc578a18a0c3d1392eb1bc7d443856b43b8"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "eb3ff781599e311cc27f1d34c6ba8953cf8d7e5b"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "adc94393dbeddf9e027d1b2dfff7c1bab975224e"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "2a0c86278249e7a3c3429caff24c06a50048d772"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "bb60a46e9c50e9d3d18cf6dd81869240e4ebe618"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif.git",
+    "rev": "337999fd71d7bb9b2e2c078791981697e2f09c04"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips.git",
+    "rev": "c8c06967fc3b1ec2e0671fc784a2ffe44c7d0560"
+  }
+}

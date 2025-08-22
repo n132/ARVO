@@ -1,0 +1,42 @@
+{
+  "/src/sof_workspace/sof": {
+    "type": "git",
+    "url": "https://github.com/thesofproject/sof",
+    "rev": "945af8712414c3acfcd899050619a8ae21195ecc"
+  },
+  "/src/sof_workspace/sof/tools/rimage/tomlc99": {
+    "type": "git",
+    "url": "https://github.com/thesofproject/tomlc99",
+    "rev": "e3a03f5ec7d8d33be705c5ce8a632d998ce9b4d1"
+  },
+  "/src/sof_workspace/zephyr": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/zephyr",
+    "rev": "795ac34f291c2f9895e7a3a03eafc053ad1d36f2"
+  },
+  "/src/sof_workspace/modules/crypto/tinycrypt": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/tinycrypt",
+    "rev": "1012a3ebee18c15ede5efc8332ee2fc37817670f"
+  },
+  "/src/sof_workspace/modules/crypto/mbedtls": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/mbedtls",
+    "rev": "2f24831ee13d399ce019c4632b0bcd440a713f7c"
+  },
+  "/src/sof_workspace/modules/hal/xtensa": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/hal_xtensa",
+    "rev": "a2d658525b16c57bea8dd565f5bd5167e4b9f1ee"
+  },
+  "/src/sof_workspace/modules/hal/nxp": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/hal_nxp",
+    "rev": "42ea394cbd2d8632339bbecb1efffffa696d11e6"
+  },
+  "/src/sof_workspace/modules/debug/mipi-sys-t": {
+    "type": "git",
+    "url": "https://github.com/zephyrproject-rtos/mipi-sys-t",
+    "rev": "71ace1f5caa03e56c8740a09863e685efb4b2360"
+  }
+}

@@ -1,4 +1,4 @@
-import re, shutil, requests, sys, math, tiktoken
+import re, shutil, requests, sys, math, tiktoken, inspect
 from datetime       import datetime
 from base58         import b58encode
 from .utils_exec    import *
@@ -28,9 +28,16 @@ session = requests.Session()
 
 # Init Done
 def eventLog(s,ext=False):
-    FAIL(s)
+    """
+        1. Print out the message passed
+        2. Document the mssage in log file
+        3. return False if exit is not set
+    """
+    caller_name = inspect.stack()[1].function
+    formatted_msg = f"[{caller_name}] {s}"
+    FAIL("[-] " + formatted_msg)
     with open(ARVO/"Log"/"_Event.log",'a') as f:
-        f.write(s+"\n")
+        f.write(formatted_msg+"\n")
     if ext:
         exit(1)
     else:
@@ -55,8 +62,15 @@ def clean_dir(victim):
         shutil.rmtree(victim)
         return True
     except:
-        WARN(f"[FAILED] to remove tmp file {victim}")
+        WARN(f"[Permission] Failed to remove tmp file {victim}")
         return False
+def buildClean(localId):
+    if CLEAN_OUT_BUILD:
+        # INFO(f"[Cleaning] OUT for {localId}")
+        clean_dir(OSS_OUT / str(localId))
+        # INFO(f"[Cleaning] WORK for {localId}")
+        clean_dir(OSS_WORK / str(localId))
+
 def leaveRet(return_val,tmp_dir):
     if not CLEAN_TMP: return return_val
     if type(tmp_dir) != list:
@@ -77,7 +91,7 @@ def remove_oss_fuzz_img(localId):
 def get_projectInfo(localId,pname=None):
     srcmap = getSrcmaps(localId)
     if(len(srcmap)!=2):
-        eventLog(f"[-] get_projectInfo: Can't find enough srcmaps: {localId}",True)
+        eventLog(f"Can't find enough srcmaps: {localId}",True)
     if not pname: pname = getPname(localId)
     with open(srcmap[0]) as f:
         info1 = json.load(f)["/src/"+pname]
@@ -180,11 +194,11 @@ def getLanguage(localId):
     # Slow Path
     porjymal = getProjectYaml(localId)
     if porjymal== False:
-        eventLog(f"[!] getLanguage: Failed to get project.yaml file, {localId}")
+        eventLog(f"Failed to get project.yaml file, {localId}")
         return False
     res = re.findall(r'language\s*:\s*([^\s]+)',porjymal)
     if len(res) != 1:
-        eventLog(f"[!] getLanguage: Get more than one languages, {localId}")
+        eventLog(f"Get more than one languages, {localId}")
         return False
     language = str(res[0])
     PLanguage[project_name] = language
@@ -264,7 +278,7 @@ def getPname(localId,srcmapCheck=True):
             if x in list(info1.keys()):
                 candidates.append(x)
         if len(candidates)==0:
-            eventLog(f"[Pname]: {localId} could be a false positive since vulsrcmap~=fixedsrcmap")
+            eventLog(f"{localId} could be a false positive since vulsrcmap~=fixedsrcmap")
             return False
 
         first_item = "/"
@@ -305,8 +319,10 @@ def getPoc(localId,issue=None, outPath = None):
     except:
         pocPath = False
     if not pocPath or not pocPath.exists():
-        eventLog(f"[-] getPoc {localId}: Failed to download PoC")
+        eventLog(f"Failed to download PoC for {localId}")
         return leaveRet(None,case_dir)
+    # If outPath was provided, return just the path (caller manages cleanup)
+    # If we created a tmpDir, caller needs to clean up pocPath.parent
     return pocPath
 def mapMapping():
     global MAPPING
@@ -332,7 +348,7 @@ def getSrcmaps(localId):
         return str(a)
     issue_dir = DATADIR / "Issues" / (str(localId) + "_files")
     if not issue_dir.exists():
-        eventLog(f"[-] no such issue_dir for {localId}")
+        eventLog(f"No such issue_dir for {localId}")
         return False
     srcmap = list(issue_dir.glob('*.srcmap.json'))
     srcmap.sort(key=_cmp)
@@ -400,7 +416,7 @@ def getIssue(localId):
         issue = json.loads(_)
         if(issue['localId']==localId):
             return issue
-    eventLog(f"[-] no such issue, {localId}")
+    eventLog(f"No such issue: {localId}")
     return False
 def getDepNum(localId):
     srcmaps = getSrcmaps(localId)
@@ -430,16 +446,18 @@ def getFuzzer(localId,wkdir):
         if _checkexist(name):
             return wkdir / name
         else:
-            if name.startswith("afl") or name.startswith("libfuzzer") or name.startswith("honggfuzz"):
+            if name.startswith("libFuzzer"):
                 name = "_".join(name.split("_")[off+1:])
+                if _checkexist(name):
+                    return wkdir / name
+                name = "_".join(name.split("_")[1:])
                 if _checkexist(name):
                     return wkdir / name
                 else:
                     return issue_record(issue['project'],localId,f"Failed to get the fuzzer",retv=None)
     if "fuzz_target" in issue:
         return _findFuzzer("fuzz_target",0)
-    elif "fuzzer" in issue:
-        return _findFuzzer("fuzzer",1)
+
     elif 'issue' in issue and 'summary' in issue['issue']:
         name = issue['issue']['summary'].split(":")[1]
         if _checkexist(name):
@@ -543,6 +561,8 @@ def svn_pull(cwd):
         return check_call(['svn','update'],cwd=cwd,stderr=f,stdout=f)
 def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
     def _git_clone(url,dest,name):
+        if name!=None and (dest/name).exists():
+            shutil.rmtree(dest/name)
         if dbCOPY(url,dest,name):
             return True
         cmd = ['git','clone',url]
@@ -555,15 +575,14 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
         return DB_INSERT(url,dest/name)
     def _check_out(commit,path):
         with open('/dev/null','w') as f:
-            return check_call(['git',"reset",'--hard', commit], cwd=path, stdout=f)
+            return check_call(['git',"reset",'--hard', commit], cwd=path, stdout=f,stderr=f)
     if(dest):
         dest = Path(dest)
     else:
         dest = tmpDir()
 
     if not _git_clone(url,dest,name):
-        eventLog(f"[!] - clone: Failed to clone {url}")
-        return False
+        return eventLog(f"Failed to clone {url}")
     if commit:
         if name==None:
             name = list(dest.iterdir())[0]
@@ -571,11 +590,10 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
             return dest
         else:
             if main_repo == True:
-                eventLog(f"[!] - clone: Failed to checkout {name}")
-                return False
+                return eventLog(f"Failed to checkout {name}")
             else:
                 if commit_date==None:
-                    eventLog(f"[!] - clone: Failed to checkout {name} but it's not the main component, using the latest version")
+                    eventLog(f"Failed to checkout {name} but it's not the main component, using the latest version")
                     return dest
                 WARN("[!] Failed to checkout, try a version before required commit")
                 cmd = ["git", "log", f"--before='{commit_date.isoformat()}'", "--format='%H'", "-n1"]
@@ -584,8 +602,7 @@ def clone(url,commit=None,dest=None,name=None,main_repo=False,commit_date=None):
                 if _check_out(commit, dest / name):
                     return dest
                 else:
-                    eventLog(f"[!] - clone: Failed to checkout {name}")
-                    return False
+                    return eventLog(f"Failed to checkout {name}")
     return dest
 def svn_clone(url,commit=None,dest=None,rename=None):
     def _svn_clone(url,dest,name=None):
@@ -605,7 +622,7 @@ def svn_clone(url,commit=None,dest=None,rename=None):
     else:
         tmp = tmpDir()
     if not _svn_clone(url,tmp,rename):
-        eventLog(f"[!] - svn_clone: Failed to clone {url}")
+        eventLog(f"Failed to clone {url}")
         return False
     if commit:
         name = rename if rename else list(tmp.iterdir)[0]
@@ -630,7 +647,7 @@ def hg_clone(url,commit=None,dest=None,rename=None):
     else:
         tmp = tmpDir()
     if not _hg_clone(url,tmp,rename):
-        eventLog(f"[!] - hg_clone: Failed to clone {url}")
+        eventLog(f"Failed to clone {url}")
         return False
     if commit:
         if rename:
@@ -668,11 +685,12 @@ def dbCOPY(url,dest,name):
 #                  Crash Check Part
 #
 #==================================================================
-def pocResultChecker(returnCode,logfile, args, recursive_call=False):
+def pocResultChecker(returnCode, logfile, args, recursive_call=False):
     with open(logfile,'rb') as f:
         log_ctx = f.read()
     if b"error while loading shared libraries" in log_ctx:
-        PANIC("[PANIC] RUNNING ENV WAS BROKEN")
+        WARN("[PANIC] RUNNING ENV WAS BROKEN")
+        return None
     if returnCode == 0: # not crash
         return True
     elif ("timeout" in args) and returnCode == 124: # timeout

@@ -11,7 +11,7 @@ NoOperation = [
     "/src/LPM/external.protobuf/src/external.protobuf",
     "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
 ]
-def fixDockerfile(dockerfile_path,project=None):
+def fixDockerfile(dockerfile_path,project,commit_date):
     # todo: if you want to make it faster, implement it. And it's a liitle complex
     # DO not want to modify dockerfile
     # It comsumes TIME! 
@@ -42,8 +42,34 @@ def fixDockerfile(dockerfile_path,project=None):
         line = 'COPY build.sh $SRC/'
         dft.insertLineAfter(line,"RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
     elif project == 'gdal':
-        pass
-        # dft.strReplace('cd netcdf-4.4.1.1','cd netcdf-c-4.4.1.1')
+        dft.appendLine(f'ARG ARVO_TS="{commit_date.isoformat()}"')
+        """
+        1. remove all --depth
+        2. checkout the cloned repo in build.sh
+        """
+        build_clone_fix = r'''RUN awk -v ts="$ARVO_TS" '\
+    /git clone/ { \
+        gsub(/--depth[= ][0-9]+/, "", $0); \
+        if (NF == 3) dir = $3; \
+        else { \
+            repo = $NF; \
+            gsub(/.*\//, "", repo); \
+            gsub(/\.git$/, "", repo); \
+            dir = repo; \
+        } \
+        print $0 " && (pushd " dir " && commit=$(git log --before=\"" ts "\" --format=\"%H\" -n1) && git reset --hard $commit || exit 99 && popd) && (pushd " dir " && git submodule init && git submodule update --force && popd)"; \
+        next \
+    } \
+    { print }' $SRC/build.sh > $SRC/build.sh.tmp && mv $SRC/build.sh.tmp $SRC/build.sh
+    '''
+        dft.appendLine(build_clone_fix)
+        line = '''RUN [ -f /src/gdal/gdal/GNUmakefile ] && sed -i 's|(cd frmts; $(MAKE))|(cd frmts; $(MAKE) clean; $(MAKE))|' /src/gdal/gdal/GNUmakefile || true'''
+        dft.appendLine(line)
+        dft.appendLine('''RUN sed -i 's|BUILD_SH_FROM_REPO="$SRC/gdal/fuzzers/build.sh"|BUILD_SH_FROM_REPO=$0|g' $SRC/build.sh''')
+        
+    elif project == 'curl':
+        # Check if download_zlib.sh exists and replace zlib URL
+        dft.appendLine('RUN [ -f "/src/curl_fuzzer/scripts/download_zlib.sh" ] && sed -i \'s|https://www.zlib.net/zlib-1.2.11.tar.gz|https://www.zlib.net/fossils/zlib-1.2.11.tar.gz|g\' /src/curl_fuzzer/scripts/download_zlib.sh || true')
     elif project == 'freeradius':
         dft.strReplace('sha256sum -c','pwd')
         dft.strReplace("curl -s -O ",'curl -s -O -L ')
@@ -72,8 +98,6 @@ def fixDockerfile(dockerfile_path,project=None):
         dft.replace(r"RUN wget",'#RUN wget')
     elif project == 'quickjs':
         dft.strReplace('https://github.com/horhof/quickjs','https://github.com/bellard/quickjs')
-    elif project =="dav1d":
-        pass
     elif project == 'cryptofuzz':
         line = "RUN cd $SRC/libressl && ./update.sh"
         dft.insertLineBefore(line,"RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
@@ -152,11 +176,14 @@ def extraScritps(pname,oss_dir,source_dir):
                     del(lines[-x])
             with open(target,'w') as f:
                 f.write("\n".join(lines))
+        
     return True
 def fixBuildScript(file,pname):
     if not file.exists():
         return True
     dft = DfTool(file)
+    # Experimental Feat
+    dft.strReplaceAll(globalStrReplace)
     if   pname == "uwebsockets":
         '''
         https://github.com/alexhultman/zlib
@@ -165,10 +192,6 @@ def fixBuildScript(file,pname):
         '''
         script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
         dft.insertLineat(0,script)     
-    elif pname == 'serenity':
-        # script = "sed -i 's/UCD_VERSION 15.0.0/UCD_VERSION 15.1.0/g' /src/serenity/Meta/CMake/unicode_data.cmake"
-        # dft.insertLineat(0,script)    
-        pass
     elif pname == 'libreoffice':
         '''
         If you don't want to destroy your life. 
@@ -196,15 +219,14 @@ def fixBuildScript(file,pname):
                 ends = num
                 break
         if starts != -1 and ends != -1:
-            dft.removeRange(starts,ends)        
+            dft.removeRange(starts,ends)
+        dft.strReplace("svn export https://github.com/mozillasecurity/fuzzdata.git/trunk/samples/h264 corpus/","mkdir corpus")
     elif pname in ['libredwg','duckdb']:
         dft.replace(r'^make$','make -j`nproc`\n')
     elif pname == "cryptofuzz":
         # The repo was deleted 
         dft.replace(r'\scp .*cryptofuzz-corpora .*\n?', '', flags=re.MULTILINE)
-    elif pname == 'gdal':
-        pass
-        # dft.replace(r'make -j\$\(nproc\) -s','rm -rf /src/gdal/gdal/frmts/jpeg/libjpeg12/*.h && make -j$(nproc) -s')
+
     assert(dft.flush()==True)
     return True
 def skipComponent(pname,itemName):
@@ -248,24 +270,56 @@ def dockerfileCleaner(dockerfile):
     dft.replace(r'(--single-branch\s+)',"") # --single-branch
     dft.replace(r'(--branch\s+\S+\s+|-b\s\S+\s+|--branch=\S+\s+)',"") # remove --branch or -b
     dft.flush()
+def parse_git_clone(dockerfile_line):
+    # Comprehensive git clone pattern
+    pattern = r'RUN\s+git\s+clone\s+(?P<flags>(?:(?:--?\w+(?:[=\s]\S+)?)\s+)*)?(?P<url>\S+?)(?:\s+(?P<dest>\S+))?\s*$'
+
+    
+    match = re.search(pattern, dockerfile_line.strip())
+    if not match:
+        return None
+    
+    url = match.group('url')
+    explicit_dest = match.group('dest')
+
+    # Get default repo name from URL
+    if explicit_dest:
+        repo_dir = explicit_dest
+    else:
+        # Extract repo name from various URL formats
+        if url.endswith('.git'):
+            repo_name = url.split('/')[-1][:-4]  # Remove .git
+        else:
+            if url.endswith("/"):
+                url = url[:-1]
+            repo_name = url.split('/')[-1]
+        repo_dir = repo_name
+    
+    return repo_dir
 def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate):
+    """
+    ins the dockerfile to perform minial changes while reproducing
+    """ 
     item_url    = item['url']
     item_rev    = item['rev']
     item_type   = item['type']
 
     dft = DfTool(dockerfile)
-    keyword = item['url']
+
+    keyword = item['url'].strip()
     if keyword.startswith("http:"):
         keyword = keyword[4:]
     elif keyword.startswith("https:"):
         keyword = keyword[5:]
     elif keyword.startswith("git://git"):
         keyword = keyword[9:]
-
+    if keyword.endswith(".git"):
+        keyword = keyword[:-4]
+    
     hits, ct = dft.getLine(keyword)
     if len(hits) == 0:
-        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer']:
-            WARN(f"Not Found {item_url=} for {localId=}")
+        if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer','https://github.com/ossf/fuzz-introspector.git']:
+            WARN(f"Not Found {item_url=} for {localId=}  ({keyword=})")
         return False
     if len(hits) != 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
@@ -288,7 +342,6 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     
     if type(commit_date) == type(Path("/tmp")):
         rep_path = commit_date
-        # Replace mode
         """
         Replace the original line with ADD/COPY command
         Then RUN init/update the submodule
@@ -300,10 +353,26 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
     else:
         # Insert Mode
         if item_type == "git":
-            if approximate == '-':
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            repo_dir = parse_git_clone(dft.content.split("\n")[ct-1])
+            
+            if repo_dir!=None and "/" in repo_dir:
+                repo_dir = repo_dir.split("/")[-1]
+            if ARVO_Turbo and repo_dir!=None:
+                clone_res = clone(item_url,None,dockerfile.parent,repo_dir,commit_date=commit_date)
             else:
-                dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                clone_res = False
+            if approximate == '-':
+                if  clone_res not in [None, False]: # Cache Path
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {src_path}")
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                else:
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --before='{commit_date.isoformat()}' --format='%H' -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+            else:
+                if  clone_res not in [None, False]: # Cache Path
+                    dft.replaceLineat(ct-1,f"ADD {repo_dir} {src_path}")
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
+                else:
+                    dft.insertLineat(ct,f"RUN bash -cx 'pushd {src_path} ; (git reset --hard {item_rev}) || (commit=$(git log --since='{commit_date.isoformat()}' --format='%H' --reverse | head -n1) && git reset --hard $commit || exit 99) ;  (git submodule init && git submodule update --force) ;popd'")
             dft.flush()
             return True
         elif item_type == 'hg':

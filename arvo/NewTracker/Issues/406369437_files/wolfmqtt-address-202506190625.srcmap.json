@@ -1,0 +1,22 @@
+{
+  "/src/fuzzing-headers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/fuzzing-headers.git",
+    "rev": "bbd75f2806d18009aeca0f3b8fdcc6e7a3929686"
+  },
+  "/src/wolfmqtt-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/guidovranken/wolfmqtt-fuzzers.git",
+    "rev": "280349b540f9d3a386035894b09487ced6104e92"
+  },
+  "/src/wolfmqtt": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfMQTT.git",
+    "rev": "d6c76bed0761bc7363c035c5711394fc0772a654"
+  },
+  "/src/wolfssl": {
+    "type": "git",
+    "url": "https://github.com/wolfSSL/wolfssl.git",
+    "rev": "f7fb68dedc96e2cdea7a42e4bad09f69de98eb36"
+  }
+}

@@ -47,7 +47,6 @@ def metaFilter():
                 file_hash.update(f.read())
             xxx.append(file_hash.digest())
         if len(set(xxx)) != len(xxx):
-            INFO(f"[!] Found false positives: {localId}")
             false_positives.append(localId)    
     res.extend(broken_srcmaps)
     # print(false_positives)
@@ -55,7 +54,6 @@ def metaFilter():
     res = list(set(res))
     remove_issue_meta(res)
     remove_issue_data(res)
-    SUCCESS("Done")
 def getIssueIds():
     localIds = []
     session = requests.Session()
@@ -97,7 +95,7 @@ def getIssueIds():
                 WARN("Out of Limit. Not Supported yet. (You may split it by month instead of year)")
                 exit(1)
         added_num = len(localIds) - init_num
-        INFO(f"Add {added_num} issues in year {start_year}")
+        SUCCESS(f"[+] Added {added_num:,} issues from {start_year} ({len(localIds):,} total)")
         start_year+=1
     
     return [int(x) for x in localIds]
@@ -133,7 +131,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
         "msan": "memory",
         "ubsan": "undefined",
     }
-    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target binary):\s*(\S+)','NOTFOUND')
+    fuzz_target = extract(r'(?:Fuzz Target|Fuzz target|Fuzz target binary|Fuzzer):\s*(\S+)','NOTFOUND')
     if len(res['job_type'].split("_"))==2:
         WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
         return False
@@ -145,7 +143,7 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
     if res['project'] == "NOTFOUND":
         res['project'] = res['job_type'].split("_")[-1]
     return res
-def getIssue(issue_id):
+def meta_getIssue(issue_id):
     url = f'https://issues.oss-fuzz.com/action/issues/{issue_id}/events?currentTrackerId=391'
     session = requests.Session()
     # Step 1: Get the token from the cookie
@@ -173,7 +171,7 @@ def getIssue(issue_id):
         WARN(f"FAIL on {issue_id}, skip")
         return False
     return res
-def getIssues(issue_ids):
+def meta_getIssues(issue_ids):
     issues = []
     if not MetaDataFile.exists():
         MetaDataFile.touch()
@@ -182,17 +180,17 @@ def getIssues(issue_ids):
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
-    for x in bar(issue_ids):
-        if x in done:
-            continue
-        res = getIssue(x)
+    todo = [x for x in issue_ids if x not in done]
+    INFO(f"Added {len(todo)} new issues")
+    for x in bar(todo):
+        res = meta_getIssue(x)
         if res:
             issues.append(res)
             with open(MetaDataFile,'a') as f:
                 f.write(json.dumps(res) + '\n') 
         else:
             WARN(f"Failed to fetch the issue for {x}")
-    return issues
+    return todo
 # Parse the job type into parts
 def parse_job_type(job_type):
     parts = job_type.split('_')
@@ -300,7 +298,7 @@ def download_build_artifacts(metadata, url, outdir):
             print(f'Skipping {name} (not found)')
             continue
         print(download_path)
-        ret = blob.download_to_filename(str(download_path))
+        blob.download_to_filename(str(download_path))
         
         print(f'Downloaded {name}')
         downloaded_files.append(download_path)
@@ -308,11 +306,10 @@ def download_build_artifacts(metadata, url, outdir):
 def data_download(localIds = None):
     metadata = {}
     for line in open(MetaDataFile):
-        mdline = json.loads(line)
-        if localIds == None or mdline['localId'] in localIds:
-            metadata[mdline['localId']] = mdline
+        line = json.loads(line)
+        if localIds == None or line['localId'] in localIds:
+            metadata[line['localId']] = line
     to_remove = []
-    #for localId in metadata:
     for localId in bar(metadata):
         # Get reproducer(s) and save them.
         issue_dir = META / "Issues" / f"{localId}_files"
@@ -328,22 +325,29 @@ def data_download(localIds = None):
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
+        if getLanguage(str(localId)) not in ['c','c++']:
+            WARN(f"[!] Not C/C++ Issue: {localId=}")
+            to_remove.append(x)
+            continue
         if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir): 
-            WARN("[!] Failed to download the srcmap")
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
             continue
         if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir):
-            WARN("[!] Failed to download the srcmap")
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
             to_remove.append(localId)
             continue
+
+
     remove_issue_meta(to_remove)
     remove_issue_data(to_remove)
     return True
 def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
     if not META.exists(): META.mkdir()
-    getIssues(getIssueIds())
-    data_download()
+    todo = meta_getIssues(getIssueIds())
+    print(todo)
+    data_download(todo)
 
 if __name__ == "__main__":
     pass

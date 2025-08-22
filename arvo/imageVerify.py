@@ -40,7 +40,7 @@ def recompileProb(localId):
     if docker_load(open(target/f"{localId}-vul.tar"))!=True:
         return leave(False)
     cmdline = parseArvoScript(target/"arvo_vul.sh")
-    subcmd = " ".join(cmdline[-2:])
+    subcmd  = " ".join(cmdline[-2:])
     cmdline = cmdline[:-2] + ["sh", "-c", f'(compile || exit 132) && {subcmd}']
     print(" ".join(cmdline))
     ret_code = execute_ret(cmdline,target)

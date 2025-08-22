@@ -1,0 +1,22 @@
+{
+  "/src/mpv": {
+    "type": "git",
+    "url": "https://github.com/mpv-player/mpv",
+    "rev": "86e12929aa0bbc61946d3804982acf887786a7cb"
+  },
+  "/src/mpv/subprojects/libplacebo": {
+    "type": "git",
+    "url": "https://github.com/haasn/libplacebo",
+    "rev": "1f1ba06aa2a83a2c75ade4150b7c0bba10531088"
+  },
+  "/src/mpv/subprojects/libass": {
+    "type": "git",
+    "url": "https://github.com/libass/libass",
+    "rev": "338fd2cea8ac156a910b04838b5f40b868e41160"
+  },
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://github.com/FFmpeg/FFmpeg",
+    "rev": "bf79148cbb8719314e5ea53c9597f8cd35f9c0b5"
+  }
+}

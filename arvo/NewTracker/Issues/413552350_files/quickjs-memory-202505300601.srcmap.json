@@ -1,0 +1,12 @@
+{
+  "/src/quickjs-corpus": {
+    "type": "git",
+    "url": "https://github.com/renatahodovan/quickjs-corpus",
+    "rev": "e4a5f4b5e67d5f1303435417b81ff27ea6555623"
+  },
+  "/src/quickjs": {
+    "type": "git",
+    "url": "https://github.com/bellard/quickjs",
+    "rev": "638ec8ca5e1d4aed002a9fb3ef3358e2a6bc42ab"
+  }
+}

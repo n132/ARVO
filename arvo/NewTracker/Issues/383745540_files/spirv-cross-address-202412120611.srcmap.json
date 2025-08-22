@@ -1,0 +1,7 @@
+{
+  "/src/spirv-cross": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/SPIRV-Cross",
+    "rev": "d2478b2028dbde45d7caa9dca0de0d697bc27223"
+  }
+}

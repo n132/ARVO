@@ -1,0 +1,12 @@
+{
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib.git",
+    "rev": "78cd78d2988616d9af0e8f43e703717d092cd3ff"
+  },
+  "/src/gdk-pixbuf": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/gdk-pixbuf.git",
+    "rev": "4268e6926fc0624db231515d72e12b89e3e87a6c"
+  }
+}

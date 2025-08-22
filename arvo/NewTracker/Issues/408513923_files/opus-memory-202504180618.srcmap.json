@@ -1,0 +1,7 @@
+{
+  "/src/opus": {
+    "type": "git",
+    "url": "https://gitlab.xiph.org/xiph/opus.git",
+    "rev": "840ad4757978a6dc8d7bcfe6fe0b7dd04325f418"
+  }
+}

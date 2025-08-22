@@ -1,0 +1,7 @@
+{
+  "/src/hwloc": {
+    "type": "git",
+    "url": "https://github.com/open-mpi/hwloc",
+    "rev": "441f8c71709ce56743cdf82d0294fd2760789e8f"
+  }
+}

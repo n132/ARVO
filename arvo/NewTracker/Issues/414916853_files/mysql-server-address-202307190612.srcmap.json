@@ -1,0 +1,7 @@
+{
+  "/src/mysql-server": {
+    "type": "git",
+    "url": "https://github.com/mysql/mysql-server",
+    "rev": "ea1efa9822d81044b726aab20c857d5e1b7e046a"
+  }
+}

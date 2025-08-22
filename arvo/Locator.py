@@ -8,7 +8,6 @@ import json
 import sys
 # fmt: off
 import urllib.parse
-import ipdb
 
 #==================================================================
 #
@@ -51,11 +50,9 @@ def dichotomy_log(localId,s,tag):
     with open(log,'a') as f:
         f.write(f'{s}\n')
 def _check_buid_prompt(s):
-    print("\n\n")
-    print("*"*0x20)
-    print(f"commit: {s}")
-    print("*"*0x20)
-    print("\n\n")
+    INFO("*"*0x20)
+    SUCCESS(f"commit: {s}")
+    INFO("*"*0x20)
 def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule_tracker=[]):
     if type(commit) != str:
         commit = commit[-1]
@@ -66,11 +63,12 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
 
     cts = customSrcmap(srcmap,pname,commit)
     if not cts:
-        eventLog(f"[-] checkBuild {localId}: Failed to create customSrcmap, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to create customSrcmap, where {commit=} && {pname=}")
         return None
+
     # Step3: Try to build/compile the fuzz target
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
-    build_res = build_from_srcmap(cts,issue,ForceNoErrDump='/dev/null',oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
+    build_res = build_from_srcmap(cts,issue,ForceNoErrDump=OSS_ERR / f"{localId}_Compile_{commit}.log",oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
     if not poc: # Build only mode
         return build_res
     if build_res == True:
@@ -86,11 +84,11 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         remove_oss_fuzz_img(localId)
         return leaveRet(res,cts.parent)
     elif build_res == False:
-        eventLog(f"[-] checkBuild {localId}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
+        eventLog(f"{localId=}: Failed to build fuzztarget, where commit=={commit}&&pname=={pname}")
         remove_oss_fuzz_img(localId)
         return leaveRet(None,cts.parent)
     else:
-        eventLog(f"[-] Weird return value from build_from_srcmap: {build_res}",True)
+        eventLog(f"Unintended return value: {build_res=}",True)
 #==================================================================
 #
 #                  Report Generator
@@ -100,8 +98,9 @@ def dichotomy_search(commits_list,localId,pname,poc,tag):
     global CHANCE, TURBO
     # The first commit is not tested
     # the last commit is fixed!
-    print(commits_list)
-    print(f"[+] {len(commits_list)} commits Left")
+    if len(commits_list) < 32:
+        print(commits_list)
+    INFO(f"[+] {len(commits_list)} commits Left")
     log = ARVO /"Log"/tag/f"{localId}"/f"{localId}.log"
     if not log.exists():
         with open(log,'w') as f:
@@ -191,11 +190,9 @@ def vulCommit(localId,retryChance=None,hint=None):
     # the tuple will be used in other functions that this function will call
     srcmap,issue = getIssueTuple(localId)
     if not srcmap or not issue:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to get srcmap/issue")
-        return False
+        return eventLog(f"{localId=}: Failed to get srcmap/issue")
     elif len(srcmap)!=2:
-        eventLog(f"\t[-] vulCommit {localId}: Len(srcmap)!=2")
-        return False
+        return eventLog(f"{localId=}: Len(srcmap)!=2")
     # 1 - Do the work
     pname   = getPname(localId)
     if pname == False:
@@ -203,19 +200,16 @@ def vulCommit(localId,retryChance=None,hint=None):
     commits = list_commits(localId,pname)
     
     if commits == False:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to list commits")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Failed to list commits")
     commits, TURBO, inclusive = commits
     
     if len(commits)<=1:
-        eventLog(f"\t[-] vulCommit {localId}: Found {len(commits)} commit, which is abnormal")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Found {len(commits)} commit, which is abnormal")
     
     commits = commits[1:] if inclusive else commits
     poc = getPoc(localId,issue)
     if not poc:
-        eventLog(f"\t[-] vulCommit {localId}: Failed to download the PoC")
-        return False
+        return eventLog(f"\t[-] vulCommit {localId}: Failed to download the PoC")
     # 2 - Prepare for log
     log = ARVO /"Log"/"bisect"/f"{localId}"
     if log.exists():
@@ -246,9 +240,29 @@ def vulCommit(localId,retryChance=None,hint=None):
     else:
         submodules = parseSubmoduleUpdate(ifsub)
         def get_submodule_url(path, repo):
+            # Parse .gitmodules to find submodule name by path
+            gitmodules_path = Path(repo) / ".gitmodules"
+            if not gitmodules_path.exists():
+                return None
+                
+            import configparser
+            config = configparser.ConfigParser()
+            config.read(gitmodules_path)
+            
+            submodule_name = None
+            for section in config.sections():
+                if section.startswith("submodule "):
+                    if config.get(section, "path", fallback="") == path:
+                        submodule_name = section.split('"')[1]  # Extract name from 'submodule "name"'
+                        break
+            
+            if not submodule_name:
+                # Fallback: assume path is the submodule name
+                submodule_name = path
+            
             # Get submodule relative or absolute URL from .gitmodules
             sub_url = subprocess.check_output([
-                "git", "config", "-f", ".gitmodules", "--get", f"submodule.{path}.url"
+                "git", "config", "-f", ".gitmodules", "--get", f"submodule.{submodule_name}.url"
             ], text=True,cwd = repo).strip()
             scheme = urllib.parse.urlparse(sub_url).scheme
             
@@ -303,8 +317,8 @@ def vulCommit(localId,retryChance=None,hint=None):
                     return leaveRet(found, poc.parent)
             else:
                 PANIC(f"Impossible to reach here")
-        # Can't work it out, still return the submodule update commit 
-        WARN("Failed to locate the specific submodule matters")
+        # The main commit includes the fix
+        SUCCESS("Submodule doesn't matter, the fix is in the main repo")
     return leaveRet(target_commit,poc.parent)
 def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main,sub_url):
     # git config --file .git/config submodule.qtbase.url
@@ -312,26 +326,36 @@ def checkSubmodulePatch(localId,pname,commit,submodule_info,poc,sub_path,gt_main
     sub_commits = gt_subm.listCommits(submodule_info[1],submodule_info[2])
     if not sub_commits:
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
-    print(sub_commits)
-    # TODO bisect
+    # Bisect search for the fix commit
+    commits_to_check = sub_commits[1:]  # Skip the first commit
+    left, right = 0, len(commits_to_check) - 1
     found = False
-    for sub_commit in sub_commits[1:]:
+    
+    while left <= right:
+        INFO(f"Submodule Search: {right-left} Commits Left ")
+        mid = (left + right) // 2
+        sub_commit = commits_to_check[mid]
+        
         appendix = ["bash",'-c',f'rm -rf /src/{sub_path} && git clone {sub_url} /src/{sub_path} && pushd /src/{sub_path} && git reset --hard  {sub_commit} && popd && compile']
         res = checkBuild(commit,localId,pname,poc,'sub-tracker',submodule_tracker=appendix)
+        
         if res == None:
-            # Failed to Compile/Build: combine it and its next commit
-            WARN(f"INFO Failed to build: submodule -> {submodule_info[0]} {sub_commit}")
-            continue
+            # Failed to Compile/Build: remove this commit and update bounds
+            WARN(f"Failed to build: submodule -> {submodule_info[0]} {sub_commit}")
+            commits_to_check.pop(mid)
+            right = len(commits_to_check) - 1
         elif res == True:
-            SUCCESS(f"Bug Fixed:{submodule_info[0]} {sub_commit}")
+            # Bug Fixed: this could be our target, but check if there's an earlier fix
+            SUCCESS(f"Bug Fixed: {submodule_info[0]} {sub_commit}")
             found = sub_commit
-            break
+            right = mid - 1  # Look for earlier fix
         elif res == False:
-            # Crash
-            INFO(f"Still Buggy:{submodule_info[0]} {sub_commit}")
-            continue
+            # Still Vulnerable: the fix is after this commit
+            WARN(f"Still Vulnerable: {submodule_info[0]} {sub_commit}")
+            left = mid + 1
         else:
             PANIC(f"Impossible to reach here")
+    
     if not found:
         # Failed to locate
         return leaveRet(False,[gt_main.repo,gt_subm.repo])
@@ -368,7 +392,7 @@ def reportFix(repo,commit):
         repo += "/commit/"
     elif ".googlesource.com" in repo:
         repo += "/+/"
-    elif repo.startswith("https://gitlab.com/") or repo.startswith("http://gitlab.com/"):
+    elif repo.startswith("https://gitlab.") or repo.startswith("http://gitlab."):
         repo = repo[:-4] if repo.endswith(".git") else repo
         repo += "/-/commit/"
     elif "git://code.qt.io/qt/qtbase.git" in repo:
@@ -401,6 +425,14 @@ def reportFix(repo,commit):
         repo = 'https://git.osgeo.org/gitea/geos/geos/commit/'
     elif repo == "https://git.gnu.org.ua/gdbm.git":  
         repo = 'https://git.gnu.org.ua/gdbm.git/commit/?id='
+    elif repo == 'https://invent.kde.org/frameworks/kimageformats.git':
+        repo = "https://invent.kde.org/frameworks/kimageformats/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/karchive.git':
+        repo = "https://invent.kde.org/frameworks/karchive/-/commit/"
+    elif repo == 'https://invent.kde.org/frameworks/extra-cmake-modules.git':
+        repo = 'https://invent.kde.org/frameworks/extra-cmake-modules/-/commit/'
+    elif repo == 'git://git.ghostscript.com/jbig2dec.git':
+        repo = 'https://github.com/ArtifexSoftware/jbig2dec/commit/'
     res = repo + commit
     if ".googlesource.com" in res:
         res+="%5E%21/"
@@ -421,12 +453,13 @@ def fileReport(localId,fix_commit):
     #######################################################
     fix_commits = fix_commit
     fix_commit = fix_commit[-1] if type(fix_commit) != str else fix_commit
-
+    res = dict()
+    res['submodule_bug'] = False
     if "submodule" in fix_commit:
         vulComponentUrl,fix_commit = fix_commit.split(" ")[1:]
         fix_commits  = fix_commit
+        res['submodule_bug'] = True
     fix = reportFix(vulComponentUrl,fix_commit)
-    res = dict()
     res['fix']      = fix
     res['verify']   = False
     res['localId']  = localId
@@ -439,7 +472,7 @@ def fileReport(localId,fix_commit):
     try:
         res['severity'] = issue['severity']
     except:
-        pass
+        res['severity'] = "UNKNOWN"
     res['report']       = f"https://issues.oss-fuzz.com/issues/{localId}"
     res['fix_commit']   = fix_commits
     res['repo_addr']    = vulComponentUrl
@@ -449,20 +482,20 @@ def report(localId,verified=False):
     localId = localIdMapping(localId)
     
     if not verified:
-        print(f"[+] Verifying {localId}")
+        INFO(f"[+] Verifying {localId}")
         if (not verify(localId)):
-            eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
-            return False
+            return eventLog(f"[-] Failed to reproduce {localId}: Failed on function verify")
         done = getDone()
         if localId not in done:
-            print(f"[+] Add {localId} to results")
+            INFO(f"[+] Add {localId} to results")
 
             
     # Step2: Find the commit that fixed the bug+
     fix_commit= vulCommit(localId,0x10)
+
     if fix_commit == False or fix_commit=="":
-        eventLog(f"[-] Failed to locate the patches for issue {localId}")
-        return False
+        return eventLog(f"[-] Failed to locate the patches for issue {localId}")
+
     # return fix_commit
     # Step3: File the report 
     return fileReport(localId,fix_commit)
@@ -480,9 +513,7 @@ def dichotomy_search_TC(commits_list,localId,pname,poc,tag,targetCrash,oss_fuzz_
     # only use this function when commits_list is reversed
     # The first commit is not tested
     # the last commit is fixed!
-    # print(commits_list)
-    print(f"[+] {len(commits_list)} commits Left")
-    print(tag,localId)
+    INFO(f"[+] Working on {localId=}, {len(commits_list)} commits Left")
     log = ARVO /"Log" /tag/f"{localId}"/f"{localId}.log"
     if not log.exists():
         with open(log,'w') as f:
@@ -566,8 +597,7 @@ def lifeSpan_prepareProject(localId,pname):
     srcmap = getSrcmaps(localId)
     init_timestamp = lifeSpan_getInitTimeStamp(localId)
     if not init_timestamp:
-        eventLog(f"[lifeSpan]: Failed to get the init_timestamp for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get the init_timestamp for {localId}")
     ti = json.loads(open(srcmap[0]).read())[f"/src/{pname}"]
     _, ti["url"], ti["type"] = trans_table(f"/src/{pname}", ti["url"], ti["type"])
     if(ti["url"] == None):
@@ -581,18 +611,16 @@ def lifeSpan_prepareProject(localId,pname):
 def lifeSpan(localId):
     global CHANCE, TURBO
     # 1. Get Pname
-    print(f"[+] Working on {localId}")
+    INFO(f"[+] Working on {localId}")
     CHANCE  = 0x10
     pname = getPname(localId)
     if not pname:
-        eventLog(f"[lifeSpan]: Failed to get basices for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get basices for {localId}")
 
     # 2. Prepare Commits
     tmp_res = lifeSpan_prepareProject(localId,pname)
     if not tmp_res:
-        eventLog(f"[lifeSpan]: Failed to get the commit information for {localId}")
-        return False
+        return eventLog(f"[lifeSpan]: Failed to get the commit information for {localId}")
     gt, beg_commit, vulnerable_commit  = tmp_res
     beg_ts = gt.timestamp(beg_commit) 
     vul_ts = gt.timestamp(vulnerable_commit)
@@ -610,7 +638,7 @@ def lifeSpan(localId):
         return leaveRet(False, gt.repo)
     elif len(commits) < 2:
         eventLog(f"[lifeSpan]: Less than two commits to check for {localId}")
-        return False
+        return leaveRet(False, gt.repo)
     TURBO = gt.getRecentCommit(commits)
     commits = (commits[:-1])[::-1] # Remove info[0][/src/pname][rev] and rev the list
     shutil.rmtree(gt.repo)
@@ -623,14 +651,12 @@ def lifeSpan(localId):
     # 4. Get the target Crash
     targetCrash = getCrashSummary(ARVO / "Log" / "Round1" / f"{localId}_vul.log")
     if not targetCrash:
-        eventLog(f"Failed to get crashSummary for {localId}")
-        return False
+        return eventLog(f"Failed to get crashSummary for {localId}")
     
     # 5. Get PoC
     poc = getPoc(localId, getIssue(localId))
     if not poc:
-        eventLog(f"Failed to get the poc getPoc({localId})")
-        return False
+        return eventLog(f"Failed to get the poc getPoc({localId})")
     
     # 6. Do search
     found   = dichotomy_search_TC(commits, localId, pname, poc, 'lifeSpan',targetCrash, oss_fuzz_commit)
@@ -733,6 +759,7 @@ def dockerhubPusher():
         if len(todo) == 0:
             SUCCESS("All local images are pushed to remote")
             break
+
         for x in todo:
             if not x.exists():
                 continue
@@ -763,15 +790,22 @@ def dockerImgExist(localId):
             return False    
     return True
 
-def reproduce(localId, dockerize = True, update = False):
+def reproduce(localId, dockerize = False, update = True):
+    if "arrow" == getPname(localId):
+        return True
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
         INFO("[+] Record Exists")
         return True
-    if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
-        eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
+    known_false_positives = getFalsePositives()
+    if localId in known_false_positives:
+        WARN(f"{localId=} is a known false positive from upstream")
         return False
+
+    if (not dockerImgExist(localId)) and (not verify(localId,dockerize)):
+        buildClean(localId)
+        return eventLog(f"[-] Failed to reproduce {localId}: Unable to Reproduce")
     
     reproduced      = True
 
@@ -779,7 +813,9 @@ def reproduce(localId, dockerize = True, update = False):
     reproducer_fix = f"docker run --rm -it n132/arvo:{localId}-fix arvo"
 
     res = report(localId,True)
-    if not res: return False
+    if not res: 
+        buildClean(localId)
+        return False
     patch_located  = True
     patch_located  = True
     patch_url      = res['fix']
@@ -792,6 +828,8 @@ def reproduce(localId, dockerize = True, update = False):
     severity       = res['severity'] if 'severity' in res else "UNK"
     fix_commit     = res['fix_commit']
     language       = getLanguage(localId)
+    repo_addr      = res['repo_addr']
+    submodule_bug  = res['submodule_bug']
     # We still have the layers cached so it's not hard to re-run and get some info
 
     if isinstance(fix_commit,list):
@@ -822,11 +860,13 @@ def reproduce(localId, dockerize = True, update = False):
 
     if exist_record:
         if not delete_entry(localId):
+            buildClean(localId)
             return False
-    
+    buildClean(localId)
+
     return insert_entry((localId, project, reproduced, reproducer_vul, reproducer_fix, patch_located,
         patch_url, verified, fuzz_target, fuzz_engine,
-        sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language))
+        sanitizer, crash_type, crash_output, severity, res['report'],fix_commit, language, repo_addr, submodule_bug))
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:

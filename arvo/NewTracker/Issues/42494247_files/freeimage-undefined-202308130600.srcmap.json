@@ -1,0 +1,7 @@
+{
+  "/src/freeimage-svn": {
+    "type": "svn",
+    "url": "https://svn.code.sf.net/p/freeimage/svn",
+    "rev": "1909"
+  }
+}
