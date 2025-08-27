@@ -2,7 +2,7 @@
 name = "arvo"
 version = "0.1.0"
 description = "ARVO: an Atlas of Reproducible Vulnerabilities in Open source software"
-authors = [{ name = "n132", email = "n132@asu.com" }]
+authors = [{ name = "-", email = "-" }]
 dependencies = [
     "pytz",
     "python-dateutil",
