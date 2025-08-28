@@ -28,3 +28,4 @@ fxTest.py
 FalsePositives.md
 *.db
 diff
+eval_*.py

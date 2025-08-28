@@ -790,9 +790,7 @@ def dockerImgExist(localId):
             return False    
     return True
 
-def reproduce(localId, dockerize = False, update = True):
-    if "arrow" == getPname(localId):
-        return True
+def reproduce(localId, dockerize = True, update = True):
     localId = localIdMapping(localId)
     exist_record  = arvoRecorded(localId)
     if exist_record and not update:
