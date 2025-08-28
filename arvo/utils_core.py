@@ -181,7 +181,6 @@ def extraScritps(pname,oss_dir,source_dir):
                     del(lines[-x])
             with open(target,'w') as f:
                 f.write("\n".join(lines))
-        
     return True
 def fixBuildScript(file,pname):
     if _profile.EVAL_NOURLFIX:
