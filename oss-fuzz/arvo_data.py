@@ -293,11 +293,11 @@ def skip_component(project_name: str, item_name: str) -> bool:
     Returns:
         True if component should be skipped, False otherwise.
     """
-  no_operation = [
+  NO_OPERATION = (
       "/src",
       "/src/LPM/external.protobuf/src/external.protobuf",
       "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf",
-  ]
+  )
   item_name = item_name.strip(" ")
 
   # Special for skia, Skip since they are done by submodule init
@@ -305,7 +305,7 @@ def skip_component(project_name: str, item_name: str) -> bool:
     if item_name.startswith("/src/skia/"):
       return True
 
-  if item_name in no_operation:
+  if item_name in NO_OPERATION:
     return True
 
   return False
