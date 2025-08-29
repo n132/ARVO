@@ -5,10 +5,13 @@ including configuration mappings and Docker/build script fixes.
 """
 
 from pathlib import Path
-from typing import Any, Dict, Optional, Tuple, Union
+from typing import Any, Dict, Tuple
+from datetime import datetime
+from hacks import get_project_hack
 
 from arvo_utils import (DockerfileModifier, CHANGED_KEY, CHANGED_TYPE,
                         GLOBAL_STR_REPLACE, UPDATE_TABLE)
+
 
 def update_resource_info(item_name: str, item_url: str,
                          item_type: str) -> Tuple[str, str, str]:
@@ -32,7 +35,7 @@ def update_resource_info(item_name: str, item_url: str,
     return item_name, item_url, item_type
 
 
-def dockerfile_cleaner(dockerfile_path: Union[str, Path]) -> None:
+def dockerfile_cleaner(dockerfile_path: str | Path) -> None:
   """Clean dockerfile by removing git branch-specific arguments.
     
     Args:
@@ -45,28 +48,19 @@ def dockerfile_cleaner(dockerfile_path: Union[str, Path]) -> None:
   dft.flush()
 
 
-def fix_dockerfile(dockerfile_path: Union[str, Path],
-                   project: Optional[str] = None) -> bool:
+def fix_dockerfile(dockerfile_path: str | Path,
+                   project: str | None = None,
+                   commit_date: datetime | None = None) -> bool:
   """Fix the dockerfile for specific projects and general issues.
     
     Args:
         dockerfile_path: Path to the Dockerfile to fix.
         project: Name of the project for project-specific fixes.
+        commit_date: Target commit date (required for some projects like GDAL).
         
     Returns:
         True if fixes were applied successfully, False otherwise.
     """
-
-  def _x265_fix(dft: DockerfileModifier) -> None:
-    """Apply x265-specific fixes to the dockerfile modifier."""
-    # The order of following two lines matters
-    dft.replace(
-        r'RUN\shg\sclone\s.*bitbucket.org/multicoreware/x265\s*(x265)*',
-        "RUN git clone "
-        "https://bitbucket.org/multicoreware/x265_git.git x265\n")
-    dft.replace(
-        r'RUN\shg\sclone\s.*hg.videolan.org/x265\s*(x265)*', "RUN git clone "
-        "https://bitbucket.org/multicoreware/x265_git.git x265\n")
 
   dockerfile_cleaner(dockerfile_path)
   dft = DockerfileModifier(dockerfile_path)
@@ -82,78 +76,15 @@ def fix_dockerfile(dockerfile_path: Union[str, Path],
   dft.str_replace_all(GLOBAL_STR_REPLACE)
 
   # Apply project-specific hacks that solve building/compiling problems
-  if project == "lcms":
-    # TODO: improve this tmp patch
-    dft.replace(r'#add more seeds from the testbed dir.*\n', "")
-  elif project == 'wolfssl':
-    dft.str_replace(
-        'RUN gsutil cp '
-        'gs://wolfssl-backup.clusterfuzz-external.appspot.com/'
-        'corpus/libFuzzer/wolfssl_cryptofuzz-disable-fastmath/public.zip '
-        '$SRC/corpus_wolfssl_disable-fastmath.zip', "RUN touch 0xdeadbeef && "
-        "zip $SRC/corpus_wolfssl_disable-fastmath.zip 0xdeadbeef")
-  elif project == 'skia':
-    dft.str_replace('RUN wget', "# RUN wget")
-    dft.insert_line_after('COPY build.sh $SRC/',
-                          "RUN sed -i 's/cp.*zip.*//g' $SRC/build.sh")
-  elif project == 'libreoffice':
-    dft.str_replace(
-        'RUN ./bin/oss-fuzz-setup.sh',
-        "RUN sed -i 's|svn export --force -q https://github.com|"
-        "#svn export --force -q https://github.com|g' "
-        "./bin/oss-fuzz-setup.sh")
-    dft.str_replace('RUN svn export', '# RUN svn export')
-    dft.str_replace('ADD ', '# ADD ')
-    dft.str_replace('RUN zip', '# RUN zip')
-    dft.str_replace('RUN mkdir afl-testcases', "# RUN mkdir afl-testcases")
-    dft.str_replace(
-        'RUN ./bin/oss-fuzz-setup.sh',
-        "# RUN ./bin/oss-fuzz-setup.sh")  # Avoid downloading not related
-  elif project == 'graphicsmagick':
-    dft.replace(
-        r'RUN hg clone .* graphicsmagick', 'RUN (CMD="hg clone --insecure '
-        'https://foss.heptapod.net/graphicsmagick/graphicsmagick '
-        'graphicsmagick" && '
-        'for x in `seq 1 100`; do $($CMD); '
-        'if [ $? -eq 0 ]; then break; fi; done)')
-    _x265_fix(dft)
-  elif project == 'libheif':
-    _x265_fix(dft)
-  elif project == 'ffmpeg':
-    _x265_fix(dft)
-  elif project == 'imagemagick':
-    dft.replace(r'RUN svn .*heic_corpus.*',
-                "RUN mkdir /src/heic_corpus && touch /src/heic_corpus/XxX")
-  elif project == "jbig2dec":
-    dft.replace(r'RUN cd tests .*', "")
-  elif project == 'dlplibs':
-    dft.replace(r"ADD", '# ADD')
-    dft.replace(r"RUN wget", '#RUN wget')
-  elif project == 'quickjs':
-    dft.str_replace('https://github.com/horhof/quickjs',
-                    'https://github.com/bellard/quickjs')
-  elif project == 'cryptofuzz':
-    dft.insert_line_before(
-        "RUN cd $SRC/libressl && ./update.sh",
-        "RUN sed -n -i '/^# setup source paths$/,$p' $SRC/libressl/update.sh")
-  elif project == 'libyang':
-    dft.str_replace(
-        'RUN git clone https://github.com/PCRE2Project/pcre2 pcre2 &&',
-        "RUN git clone https://github.com/PCRE2Project/pcre2 pcre2\n"
-        "RUN ")
-  elif project == "yara":
-    if 'bison' not in dft.content:
-      dft.insert_line_before(
-          "RUN git clone https://github.com/VirusTotal/yara.git",
-          "RUN apt install -y bison")
-  elif project == "lwan":
-    dft.str_replace('git://github.com/lpereira/lwan',
-                    'https://github.com/lpereira/lwan.git')
-  elif project == "radare2":
-    dft.str_replace("https://github.com/radare/radare2-regressions",
-                    'https://github.com/rlaemmert/radare2-regressions.git')
-  elif project == "wireshark":
-    dft.replace(r"RUN git clone .*wireshark.*", "")
+  if project:
+    hack = get_project_hack(project)
+    if hack:
+      # Pass commit_date to the hack if it needs it
+      if hasattr(hack, 'set_commit_date') and commit_date:
+        hack.set_commit_date(commit_date)
+      success = hack.apply_dockerfile_fixes(dft)
+      if not success:
+        return False
 
   dft.clean_comments()
   return dft.flush()
@@ -174,47 +105,12 @@ def fix_build_script(file_path: Path, project_name: str) -> bool:
 
   dft = DockerfileModifier(file_path)
 
-  if project_name == "uwebsockets":
-    # https://github.com/alexhultman/zlib -> https://github.com/madler/zlib.git
-    script = "sed -i 's/alexhultman/madler/g' fuzzing/Makefile"
-    dft.insert_line_at(0, script)
-  elif project_name == 'libreoffice':
-    # If you don't want to destroy your life.
-    # Please leave this project alone. too hard to fix and the compiling
-    # takes several hours
-    line = '$SRC/libreoffice/bin/oss-fuzz-build.sh'
-    dft.insert_line_before(
-        line, "sed -i 's/make fuzzers/make fuzzers -i/g' "
-        "$SRC/libreoffice/bin/oss-fuzz-build.sh")
-    dft.insert_line_before(
-        line, "sed -n -i '/#starting corpuses/q;p' "
-        "$SRC/libreoffice/bin/oss-fuzz-build.sh")
-    dft.insert_line_before(
-        line, r"sed -n -i '/pushd instdir\/program/q;p' "
-        r"$SRC/libreoffice/bin/oss-fuzz-build.sh")
-    dft.insert_line_before(
-        line, 'echo "pushd instdir/program && mv *fuzzer $OUT" >> '
-        '$SRC/libreoffice/bin/oss-fuzz-build.sh')
-  elif project_name == 'jbig2dec':
-    dft.replace('unzip.*', 'exit 0')
-  elif project_name == "ghostscript":
-    old = r"mv \$SRC\/freetype freetype"
-    new = "cp -r $SRC/freetype freetype"
-    dft.replace(old, new)
-  elif project_name == 'openh264':
-    lines = dft.content.split("\n")
-    starts = -1
-    ends = -1
-    for num, line in enumerate(lines):
-      if "# prepare corpus" in line:
-        starts = num
-      elif "# build" in line:
-        ends = num
-        break
-    if starts != -1 and ends != -1:
-      dft.remove_range(starts, ends)
-  elif project_name in ['libredwg', 'duckdb']:
-    dft.replace(r'^make$', 'make -j`nproc`\n')
+  # Apply project-specific build script hacks
+  hack = get_project_hack(project_name)
+  if hack:
+    success = hack.apply_build_script_fixes(dft)
+    if not success:
+      return False
 
   return dft.flush()
 
@@ -222,7 +118,6 @@ def fix_build_script(file_path: Path, project_name: str) -> bool:
 def extra_scripts(project_name: str, source_dir: Path) -> bool:
   """Execute extra scripts for specific projects.
     
-    TODO: migrate these hacks to fix_dockerfile
     This function allows us to modify build.sh scripts and other stuff
     to modify the compiling setting.
     
@@ -233,23 +128,18 @@ def extra_scripts(project_name: str, source_dir: Path) -> bool:
     Returns:
         True if scripts executed successfully, False otherwise.
     """
-  if project_name == 'imagemagick':
-    # TODO: Improve this hack
-    target = (source_dir / "src" / project_name / "Magick++" / "fuzz" /
-              "build.sh")
-    if target.exists():
-      with open(target, encoding='utf-8') as f:
-        lines = f.readlines()
-      for x in range(3):
-        if lines and "zip" in lines[-x - 1]:
-          del lines[-x - 1]
-      with open(target, 'w', encoding='utf-8') as f:
-        f.write("\n".join(lines))
+  # Apply project-specific extra fixes
+  hack = get_project_hack(project_name)
+  if hack:
+    success = hack.apply_extra_fixes(source_dir)
+    if not success:
+      return False
+
   return True
 
 
 def special_component(project_name: str, item_key: str, item: Dict[str, Any],
-                      dockerfile: Union[str, Path]) -> bool:
+                      dockerfile: str | Path) -> bool:
   """Check if a component requires special handling.
     
     TODO: Theoretically, we can remove this func since other parts gonna

@@ -18,7 +18,6 @@ Functions:
 """
 
 import argparse
-import collections
 import json
 import logging
 import os
@@ -29,7 +28,7 @@ import time
 from bisect import bisect_right
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any
 from urllib.parse import parse_qs, urlparse
 
 import requests
@@ -37,16 +36,15 @@ from dateutil.parser import parse
 from google.cloud import storage
 from dataclasses import dataclass
 
-from arvo_data import (extra_scripts, fix_build_script,
-                       fix_dockerfile, skip_component, special_component,
-                       update_resource_info)
+from arvo_data import (extra_scripts, fix_build_script, fix_dockerfile,
+                       skip_component, special_component, update_resource_info)
 from arvo_utils import (DockerfileModifier, VersionControlTool, check_call,
                         clean_dir, clone, docker_build, docker_run, execute,
                         hg_clone, leave_ret, svn_clone, OSS_ERR, OSS_OUT,
                         OSS_WORK, PNAME_TABLE)
 
 # Global storage client
-storage_client: Optional[storage.Client] = None
+storage_client: storage.Client | None = None
 
 
 @dataclass
@@ -818,7 +816,7 @@ def build_fuzzer_with_source(local_id: int | str, project_name: str,
     return leave_ret(False, tmp_dir)
 
   # Step ONE: Fix Dockerfiles
-  if not fix_dockerfile(dockerfile, project_name):
+  if not fix_dockerfile(dockerfile, project_name, commit_date):
     logging.error(
         f"build_fuzzer_with_source: Failed to Fix Dockerfile, {local_id}")
     return leave_ret(False, tmp_dir)

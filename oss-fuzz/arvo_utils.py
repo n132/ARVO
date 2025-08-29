@@ -18,7 +18,7 @@ import tempfile
 import warnings
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Tuple
 
 import pytz
 from dataclasses import dataclass
@@ -193,7 +193,7 @@ def clone(url: str,
         Path to cloned repository on success, False on failure.
     """
 
-  def _git_clone(url: str, dest: Path, name: Optional[str]) -> bool:
+  def _git_clone(url: str, dest: Path, name: str | None) -> bool:
     """Helper function to perform git clone operation."""
     cmd = ['git', 'clone', url]
     if name is not None:
@@ -264,7 +264,7 @@ def svn_clone(url: str,
         Path to cloned repository on success, False on failure.
     """
 
-  def _svn_clone(url: str, dest: Path, name: Optional[str] = None) -> bool:
+  def _svn_clone(url: str, dest: Path, name: str | None = None) -> bool:
     """Helper function to perform SVN checkout operation."""
     cmd = ["svn", "co", url]
     if name:
@@ -304,7 +304,7 @@ def hg_clone(url: str,
         Path to cloned repository on success, False on failure.
     """
 
-  def _hg_clone(url: str, dest: Path, name: Optional[str] = None) -> bool:
+  def _hg_clone(url: str, dest: Path, name: str | None = None) -> bool:
     """Helper function to perform hg clone operation."""
     cmd = ["hg", "clone", url]
     if name:
@@ -333,7 +333,7 @@ def hg_clone(url: str,
 class DockerfileModifier:
   """A class for modifying Dockerfile content with various text operations."""
 
-  def __init__(self, path: Union[str, Path]) -> None:
+  def __init__(self, path: str | Path) -> None:
     """
     Initialize the DockerfileModifier.
 
@@ -536,9 +536,9 @@ class VersionControlTool:
   """A unified interface for version control operations (git, hg, svn)."""
 
   def __init__(self,
-               repo_path: Union[str, Path],
+               repo_path: str | Path,
                vc_type: str = 'git',
-               revision: Optional[str] = None,
+               revision: str | None = None,
                latest: bool = False) -> None:
     """Initialize the VersionControlTool.
         
@@ -581,7 +581,7 @@ class VersionControlTool:
     else:
       return _svn_pull(self.repo)
 
-  def clone(self, url: str, revision: Optional[str] = None) -> Path | bool:
+  def clone(self, url: str, revision: str | None = None) -> Path | bool:
     """Clone the repository.
         
         Args:
@@ -667,7 +667,7 @@ class VersionControlTool:
     return False
 
 
-def docker_build(args: List[str], log_file: Optional[Path] = None) -> bool:
+def docker_build(args: List[str], log_file: Path | None = None) -> bool:
   """Build a Docker image.
     
     Args:
@@ -692,7 +692,7 @@ def docker_build(args: List[str], log_file: Optional[Path] = None) -> bool:
 
 def docker_run(args: List[str],
                rm: bool = True,
-               log_file: Optional[Path] = None) -> bool:
+               log_file: Path | None = None) -> bool:
   """Run a Docker container.
     
     Args:
