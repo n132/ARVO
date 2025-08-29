@@ -4,46 +4,11 @@ This module provides data management functions for ARVO reproducer,
 including configuration mappings and Docker/build script fixes.
 """
 
-import json
-import os
-import re
 from pathlib import Path
 from typing import Any, Dict, Optional, Tuple, Union
 
-from arvo_utils import DockerfileModifier
-
-
-def load_repo_map(file_name: str) -> Dict[str, Any]:
-  """Load repository mapping from JSON file.
-    
-    Args:
-        file_name: Name of the JSON file to load.
-        
-    Returns:
-        Dictionary containing the loaded JSON data.
-    """
-  json_path = os.path.join(os.path.dirname(__file__), file_name)
-  with open(json_path, encoding='utf-8') as f:
-    return json.load(f)
-
-
-# Configuration constants - Order matters
-GLOBAL_STR_REPLACE = load_repo_map("string_replacement.json")
-UPDATE_TABLE = load_repo_map("component_fixes.json")
-
-# Only include non git project
-CHANGED_TYPE = {'/src/graphicsmagick': 'hg'}
-
-CHANGED_KEY = {
-    '/src/mdbtools/test': '/src/mdbtools',
-}
-
-PNAME_TABLE = {
-    'libpng-proto': "libprotobuf-mutator",
-    'pcapplusplus': "PcapPlusPlus",
-    'skia-ftz': 'skia',
-}
-
+from arvo_utils import (DockerfileModifier, CHANGED_KEY, CHANGED_TYPE,
+                        GLOBAL_STR_REPLACE, UPDATE_TABLE)
 
 def update_resource_info(item_name: str, item_url: str,
                          item_type: str) -> Tuple[str, str, str]:

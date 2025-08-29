@@ -8,6 +8,8 @@ This module provides utility functions for ARVO reproducer including:
 - Dockerfile modification tools
 """
 
+import json
+import os
 import logging
 import re
 import shutil
@@ -21,8 +23,40 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 import pytz
 from dataclasses import dataclass
 
+
+def load_repo_map(file_name: str) -> Dict[str, Any]:
+  """Load repository mapping from JSON file.
+    
+    Args:
+        file_name: Name of the JSON file to load.
+        
+    Returns:
+        Dictionary containing the loaded JSON data.
+    """
+  json_path = os.path.join(os.path.dirname(__file__), file_name)
+  with open(json_path, encoding='utf-8') as f:
+    return json.load(f)
+
+
+# Configuration constants - Order matters
+GLOBAL_STR_REPLACE = load_repo_map("string_replacement.json")
+UPDATE_TABLE = load_repo_map("component_fixes.json")
+
 # Global constants
 OSS_OUT = OSS_WORK = OSS_ERR = Path("/tmp")
+
+# Only include non git project
+CHANGED_TYPE = {'/src/graphicsmagick': 'hg'}
+
+CHANGED_KEY = {
+    '/src/mdbtools/test': '/src/mdbtools',
+}
+
+PNAME_TABLE = {
+    'libpng-proto': "libprotobuf-mutator",
+    'pcapplusplus': "PcapPlusPlus",
+    'skia-ftz': 'skia',
+}
 
 # Configure logging
 logging.basicConfig(level=logging.INFO,

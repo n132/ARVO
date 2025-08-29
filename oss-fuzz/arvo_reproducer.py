@@ -37,13 +37,13 @@ from dateutil.parser import parse
 from google.cloud import storage
 from dataclasses import dataclass
 
-from arvo_data import (PNAME_TABLE, extra_scripts, fix_build_script,
+from arvo_data import (extra_scripts, fix_build_script,
                        fix_dockerfile, skip_component, special_component,
                        update_resource_info)
 from arvo_utils import (DockerfileModifier, VersionControlTool, check_call,
                         clean_dir, clone, docker_build, docker_run, execute,
                         hg_clone, leave_ret, svn_clone, OSS_ERR, OSS_OUT,
-                        OSS_WORK)
+                        OSS_WORK, PNAME_TABLE)
 
 # Global storage client
 storage_client: Optional[storage.Client] = None
