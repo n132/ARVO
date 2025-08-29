@@ -5,9 +5,9 @@ from .dev import *
 import collections
 BuildData = collections.namedtuple(
     'BuildData', ['project_name', 'engine', 'sanitizer', 'architecture'])
-from .transform import trans_table
 from . import utils_ctx 
 from .utils_detector import getFalsePositives
+from . import _profile
 # Global
 CONTAINER_ENV = []
 def permissionResolve(target_path):
@@ -100,10 +100,10 @@ def build_from_srcmap(srcmap,issue,replace_dep=None,save_img=False,verifyFix=Fal
             ForceNoErrDump = ForceNoErrDump,patches=patches,oss_fuzz_commit=oss_fuzz_commit,custom_script=custom_script)
 def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,commit_date,replace_dep=None,\
     save_img=False,verifyFix=False,ForceNoErrDump = False,patches=None,oss_fuzz_commit=False,custom_script=[]):
-    global REBUTTAL_EXP
     # Build source_dir
         
     srcmap_items = json.loads(open(srcmap).read())
+
     if not oss_fuzz_commit:
         if "/src" in srcmap_items and srcmap_items['/src']['url']=='https://github.com/google/oss-fuzz.git':
             res = reproducerPrepareOssFuzz(project_name,srcmap_items['/src']['rev'])
@@ -111,8 +111,10 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
             res = reproducerPrepareOssFuzz(project_name,commit_date)
     else:
         res = reproducerPrepareOssFuzz(project_name,oss_fuzz_commit)
-    if not res: return False
-    else: tmp_dir , project_dir = res
+    if not res: 
+        return False
+
+    tmp_dir , project_dir = res
     
     dockerfile = project_dir / 'Dockerfile'
     INFO(f"[+] dockerfile: {dockerfile}")
@@ -136,6 +138,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     with open(srcmap) as f:
         data = json.loads(f.read())
     
+
     source_dir = tmpDir()
     src = source_dir / "src"
     src.mkdir(parents=True, exist_ok=True)
@@ -143,7 +146,8 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     unsorted = list(data.keys())
     sortedKey = sorted(unsorted, key=len)
     mainCompoinent = getPname(localId)
-    if mainCompoinent == False: return leaveRet(False,[tmp_dir,source_dir])
+    if mainCompoinent == False: 
+        return leaveRet(False,[tmp_dir,source_dir])
 
     if "/src/xz" in sortedKey: # Edge case
         ForceNoErrDump = True
@@ -152,11 +156,11 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     for x in sortedKey:
         if skipComponent(project_name,x):
             continue
-        
-        if REBUTTAL_EXP and "/src/"+mainCompoinent!=x:
+
+        if _profile.EVAL_NOCOMPONENT and "/src/"+mainCompoinent != x:
             INFO(f"[+] Not main components, Skip {x}")
             continue
-        if verifyFix and mainCompoinent==x:
+        if verifyFix and "/src/"+mainCompoinent == x:
             approximate = '+'
         else:
             approximate = '-'
@@ -172,15 +176,16 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
         item_name   = newKey
         item_url    = data[newKey]['url']
         item_type   = data[newKey]['type']
+        if _profile.EVAL_NOSRCMAP and "/src/"+mainCompoinent != x:
+            data[newKey]['rev'] = "NOT＿ABLE_TO_CHECK_OUT"
         item_rev    = data[newKey]['rev']
         item_name = "/".join(item_name.split("/")[2:])
 
         if specialComponent(project_name,newKey,data[newKey],dockerfile,commit_date):
             continue
-        if item_name == 'aflplusplus' and item_url =='https://github.com/AFLplusplus/AFLplusplus.git':
+        if item_name in [ 'aflplusplus', 'libfuzzer', 'afl']:
             continue
-        if item_name == 'libfuzzer' and 'llvm.org/svn/llvm-project/compiler-rt/trunk/lib/fuzzer' in item_url:
-            continue
+
         # Broken Revision
         if item_rev=="" or item_rev == "UNKNOWN":
             issue_record(project_name,localId,f"Broken Meta: No Revision Provided")
@@ -258,7 +263,8 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
     if not fixBuildScript(project_dir/"build.sh",project_name):
         eventLog(f"Fail to Fix Build.sh, {localId}")
         return leaveRet(False,[tmp_dir,source_dir])
-    if patches: doPatchMain(localId,dockerfile,patches) # Only used in special mode
+    if patches: 
+        doPatchMain(localId,dockerfile,patches) # Only used in special mode
     # Used for AIxCC Target Gen
     utils_ctx.BUIL_DIR = project_dir if utils_ctx.BUIL_DIR == None else utils_ctx.BUIL_DIR
     # Let's Build It
