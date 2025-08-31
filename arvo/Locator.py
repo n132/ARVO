@@ -70,7 +70,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
     # We dont need verifyFix=True since we are sure we can checkout the mainComponent
     build_res = build_from_srcmap(cts,issue,ForceNoErrDump=OSS_ERR / f"{localId}_Compile_{commit}.log",oss_fuzz_commit=oss_fuzz_commit,custom_script=submodule_tracker)
     if not poc: # Build only mode
-        return leaveRet(build_res,cts.parent)
+        return build_res
     if build_res == True:
         # Step4: Verify and return
         log = ARVO /"Log" / tag / f"{localId}" / f"{commit}.exec.log"
@@ -88,7 +88,7 @@ def checkBuild(commit,localId,pname,poc,tag=None,oss_fuzz_commit=False,submodule
         remove_oss_fuzz_img(localId)
         return leaveRet(None,cts.parent)
     else:
-        PANIC(f"Unintended return value: {build_res=}")
+        eventLog(f"Unintended return value: {build_res=}",True)
 #==================================================================
 #
 #                  Report Generator
@@ -850,7 +850,7 @@ def reproduce(localId, dockerize = True, update = True):
         subprocess.run(cmd, stdout=f,stderr=f)
     with open(tmpfile,'rb') as f:
         crash_output = f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-    shutil.rmtree(tmpfile.parent)
+    os.remove(tmpfile)
     
     docker_rmi(f"n132/arvo:{localId}-vul")
     docker_rmi(f"n132/arvo:{localId}-fix")

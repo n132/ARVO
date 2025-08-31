@@ -152,7 +152,7 @@ def getCrashOutput(localId):
         subprocess.run(cmd, stdout=f,stderr=f)
     with open(tmpfile,'rb') as f:
         crash_output = f.read().decode("utf-8", errors="replace").replace("�", "\x00")
-    os.remove(tmpfile.parent)
+    os.remove(tmpfile)
     return crash_output
 
 def dataset_fix_fuzz_target():

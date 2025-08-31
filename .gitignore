@@ -27,5 +27,7 @@ fxTest.py
 *arvo.egg-info*
 FalsePositives.md
 *.db
+arvo-run/
 diff
 eval_*.py
+data-analysis/

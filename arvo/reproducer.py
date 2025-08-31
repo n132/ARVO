@@ -1,4 +1,3 @@
-from sqlalchemy import Null
 from .utils import *
 from .utils_core import *
 from .utils_git import *
@@ -279,8 +278,7 @@ def build_fuzzer_with_source(localId,project_name,srcmap,sanitizer,engine,arch,c
                                 save_img=save_img,noDump=ForceNoErrDump,
                                 custom_script=custom_script)
     # we need sudo since the docker container root touched the folder
-    if CLEAN_TMP: 
-        check_call(["sudo","rm","-rf",source_dir])
+    if CLEAN_TMP: check_call(["sudo","rm","-rf",source_dir])
     return leaveRet(result,tmp_dir)
 def build_fuzzers_impl(localId,project,project_dir,engine,
     sanitizer,architecture,source_path,
@@ -306,8 +304,7 @@ def build_fuzzers_impl(localId,project,project_dir,engine,
         return issue_record(project,localId,f"Failed to build DockerImage",retv=False)
     
     # Build Succeed, Try Compiling
-    if logFile and logFile.exists(): 
-        os.remove(str(logFile))
+    if logFile and logFile.exists(): os.remove(str(logFile))
     env = [
         'FUZZING_ENGINE=' + engine,
         'SANITIZER=' + sanitizer,
@@ -455,11 +452,9 @@ def pushImgRemote(localId,issue):
 def verify(localId,save_img=False):
     # if Save_img == True, we should make sure there is no two workers working
     # on the same localId or confliction may happen
-    if not isinstance(localId,int):
-        return False
     known_false_positives = getFalsePositives()
     if localId in known_false_positives:
-        INFO(f"{localId=} is a known false positive from the upstream")
+        INFO(f"{localId=} is a known false positive on oss-fuzz")
         return False
         
     def leave(result):
@@ -467,18 +462,8 @@ def verify(localId,save_img=False):
             docker_rm(f"reproducer_{localId}")
             docker_rmi(f"n132/arvo:{localId}-vul")
             docker_rmi(f"n132/arvo:{localId}-fix")
-        if CLEAN_TMP:
-            if  case_dir:
-                clean_dir(case_dir)
-            # sudo is necessary since the permission issue
-            out_dir     = OSS_OUT  / str(localId)
-            work_dir    = OSS_WORK  / str(localId)
-            if out_dir.exists():
-                check_call(["sudo","rm","-rf", out_dir])
-            if work_dir.exists():
-                check_call(["sudo","rm","-rf", work_dir])
-        if RM_IMAGES: 
-            remove_oss_fuzz_img(localId)
+        if CLEAN_TMP and case_dir: clean_dir(case_dir)
+        if RM_IMAGES: remove_oss_fuzz_img(localId)
         return result
     
     def saveImg_LoadCommit(tag):
@@ -518,11 +503,11 @@ def verify(localId,save_img=False):
     # 2. Download the PoC
     INFO("[+] Downloading PoC")
     case_dir = tmpDir()
-    case_path = None
     try:
         case_path = downloadPoc(issue,case_dir,"crash_case")
     except:
-        pass
+        issue_record(issue['project'],localId,f"Fail to Download the Reproducer")
+        return leave(False)
     if not case_path or not case_path.exists():
         issue_record(issue['project'],localId,f"Fail to Download the Reproducer")
         return leave(False)
