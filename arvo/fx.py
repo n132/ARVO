@@ -30,7 +30,6 @@ def getGetVulCode(localId):
     pInfo         = get_projectInfo(localId,pname)[1]
     gt = GitTool(pInfo['url'],pInfo['type'],vul_commit)
     repo_dir = gt.repo
-    vul_code = runFixGetVulCode(diff_file,repo_dir)
     vul_code = get_vul_code(diff_file,repo_dir)
     return [ x[0] for x in vul_code]
 def verify_FIX(localId,repo_dir,pname):
