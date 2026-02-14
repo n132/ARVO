@@ -1,0 +1,7 @@
+{
+  "/src/arrow": {
+    "type": "git",
+    "url": "https://github.com/apache/arrow.git",
+    "rev": "6a08785946a095739938d768aba99ac03dae8d47"
+  }
+}

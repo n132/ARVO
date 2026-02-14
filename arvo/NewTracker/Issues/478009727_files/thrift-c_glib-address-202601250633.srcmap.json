@@ -1,0 +1,7 @@
+{
+  "/src/thrift": {
+    "type": "git",
+    "url": "https://github.com/apache/thrift.git",
+    "rev": "6f76573602ab08c1b7ca9f6f6973cd4f1fbb3869"
+  }
+}

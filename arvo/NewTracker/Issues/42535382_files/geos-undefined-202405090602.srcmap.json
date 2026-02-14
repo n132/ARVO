@@ -1,0 +1,7 @@
+{
+  "/src/geos": {
+    "type": "git",
+    "url": "https://git.osgeo.org/gitea/geos/geos.git",
+    "rev": "7f429a927aa7638a2087a59f62a5f67fe1d094a2"
+  }
+}

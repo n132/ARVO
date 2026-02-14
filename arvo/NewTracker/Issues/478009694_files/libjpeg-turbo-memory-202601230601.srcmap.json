@@ -1,0 +1,22 @@
+{
+  "/src/libjpeg-turbo.3.0.x": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "91ad423edd8c4c70abb30b5fa3de56a409db078c"
+  },
+  "/src/libjpeg-turbo.main": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "f1b33d9ed83b8b302d27d447e94445e907c7889e"
+  },
+  "/src/libjpeg-turbo.dev": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "312d0e493ed99d2b175f5871838e56369e954a27"
+  },
+  "/src/fuzz": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/fuzz",
+    "rev": "9888922e816e5c47e14684a5d9305f680e68147d"
+  }
+}

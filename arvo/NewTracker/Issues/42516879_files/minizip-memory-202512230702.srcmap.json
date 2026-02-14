@@ -1,0 +1,7 @@
+{
+  "/src/minizip-ng": {
+    "type": "git",
+    "url": "https://github.com/zlib-ng/minizip-ng",
+    "rev": "bf92612b706ba7a31390469ff5ae782c5cb3516a"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "/src/libpcap": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/libpcap.git",
+    "rev": "6870404f35da32d63a0a8789edb010842dd6b208"
+  },
+  "/src/tcpdump": {
+    "type": "git",
+    "url": "https://github.com/the-tcpdump-group/tcpdump.git",
+    "rev": "3ba8291c6a772d6c2a3023af8b3fd991964070cf"
+  },
+  "/src/PcapPlusPlus": {
+    "type": "git",
+    "url": "https://github.com/seladb/PcapPlusPlus",
+    "rev": "08d661c4385a9e1e1bea68afc88ccad60718f638"
+  }
+}

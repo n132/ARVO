@@ -1,0 +1,87 @@
+{
+  "/src/jbigkit": {
+    "type": "git",
+    "url": "https://www.cl.cam.ac.uk/~mgk25/git/jbigkit",
+    "rev": "7d3c1bea895d910907e2501fe9165e353eceabae"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl",
+    "rev": "53042ec537712e0df08709524f4df097d42174bc"
+  },
+  "/src/bzip2": {
+    "type": "git",
+    "url": "https://gitlab.com/federicomenaquintero/bzip2.git",
+    "rev": "bf905ea2251191ff9911ae7ec0cfc35d41f9f7f6"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://github.com/freetype/freetype",
+    "rev": "341049a95bacfc5debf6c9daf537b7acec27f3dd"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS",
+    "rev": "35b57af4e1a4d6d7a40ba188f9f4efb7857ff511"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/pnggroup/libpng",
+    "rev": "0f07f70aa55e4771d00b0f8a238dca992fbb60e4"
+  },
+  "/src/libraw": {
+    "type": "git",
+    "url": "https://github.com/libraw/libraw",
+    "rev": "0b56545a4f828743f28a4345cdfdd4c49f9f9a2a"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz",
+    "rev": "9f4c5a0d4817c9c7011cdfd00cfbe0ddda66a455"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo",
+    "rev": "813425f735fcc8babccc1516dd214f77378dca5e"
+  },
+  "/src/libdeflate": {
+    "type": "git",
+    "url": "https://github.com/ebiggers/libdeflate",
+    "rev": "c8c56a20f8f621e6a966b716b31f1dedab6a41e3"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib",
+    "rev": "ecbaf031f81ddfcff200dcfd052df48c9047f3cf"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://github.com/webmproject/libwebp",
+    "rev": "45102247a82396fabac5241c64305b13ed711335"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "8ac526236416b9c28f73d4684cf9e8a66f1d134e"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif",
+    "rev": "56cc0d2829800a2e847dd2ab6577e4965a26a5d5"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265",
+    "rev": "98ee32715ee3826faf180436befc13223892a1cf"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff",
+    "rev": "61b5551e0c26685000435885c1ba6cf23b92d416"
+  },
+  "/src/imagemagick": {
+    "type": "git",
+    "url": "https://github.com/imagemagick/imagemagick",
+    "rev": "a52c1b402be08ef8ae193f28ac5b2e120f2fa26f"
+  }
+}

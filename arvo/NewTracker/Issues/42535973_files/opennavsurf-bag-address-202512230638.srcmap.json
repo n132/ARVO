@@ -1,0 +1,7 @@
+{
+  "/src/bag": {
+    "type": "git",
+    "url": "https://github.com/OpenNavigationSurface/BAG",
+    "rev": "f4d7860efa36c6f1fd31a5c50d3656f6b80bb41b"
+  }
+}

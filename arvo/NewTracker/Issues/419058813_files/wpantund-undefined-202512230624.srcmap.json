@@ -1,0 +1,7 @@
+{
+  "/src/wpantund": {
+    "type": "git",
+    "url": "https://github.com/openthread/wpantund",
+    "rev": "8b5ce64c2f5bbf106cabfd015bcb3bdb2e0248d3"
+  }
+}

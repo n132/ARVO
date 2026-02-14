@@ -1,0 +1,187 @@
+{
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "6c878f8b829bc9da4bbb5196c125e55a7c3ac32f"
+  },
+  "/src/LibRaw": {
+    "type": "git",
+    "url": "https://github.com/LibRaw/LibRaw.git",
+    "rev": "0b56545a4f828743f28a4345cdfdd4c49f9f9a2a"
+  },
+  "/src/texlive-source": {
+    "type": "git",
+    "url": "https://github.com/TeX-Live/texlive-source.git",
+    "rev": "715db8cdd85ac2352e23bf28f3e5f9a34d5589be"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "https://github.com/ArtifexSoftware/ghostpdl.git",
+    "rev": "d4ac828eba87f53077339dd5acd6f8f022bad745"
+  },
+  "/src/kdegraphics-mobipocket": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/kdegraphics-mobipocket.git",
+    "rev": "41cc2e330c8bf93e46f99124b8d692c661f90643"
+  },
+  "/src/libkdcraw": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/libkdcraw.git",
+    "rev": "784cb18a4c1c2abd67b5a93a4e65888dbcb110e9"
+  },
+  "/src/taglib": {
+    "type": "git",
+    "url": "https://github.com/taglib/taglib.git",
+    "rev": "5d44f3eeac33c518f77b7a99c5e6463f897f904c"
+  },
+  "/src/kio-extras/thumbnail/autotests/data/corpus/openexr-images": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr-images.git",
+    "rev": "e38ffb0790f62f05a6f083a6fa4cac150b3b7452"
+  },
+  "/src/kio-extras": {
+    "type": "git",
+    "url": "https://invent.kde.org/network/kio-extras.git",
+    "rev": "f8eec424c432a5235f55f273203059109823293f"
+  },
+  "/src/fmt": {
+    "type": "git",
+    "url": "https://github.com/fmtlib/fmt.git",
+    "rev": "0e078f6ed0624be8babc43bd145371d9f3a08aab"
+  },
+  "/src/kwindowsystem": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kwindowsystem.git",
+    "rev": "7fc38783e70d02cccbc3d72246955a0432e2dadc"
+  },
+  "/src/kservice": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kservice.git",
+    "rev": "e1e715c5a251a04837c12f7a5565fe33128c60ba"
+  },
+  "/src/kcoreaddons": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kcoreaddons.git",
+    "rev": "d09eafb581ed8ed8185d86ecd57c0d29d190a5db"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "9f4c5a0d4817c9c7011cdfd00cfbe0ddda66a455"
+  },
+  "/src/kio": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kio.git",
+    "rev": "2a05436403b6fd98d6a027a77be9d54e96f9b132"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "edd88953de3a8560b0925ad0637490925f086317"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "ae9f20ca2716f2605822ca375995b7d876389b64"
+  },
+  "/src/kcrash": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kcrash.git",
+    "rev": "fd28fadbc7f30de62ba2757f661d12518d0f3ae0"
+  },
+  "/src/libkexiv2": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/libkexiv2.git",
+    "rev": "90a165d07bcbbb4a5a15e8d40e1c7b47bd2e0043"
+  },
+  "/src/syntax-highlighting": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/syntax-highlighting.git",
+    "rev": "f6f1e6538b4489f44701dbea2d06debdaf59d059"
+  },
+  "/src/ki18n": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/ki18n.git",
+    "rev": "2b88357db64b8c5de898fc6c548463e4ad366481"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/freetype/freetype.git",
+    "rev": "a9babbcbc0e93757f37e6ab998195b227fe19ad9"
+  },
+  "/src/exiv2": {
+    "type": "git",
+    "url": "https://github.com/exiv2/exiv2.git",
+    "rev": "1ea44664cff6d5c4230519fc29569e9ea35b7c30"
+  },
+  "/src/qtsvg": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtsvg.git",
+    "rev": "a57b90fbd2c2701c680c8c4aa6a187cfd19668f9"
+  },
+  "/src/kconfig": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kconfig.git",
+    "rev": "5733f186a478a2f2d482ff3b166af397b0a1f4a0"
+  },
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+    "rev": "027f33284f146d91bf983a58c8ea50c36154f339"
+  },
+  "/src/solid": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/solid.git",
+    "rev": "d0652465812bfd4e2fb3b81b1507f0719eb82183"
+  },
+  "/src/kauth": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kauth.git",
+    "rev": "27ebf2ababee8d2653c71d4857612e61ac9b3152"
+  },
+  "/src/fontconfig": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+    "rev": "25c40e71443046db4a89160971948ceca1a0046a"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "4b7cd5474a8613d8007c257c818d672958207303"
+  },
+  "/src/brotli": {
+    "type": "git",
+    "url": "https://github.com/google/brotli.git",
+    "rev": "5fa73e23bee34f84148719576a7a434f0fc43dc8"
+  },
+  "/src/libexpat": {
+    "type": "git",
+    "url": "https://github.com/libexpat/libexpat.git",
+    "rev": "2f2c3b85d96edcf3fedbe950ee9451dbf3b2b498"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "90bec692577c55e5377829e239f79eb76a341bbf"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "845e0c2c20f7edd2cb1cb28da7130051514592b7"
+  },
+  "/src/ffmpegthumbs": {
+    "type": "git",
+    "url": "https://invent.kde.org/multimedia/ffmpegthumbs.git",
+    "rev": "9362e941686535e9c575669171ed0d7cc46e21c7"
+  },
+  "/src/kdesdk-thumbnailers": {
+    "type": "git",
+    "url": "https://invent.kde.org/sdk/kdesdk-thumbnailers.git",
+    "rev": "a86c400801bf4e5e72d078f8252c2fa91a1790de"
+  },
+  "/src/kdegraphics-thumbnailers": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/kdegraphics-thumbnailers.git",
+    "rev": "b7fee89bf0709203469c6cd72887e03d7f6e3c46"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/net-snmp": {
+    "type": "git",
+    "url": "https://github.com/net-snmp/net-snmp",
+    "rev": "1d79f40e833c5553327f5bb5402bf103572fd6ae"
+  }
+}

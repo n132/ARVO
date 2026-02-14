@@ -1,0 +1,12 @@
+{
+  "/src/libssh2": {
+    "type": "git",
+    "url": "https://github.com/libssh2/libssh2.git",
+    "rev": "13ad7b2f5cd67e0dc843098ce19ce8b208368c29"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "5525f8c9ef8bb879dadd0eb942d524827d1b0362"
+  }
+}

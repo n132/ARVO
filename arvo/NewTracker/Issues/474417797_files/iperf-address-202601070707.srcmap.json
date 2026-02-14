@@ -1,0 +1,7 @@
+{
+  "/src/iperf": {
+    "type": "git",
+    "url": "https://github.com/esnet/iperf",
+    "rev": "4b370dd315f21cf628db61c6d7baba63cc6852b6"
+  }
+}

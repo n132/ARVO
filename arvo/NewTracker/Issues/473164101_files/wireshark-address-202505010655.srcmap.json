@@ -1,0 +1,12 @@
+{
+  "/src/wireshark-fuzzdb": {
+    "type": "git",
+    "url": "https://bitbucket.org/jwzawadzki/wireshark-fuzzdb.git",
+    "rev": "98fa5ba9a4c27a2fbcbe68bc43f696cfa295046e"
+  },
+  "/src/wireshark": {
+    "type": "git",
+    "url": "https://gitlab.com/wireshark/wireshark.git",
+    "rev": "c374a1f128b4a2a9a5cf80348b7c64ea4824200b"
+  }
+}

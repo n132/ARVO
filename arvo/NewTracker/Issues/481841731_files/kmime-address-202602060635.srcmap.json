@@ -1,0 +1,22 @@
+{
+  "/src/kcodecs": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kcodecs.git",
+    "rev": "e4121db12ab6c8686768cefcca8d5135981a0725"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "0de1b26b80efb5a123c73a6d23a43fcb73f9c1ed"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "100ab64db94a193d2a5a1d76443d17a4b3e9229c"
+  },
+  "/src/kmime": {
+    "type": "git",
+    "url": "https://invent.kde.org/pim/kmime.git",
+    "rev": "61d9d5dbf5013ad8b1968611fdd0a89676920444"
+  }
+}

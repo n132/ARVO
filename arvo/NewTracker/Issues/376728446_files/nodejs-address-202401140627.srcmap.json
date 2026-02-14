@@ -1,0 +1,7 @@
+{
+  "/src/node": {
+    "type": "git",
+    "url": "https://github.com/AdamKorcz/node",
+    "rev": "bc99139271f260f94b61de68e968583ad9a84001"
+  }
+}

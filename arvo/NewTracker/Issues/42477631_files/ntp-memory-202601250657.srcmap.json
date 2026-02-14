@@ -1,0 +1,7 @@
+{
+  "/src/ntp-dev": {
+    "type": "git",
+    "url": "https://bitbucket.nwtime.org/pc/ntp.git",
+    "rev": "ef7670e705e0b0ffe0635873bfed128d5f8c7555"
+  }
+}

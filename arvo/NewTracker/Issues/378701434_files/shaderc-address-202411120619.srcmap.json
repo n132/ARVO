@@ -1,0 +1,12 @@
+{
+  "/src/shaderc": {
+    "type": "git",
+    "url": "https://github.com/google/shaderc",
+    "rev": "8c4d729001709e907fba57041749d9ed8985891c"
+  },
+  "/src/glslang": {
+    "type": "git",
+    "url": "https://github.com/KhronosGroup/glslang",
+    "rev": "cb9a9d375dfde6477c14a4f3de9e320134d37447"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "/src/fio": {
+    "type": "git",
+    "url": "https://github.com/axboe/fio.git",
+    "rev": "df0ab55ff9e28f4b85c199e207aec904f8a76440"
+  },
+  "/src/aflplusplus": {
+    "type": "git",
+    "url": "https://github.com/AFLplusplus/AFLplusplus.git",
+    "rev": "550ba4d77294e61597a5259d00769c61281e0042"
+  }
+}

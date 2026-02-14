@@ -1,0 +1,7 @@
+{
+  "/src/libvpx": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libvpx",
+    "rev": "75d62e849507e78e254d0c2ba47f50174c18d293"
+  }
+}

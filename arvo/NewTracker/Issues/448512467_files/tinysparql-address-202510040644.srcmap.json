@@ -1,0 +1,7 @@
+{
+  "/src/tinysparql": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/tinysparql.git",
+    "rev": "cd880928f1625f6685f4fde08f1d167efc53c014"
+  }
+}

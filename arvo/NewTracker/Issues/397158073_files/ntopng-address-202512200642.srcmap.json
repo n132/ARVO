@@ -1,0 +1,22 @@
+{
+  "/src/nDPI": {
+    "type": "git",
+    "url": "https://github.com/ntop/nDPI.git",
+    "rev": "712f4bc72a7b4b4c59cc48e0f08b9bcabaee63a5"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator.git",
+    "rev": "d780394da371517c2e21190d05414845d0ac1e07"
+  },
+  "/src/libprotobuf-mutator/build/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "b407e8416e3893036aee5af9a12bd9b6a0e2b2e6"
+  },
+  "/src/ntopng": {
+    "type": "git",
+    "url": "https://github.com/ntop/ntopng.git",
+    "rev": "d28db325a28b8df5c8ec77f3a9c5ea37f3c3367c"
+  }
+}

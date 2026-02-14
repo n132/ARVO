@@ -1,0 +1,242 @@
+{
+  "/src/ffmpeg": {
+    "type": "git",
+    "url": "https://git.ffmpeg.org/ffmpeg.git",
+    "rev": "9bfa1635aef08e777deaeeae15ff9a5ade412188"
+  },
+  "/src/gettext": {
+    "type": "git",
+    "url": "git://git.savannah.gnu.org/gettext.git",
+    "rev": "633b7fdef68b660802ce190f1cf0ab64eb8c3e5e"
+  },
+  "/src/LibRaw": {
+    "type": "git",
+    "url": "https://github.com/LibRaw/LibRaw.git",
+    "rev": "ca5d4507ef6f64cbf753fbc40c71773bb697fff9"
+  },
+  "/src/texlive-source": {
+    "type": "git",
+    "url": "https://github.com/TeX-Live/texlive-source.git",
+    "rev": "b63059a22c1b9ce26d1802c7471f889c9ec511a7"
+  },
+  "/src/ghostpdl": {
+    "type": "git",
+    "url": "https://github.com/ArtifexSoftware/ghostpdl.git",
+    "rev": "b251567de911d13a774e818298fc88dd3d22276c"
+  },
+  "/src/kdegraphics-mobipocket": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/kdegraphics-mobipocket.git",
+    "rev": "940d5ab5a9cd9515d173777cb69ebc7c922ad217"
+  },
+  "/src/libkdcraw": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/libkdcraw.git",
+    "rev": "784cb18a4c1c2abd67b5a93a4e65888dbcb110e9"
+  },
+  "/src/libXfixes": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libXfixes.git",
+    "rev": "55bb2d1d57d43e0595ce45393f26eb433d75a7cc"
+  },
+  "/src/taglib": {
+    "type": "git",
+    "url": "https://github.com/taglib/taglib.git",
+    "rev": "f4117f873c2cdc7b61553ae27df34364340a37ea"
+  },
+  "/src/kio-extras/thumbnail/autotests/data/corpus/openexr-images": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr-images.git",
+    "rev": "e38ffb0790f62f05a6f083a6fa4cac150b3b7452"
+  },
+  "/src/kio-extras": {
+    "type": "git",
+    "url": "https://invent.kde.org/network/kio-extras.git",
+    "rev": "af529f5c6982533ed15cf4251b5607c142482201"
+  },
+  "/src/fmt": {
+    "type": "git",
+    "url": "https://github.com/fmtlib/fmt.git",
+    "rev": "f99d53024782bf928b07839140862163f15ade5b"
+  },
+  "/src/kwindowsystem": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kwindowsystem.git",
+    "rev": "a7b8ab45c04f8a71010dae9f4d5246d98ccd7465"
+  },
+  "/src/libX11": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libX11.git",
+    "rev": "6c75545a1deb51f5903992c52af6bc35cc9bc103"
+  },
+  "/src/kservice": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kservice.git",
+    "rev": "8df96355194c36776d938a93a1899cba469ffea8"
+  },
+  "/src/kcoreaddons": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kcoreaddons.git",
+    "rev": "4f6e577d8de3ee9b326eec9eefc226c5e6d08bfe"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "54147ad65af12d9e4f60a8ce59094a8a30ad5919"
+  },
+  "/src/kio": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kio.git",
+    "rev": "e4b8d80946e8fec372dd2fa4032aa7751fe91bd1"
+  },
+  "/src/xcbproto": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/proto/xcbproto.git",
+    "rev": "cf7e2581b613802f2f8ec2a4b50a6a20aad4bf52"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "cd55be2a2ff985d3b607208abb27333f1aa434c9"
+  },
+  "/src/libxtrans": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libxtrans.git",
+    "rev": "693d28a76024a2a0a28eef25037bcb7558b8bbfa"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "1168da0e567960d50cba1b58c9b0ba047ece4733"
+  },
+  "/src/util-macros": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/util/macros.git",
+    "rev": "a9d71e3fd8e6758b70be31c586921bbbcd2a8449"
+  },
+  "/src/libXau": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libXau.git",
+    "rev": "3861176ca80013c867b32451075e566caab4d5c2"
+  },
+  "/src/kcrash": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kcrash.git",
+    "rev": "51351d1540db371d5b10db519dd7302c5c3209c3"
+  },
+  "/src/libkexiv2": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/libkexiv2.git",
+    "rev": "90a165d07bcbbb4a5a15e8d40e1c7b47bd2e0043"
+  },
+  "/src/syntax-highlighting": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/syntax-highlighting.git",
+    "rev": "dd33fb285309795f54f7a304eebda9df10cdb252"
+  },
+  "/src/ki18n": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/ki18n.git",
+    "rev": "ea8dab9a47774088014ba028f73b041a0ef14ef8"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/freetype/freetype.git",
+    "rev": "85c8efe0afa5ad0df35114e317a065f544943c52"
+  },
+  "/src/exiv2": {
+    "type": "git",
+    "url": "https://github.com/exiv2/exiv2.git",
+    "rev": "6e7600b7c1b3918ea9c1f05d9806c114cec75482"
+  },
+  "/src/qtsvg": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtsvg.git",
+    "rev": "f1af239feb7626c85200050538e1f244908c99c8"
+  },
+  "/src/kconfig": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kconfig.git",
+    "rev": "8bcca27837115d46ecb31f665bea98fdae4a7128"
+  },
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+    "rev": "027f33284f146d91bf983a58c8ea50c36154f339"
+  },
+  "/src/libXcursor": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libXcursor.git",
+    "rev": "15efad7ccd035f5d1ddc8d437e047569d1775fa7"
+  },
+  "/src/solid": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/solid.git",
+    "rev": "e324a507f36ef5d03bae4b598f210c9bed0982bf"
+  },
+  "/src/kauth": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kauth.git",
+    "rev": "ee861c34f5272c5c8721f75896636a899631f8c0"
+  },
+  "/src/fontconfig": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+    "rev": "099a046fea5b707170f23c6041cb540be948efa4"
+  },
+  "/src/xorgproto": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/proto/xorgproto.git",
+    "rev": "cc9ce4a0cc3c99488d26b77a4f27192b0663cafa"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "b3720372cf9852995326e8fba10909b9644919fe"
+  },
+  "/src/brotli": {
+    "type": "git",
+    "url": "https://github.com/google/brotli.git",
+    "rev": "5fa73e23bee34f84148719576a7a434f0fc43dc8"
+  },
+  "/src/libxcb": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libxcb.git",
+    "rev": "93ee2ac73c32dcb567259fb83c564a424cd9fef7"
+  },
+  "/src/libexpat": {
+    "type": "git",
+    "url": "https://github.com/libexpat/libexpat.git",
+    "rev": "7cbe6c52c068dcb0d6b135f6e09cd6ff68c983fa"
+  },
+  "/src/libXrender": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/xorg/lib/libXrender.git",
+    "rev": "f32afe9f877ae032c6bc9c27b17b7978b1b4c856"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "3c5d7054663db573f17d7d1511c7aad480da0602"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "9ddb3b52722fbd0c92577c55c49a6153d3baa404"
+  },
+  "/src/ffmpegthumbs": {
+    "type": "git",
+    "url": "https://invent.kde.org/multimedia/ffmpegthumbs.git",
+    "rev": "8eb38b146e36a5501e800a141977a3e18e6a2a6f"
+  },
+  "/src/kdesdk-thumbnailers": {
+    "type": "git",
+    "url": "https://invent.kde.org/sdk/kdesdk-thumbnailers.git",
+    "rev": "a6da0192a1c6cdbce83cfdb8d7ed65ccf8ed40e0"
+  },
+  "/src/kdegraphics-thumbnailers": {
+    "type": "git",
+    "url": "https://invent.kde.org/graphics/kdegraphics-thumbnailers.git",
+    "rev": "1a309aeb83ff1558c00f166eb163e55576d10e2d"
+  }
+}

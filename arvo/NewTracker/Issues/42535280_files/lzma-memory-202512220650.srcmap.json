@@ -1,0 +1,7 @@
+{
+  "/src/lzma-fuzz": {
+    "type": "git",
+    "url": "https://github.com/fancycode/lzma-fuzz.git",
+    "rev": "d25e63d8f6b8186d04146cb19405bc5ad565412e"
+  }
+}

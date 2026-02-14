@@ -1,0 +1,22 @@
+{
+  "/src/LPM/external.protobuf/src/external.protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "b407e8416e3893036aee5af9a12bd9b6a0e2b2e6"
+  },
+  "/src/libprotobuf-mutator": {
+    "type": "git",
+    "url": "https://github.com/google/libprotobuf-mutator",
+    "rev": "d780394da371517c2e21190d05414845d0ac1e07"
+  },
+  "/src/cJSON": {
+    "type": "git",
+    "url": "https://github.com/ralight/cJSON",
+    "rev": "04564d8d6911725c5bc48d8c4b4126d37967d939"
+  },
+  "/src/mosquitto": {
+    "type": "git",
+    "url": "https://github.com/eclipse/mosquitto",
+    "rev": "ae7cf71dcf17aa7e309c62b69fed5a321c4ca5c9"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "7139d2ba980d97c45ab9a7b80ef2c98328ec2606"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "402e264b94fd74bdf66837da216b6251805b4ae4"
+  },
+  "/src/x265": {
+    "type": "git",
+    "url": "https://bitbucket.org/multicoreware/x265_git/src/stable/",
+    "rev": "afa0028dda3486bce8441473c6c7b99bec2f0961"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "1eab345ad333631dbaceadbec776806c8142144e"
+  }
+}

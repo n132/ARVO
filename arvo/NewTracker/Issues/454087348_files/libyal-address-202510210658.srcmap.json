@@ -1,0 +1,252 @@
+{
+  "/src/libvmdk": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvmdk.git",
+    "rev": "538da70e8a9fda95be874f544573334c2f5bb97b"
+  },
+  "/src/libvhdi": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvhdi.git",
+    "rev": "6c102a20ad8d0c93330bc6a97beb97718befd26b"
+  },
+  "/src/libsmraw": {
+    "type": "git",
+    "url": "https://github.com/libyal/libsmraw.git",
+    "rev": "a66fdaf364841c5ef429518abf7dc6a6046f1604"
+  },
+  "/src/libqcow": {
+    "type": "git",
+    "url": "https://github.com/libyal/libqcow.git",
+    "rev": "474d5c362928ee5cddf056a5da9c23f1a32c0440"
+  },
+  "/src/libphdi": {
+    "type": "git",
+    "url": "https://github.com/libyal/libphdi.git",
+    "rev": "9bbc65dd3cda85f6c70956d688d6a0ee2a7343f1"
+  },
+  "/src/libodraw": {
+    "type": "git",
+    "url": "https://github.com/libyal/libodraw.git",
+    "rev": "f3d9b6b33a2c160514d8f56c60c3a47c4322f8ad"
+  },
+  "/src/libmodi": {
+    "type": "git",
+    "url": "https://github.com/libyal/libmodi.git",
+    "rev": "80b7ce6b1c82254130d1efcbe13b9becea56c157"
+  },
+  "/src/libewf": {
+    "type": "git",
+    "url": "https://github.com/libyal/libewf.git",
+    "rev": "63068f601869b46292dbec91f8863bdf3e86e581"
+  },
+  "/src/libvsmbr": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvsmbr.git",
+    "rev": "bac6947a9b6717615924b36dda10ece0b126cfd2"
+  },
+  "/src/libvslvm": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvslvm.git",
+    "rev": "19ea14299e45d066f3eeb9c3ff2be2887b9836ed"
+  },
+  "/src/libvshadow": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvshadow.git",
+    "rev": "9070531247f329bfe3aa60a05cfe5a1c09b197bc"
+  },
+  "/src/libvsgpt": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvsgpt.git",
+    "rev": "f8a5a46ed0ac6bdf482dc79ae0bad5463c03157e"
+  },
+  "/src/libvsbsdl": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvsbsdl.git",
+    "rev": "e3cd502f3e9033ef10937ab6d8000af1a1e061fa"
+  },
+  "/src/libvsapm": {
+    "type": "git",
+    "url": "https://github.com/libyal/libvsapm.git",
+    "rev": "d61176aa3e1bd1a7c2ca570d37880c38b8fa571d"
+  },
+  "/src/libluksde": {
+    "type": "git",
+    "url": "https://github.com/libyal/libluksde.git",
+    "rev": "b9c9c5008c8126ed7f08704276f9417d981a9686"
+  },
+  "/src/libfvde": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfvde.git",
+    "rev": "03f12f567cd9078d017f9fc44dbfed1f66884d6d"
+  },
+  "/src/libbde": {
+    "type": "git",
+    "url": "https://github.com/libyal/libbde.git",
+    "rev": "36282206c1c63545e8e094c3bc6caded2ae9df0f"
+  },
+  "/src/libfsxfs": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfsxfs.git",
+    "rev": "4de4d8947436806e33a0897e0a709f174b594ca8"
+  },
+  "/src/libfsntfs": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfsntfs.git",
+    "rev": "d5913c7aee63bb7eee276b244142c64b0d017f39"
+  },
+  "/src/libfshfs": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfshfs.git",
+    "rev": "1b26cec37ee05ce32707f69f4cececc753596c11"
+  },
+  "/src/libfsfat": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfsfat.git",
+    "rev": "f3504e412c66be9f8c2b53c1cede327c76da3f43"
+  },
+  "/src/libfsext": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfsext.git",
+    "rev": "ccd3bf55fbe90d7fb961dc12bcf6a7a6c0527d88"
+  },
+  "/src/libfsapfs": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfsapfs.git",
+    "rev": "5f86c438cc2cd544928e1f693f010414eb8c50bc"
+  },
+  "/src/libwrc": {
+    "type": "git",
+    "url": "https://github.com/libyal/libwrc.git",
+    "rev": "b4b358785237344d9dbad8b338cc3d7d1ac74a12"
+  },
+  "/src/libscca": {
+    "type": "git",
+    "url": "https://github.com/libyal/libscca.git",
+    "rev": "c14efccd691ff5dacd211bc8addb2e8917d3542c"
+  },
+  "/src/libregf": {
+    "type": "git",
+    "url": "https://github.com/libyal/libregf.git",
+    "rev": "9f9f9da3d3c9c36af784a07936dee6674bcd198c"
+  },
+  "/src/libpff": {
+    "type": "git",
+    "url": "https://github.com/libyal/libpff.git",
+    "rev": "2f90504f06ac45e83a6c1050666cbd17f7ae2821"
+  },
+  "/src/libolecf": {
+    "type": "git",
+    "url": "https://github.com/libyal/libolecf.git",
+    "rev": "493b01945f7d2936bb722c8eb6586d6b9d2bd67f"
+  },
+  "/src/libnk2": {
+    "type": "git",
+    "url": "https://github.com/libyal/libnk2.git",
+    "rev": "610acb185a0e3703b518b342116c298316116f85"
+  },
+  "/src/libmsiecf": {
+    "type": "git",
+    "url": "https://github.com/libyal/libmsiecf.git",
+    "rev": "ac49d0ccadb2ecfbd1a0bd9e3e9f8977d69c7943"
+  },
+  "/src/libmdmp": {
+    "type": "git",
+    "url": "https://github.com/libyal/libmdmp.git",
+    "rev": "5428726c7071fd77206278a8c3b7397efb3231da"
+  },
+  "/src/liblnk": {
+    "type": "git",
+    "url": "https://github.com/libyal/liblnk.git",
+    "rev": "00e03ad49fd9610d2941388ebab08ff2dc8affde"
+  },
+  "/src/libexe": {
+    "type": "git",
+    "url": "https://github.com/libyal/libexe.git",
+    "rev": "54e083ae780131d8bd0eaad58de7141d49a5e25a"
+  },
+  "/src/libevtx": {
+    "type": "git",
+    "url": "https://github.com/libyal/libevtx.git",
+    "rev": "22e208e4837786c4c88e1c7679357d66bb4c6c90"
+  },
+  "/src/libevt": {
+    "type": "git",
+    "url": "https://github.com/libyal/libevt.git",
+    "rev": "0e79e00fa14af08a1ec39a6d98ea6a9490b1cb63"
+  },
+  "/src/libesedb": {
+    "type": "git",
+    "url": "https://github.com/libyal/libesedb.git",
+    "rev": "d959e1e037635c72f07f08e2ac741036268f4e3c"
+  },
+  "/src/libcreg": {
+    "type": "git",
+    "url": "https://github.com/libyal/libcreg.git",
+    "rev": "150e12159148d8c1bf8a3e7673662ba60da82155"
+  },
+  "/src/libagdb": {
+    "type": "git",
+    "url": "https://github.com/libyal/libagdb.git",
+    "rev": "43389aefc12e2cad99a899ad4e8a5598d4f09081"
+  },
+  "/src/libhmac": {
+    "type": "git",
+    "url": "https://github.com/libyal/libhmac.git",
+    "rev": "8628d575037c126b8e46fae0085f50658faa0967"
+  },
+  "/src/libfwsi": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfwsi.git",
+    "rev": "3c6c44da191a2903b6a94c9b046d8d28a582c7e8"
+  },
+  "/src/libfwps": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfwps.git",
+    "rev": "5b86175d8d729c17c30874c5881ee7fedeb748e0"
+  },
+  "/src/libfwnt": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfwnt.git",
+    "rev": "6eca74ea9877d2902871e9a3c0ec677589c5f385"
+  },
+  "/src/libfwevt": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfwevt.git",
+    "rev": "7ad068a4e0f23a847ffc50ce3d3956dcffa53aab"
+  },
+  "/src/libfusn": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfusn.git",
+    "rev": "ed4354a61ab7de5f16755265115d22e7f7bc5937"
+  },
+  "/src/libftxf": {
+    "type": "git",
+    "url": "https://github.com/libyal/libftxf.git",
+    "rev": "f83d602a631e421b76491e9f4fe907c159eb249a"
+  },
+  "/src/libfplist": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfplist.git",
+    "rev": "69f34761ad73f0825864d0fb41796696e9669ff6"
+  },
+  "/src/libfmos": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfmos.git",
+    "rev": "2e1fc3380fe626f22ce4cce29591bfb72196c64f"
+  },
+  "/src/libfmapi": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfmapi.git",
+    "rev": "345e1c6082e8cde40a4de7fd4b8d46ff8f83b61b"
+  },
+  "/src/libfcrypto": {
+    "type": "git",
+    "url": "https://github.com/libyal/libfcrypto.git",
+    "rev": "fafef505697f83d3462d16108676da3bf54631e6"
+  },
+  "/src/libcaes": {
+    "type": "git",
+    "url": "https://github.com/libyal/libcaes.git",
+    "rev": "3ed36e5ef7ba2b4e2eb3950ea713d5cc9f93e303"
+  }
+}

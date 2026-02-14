@@ -8,6 +8,7 @@ import json
 from google.cloud import storage
 from urllib.parse import urlparse
 from urllib.parse import parse_qs
+from html import unescape as html_unescape
 import hashlib 
 if NEW_ISSUE_TRACKER:
     META = ARVO / NEW_ISSUE_TRACKER
@@ -133,8 +134,11 @@ def parse_oss_fuzz_report(report_text: bytes,localId: int) -> dict:
     }
     fuzz_target = extract(r'(?:Fuzz Target|Fuzz target|Fuzz target binary|Fuzzer):\s*(\S+)','NOTFOUND')
     if len(res['job_type'].split("_"))==2:
-        WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
-        return False
+        if res['job_type'].split("_")[0] in sanitizer_map.keys():
+            res['sanitizer'] = res['job_type'].split("_")[0]
+        else:
+            WARN(f"FAILED to GET sanitizer {localId=} {res['job_type']}")
+            return False
     else:
         res['sanitizer'] = sanitizer_map[res['job_type'].split("_")[1]]
 
@@ -176,10 +180,12 @@ def meta_getIssues(issue_ids):
     if not MetaDataFile.exists():
         MetaDataFile.touch()
     done = []
+    
     with open(MetaDataFile,'r') as f:
         lines = f.readlines()
     for line in lines:
         done.append(json.loads(line)['localId'])
+    
     todo = [x for x in issue_ids if x not in done]
     INFO(f"Added {len(todo)} new issues")
     for x in bar(todo):
@@ -248,8 +254,9 @@ def download_build_artifacts(metadata, url, outdir):
     job = parse_job_type(job_name)
     
     # These don't have any build artifacts
-    if job['untrusted']: return False
-    if job['engine'] == 'none': return False
+    if job['untrusted'] or job['engine'] == 'none':
+        print("Lack of building info")
+        return False
     # Prefer the info from the job name, since the metadata
     # format has changed several times.
     if 'project' in metadata:
@@ -267,17 +274,18 @@ def download_build_artifacts(metadata, url, outdir):
         bucket_string += '_i386'
     assert bucket_string in bucket_map
     bucket_name = bucket_map[bucket_string]
-
     # Grab the revision from the URL
-    urlparams = parse_qs(urlparse(url).query)
-    
+    urlparams = parse_qs(urlparse(html_unescape(url)).query)
+
     if 'revision' in urlparams:
         revision = urlparams['revision'][0]
     elif 'range' in urlparams:
         revision = urlparams['range'][0].split(':')[1]
     else:
+        WARN(f"Not recognized url {url}")
         return False
     
+
     zip_name = f'{project}-{sanitizer}-{revision}.zip'
     srcmap_name = f'{project}-{sanitizer}-{revision}.srcmap.json'
     zip_path = f'{project}/{zip_name}'
@@ -312,6 +320,7 @@ def data_download(localIds = None):
     to_remove = []
     for localId in bar(metadata):
         # Get reproducer(s) and save them.
+        print(localId)
         issue_dir = META / "Issues" / f"{localId}_files"
         if issue_dir.exists():
             done = []
@@ -319,26 +328,28 @@ def data_download(localIds = None):
                 done.append(x)
             if len(done) == 2:
                 continue
-            elif len(done) != 0:
+            elif len(done) == 0:
                 shutil.rmtree(issue_dir)
         issue_dir.mkdir(parents=True, exist_ok=True)
         if 'regressed' not in metadata[localId] or 'verified_fixed' not in metadata[localId] or \
             metadata[localId]['verified_fixed'] == 'NO_FIX':
             continue
+        if not download_build_artifacts(metadata[localId], metadata[localId]['regressed'], issue_dir): 
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
+            to_remove.append(localId)
+            continue
+        if not download_build_artifacts(metadata[localId], metadata[localId]['verified_fixed'], issue_dir):
+            WARN(f"[!] Failed to download the srcmap: {localId=}")
+            to_remove.append(localId)
+            continue
+        if issue_dir.exists():
+            if len(list(issue_dir.iterdir())) == 0:
+                shutil.rmtree(issue_dir)
+                to_remove.append(localId)
         if getLanguage(str(localId)) not in ['c','c++']:
-            WARN(f"[!] Not C/C++ Issue: {localId=}")
-            to_remove.append(x)
-            continue
-        if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['regressed'], issue_dir): 
-            WARN(f"[!] Failed to download the srcmap: {localId=}")
+            INFO(f"[!] Not C/C++ Issue: {localId=}")
             to_remove.append(localId)
             continue
-        if not silentRun(download_build_artifacts,metadata[localId], metadata[localId]['verified_fixed'], issue_dir):
-            WARN(f"[!] Failed to download the srcmap: {localId=}")
-            to_remove.append(localId)
-            continue
-
-
     remove_issue_meta(to_remove)
     remove_issue_data(to_remove)
     return True

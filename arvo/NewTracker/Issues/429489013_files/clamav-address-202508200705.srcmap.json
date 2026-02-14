@@ -1,0 +1,12 @@
+{
+  "/src/clamav": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav.git",
+    "rev": "7fab05a89ff668eafc489cd2da920a341bb53759"
+  },
+  "/src/clamav-mussels-cookbook": {
+    "type": "git",
+    "url": "https://github.com/Cisco-Talos/clamav-mussels-cookbook.git",
+    "rev": "ee53dba26c61d25666aa92bf9f902e6b3debaa1e"
+  }
+}

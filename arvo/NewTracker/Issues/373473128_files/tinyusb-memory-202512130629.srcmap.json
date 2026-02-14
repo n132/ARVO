@@ -1,0 +1,7 @@
+{
+  "/src/tinyusb": {
+    "type": "git",
+    "url": "https://github.com/hathach/tinyusb.git",
+    "rev": "3a4d02ba9f150b74df08384d16fac124a7c27485"
+  }
+}

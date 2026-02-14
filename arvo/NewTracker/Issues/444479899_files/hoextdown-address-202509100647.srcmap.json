@@ -1,0 +1,7 @@
+{
+  "/src/hoextdown": {
+    "type": "git",
+    "url": "https://github.com/kjdev/hoextdown.git",
+    "rev": "65c675e014a341d28cf9d8923885d65b870e55b9"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/dovecot": {
+    "type": "git",
+    "url": "https://github.com/dovecot/core",
+    "rev": "8dee235890ae9ac252b54aaa130963c4a7bd4d67"
+  }
+}

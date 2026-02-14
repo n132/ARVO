@@ -1,0 +1,12 @@
+{
+  "/src/gpsd": {
+    "type": "git",
+    "url": "https://gitlab.com/gpsd/gpsd",
+    "rev": "1dd9fdb96d2725e9b0eb5e91ff876e065588658b"
+  },
+  "/src/ada-fuzzers": {
+    "type": "git",
+    "url": "https://github.com/adalogics/ada-fuzzers",
+    "rev": "be3c62237c3be6dc1dd3e356fefaf1de12109325"
+  }
+}

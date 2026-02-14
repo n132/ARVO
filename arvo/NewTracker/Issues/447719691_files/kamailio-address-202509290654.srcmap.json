@@ -1,0 +1,7 @@
+{
+  "/src/kamailio": {
+    "type": "git",
+    "url": "https://github.com/kamailio/kamailio",
+    "rev": "4fef850efb73aa063ae4f920e0f86f2bf085956c"
+  }
+}

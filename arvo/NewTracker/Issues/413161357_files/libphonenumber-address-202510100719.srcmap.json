@@ -1,0 +1,22 @@
+{
+  "/src/abseil-cpp": {
+    "type": "git",
+    "url": "https://github.com/abseil/abseil-cpp",
+    "rev": "273292d1cfc0a94a65082ee350509af1d113344d"
+  },
+  "/src/libphonenumber": {
+    "type": "git",
+    "url": "https://github.com/google/libphonenumber",
+    "rev": "669751dd889a2daf135580caf5cb54f41fa0bc2d"
+  },
+  "/src/protobuf": {
+    "type": "git",
+    "url": "https://github.com/google/protobuf.git",
+    "rev": "2514f0bd7da7e2af1bed4c5d1b84f031c4d12c10"
+  },
+  "/src/googletest": {
+    "type": "git",
+    "url": "https://github.com/google/googletest",
+    "rev": "279f8479469d22fa772adb454068f854472e1eb9"
+  }
+}

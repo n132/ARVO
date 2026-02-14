@@ -54,7 +54,27 @@ class DiffTool():
                 index+=1
                 res.append((patch.path,target_line,index))
         return res
+def getRevDiff(localId,multi_commits=False):
+    localDp = ARVO/"PatchesRev"/f"{localId}.diff"
+    commit    = getReport(localId)['fix_commit']
+    if localDp.exists():
+        if not isinstance(commit,list) or multi_commits==False:
+            return localDp
 
+    gt = getFixedGt(localId)
+    if not gt:
+        return False
+
+    if not isinstance(commit,list):
+        res = gt.showCommit(commit,rev=True)
+    else:
+        if multi_commits:
+            res = tmpFile()
+            for one in commit:
+                gt.showCommit(one,res,rev=True)
+        else:
+            res = gt.showCommit(commit[-1],rev=True)
+    return leaveRet(res,gt.repo.parent)
 
 def getFixedGt(localId):
     pname   = getPname(localId)

@@ -1,0 +1,7 @@
+{
+  "/src/nettle": {
+    "type": "git",
+    "url": "https://git.lysator.liu.se/nettle/nettle",
+    "rev": "79d92ffee57365df5faac6d4e522327a51378810"
+  }
+}

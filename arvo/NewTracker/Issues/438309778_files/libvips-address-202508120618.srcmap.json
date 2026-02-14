@@ -1,0 +1,67 @@
+{
+  "/src/highway": {
+    "type": "git",
+    "url": "https://github.com/google/highway.git",
+    "rev": "92d327e841d78e11ae888757a3e16d291951cf64"
+  },
+  "/src/cgif": {
+    "type": "git",
+    "url": "https://github.com/dloebl/cgif.git",
+    "rev": "0c5399e85a4c0f37bee6549e0dc64a923562414e"
+  },
+  "/src/libimagequant": {
+    "type": "git",
+    "url": "https://github.com/lovell/libimagequant.git",
+    "rev": "4e82d9492db228a7a2057c442f7a6eb40508a0eb"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "e4bad59e64048d5c1fa5fe3664df2413bebd1dad"
+  },
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "7e732c54caba954c2daf5fcc44734acbc4f11e34"
+  },
+  "/src/libtiff": {
+    "type": "git",
+    "url": "https://gitlab.com/libtiff/libtiff.git",
+    "rev": "0ce7d7766c6608c1b98bd62e5e83e74b3617bdad"
+  },
+  "/src/libwebp": {
+    "type": "git",
+    "url": "https://chromium.googlesource.com/webm/libwebp",
+    "rev": "2246828be3329e26d8c0774481e98b0315872110"
+  },
+  "/src/libspng": {
+    "type": "git",
+    "url": "https://github.com/randy408/libspng.git",
+    "rev": "adc94393dbeddf9e027d1b2dfff7c1bab975224e"
+  },
+  "/src/libjpeg-turbo": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+    "rev": "f2d1f1cbd431b5b5e3c0c354bddbf8360cdcabd1"
+  },
+  "/src/lcms": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "59feb9ec4995e3d59dc78ae1f2cb7643c193ccd1"
+  },
+  "/src/libexif": {
+    "type": "git",
+    "url": "https://github.com/libexif/libexif.git",
+    "rev": "1cb1560c6bf72245efd2a6de10fb02ba55a97bca"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  },
+  "/src/libvips": {
+    "type": "git",
+    "url": "https://github.com/libvips/libvips.git",
+    "rev": "5c1848ed5ac9910c5a0c33479b382cef5edc7cb0"
+  }
+}

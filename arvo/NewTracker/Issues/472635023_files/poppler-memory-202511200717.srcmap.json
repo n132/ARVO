@@ -1,0 +1,52 @@
+{
+  "/src/poppler": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/poppler/poppler.git",
+    "rev": "5f9b4545fa390ebdc913506bd58fa35408e17473"
+  },
+  "/src/pango": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/pango.git",
+    "rev": "d0cd499e17cdcfdc3f7a93d0d28a3df3c5f9b10e"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "49adb85d34918034e0d6a4c23817407103fb9f73"
+  },
+  "/src/cairo": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/cairo/cairo.git",
+    "rev": "04656d7450e229622546fd2b11496aa58c44181d"
+  },
+  "/src/fontconfig": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/fontconfig/fontconfig.git",
+    "rev": "9dd619626a10d26c47997b0549d340524013de0a"
+  },
+  "/src/libpng": {
+    "type": "git",
+    "url": "https://github.com/glennrp/libpng.git",
+    "rev": "b4800bae3379f1abf82359703c28e727b5df4135"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "1ad9bec2c12ee445ce23e660f5e4fe870b9d5e09"
+  },
+  "/src/Little-CMS": {
+    "type": "git",
+    "url": "https://github.com/mm2/Little-CMS.git",
+    "rev": "4e1eab489d6352fd6488456b1cbfef6f4128f1e8"
+  },
+  "/src/freetype": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/freetype/freetype.git",
+    "rev": "6d4977d66033e7841219bdc2b686a97552091ade"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "5a82f71ed1dfc0bec044d9702463dbdf84ea3b71"
+  }
+}

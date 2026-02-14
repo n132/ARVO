@@ -1,0 +1,17 @@
+{
+  "/src/cairo": {
+    "type": "git",
+    "url": "https://gitlab.freedesktop.org/cairo/cairo.git",
+    "rev": "27c8ad5cd8591db742dbf2000ca0d2b08b2c3675"
+  },
+  "/src/glib": {
+    "type": "git",
+    "url": "https://gitlab.gnome.org/GNOME/glib",
+    "rev": "872927c307441aa0820c82680c2754a4e4e5477e"
+  },
+  "/src/freetype2": {
+    "type": "git",
+    "url": "git://git.sv.nongnu.org/freetype/freetype2.git",
+    "rev": "5962d3c1b928fa49980e795590c2263f949b8a07"
+  }
+}

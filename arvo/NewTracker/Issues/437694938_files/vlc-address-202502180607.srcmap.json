@@ -1,0 +1,12 @@
+{
+  "/src/vlc": {
+    "type": "git",
+    "url": "https://code.videolan.org/videolan/vlc.git",
+    "rev": "ca8a1dd2e9f38ae5d0ecae43be473d3a9af6a399"
+  },
+  "/src/vlc/fuzz-corpus": {
+    "type": "git",
+    "url": "https://code.videolan.org/VideoLAN.org/vlc-fuzz-corpus.git",
+    "rev": "1e27a8b5fb58e1497c5a3b36f06cd92289d43fee"
+  }
+}

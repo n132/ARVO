@@ -190,7 +190,7 @@ def getProjectYaml(localId,tag='vul'):
         return False
     proj_dir, tmp_dir = pof
     # Get the Dockerfile
-    porjymal = proj_dir/"project.yaml"
+    porjymal = proj_dir / "project.yaml"
     if not porjymal.exists():
         return leaveRet(False,tmp_dir)
     with open(porjymal) as f:
@@ -199,7 +199,8 @@ def getProjectYaml(localId,tag='vul'):
 def getLanguage(localId):
     # Fast Path
     project_name = getPname(localId,False)
-    if project_name in PLanguage.keys(): return PLanguage[project_name]
+    if project_name in PLanguage.keys():
+        return PLanguage[project_name]
     # Slow Path
     porjymal = getProjectYaml(localId)
     if porjymal== False:

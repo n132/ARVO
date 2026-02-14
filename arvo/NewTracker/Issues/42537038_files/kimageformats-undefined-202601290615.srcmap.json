@@ -1,0 +1,92 @@
+{
+  "/src/aom": {
+    "type": "git",
+    "url": "https://aomedia.googlesource.com/aom",
+    "rev": "3b624af45b86646a20b11a9ff803aeae588cdee6"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "ae5cb195d491208c94a082871adab805af6cd81e"
+  },
+  "/src/xz": {
+    "type": "git",
+    "url": "https://github.com/tukaani-project/xz.git",
+    "rev": "54147ad65af12d9e4f60a8ce59094a8a30ad5919"
+  },
+  "/src/jxrlib": {
+    "type": "git",
+    "url": "https://github.com/mircomir/jxrlib.git",
+    "rev": "14b78eafa4848d63d8fc32792cc398f3b8c4ae84"
+  },
+  "/src/zlib": {
+    "type": "git",
+    "url": "https://github.com/madler/zlib.git",
+    "rev": "75133f8599b7b4509db50e673c66a42c1da1be03"
+  },
+  "/src/zstd": {
+    "type": "git",
+    "url": "https://github.com/facebook/zstd.git",
+    "rev": "f8745da6ff1ad1e7bab384bd1f9d742439278e99"
+  },
+  "/src/LibRaw": {
+    "type": "git",
+    "url": "https://github.com/LibRaw/LibRaw",
+    "rev": "8dc68e2a4551f03838b7f2da9276e5d1eb20bca0"
+  },
+  "/src/libde265": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libde265.git",
+    "rev": "98ee32715ee3826faf180436befc13223892a1cf"
+  },
+  "/src/qttools": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qttools.git",
+    "rev": "21416202b228bd2c414f7f26992b12306e170482"
+  },
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+    "rev": "027f33284f146d91bf983a58c8ea50c36154f339"
+  },
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg.git",
+    "rev": "210a8a5690d0da66f02d49420d7176a21ef409dc"
+  },
+  "/src/extra-cmake-modules": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/extra-cmake-modules.git",
+    "rev": "9e6ab6e52f22b3c15ce402f004ed511873bf9601"
+  },
+  "/src/libheif": {
+    "type": "git",
+    "url": "https://github.com/strukturag/libheif.git",
+    "rev": "a716a66fb643fd30e51584c248e499b548f67c12"
+  },
+  "/src/libavif": {
+    "type": "git",
+    "url": "https://github.com/AOMediaCodec/libavif.git",
+    "rev": "fcb084c9387e367750f5375e462005ce298f57cc"
+  },
+  "/src/openh264": {
+    "type": "git",
+    "url": "https://github.com/cisco/openh264.git",
+    "rev": "652bdb7719f30b52b08e506645a7322ff1b2cc6f"
+  },
+  "/src/qtbase": {
+    "type": "git",
+    "url": "git://code.qt.io/qt/qtbase.git",
+    "rev": "080d61c020678b75ed9d5acb062ec82ba8fc402f"
+  },
+  "/src/karchive": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/karchive.git",
+    "rev": "5b0f63228469e7ef7716619553c2f7f9f5c044ef"
+  },
+  "/src/kimageformats": {
+    "type": "git",
+    "url": "https://invent.kde.org/frameworks/kimageformats.git",
+    "rev": "e0f1ba640a5a7d44e6f34dfb35c14335db80f9a3"
+  }
+}

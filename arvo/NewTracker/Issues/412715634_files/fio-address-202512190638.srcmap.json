@@ -1,0 +1,7 @@
+{
+  "/src/fio": {
+    "type": "git",
+    "url": "https://github.com/axboe/fio.git",
+    "rev": "d028bdcb8515a29eb683a23b0a88c398cfe4d687"
+  }
+}

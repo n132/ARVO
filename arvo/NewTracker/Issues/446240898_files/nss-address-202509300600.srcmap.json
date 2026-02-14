@@ -1,0 +1,17 @@
+{
+  "/src/nss-corpus": {
+    "type": "git",
+    "url": "https://github.com/MozillaSecurity/nss-fuzzing-corpus.git",
+    "rev": "b8cd2fbb24baaa227dfeb5843ba794a0abec633b"
+  },
+  "/src/nss": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nss",
+    "rev": "6b0a460d27cdbd71a9e6cb191571b54715538b99"
+  },
+  "/src/nspr": {
+    "type": "hg",
+    "url": "https://hg.mozilla.org/projects/nspr",
+    "rev": "96ad2cc04c622a9462eb2b8d6cca296907d8799d"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "/src/mhd2": {
+    "type": "git",
+    "url": "https://git.gnunet.org/libmicrohttpd2.git",
+    "rev": "ea74a89d61005de46c4634e7d6f25d220ae0253b"
+  }
+}

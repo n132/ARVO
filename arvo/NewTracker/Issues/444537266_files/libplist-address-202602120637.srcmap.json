@@ -1,0 +1,7 @@
+{
+  "/src/libplist": {
+    "type": "git",
+    "url": "https://github.com/libimobiledevice/libplist",
+    "rev": "9969b8ebeb2dd2ac66e4d18fc15d0340de6e8d0e"
+  }
+}

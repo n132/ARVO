@@ -1,0 +1,12 @@
+{
+  "/src/fuzzing-corpus": {
+    "type": "git",
+    "url": "https://github.com/strongcourage/fuzzing-corpus",
+    "rev": "d5aaf2c8654592f65e8792d12800317200446e7c"
+  },
+  "/src/CMake": {
+    "type": "git",
+    "url": "https://gitlab.kitware.com/cmake/cmake",
+    "rev": "d2345b5e67b406b4b3f615c91b61ee42d96ed04b"
+  }
+}

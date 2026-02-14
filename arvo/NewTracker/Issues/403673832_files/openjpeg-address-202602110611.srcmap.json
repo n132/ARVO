@@ -1,0 +1,7 @@
+{
+  "/src/openjpeg": {
+    "type": "git",
+    "url": "https://github.com/uclouvain/openjpeg",
+    "rev": "d33cbecc148d3affcdf403211fddc2cc5d442379"
+  }
+}

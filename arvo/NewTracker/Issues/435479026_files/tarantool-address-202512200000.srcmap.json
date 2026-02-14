@@ -1,0 +1,12 @@
+{
+  "/src/tarantool/test/static": {
+    "type": "git",
+    "url": "https://github.com/ligurio/tarantool-corpus",
+    "rev": "2f35ecfd973df5d9f2c76f143b55c66369dfe81f"
+  },
+  "/src/tarantool": {
+    "type": "git",
+    "url": "https://github.com/tarantool/tarantool",
+    "rev": "dc969d16f6467569f4aa9dc124a31f023b803c22"
+  }
+}

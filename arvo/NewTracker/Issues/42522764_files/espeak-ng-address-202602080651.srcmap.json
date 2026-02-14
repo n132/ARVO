@@ -1,0 +1,7 @@
+{
+  "/src/espeak-ng": {
+    "type": "git",
+    "url": "https://github.com/espeak-ng/espeak-ng",
+    "rev": "3dcbe7ea3ea85a9212968d0f05172dde4259e770"
+  }
+}

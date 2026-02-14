@@ -1,0 +1,12 @@
+{
+  "/src/grok-data": {
+    "type": "git",
+    "url": "https://github.com/GrokImageCompression/grok-test-data.git",
+    "rev": "7e4c8fbc97232ec697815607594892f0da21476e"
+  },
+  "/src/grok": {
+    "type": "git",
+    "url": "https://github.com/GrokImageCompression/grok.git",
+    "rev": "103254893649a76e35d57e8deb68c0daef415480"
+  }
+}

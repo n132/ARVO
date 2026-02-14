@@ -1,0 +1,12 @@
+{
+  "/src/seed-corpora": {
+    "type": "git",
+    "url": "https://github.com/libjpeg-turbo/seed-corpora",
+    "rev": "8794b5c5efc5ec61fabda8feded5b7fcb974d621"
+  },
+  "/src/libjxl": {
+    "type": "git",
+    "url": "https://github.com/libjxl/libjxl.git",
+    "rev": "2a4f12b6ef22672e0f4a399df3b8589856ebace2"
+  }
+}

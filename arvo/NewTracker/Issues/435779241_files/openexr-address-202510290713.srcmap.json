@@ -1,0 +1,7 @@
+{
+  "/src/openexr": {
+    "type": "git",
+    "url": "https://github.com/AcademySoftwareFoundation/openexr",
+    "rev": "fffdcf2f0759a88a39a7ca302477666853a6e961"
+  }
+}
