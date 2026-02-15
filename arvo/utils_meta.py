@@ -50,8 +50,7 @@ def metaFilter():
         if len(set(tmp_lst)) != len(tmp_lst):
             false_positives.append(localId)
     res.extend(broken_srcmaps)
-    # print(false_positives)
-    # res.extend(false_positives)
+    res.extend(false_positives)
     res = list(set(res))
     remove_issue_meta(res)
     remove_issue_data(res)
@@ -357,8 +356,8 @@ def getMeta():
     if not NEW_ISSUE_TRACKER: PANIC("THIS SCRIPT ONLY WORKS FOR NEW_ISSUE_TRACKER")
     if not META.exists(): META.mkdir()
     todo = meta_getIssues(getIssueIds())
-    print(todo)
     data_download(todo)
+    metaFilter()
 
 if __name__ == "__main__":
     pass
