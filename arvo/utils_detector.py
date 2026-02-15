@@ -107,7 +107,7 @@ def tp_insert(data, max_retries=3, retry_delay=0.1):
             conn = sqlite3.connect(Database_PATH, timeout=30)
             conn.execute("BEGIN IMMEDIATE")
             conn.execute("""
-            INSERT INTO upstream_true_positives (
+            INSERT OR REPLACE INTO upstream_true_positives (
                 localId, reason, log
             ) VALUES (?, ?, ?)
             """, data)
@@ -416,7 +416,7 @@ def upstream_state_delete(localId):
     return False
             
 # False positives
-def check_false_positive(localId):
+def check_false_positive(localId,limit = 10*(1<<30)):
     """
     Check if a given localId is a false positive by running the false_positive test.
     Logs results and stores them in appropriate database tables.
@@ -429,7 +429,7 @@ def check_false_positive(localId):
     """
     LogDir = ARVO / "Log" / "upstream_false_positives"
     INFO(f"[ARVO] [{datetime.now()}] working on {localId=}")
-    res = _false_positive(localId)
+    res = _false_positive(localId,limit=limit)
     vul_result = LogDir/f"{localId}_vul.log"
     fix_result = LogDir/f"{localId}_fix.log"
 
@@ -465,7 +465,7 @@ def check_false_positive(localId):
         WARN(f"Add new upstream false positive: {localId=}")
         return "False Posiitve"
 
-def _false_positive(localId,force_reset = False):
+def _false_positive(localId,force_reset = False, limit= (1<<30)*4):
     """
     Test if a vulnerability report is a false positive by running POC against compiled binaries.
     Downloads OSS-Fuzz binaries, runs proof-of-concept against vulnerable and fixed versions.
@@ -492,7 +492,7 @@ def _false_positive(localId,force_reset = False):
     # Do download 
     store.mkdir(parents=True, exist_ok=True)
     while True:
-        res = getOSSFuzzer(localId, store,limit=(1<<30)*4) # Limit 10 GB
+        res = getOSSFuzzer(localId, store,limit= limit)
         if res == False:
             return _leaveRet(None,"[FAILED] Failed to get necessary metadate to locate the resource")
         elif res == None:
@@ -502,8 +502,12 @@ def _false_positive(localId,force_reset = False):
             break
 
     for target in store.iterdir():
-        with zipfile.ZipFile(target, "r") as zf:
-            file_list = zf.namelist()
+        try:
+            with zipfile.ZipFile(target, "r") as zf:
+                file_list = zf.namelist()
+        except zipfile.BadZipFile:
+            subprocess.run(["unar",str(target)],stdout=open('/dev/null','w'),cwd=store)
+            continue
         subprocess.run(["unar",str(target)],stdout=open('/dev/null','w'),cwd=store)
         if len(file_list)==1:
             new_dir = store / target.name.split(".")[0]
