@@ -100,26 +100,27 @@ class DfTool():
         return linenum
     def getLine(self,keyword):
         res = []
+        linenum = []
         lines = self.content.split("\n")
         ct =  0 
-        linenum = 0
         
         for line in lines:
             ct +=1
             if keyword in line:
                 res.append(line)
-                linenum = ct
+                linenum.append(ct)
         if len(res)<2:
             return res, linenum
+        
         pat = re.compile(rf"{re.escape(keyword)}(\.git(?:\s.*)?|(?:\s.*)?)?$")
         res = []
+        linenum = []
         ct =  0 
-        linenum = 0
         for line in lines:
             ct +=1
             if pat.findall(line):
                 res.append(line)
-                linenum = ct
+                linenum.append(ct)
         return res, linenum
 
 # Docker Options

@@ -55,13 +55,14 @@ def donwloadFuzzer(pname,srcmap_name,engine='libfuzzer',arch="x86_64",storage=No
 
     #    gcloud storage du  gs://clusterfuzz-builds/suricata/suricata-undefined-202109100611.zip
     out = subprocess.check_output(['gsutil', 'du', url]).decode()
-    try:
-        if int(out.strip().split()[0]) > limit:
-            INFO("donwloadFuzzer: The target binary is too huge to download")
+    if limit != None:
+        try:
+            if int(out.strip().split()[0]) > limit:
+                INFO("donwloadFuzzer: The target binary is too huge to download")
+                return None
+        except:
+            WARN(f"donwloadFuzzer: Failed to parse the du results for gsutil for {url=}: {out.strip()}")
             return None
-    except:
-        WARN(f"donwloadFuzzer: Failed to parse the du results for gsutil for {url=}: {out.strip()}")
-        return None
 
     if storage== None:
         target_dir = tmpDir()

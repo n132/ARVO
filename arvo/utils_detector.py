@@ -416,7 +416,7 @@ def upstream_state_delete(localId):
     return False
             
 # False positives
-def check_false_positive(localId,limit = 10*(1<<30)):
+def check_false_positive(localId,limit = None):
     """
     Check if a given localId is a false positive by running the false_positive test.
     Logs results and stores them in appropriate database tables.
@@ -432,7 +432,6 @@ def check_false_positive(localId,limit = 10*(1<<30)):
     res = _false_positive(localId,limit=limit)
     vul_result = LogDir/f"{localId}_vul.log"
     fix_result = LogDir/f"{localId}_fix.log"
-
     if res != True:
         log = "=== vulnerable version ===:\n\n"
         if vul_result.exists():
@@ -484,8 +483,8 @@ def _false_positive(localId,force_reset = False, limit= (1<<30)*4):
         return res
     if not force_reset and localId in getFalsePositives():
         return True
-    if localId in getNotFalsePositives():
-        return False
+    # if localId in getNotFalsePositives():
+        # return False
     if store.exists():
         shutil.rmtree(store)
 

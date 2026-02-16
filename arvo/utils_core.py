@@ -338,11 +338,17 @@ def updateRevisionInfo(dockerfile,localId,src_path,item,commit_date,approximate)
         if item_url not in ['https://github.com/google/AFL.git','https://chromium.googlesource.com/chromium/llvm-project/llvm/lib/Fuzzer','https://github.com/ossf/fuzz-introspector.git']:
             WARN(f"Not Found {item_url=} for {localId=}  ({keyword=})")
         return False
-    if len(hits) != 1:
+    src_name = src_path.split("/")[-1]
+    if len(hits) > 1:
         WARN(f"Found more than one lines containing {item_url=} for {localId=}")
-        return False
-
-    line = hits[0]
+        for x in range(len(hits)):
+            if src_name in hits[x]:
+                line = hits[x]
+                ct = ct[x]
+                break
+    else:
+        line = hits[0]
+        ct = ct[0]
     if item_type == 'git':
         pat = re.compile(rf"{item_type}\s+clone")
     elif item_type == 'hg':
