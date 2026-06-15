@@ -1,10 +1,23 @@
 # ARVO
 
-ARVO: an Atlas of Reproducible Vulnerabilities in
-Open source software.
+ARVO: Atlas of Reproducible Vulnerabilities for Open-Source Software
 
-By sourcing vulnerabilities from C/C++ projects that [Google’s OSS-Fuzz][2] discovered and
-Implementing a reliable re-compilation system, we successfully reproduce more than 6,000 memory vulnerabilities across over 300 projects (Oct. 2025), each with a triggering input, the canonical developer-written patch for fixing the vulnerability, and the ability to automatically rebuild the project from source and run it at its vulnerable and patched revisions. Moreover, our dataset can be automatically updated as OSS-Fuzz finds new vulnerabilities, allowing it to grow over time. We provide a thorough characterization of the ARVO dataset and show that it can locate fixes more accurately than Google’s own OSV reproduction effort.
+## Abstract
+
+Achieving reproducibility, quantity, and diversity in vulnerability datasets has long been viewed as an inherent three-way trade-off, where improving one dimension often comes at the cost of the others. In practice, reproducibility has been the dimension most often neglected. This has limited what can be automatically extracted from historical bug datasets, and has reduced their utility for downstream security research.
+
+In this work, we propose a method to produce a new security dataset which ensures reproducibility for diverse vulnerabilities at scale by identifying the key obstacles to large-scale bug reproduction and addressing them with general solutions. Using this method, we introduce full reproducibility to the largest open source software vulnerability dataset (OSS-Fuzz) and construct the ARVO dataset (an Atlas of Reproducible Vulnerabilities in Open-source software). ARVO is a large-scale dataset consisting of over 6,100 real-world vulnerabilities across 311 projects. Focusing on reproducibility, ARVO differs from existing datasets by providing each vulnerability in a form that can be consistently rebuilt, triggered, and analyzed across versions. Reproducibility also enables automatic identification of the corresponding patch for each vulnerability and supports direct interaction with vulnerabilities after code changes, capabilities that existing large-scale datasets do not provide. In our evaluation, ARVO successfully reproduces 81% of vulnerabilities and achieves 89.4% accuracy on the located patches. We also discuss ARVO's influence on both upstream practices and downstream security research.
+
+## Artifact
+
+- Source code: https://github.com/n132/arvo
+- Dataset: https://github.com/n132/ARVO-Meta
+
+## Paper
+
+Accepted at IEEE European Symposium on Security and Privacy (EuroS&P) 2026 
+
+[ARVO paper (PDF)](./2026155803.pdf)
 
 # 🚀 Quickstart via Docker (Recommended)
 
