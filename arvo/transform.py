@@ -41,6 +41,8 @@ TRANS_TABLE = {
     "/src/libXfixes": "https://gitlab.freedesktop.org/xorg/lib/libxfixes.git",
     "/src/drm": "https://gitlab.freedesktop.org/mesa/libdrm.git",
     "/src/libXext": "https://gitlab.freedesktop.org/xorg/lib/libxext.git",
+    "/src/fuzzing-headers": "https://github.com/JacobBarthelmeh/fuzzing-headers.git",
+    "/src/wolf-ssl-ssh-fuzzers": "https://github.com/JacobBarthelmeh/wolf-ssl-ssh-fuzzers",
 }
 # Only include non git project
 TRANS_TYPE = {
@@ -105,6 +107,10 @@ globalStrReplace = {
     " --depth=1":"",
     " --depth ":" --jobs ",
     " --recursive ": " ",
+    "autoconf_2.72-3_all.deb": "autoconf_2.72-3ubuntu1_all.deb",
+    "https://github.com/guidovranken/fuzzing-headers.git": "https://github.com/JacobBarthelmeh/fuzzing-headers.git",
+    "https://github.com/guidovranken/fuzzing-headers": "https://github.com/JacobBarthelmeh/fuzzing-headers",
+    "https://github.com/guidovranken/wolf-ssl-ssh-fuzzers": "https://github.com/JacobBarthelmeh/wolf-ssl-ssh-fuzzers",
 }
 # The las 
 pname_table = {
